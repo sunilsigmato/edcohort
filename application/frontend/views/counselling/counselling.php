@@ -12,14 +12,29 @@ $segment = $this->input->get('segment');
 
    // print_ex($_GET);
 ?>
+<?php 
+
+$get_breadcrumb = get_breadcrumb_value();
+$breadcrumb_name1 = '';
+$breadcrumb_name2 = '';
+
+$get_single_course_detail = get_single_coure_detail($course);
+$get_brand_compare = get_brand_compare_detail($course,$segment);
+
+if($get_breadcrumb)
+{   
+    $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
+    $breadcrumb_name2 = $get_breadcrumb->breadcrumb2_name;
+}
+?>
 <!--banner start-->
 <div class="inner-banner ">
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
             <ul>
                 <li>Home</li>
-                <li><?php echo @$product_list['0']->brand_name; ?></li>
-                <li><a href="#"><?php echo @$product_list['0']->product_name; ?></a></li>
+                <li><?php echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -28,22 +43,22 @@ $segment = $this->input->get('segment');
         <div class="tab-menu">
             <ul>
                 <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
+                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
                     </a></li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
+                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
                         <?php echo $counselling_count; ?></a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
+                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
                 </li>
                 <li><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews</a>
+                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews</a>
                 </li>
                 <li><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons</a>
+                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons</a>
                 </li>
             </ul>
         </div>
@@ -63,25 +78,34 @@ $segment = $this->input->get('segment');
         <div class="row">
             <div class="col-md-1 course-img p-3 text-center">
 
-                <img src="<?php echo base_url(); ?>assets/images/edcohort_tp_review_logo.png" alt="">
+            <img class="card-img-top" style="height: 150px;"
+                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo  $get_single_course_detail->product_image; ?>">
+
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-                <h1>Course Name</h1>
+            <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
-                    <span class="rating-btn-display">4.9</span>
+                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
                     <label for="rating2" class="rating-display"><img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
                 </div>
                 <div class="pt-3 total-review-display">
-                    <h4> Excellent Based on 155 - Review </h4>
+                    <h4> Excellent Review </h4>
                 </div>
             </div>
-            <div class="col-md-4 pt-3 write-review-icon mb-3">
-                <a href="<?php echo base_url(); ?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
-                    class="review-btns text-decoration-none">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user "></i> <span> Write a review </span>
-                    <label for="rating2"><img src="<?php echo base_url(); ?>assets/images/rating-1.png" alt="">
-                    </label>
+            <div class="col-md-4 pt-3 write-review-icon ">
+            <?php if ($this->session->userdata('user_id')) { ?>
+                            <a href="<?php echo base_url();?>create-a-counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
+                    class=" text-decoration-none ">
+                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Get Counselling </span> <label
+                        for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>
+                </a>
+                        <?php } else { ?>
+                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
+                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
+                        for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label></a>
+                        <?php } ?>
+
                 </a>
 
             </div>
@@ -243,7 +267,7 @@ $segment = $this->input->get('segment');
                 <div class="col-md-8">
                     <div class="review-center">
                         <div class="review-btn-box p-3">
-                            <?php if($this->session->userdata('user_id')){ ?>
+                           <!-- <?php if($this->session->userdata('user_id')){ ?>
                             <a href="<?php echo base_url(); ?>create-a-counselling?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&pickupdate=<?php echo $c_date; ?>&sort_by=<?php echo $sort_by; ?>"
                                 class="review-btn"> Get counselling
                             </a>
@@ -251,7 +275,7 @@ $segment = $this->input->get('segment');
                             <a href="javascript:void(0)" class="review-btn" data-bs-effect="effect-scale"
                                 data-bs-toggle="modal" data-bs-target="#login-button">Get counselling
                             </a>
-                            <?php } ?>
+                            <?php } ?> -->
                         </div>
                         <!-- <div class="select-filter-box">
                 <ul class="select-filter">
@@ -330,7 +354,7 @@ $segment = $this->input->get('segment');
                             <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
                                 <?php echo $page_link; ?></div>
                             <?php }else{?>
-                            <div class="review-row">
+                            <div class="review-row-reply">
                                 <h4>No result found..!!</h4>
                             </div>
                             <?php } ?>

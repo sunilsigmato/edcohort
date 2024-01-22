@@ -220,7 +220,7 @@ $sort_by = $this->input->get('sort_by');
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
-                            class="btn btn-primary mt-auto">Select</a>
+                            class="btn btn-primary mt-auto btn-select">Select</a>
                     </div>
                 </div>
             </div>
@@ -251,7 +251,7 @@ if (empty($courseid)) {
                 <path d="M17.8333 3.00033L17.8333 37.667M33 18.167L17.8333 3.00033L2.66667 18.167" stroke="#E8F9FD"
                     stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <h2>Please select your course catagory for curated viewsssss</h2>
+            <h2>Please select your course catagory for curated views</h2>
             <span>You can change this later anytime</span>
         </div>
     </div>
@@ -506,7 +506,7 @@ if (empty($courseid)) {
                                     </div>
                                     <hr>
                                     <a href="#" style="text-decoration:none; ">
-                                        <h6>VEIW BRAND</h6>
+                                        <div class = "view-program-font"><h6>VEIW BRAND</h6></div>
                                     </a>
                                     <!-- <p class=" card-text rating-number">
                                         <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
@@ -519,7 +519,7 @@ if (empty($courseid)) {
                 </div>
 
                 <div class="d-flex justify-content-center m-5">
-                    <a href="<?php echo base_url(); ?>brands" class="btn btn-primary">
+                    <a href="<?php echo base_url(); ?>brands" class="btn btn-primary btn-select">
                         VIEW ALL BRANDS
                     </a>
                 </div>
@@ -573,7 +573,7 @@ if (empty($courseid)) {
                                     <hr>
                                     <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
                                         style="text-decoration:none; ">
-                                        <h6>VIEW PROGRAM</h6>
+                                        <div class = "view-program-font"><h6>VIEW PROGRAM</h6></div>
                                     </a>
                                     <!-- <p class="card-text rating-number">
                                             <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
@@ -587,7 +587,7 @@ if (empty($courseid)) {
                 </div>
 
                 <div class="d-flex justify-content-center m-5"><a href="<?php echo base_url(); ?>course"
-                        class="btn btn-primary">VIEW ALL COURSES</a>
+                        class="btn btn-primary btn-select">VIEW ALL COURSES</a>
                 </div>
 
             </div>

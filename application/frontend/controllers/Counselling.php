@@ -9,6 +9,7 @@ class Counselling extends CI_Controller {
     $this->load->library('pagination');
     $this->load->helper('form');
     $this->load->model('counselling_model');
+    $this->load->model('review_model');
   }
   function index($id = '')
   {

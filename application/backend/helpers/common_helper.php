@@ -273,5 +273,19 @@
         return $string;
     }
 
+    function get_coupons_name($id)
+    {
+        $CI =& get_instance();
+        $c1=$c2=$c3="";
+        
+        $data=$CI->admin_model->selectOne('tbl_segment','id',$id);
+        foreach ($data as $category)
+        {   
+            $c1=$c2=$c3="";
+            $c1=$category->segment_name;             
+        }
+        return $c3.$c2.$c1; 
+    }
+
 
 

@@ -67,9 +67,14 @@ if(empty($meta_description)){
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
+    <!-- Old Font -->
+    <!--<link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100;9..40,300;9..40,400;9..40,500;9..40,700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <!--plugin css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -134,7 +139,7 @@ if(empty($meta_description)){
 
             <!--logo-->
             <div class="logo">
-                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/top_logo.webp"
+                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo_new1.png"
                         alt="Edcohort"></a>
             </div>
             <?php //print_ex($type_records); ?>
@@ -144,7 +149,7 @@ if(empty($meta_description)){
                     <input type="text" placeholder="Search for Brands, Exams" class="search-input">
 
                     <button class="search-button">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-search search-icon-color"></i>
                     </button>
                 </div>
             </div>

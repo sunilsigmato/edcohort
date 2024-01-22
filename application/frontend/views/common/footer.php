@@ -30,7 +30,7 @@ $authUrl1 = $gClient->createAuthUrl();
 ?>
 
 <!--footer start-->
-<div class="content-bg">
+<div class="content-bg-color">
     <div class="container ">
         <div class="row">
             <div class="col-md-12 footer-icons pt-3">
@@ -42,7 +42,9 @@ $authUrl1 = $gClient->createAuthUrl();
         </div>
     </div>
 
-    <hr />
+   
+    <div class="hr-dynamic">
+    </div>
     <div class="container ">
         <div class="row">
             <div class=" col-6 col-md-3 ">

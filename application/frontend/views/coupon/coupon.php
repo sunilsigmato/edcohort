@@ -11,6 +11,21 @@ $segment = $this->input->get('segment');
 
   //  print_ex($product_list);
 ?>
+<?php 
+
+$get_breadcrumb = get_breadcrumb_value();
+$breadcrumb_name1 = '';
+$breadcrumb_name2 = '';
+
+$get_single_course_detail = get_single_coure_detail($course);
+$get_brand_compare = get_brand_compare_detail($course,$segment);
+
+if($get_breadcrumb)
+{   
+    $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
+    $breadcrumb_name2 = $get_breadcrumb->breadcrumb2_name;
+}
+?>
 <!--banner start-->
 <div class="inner-banner ">
     <div class="col-md-3 breadcrumb-design">
@@ -18,8 +33,8 @@ $segment = $this->input->get('segment');
         <div class="breadcrumb">
             <ul>
                 <li>Home</li>
-                <li><?php echo @$product_list['0']->brand_name; ?></li>
-                <li><a href="#"><?php echo @$product_list['0']->product_name; ?></a></li>
+                <li><?php echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -28,22 +43,22 @@ $segment = $this->input->get('segment');
         <div class="tab-menu">
             <ul>
                 <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
+                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
+                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort
+                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
+                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
                     </a></li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons
+                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons
                     </a></li>
             </ul>
         </div>
@@ -63,20 +78,21 @@ $segment = $this->input->get('segment');
         <div class="row">
             <div class="col-md-1 course-img p-3 text-center">
 
-                <img src="<?php echo base_url(); ?>assets/images/edcohort_tp_review_logo.png" alt="">
+            <img class="card-img-top" style="height: 150px;"
+                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo  $get_single_course_detail->product_image; ?>">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-                <h1>Course Name</h1>
+            <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
-                    <span class="rating-btn-display">4.9</span>
+                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
                     <label for="rating2" class="rating-display"><img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
                 </div>
                 <div class="pt-3 total-review-display">
-                    <h4> Excellent Based on 155 - Review </h4>
+                    <h4> Excellent Review </h4>
                 </div>
             </div>
-            <div class="col-md-4 pt-3 write-review-icon mb-3">
+            <div class="col-md-4 pt-3 write-review-icon ">
                 <a href="<?php echo base_url(); ?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
                     class="review-btns text-decoration-none">
                     <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span>
@@ -223,98 +239,111 @@ $segment = $this->input->get('segment');
 							</div>
 						</div> -->
                             </div>
-                        </div>
-                        <div class="across-row">
-                            <h2 class="across-title" style="margin-left:20px"><span></span> Status Bar</h2>
-                            <div class=" card-body">
-                                <?php echo message(); ?>
-                                <div class="alert alert-outline alert-outline-success reg-message-success"
-                                    id="reg-message-success" role="alert" style="display:none;">
-                                    <button type="button" class="close" data-bs-dismiss="alert"
-                                        aria-hidden="true">×</button>
-                                    <p id="text-message-success"></p>
-                                </div>
-                                <div class="alert alert-outline alert-outline-danger reg-message-error"
-                                    id="reg-message-error" role="alert" style="display:none">
-                                    <button type="button" class="close" data-bs-dismiss="alert"
-                                        aria-hidden="true">×</button>
-                                    <p id="text-message-error"></p>
-                                </div>
-
-                                <div class="table-responsive coupon_table">
-                                    <table class="table table-bordered border-top mb-0">
-
-                                        <tr>
-                                            <?php //print_ex($coupon_records); ?>
-                                            <td>Confirm Buying</td>
-                                            <?php foreach($coupon_records as $coupon){ ?>
-                                            <td class="text-center">
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic radio toggle button group">
-                                                    <input type="radio" class="btn-check" name="confirm_bying"
-                                                        id="confirm_bying_<?php echo $coupon->coupon_id; ?>"
-                                                        onClick="couponconfirm_bying(<?php echo $coupon->coupon_id; ?>)"
-                                                        value="<?php echo $coupon->coupon_id; ?>">
-                                                    <label class="btn btn-outline-primary"
-                                                        for="confirm_bying_<?php echo $coupon->coupon_id; ?>"><?php echo $coupon->coupon_code ?></label>
+                        
+                                    <!-- Coupon New code -->
+                        <div class="card">
+            
+                        <!-- Vinay Latest Code -->
+                        <div>
+                                <div class="row coupon-style ">
+                                    <div class="col-md-12">
+                                        <div class=" row coupon-card">
+                                            <div class="col-md-10">
+                                                <div class="d-flex align-items-center">
+                                                    <p>
+                                                        <i class="fa-solid fa-check verify-icon"></i>
+                                                        Verified today
+                                                    </p>
+                                                    <p class="ps-5"> <i class="fa-solid fa-users"></i> 218 People Used
+                                                        Today
+                                                    </p>
                                                 </div>
-                                            </td>
-                                            <?php } ?>
-                                        </tr>
-                                        <tr id="buyer_tr" style="display:none">
-                                            <td>Ready Buyers</td>
-                                            <?php foreach($coupon_records as $coupon){ ?>
-                                            <td class="text-center">
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic radio toggle button group">
-                                                    <!-- <input type="radio" class="btn-check" name="ready_buying" id="ready_buying_<?php echo $coupon->coupon_id; ?>" value="<?php echo $coupon->coupon_id; ?>"> -->
-                                                    <label class="btn btn-outline-primary"
-                                                        id="label_ready_buying_<?php echo $coupon->coupon_id; ?>"
-                                                        for="ready_buying_<?php echo $coupon->coupon_id; ?>"><?php echo $coupon->coupon_count; ?></label>
+                                                <div>
+                                                    <h4>Republic Day Sale:85% Off</h4>
+                                                    <h6>Republic Day Sale: Upto 85% Off Sitewide + Extra 10% Off Via
+                                                        ICICI B
+                                                    </h6>
                                                 </div>
-                                            </td>
-                                            <?php } ?>
-                                        </tr>
-                                    </table>
-                                    <input type="hidden" class="form-control" name="course" id="course"
-                                        placeholder="Your Name" value="<?php echo $product_list['0']->product_id; ?>">
-                                    <input type="hidden" class="form-control" name="user_id" id="user_id"
-                                        placeholder="Your Name"
-                                        value="<?php echo $this->session->userdata('user_id'); ?>">
-                                    <input type="hidden" class="form-control" name="coupon_count" id="coupon_count"
-                                        placeholder="Your Name" value="<?php echo $coupon->coupon_count; ?>">
+                                            </div>
+                                            <div class="col-md-2 d-flex align-items-center">
+                                                <div class=" coupon-card-button">Get Deal</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12  coupon-card-input ">
+                                    <div class="d-flex align-items-center justify-content-center">  
+                                    <div class="dropdown ">
+                                    <label for="coupons">
+                                                <h5>Enter
+                                                    the number of
+                                                    coupons</h5>
+                                            </label>
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Select                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Now</a></li>
+                                            <li><a class="dropdown-item" href="#">Today</a></li>
+                                            <li><a class="dropdown-item" href="#">Tommorow</a></li>
+                                            <li><a class="dropdown-item" href="#">Select Date</a></li>
+                                        </ul>
+                                    </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <label for="coupons">
+                                                <h5>Enter
+                                                    the number of
+                                                    coupons</h5>
+                                            </label>
+                                            <input type="date" class="form-control ms-3" id="exampleInputEmail1"
+                                                style="width:300px ">
+                                                
+                                        </div>
+                                        
+                                        <hr>
+                                       <!-- <div class="d-flex align-items-center justify-content-center">
+                                            <label for="coupons">
+                                                <h5>Enter
+                                                    the number of
+                                                    coupons</h5>
+                                            </label>
+                                            <input type="text" class="form-control ms-3" id="exampleInputEmail1"
+                                                style="width:300px ">
+                                                
+                                        </div>
+                                        <hr>-->
+                                        <div class="d-flex align-items-center justify-content-center">
+                                    
+                  
+                                        <?php if($this->session->userdata('user_id')){ ?>
+
+<button type=" button" onClick="conformCoupons()"
+    class="btn btn-primary text-right btn-md mb-1 form-control">Get
+    Your
+    Coupon Here </button>
+<?php }else{ ?>
+<a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
+    data-bs-effect="effect-scale" data-bs-toggle="modal"
+    data-bs-target="#login-button">Get
+    Your
+    Coupon Here</a>
+<!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
+<?php } ?>
+         
+                                                
+                                        </div>
+
+   
+
+                                    </div>
                                 </div>
-
-
-                                <br />
-                                <!-- <div class="btn-list text-right">
-
-
-                                </div> -->
                             </div>
-                            <div class="text-center">
-                                <?php if($this->session->userdata('user_id')){ ?>
+                        <!-- Vinal Lates COde Ends -->
 
-                                <button type=" button" onClick="conformCoupon()"
-                                    class="btn btn-primary text-right btn-md mb-1">Get
-                                    Your
-                                    Coupon Here </button>
-                                <?php }else{ ?>
-                                <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
-                                    data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                    data-bs-target="#login-button">Get
-                                    Your
-                                    Coupon Here</a>
-                                <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
-                                <?php } ?>
-                                <!-- <a href="javascript:void(0)" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Get Your Coupon Here</a> -->
-                                <a href="#" class="text-decoration-none ms-1"><svg width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M16.5004 3.74998C16.5003 2.87013 16.8096 2.01826 17.3741 1.3434C17.9386 0.668542 18.7225 0.213678 19.5885 0.0583884C20.4546 -0.0969011 21.3476 0.0572728 22.1115 0.493936C22.8753 0.9306 23.4613 1.62195 23.7669 2.44702C24.0725 3.27209 24.0783 4.17835 23.7832 5.00724C23.4881 5.83613 22.9109 6.53487 22.1527 6.9812C21.3945 7.42753 20.5034 7.59304 19.6355 7.44876C18.7675 7.30448 17.978 6.85961 17.4049 6.19198L7.3279 10.872C7.55956 11.6061 7.55956 12.3938 7.3279 13.128L17.4049 17.808C18.0107 17.1035 18.8564 16.6489 19.7782 16.5325C20.7 16.416 21.6322 16.6458 22.3942 17.1775C23.1561 17.7092 23.6936 18.5048 23.9024 19.4102C24.1112 20.3155 23.9764 21.2662 23.5243 22.0778C23.0721 22.8895 22.3347 23.5044 21.455 23.8034C20.5753 24.1024 19.6159 24.0642 18.7628 23.6961C17.9097 23.328 17.2236 22.6564 16.8375 21.8113C16.4513 20.9662 16.3927 20.0079 16.6729 19.122L6.5959 14.442C6.09705 15.0233 5.43212 15.438 4.69057 15.6301C3.94901 15.8222 3.1664 15.7827 2.448 15.5167C1.72961 15.2507 1.10991 14.7711 0.672259 14.1424C0.234606 13.5137 0 12.766 0 12C0 11.2339 0.234606 10.4863 0.672259 9.85755C1.10991 9.22884 1.72961 8.74923 2.448 8.48326C3.1664 8.21729 3.94901 8.17772 4.69057 8.36985C5.43212 8.56199 6.09705 8.97663 6.5959 9.55798L16.6729 4.87798C16.5582 4.51298 16.5 4.13258 16.5004 3.74998Z"
-                                            fill="#A0A0A0" />
-                                    </svg> Share</a>
-                            </div>
+
+</div>
+    
+                        <!-- Coupond New code ends -->
+
+
                         </div>
 
                     </div>
@@ -726,6 +755,28 @@ $segment = $this->input->get('segment');
 function doAction(val){
         //Forward browser to new url
         window.location= base_url+'coupon/' + val;
+    }
+    function conformCoupons()
+    {
+        var coupon_date = $('#coupon_date').val();
+        var segment_id = $('#segment_id').val();
+        var course_id = $('#course_id').val();
+        var user_id = $('#user_id').val();
+        var no_of_coupon = $('#no_of_coupon').val();
+
+        
+       $.ajax({
+        url: base_url+'test',
+        dataType: 'json',
+        type: 'post',            
+        data:{ 'course' : ''+course_id+'', 'segment_id' : ''+segment_id+'','coupon_date' : ''+coupon_date+'','user_id' : ''+user_id+'','no_of_coupon' : ''+no_of_coupon+'' },                                         
+        success: function(data){             
+                      
+    },
+    
+
+});                 
+
     }
 
     function conformCoupon(){   

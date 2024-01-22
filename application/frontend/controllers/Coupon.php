@@ -10,6 +10,7 @@ public function __construct()
     $this->load->helper('form');
     $this->load->model('jewelry_model');
     $this->load->model('coupon_model');
+    $this->load->model('review_model');
 }
 
 function index(){
@@ -154,7 +155,28 @@ function search()
     // $this->load->view('review/review',$data);
     // $this->load->view('common/footer');
   }
-
+  function coupon_submits()
+  {
+    $segment_id = $this->input->post('segment_id');
+    $course = $this->input->post('course');
+    $coupon_date = $this->input->post('coupon_date');
+    $user_id = $this->input->post('user_id');
+    $no_of_coupon = $this->input->post('no_of_coupon');
+    $data = array(
+      'segment_id' => $segment_id, 
+      'coupon_date' => $coupon_date,                 
+      'course' => $course, 
+      'no_of_coupon' => $no_of_coupon,
+      'user_id' => $user_id,
+      'date_added' => date('Y-m-d H:i:s')
+  );
+  print_R($data);
+  exit;
+  }
+function test()
+{
+  print_R("hii");
+}
   function coupon_submit() {
 
      // print_ex($_REQUEST);
@@ -265,7 +287,7 @@ function search()
     $status = 1;
     //$this->session->set_flashdata('alert_message','Request has been sent successfully.');
          echo json_encode(array('message' => $message, 'status' => $status));
-        exit();
+       // exit();
       
   }
 

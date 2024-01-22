@@ -10,6 +10,7 @@ class Cohort extends CI_Controller {
     $this->load->helper('form');
     $this->load->model('jewelry_model');
     $this->load->model('cohort_model');
+    $this->load->model('review_model');
   }
   function index($id = ''){
 
