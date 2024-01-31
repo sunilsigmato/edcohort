@@ -33,20 +33,20 @@
                 <button type="button" class="filter-btn">Filter</button>
 
                 <!--left start-->
-                <div class="review-left">
+                <div class="review-left" style="padding:20px 40px 20px 20px">
 
                     <h3 class="filter-title">Filter</h3>
                     <form action="javascript:void(0)" id="form" name="form" method="post">
                         <div class="filter-col">
 
-                            <div class="btn-group btn-toggle filter-toggle-box">
+                            <div class="btn-group btn-toggle filter-toggle-box px-3">
                                 <button class="btn btn-lg btn-default">Online </button>
                                 <button class="btn btn-lg btn-primary active">Offline</button>
                             </div>
-                            <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>
+                            <p class="online-results PX-4">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>
                         </div>
                         <?php if(!empty($board_list)){ ?>
-                        <div class="filter-col">
+                        <div class="filter-col px-3">
                             <h3 class="filter-col-title">BOARD</h3>
                             <div class="select-box">
                                 <select name="board" id="board">
@@ -60,7 +60,7 @@
                         </div>
                         <?php } ?>
                         <?php if(!empty($class_list)){ ?>
-                        <div class="filter-col">
+                        <div class="filter-col px-3">
                             <h3 class="filter-col-title">CLASS</h3>
                             <div class="select-box">
                                 <select name="class" id="class">
@@ -70,7 +70,7 @@
                         </div>
                         <?php } ?>
                         <?php if(!empty($batch_list)){ ?>
-                        <div class="filter-col">
+                        <div class="filter-col px-3">
                             <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
                             <div class="select-box">
                                 <select name="batch" id="batch">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <?php } ?>
-                        <div class="filter-btn-col">
+                        <div class="filter-btn-col p-4">
                             <button type="submit" onclick="submitForm()" class="apply-btn">Apply Filter</button>
                         </div>
                     </form>
@@ -93,7 +93,9 @@
 
                     <div class="tab-link px-5">
                         <ul>
-                            <li><a href="#" class="active">All Brands</a></li>
+                            <li><a href="#" class="active  
+                               
+                            ">All Brands</a></li>
                             <li><a href="#">All Courses</a></li>
                         </ul>
                     </div>
@@ -103,9 +105,9 @@
                             <input type="submit" class="all-search-submit">
                         </div>
                     </div> -->
-                    <div class="container mx-4">
+                    <div class="container mx-4`">
                         <div class="search-container">
-                            <input type="text" class="form-control search-input" placeholder="Search...">
+                            <input type="text" class="form-control search-input ps-5" placeholder="Search...">
                             <i class="fas fa-search search-icon"></i>
                         </div>
                     </div>
@@ -131,7 +133,7 @@
 
                 </div> -->
                     <section id="product-showcase" class="all-col-box px-5">
-                        <h2 class="all-col-title">Top Brands</h2>
+                        <h2 class="all-col-title">Top Brands </h2>
                         <div class="container">
                             <div class="content-box">
                                 <div class="category-filter clearfix">

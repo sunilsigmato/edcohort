@@ -72,7 +72,7 @@ if(empty($meta_description)){
     
     
     <!--custom css-->
-    <link href="<?php echo base_url(); ?>assets/css/style.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/style.css?v=2" type="text/css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/responsive.css" type="text/css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     

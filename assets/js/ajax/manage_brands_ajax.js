@@ -140,7 +140,7 @@ function loadMoreData(url_data) {
           html +=
             '<span class="rating-number"><img src="' +
             base_url +
-            'assets/images/Star.png" alt="">3.2</span>';
+            'assets/images/Star.png" alt="">6.2</span>';
           html += "</div>";
           html += "</div>";
           html += "</div>";

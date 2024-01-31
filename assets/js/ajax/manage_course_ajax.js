@@ -94,24 +94,30 @@ function setFilter()
                     if(details[i].product_name!=null){ var product_name=details[i].product_name; }else{ var product_name=""; }
                     if(details[i].product_slug!=null){ var product_slug=details[i].product_slug; }else{ var product_slug=""; }
                     if(details[i].product_image!=null){ var product_image=details[i].product_image; }else{ var product_image=""; }
-                   
-                    if(display=="grid")
-                    {
 
-                        html +='<div class="popular-col">';
-                        html +='<a href="'+product_slug+'">';
-                        html +='<div class="popular-col-image"><img src="'+base_url+'uploads/brand/'+product_image+'" alt=""></div>';
-                        html +='<h3>'+product_name+'</h3>';
-                        html +='<div></div>';
-                        html +='<div class="popular-col-rating">';
-                        html +='<div class="popular-star-rating"><img src="'+base_url+'assets/images/rating.png" alt=""></div>';
-                        html +='<span class="rating-number"><img src="'+base_url+'assets/images/Star.png" alt="">3.2</span>';
-                        html +='</div>';
-                        html +='</a>';
-                        html +='</div>';
+                    if (display === "grid") {
+                        html += '<div class="col-md-3 mb-4 brand-grid" style="padding: 0px 30px 20px 40px;">';
+                        html += '<div class="card brand-row">';
+                        html += '<div class="card-image-brand">';
+                        
                   
+                        html += '<img src="' + base_url + 'uploads/brand/' + product_image + '" class="card-img-top small-image" alt="' + product_name + '">';
+                        
+                        html += '</div>';
+                        html += '<div class="card-body">';
+                        html += '<h5 class="card-title"><a href="' + product_slug + '">' + product_name + '</a></h5>';
+                        html += '<div class="popular-col-rating">';
+                        html += '<div class="popular-star-rating"><img src="' + base_url + 'assets/images/rating.png" alt=""></div>';
+                        html += '<span class="rating-number"><img src="' + base_url + 'assets/images/Star.png" alt="">3.2</span>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';   
                     }
+                    
 
+              
+                    
                 }
                 $("#total_records").html(total_records);
                 $(".total_records").html(total_records);
