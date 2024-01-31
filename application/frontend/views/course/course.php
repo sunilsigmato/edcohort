@@ -31,55 +31,56 @@
                 <button type="button" class="filter-btn">Filter</button>
 
                 <!--left start-->
-                <div class="review-left">
+                <div class="review-left" style="padding:20px 40px 20px 20px">
 
                     <h3 class="filter-title">Filter</h3>
-                   <form action="javascript:void(0)" id="form" name="form" method="post">
-                    <div class="filter-col">
+                    <form action="javascript:void(0)" id="form" name="form" method="post">
+                        <div class="filter-col">
 
-                        <div class="btn-group btn-toggle filter-toggle-box"> 
-                            <button class="btn btn-lg btn-default">Online </button>
-                            <button class="btn btn-lg btn-primary active">Offline</button>
+                            <div class="btn-group btn-toggle filter-toggle-box px-3">
+                                <button class="btn btn-lg btn-default">Online </button>
+                                <button class="btn btn-lg btn-primary active">Offline</button>
+                            </div>
+                            <p class="online-results PX-4">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>
                         </div>
-                        <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>
-                    </div>
-                  <?php if(!empty($board_list)){ ?>
-                    <div class="filter-col">
-                        <h3 class="filter-col-title">BOARD</h3>
-                        <div class="select-box">
-                               <select name="board" id="board">
-                                <option value="">Select Board</option>
-                                <?php foreach($board_list as $board){ ?>
-                                <option value="<?php echo $board->board_id; ?>"><?php echo $board->board_name; ?></option>
-                    <?php } ?>
-                            </select>
+                        <?php if(!empty($board_list)){ ?>
+                        <div class="filter-col px-3">
+                            <h3 class="filter-col-title">BOARD</h3>
+                            <div class="select-box">
+                                <select name="board" id="board">
+                                    <option value="">Select Board</option>
+                                    <?php foreach($board_list as $board){ ?>
+                                    <option value="<?php echo $board->board_id; ?>"><?php echo $board->board_name; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
-                    <?php if(!empty($class_list)){ ?>
-                    <div class="filter-col">
-                        <h3 class="filter-col-title">CLASS</h3>
-                        <div class="select-box">
-                            <select name="class" id="class">
-                                <option value="">Select Class</option>
-                            </select>
+                        <?php } ?>
+                        <?php if(!empty($class_list)){ ?>
+                        <div class="filter-col px-3">
+                            <h3 class="filter-col-title">CLASS</h3>
+                            <div class="select-box">
+                                <select name="class" id="class">
+                                    <option value="">Select Class</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
-                 <?php if(!empty($batch_list)){ ?>
-                    <div class="filter-col">
-                        <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
-                        <div class="select-box">
+                        <?php } ?>
+                        <?php if(!empty($batch_list)){ ?>
+                        <div class="filter-col px-3">
+                            <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
+                            <div class="select-box">
                                 <select name="batch" id="batch">
                                     <option value="">Select Batch</option>
-                         </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                     <?php } ?>
-                    <div class="filter-btn-col">
-                        <button type="submit" onclick="submitForm()" class="apply-btn">Apply Filter</button>
-                    </div>
-</form>
+                        <?php } ?>
+                        <div class="filter-btn-col p-4">
+                            <button type="submit" onclick="submitForm()" class="apply-btn">Apply Filter</button>
+                        </div>
+                    </form>
 
                 </div>
                 <!--left end-->
@@ -96,14 +97,17 @@
                         </ul>
                     </div>
 
-                    <div class="all-search-box">
-                        <form class="top-search" id="searchform" name="searchform" method="get" action="">
-                        <input type="text" name="course_query" id="header-search" placeholder="Course Search" value="" class="all-search-input">                
-                        <input type="submit" class="all-search-submit">
+                    <div class="all-search-box " style= "display: flex;
+    align-items: center;width: 300px; 
+    margin-right: 10px;border:none;">
+  <form class="top-search" id="searchform" name="searchform" method="get" action="" >
+                        <input type="text" name="course_query" id="header-search" placeholder="Search..." value="" class="all-search-input" style="  width: 100px;
+    margin-right: 10px; " >                 
+                        <input type="submit" class="all-search-submit"> 
                          </form>
                     </div> 
 
-                    <div class="select-filter-box">
+                    <div class="select-filter-box" >
                         <span class="filterDisplayName"></span>
                         <span id="filter_item"></span>
                    <!--      <ul class="select-filter">

@@ -742,3 +742,14 @@ body .sharethis-inline-share-buttons.st-center.st-has-labels.st-inline-share-but
     height: auto;
 }
 .note-editor.note-frame .note-editing-area .note-editable{height: 75px !important;text-align: left;}
+
+/* VEENA */
+.brandCard{
+    padding: 20px;
+}
+
+.brandCard img{
+
+    padding: 20px;
+    
+}

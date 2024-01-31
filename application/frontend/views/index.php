@@ -1,3 +1,6 @@
+
+
+
 <?php
 $course = $this->input->get('segment');
 $brandID = $this->input->get('brand');
@@ -18,6 +21,8 @@ $sort_by = $this->input->get('sort_by');
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"
     integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
 <style>
 /* Your existing styles */
 .pt-5 {
@@ -203,7 +208,62 @@ $sort_by = $this->input->get('sort_by');
 
 <!--End Logo Sectiont-->
 
-<div class="content content-bg pt-5 pb-5">
+<div class="content content-bg pt-5 pb-5" >
+
+<style>
+      .container {
+        position: relative;
+ }
+ .arrow-mark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: black;
+        padding: 0px 5px 0px 0px;
+    }
+    .card-img-top {
+        position: relative;
+    }
+
+.card-body {
+        position: relative;
+        
+        
+    }
+ .card-title {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        margin-bottom: 0; 
+        font-size: 23px;
+        color: black; 
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: left;
+        padding-left:5px;
+        padding-bottom:5px;
+   }
+  .card {
+            transition: all .2s ease;
+            border: 2px solid #ddd; 
+            height: 280px;
+            width: 350px;
+            border-radius: 20px;
+            border: 1px solid #979797;
+            background: none;
+            transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+
+       
+        }
+ .card:hover {
+            transform: scale(1.03);
+             background:white;
+            border: none;
+            box-shadow: 0px 3px 4px 0px #979797; 
+             
+  }
+        </style>
     <div class="container">
         <div class="row justify-content-center">
             <?php
@@ -217,10 +277,98 @@ $sort_by = $this->input->get('sort_by');
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center">
                         <h5 class="card-title"><?php echo $class->segment_name; ?></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        <p class="card-text" style="text-align: left;">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
-                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
-                            class="btn btn-primary mt-auto btn-select">Select</a>
+                            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
+                            class="mt-auto"><div class="arrow-mark">&#8594;</div></a>
+                            
+                    </div>
+                </div>
+            </div>
+            <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
+
+<!-- veena -->
+
+<div class="content content-bg pt-5 pb-5" >
+
+<style>
+      .container {
+        position: relative;
+ }
+ .arrow-mark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: black;
+        padding: 0px 5px 0px 0px;
+    }
+    .card-img-top {
+        position: relative;
+    }
+
+.card-body {
+        position: relative;
+        
+        
+    }
+ .card-title {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        margin-bottom: 0; 
+        font-size: 23px;
+        color: black; 
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: left;
+        padding-left:5px;
+        padding-bottom:5px;
+   }
+  .card {
+            transition: all .2s ease;
+            border: 2px solid #ddd; 
+            height: 280px;
+            width: 350px;
+            border-radius: 20px;
+            border: 1px solid #979797;
+            background: none;
+            transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+
+       
+        }
+ .card:hover {
+            transform: scale(1.03);
+             background:white;
+            border: none;
+            box-shadow: 0px 3px 4px 0px #979797; 
+             
+  }
+        </style>
+    <div class="container">
+        <div class="row justify-content-center">
+            <?php
+            $class_records_count = count($segment_record);
+            if ($class_records_count > 0) {
+                foreach ($segment_record as $class) { ?>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card text-center">
+                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center" style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);" >
+                        <?php echo $class->segment_img; ?>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <h5 class="card-title"><?php echo $class->segment_name; ?></h5>
+                       
+                            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
+                            class="mt-auto"><div class="arrow-mark">&#8594;</div></a>
+                            
                     </div>
                 </div>
             </div>
@@ -236,7 +384,7 @@ $sort_by = $this->input->get('sort_by');
 
 
 
-
+<!-- -------------------------------------- -->
 <?php $courseid = $this->input->get('segment');
 if (empty($courseid)) {
 
@@ -487,12 +635,56 @@ if (empty($courseid)) {
                     </div>
                 </div>
 
-                <div class="container p-0">
+                <!-- carousel -->
+ <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <?php
+    $first = true;
+    foreach ($resp_get_brand as $brand) {
+    ?>
+      <div class="carousel-item  <?php echo ($first ? 'active' : ''); ?>">
+        <div class="carousel-size" style="width: 100%; height: 400px;border: 2px solid #ccc; border-radius: 10px; position: relative;padding:80px;">
+          <img class="card-img-top" style="height: 80%; width: 70%;padding:0px 0px 0px 450px"
+            src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
+            alt="<?php echo $brand->brand_name; ?>">
+            <h5 class="card-title mb-0" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $brand->brand_name; ?></h5>
+
+          <div class="card-body text-center">
+
+            <div class="popular-star-rating m-2" style="padding:60px 0px 60px 0px">
+              <i class="fa fa-star text-yellow"></i>
+              <i class="fa fa-star text-yellow"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php
+      $first = false; 
+    }
+    ?>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+                <!-- carousel end -->
+                <!--
+                <div class="container pt-5" id="brandCard">
                     <div class="row">
                         <?php foreach ($resp_get_brand as $brand) { ?>
                         <div class="col-sm-4 col-xl-3 col-lg-4 mb-3">
-                            <div class="card ">
-                                <img class="card-img-top " style="height: 260px;"
+                            <div class="card brandCard">
+                                <img class="card-img-top" 
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
                                     alt="<?php echo $brand->brand_name; ?>">
                                 <div class="card-body text-center ">
@@ -506,16 +698,16 @@ if (empty($courseid)) {
                                     </div>
                                     <hr>
                                     <a href="#" style="text-decoration:none; ">
-                                        <div class = "view-program-font"><h6>VEIW BRAND</h6></div>
+                                        <div class = "view-program-font viewButton">View Brand</div>
                                     </a>
-                                    <!-- <p class=" card-text rating-number">
+                                    <p class=" card-text rating-number">
                                         <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
-                                        </p> -->
+                                        </p> 
                                 </div>
                             </div>
                         </div>
                         <?php } ?>
-                    </div>
+                    </div>  
                 </div>
 
                 <div class="d-flex justify-content-center m-5">
@@ -528,6 +720,7 @@ if (empty($courseid)) {
                     ?>
             </div>
         </div>
+               -->        
         <!--row end-->
 
         <!--row start-->
@@ -549,10 +742,57 @@ if (empty($courseid)) {
                     <div class="d-flex  justify-content-center ">
 
                         <p>Got the course, but worried about the brand?</p>
+
+                    </div>
+<!---carousel-2----------->
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <?php
+        $first = true;
+        foreach ($resp_get_course as $r) :
+            ?>
+            <div class="carousel-item <?php echo ($first ? 'active' : ''); ?>">
+                <div class="carousel-size" style="width: 100%; height: 400px; border: 2px solid #ccc; border-radius: 10px; position: relative; padding: 80px;">
+
+                    <img class="card-img-top" style="height: 80%; width: 70%; padding: 0px 0px 0px 450px;"
+                         src="<?php echo base_url('uploads/product/image/' . $r->product_image); ?>"
+                         alt="<?php echo $r->product_name; ?>">
+                    <h5 class="card-title mb-0" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $r->product_name; ?></h5>
+
+                    <div class="card-body text-center">
+                        <div class="popular-star-rating m-2" style="margin-bottom: 10px;">
+                            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <i class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
+                            <?php endfor; ?>
+                        </div>
+                        <div>
+                            <a href="<?php echo base_url('review?course=' . $r->product_id . '&segment=' . $course); ?>"
+                               style="text-decoration:none; ">
+                                <div class="view-program-font pt-4"><h6>VIEW PROGRAM</h6></div>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
+            </div>
+            <?php
+            $first = false;
+        endforeach;
+        ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
+<!---carousel-2 end----------->
+                
+<!-------------->
                 <div class="container p-0">
                     <div class="row">
                         <?php foreach ($resp_get_course as $r)  { ?>
@@ -585,7 +825,43 @@ if (empty($courseid)) {
                         <?php } ?>
                     </div>
                 </div>
+<!-------------->
+<!-------veena-------
 
+
+<div class="container p-0">
+                    <div class="row">
+                        <?php foreach ($resp_get_course as $r)  { ?>
+                        <div class="col-sm-4 col-xl-3 col-lg-4 mb-4" >
+                            <div class="card" style="margin-bottom: 20px;padding:55px; ">
+
+                                <img class="card-img-top" style="height: 260px; "
+                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
+                                    alt="<?php echo $r->product_name; ?>">
+                                <div class="card-body text-center">
+                                    <h5><?php echo $r->product_name; ?></h5>
+                                    <div class="popular-star-rating m-2">
+                                        <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <i
+                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
+                                        <?php } ?>
+                                    </div>
+                                    <hr>
+                                    <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
+                                        style="text-decoration:none; ">
+                                        <div class = "view-program-font"><h6>VIEW PROGRAM</h6></div>
+                                    </a>
+                                    <!-- <p class="card-text rating-number">
+                                            <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
+                                            </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+ -->
+<!-------veena------->
                 <div class="d-flex justify-content-center m-5"><a href="<?php echo base_url(); ?>course"
                         class="btn btn-primary btn-select">VIEW ALL COURSES</a>
                 </div>

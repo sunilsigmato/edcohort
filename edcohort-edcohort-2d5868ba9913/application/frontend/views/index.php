@@ -340,7 +340,7 @@ if(empty($courseid)){
                                             <div class="course-inner-row">
 
                                                 <div class="course-section-title">
-                                                    <h2>Popular Courses</h2>
+                                                    <h2>                </h2>
                                                     <p>Got the course, but worried about the brand?<br/>
                                                     Read about all brands and their offerings here.</p>
                                                 </div>
