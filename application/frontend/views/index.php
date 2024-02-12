@@ -208,7 +208,10 @@ $sort_by = $this->input->get('sort_by');
 <!--End Logo Sectiont-->
 
 <div class="content content-bg pt-5 pb-5">
-
+<div class="pt-5 logo-content brand-align">
+    <h2>Segment</h2>
+    
+</div>
     <style>
     .container {
         position: relative;
@@ -268,7 +271,7 @@ $sort_by = $this->input->get('sort_by');
 
     }
     </style>
-    <div class="container">
+   <!-- <div class="container">
         <div class="row justify-content-center">
             <?php
             $class_records_count = count($segment_record);
@@ -296,7 +299,7 @@ $sort_by = $this->input->get('sort_by');
             }
             ?>
         </div>
-    </div>
+    </div> -->
 </div>
 
 
@@ -363,6 +366,7 @@ $sort_by = $this->input->get('sort_by');
 
     }
     </style>
+    
     <div class="container">
         <div class="row justify-content-center">
             <?php
@@ -748,10 +752,10 @@ if (empty($courseid)) {
                         <?php foreach ($resp_get_course as $r) { ?>
                         <div class="crd">
                             <div class="crd-bdy">
-                                <img class="card-img-top"
+                                <img class="card-img-top" style="height:250px;"
                                     src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">
-                                <h5 class="crd-ttl"><?php echo $r->product_name; ?></h5>
+                                <h5 class="crd-ttl pt-3"><?php echo $r->product_name; ?></h5>
                                 <div class="popular-star-rating m-2">
                                     <?php for ($i = 1; $i <= 5; $i++) { ?>
                                     <i
@@ -760,11 +764,11 @@ if (empty($courseid)) {
                                 </div>
                                 <hr>
                                 <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
-                                    style="text-decoration:none; ">
-                                    <div class="view-program-font viewButton">
-                                        View Program
-                                    </div>
-                                </a>
+                                        style="text-decoration:none; ">
+                                        <div class="view-program-font viewButton">
+                                            View Program
+                                        </div>
+                                    </a>
                             </div>
                         </div>
                         <?php } ?>
@@ -803,11 +807,12 @@ if (empty($courseid)) {
 
                 <div class="container pt-5" id="brandCard">
                     <div class="row">
+                        
                         <?php foreach ($resp_get_course as $r)  { 
                             
                             ?>
                         <div class="col-sm-4 col-xl-3 col-lg-4 mb-3">
-                            <div class="card ">
+                            <div class="card">
                                 <img class="card-img-top p-3"
                                     src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">

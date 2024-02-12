@@ -208,7 +208,7 @@ Header
 }
 .login-btn {
   background: #e64040;
-  border: 1px solid #3554fe;
+  border: 1px solid #ffffff;
   color: #fff;
 }
 .login-btn:hover {
@@ -3944,5 +3944,12 @@ body
     text-transform: uppercase;
     letter-spacing: 1.2px;
 }
-
+.cntr .viewButton{font-size: 16px;
+  font-weight: 400;
+  border: 1px solid #f1c5c5;
+  display: inline-block;
+  padding: 2px 20px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;}
 
