@@ -757,10 +757,10 @@ if (empty($courseid)) {
                     <img class="card-img-top" style="height: 80%; width: 70%; padding: 0px 0px 0px 450px;"
                          src="<?php echo base_url('uploads/product/image/' . $r->product_image); ?>"
                          alt="<?php echo $r->product_name; ?>">
-                    <h5 class="card-title mb-0" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $r->product_name; ?></h5>
+                    <h5 class="card-title mb-1 text-center" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $r->product_name; ?></h5>
 
                     <div class="card-body text-center">
-                        <div class="popular-star-rating m-2" style="margin-bottom: 10px;">
+                        <div class="popular-star-rating m-2 text-center" >
                             <?php for ($i = 1; $i <= 5; $i++) : ?>
                                 <i class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
                             <?php endfor; ?>
