@@ -1,6 +1,3 @@
-
-
-
 <?php
 $course = $this->input->get('segment');
 $brandID = $this->input->get('brand');
@@ -22,7 +19,7 @@ $sort_by = $this->input->get('sort_by');
     integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    
+
 <style>
 /* Your existing styles */
 .pt-5 {
@@ -143,23 +140,25 @@ $sort_by = $this->input->get('sort_by');
                 if($i==1)
                 {
                  ?>
-                <div class="carousel-item active">
-                    <img src="<?php echo base_url(); ?>uploads/banner/<?php echo $b->home_slider_image; ?>" class="d-block w-100" alt="Image 1" style="max-height:500px; width: auto; object-fit:cover;">
-                </div>
-            <?php
+        <div class="carousel-item active">
+            <img src="<?php echo base_url(); ?>uploads/banner/<?php echo $b->home_slider_image; ?>"
+                class="d-block w-100" alt="Image 1" style="max-height:500px; width: auto; object-fit:cover;">
+        </div>
+        <?php
             }
             else{
                     ?>
-                      <div class="carousel-item ">
-                    <img src="<?php echo base_url(); ?>uploads/banner/<?php echo $b->home_slider_image; ?>" class="d-block w-100" alt="Image 1" style="max-height:500px; width: auto; object-fit:cover;">
-                </div>
-                    <?php
+        <div class="carousel-item ">
+            <img src="<?php echo base_url(); ?>uploads/banner/<?php echo $b->home_slider_image; ?>"
+                class="d-block w-100" alt="Image 1" style="max-height:500px; width: auto; object-fit:cover;">
+        </div>
+        <?php
             }
             $i++;
         }
         }
         ?>
-        
+
         <!-- <div class="carousel-item">
             <img src="https://placekitten.com/800/402" class="d-block w-100" alt="Image 3"
                 style="max-height:500px; width: auto;object-fit:cover;">
@@ -208,13 +207,14 @@ $sort_by = $this->input->get('sort_by');
 
 <!--End Logo Sectiont-->
 
-<div class="content content-bg pt-5 pb-5" >
+<div class="content content-bg pt-5 pb-5">
 
-<style>
-      .container {
+    <style>
+    .container {
         position: relative;
- }
- .arrow-mark {
+    }
+
+    .arrow-mark {
         position: absolute;
         bottom: 10px;
         right: 10px;
@@ -222,48 +222,52 @@ $sort_by = $this->input->get('sort_by');
         color: black;
         padding: 0px 5px 0px 0px;
     }
+
     .card-img-top {
         position: relative;
     }
 
-.card-body {
+    .card-body {
         position: relative;
-        
-        
+
+
     }
- .card-title {
+
+    .card-title {
         position: absolute;
         bottom: 10px;
         left: 10px;
-        margin-bottom: 0; 
+        margin-bottom: 0;
         font-size: 23px;
-        color: black; 
+        color: black;
         border-radius: 10px;
         font-weight: bold;
         text-align: left;
-        padding-left:5px;
-        padding-bottom:5px;
-   }
-  .card {
-            transition: all .2s ease;
-            border: 2px solid #ddd; 
-            height: 280px;
-            width: 350px;
-            border-radius: 20px;
-            border: 1px solid #979797;
-            background: none;
-            transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        padding-left: 5px;
+        padding-bottom: 5px;
+    }
 
-       
-        }
- .card:hover {
-            transform: scale(1.03);
-             background:white;
-            border: none;
-            box-shadow: 0px 3px 4px 0px #979797; 
-             
-  }
-        </style>
+    .card {
+        transition: all .2s ease;
+        border: 2px solid #ddd;
+        height: 280px;
+        width: 350px;
+        border-radius: 20px;
+        border: 1px solid #979797;
+        background: none;
+        transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+
+
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        background: white;
+        border: none;
+        box-shadow: 0px 3px 4px 0px #979797;
+
+    }
+    </style>
     <div class="container">
         <div class="row justify-content-center">
             <?php
@@ -277,11 +281,13 @@ $sort_by = $this->input->get('sort_by');
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center">
                         <h5 class="card-title"><?php echo $class->segment_name; ?></h5>
-                        <p class="card-text" style="text-align: left;">Some quick example text to build on the card title and make up the bulk of
+                        <p class="card-text" style="text-align: left;">Some quick example text to build on the card
+                            title and make up the bulk of
                             the card's content.</p>
-                            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
-                            class="mt-auto"><div class="arrow-mark">&#8594;</div></a>
-                            
+                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                            <div class="arrow-mark">&#8594;</div>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -296,13 +302,14 @@ $sort_by = $this->input->get('sort_by');
 
 <!-- veena -->
 
-<div class="content content-bg pt-5 pb-5" >
+<div class="content content-bg pt-5 pb-5">
 
-<style>
-      .container {
+    <style>
+    .container {
         position: relative;
- }
- .arrow-mark {
+    }
+
+    .arrow-mark {
         position: absolute;
         bottom: 10px;
         right: 10px;
@@ -310,48 +317,52 @@ $sort_by = $this->input->get('sort_by');
         color: black;
         padding: 0px 5px 0px 0px;
     }
+
     .card-img-top {
         position: relative;
     }
 
-.card-body {
+    .card-body {
         position: relative;
-        
-        
+
+
     }
- .card-title {
+
+    .card-title {
         position: absolute;
         bottom: 10px;
         left: 10px;
-        margin-bottom: 0; 
+        margin-bottom: 0;
         font-size: 23px;
-        color: black; 
+        color: black;
         border-radius: 10px;
         font-weight: bold;
         text-align: left;
-        padding-left:5px;
-        padding-bottom:5px;
-   }
-  .card {
-            transition: all .2s ease;
-            border: 2px solid #ddd; 
-            height: 280px;
-            width: 350px;
-            border-radius: 20px;
-            border: 1px solid #979797;
-            background: none;
-            transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        padding-left: 5px;
+        padding-bottom: 5px;
+    }
 
-       
-        }
- .card:hover {
-            transform: scale(1.03);
-             background:white;
-            border: none;
-            box-shadow: 0px 3px 4px 0px #979797; 
-             
-  }
-        </style>
+    .card {
+        transition: all .2s ease;
+        border: 2px solid #ddd;
+        height: 280px;
+        width: 350px;
+        border-radius: 20px;
+        border: 1px solid #979797;
+        background: none;
+        transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+
+
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        background: white;
+        border: none;
+        box-shadow: 0px 3px 4px 0px #979797;
+
+    }
+    </style>
     <div class="container">
         <div class="row justify-content-center">
             <?php
@@ -360,15 +371,17 @@ $sort_by = $this->input->get('sort_by');
                 foreach ($segment_record as $class) { ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card text-center">
-                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center" style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);" >
+                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
+                        style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
                         <?php echo $class->segment_img; ?>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center">
                         <h5 class="card-title"><?php echo $class->segment_name; ?></h5>
-                       
-                            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>"
-                            class="mt-auto"><div class="arrow-mark">&#8594;</div></a>
-                            
+
+                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                            <div class="arrow-mark">&#8594;</div>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -610,81 +623,26 @@ if (empty($courseid)) {
 <?php } ?>
 <!--start-->
 <div class="all-course-box">
-    <!--right start-->
-    <div class="course-right">
-        <?php if (!empty($courseid)) { ?>
-        <?php
-            $resp_get_brand = getseg_brand_list($courseid);
-            if ($resp_get_brand) {
-            ?>
-        <!--row start-->
-        <div class="course-row article-section" id="Popular-Brands">
-            <div class="course-inner-row">
-
-                <div class="course-section-title">
-
-
-                    <div class="d-flex  justify-content-center ">
-                        <h2>Popular Brands</h2>
-
-                    </div>
-                    <div class="d-flex  justify-content-center ">
-
-                        <p>Got the course, but worried about the brand?<br />
-                            Read about all brands and their offerings here.</p>
-                    </div>
+    <div class="course-inner-row">
+        <div class="course-right">
+            <?php if (!empty($courseid)) { ?>
+            <?php
+                $resp_get_brand = getseg_brand_list($courseid);
+                if ($resp_get_brand) {
+                    ?>
+            <!-- Popular Brands Section -->
+            <div class="course-row article-section" id="Popular-Brands">
+                <div class="course-section-title text-center">
+                    <h2>Popular Brands</h2>
+                    <p>Got the course, but worried about the brand?<br /> Read about all brands and their offerings
+                        here.</p>
                 </div>
-
-                <!-- carousel -->
- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <?php
-    $first = true;
-    foreach ($resp_get_brand as $brand) {
-    ?>
-      <div class="carousel-item  <?php echo ($first ? 'active' : ''); ?>">
-        <div class="carousel-size" style="width: 100%; height: 400px;border: 2px solid #ccc; border-radius: 10px; position: relative;padding:80px;">
-          <img class="card-img-top" style="height: 80%; width: 70%;padding:0px 0px 0px 450px"
-            src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
-            alt="<?php echo $brand->brand_name; ?>">
-            <h5 class="card-title mb-0" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $brand->brand_name; ?></h5>
-
-          <div class="card-body text-center">
-
-            <div class="popular-star-rating m-2" style="padding:60px 0px 60px 0px">
-              <i class="fa fa-star text-yellow"></i>
-              <i class="fa fa-star text-yellow"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    <?php
-      $first = false; 
-    }
-    ?>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-
-                <!-- carousel end -->
-                <!--
-                <div class="container pt-5" id="brandCard">
+                <div class="container pt-5 card-container" id="brandCard">
                     <div class="row">
                         <?php foreach ($resp_get_brand as $brand) { ?>
                         <div class="col-sm-4 col-xl-3 col-lg-4 mb-3">
                             <div class="card brandCard">
-                                <img class="card-img-top" 
+                                <img class="card-img-top"
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
                                     alt="<?php echo $brand->brand_name; ?>">
                                 <div class="card-body text-center ">
@@ -698,219 +656,198 @@ if (empty($courseid)) {
                                     </div>
                                     <hr>
                                     <a href="#" style="text-decoration:none; ">
-                                        <div class = "view-program-font viewButton">View Brand</div>
+                                        <div class="view-program-font viewButton">View Brand</div>
                                     </a>
-                                    <p class=" card-text rating-number">
+                                    <!-- <p class=" card-text rating-number">
                                         <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
-                                        </p> 
+                                    </p> -->
                                 </div>
                             </div>
                         </div>
                         <?php } ?>
-                    </div>  
+                    </div>
                 </div>
-
                 <div class="d-flex justify-content-center m-5">
-                    <a href="<?php echo base_url(); ?>brands" class="btn btn-primary btn-select">
-                        VIEW ALL BRANDS
-                    </a>
-                </div>
-
-                <?php }
-                    ?>
-            </div>
-        </div>
-               -->        
-        <!--row end-->
-
-        <!--row start-->
-        <?php
-                $resp_get_course = getseg_course_list($courseid);
-
-                if ($resp_get_course) {
-                    // print_R($resp_get_brand);
-                    //exit;
-                ?>
-        <div class="course-row article-section" id="Popular-Courses">
-            <div class="course-inner-row">
-
-                <div class="course-section-title ">
-                    <div class="d-flex  justify-content-center ">
-                        <h2>Popular Courses</h2>
-
-                    </div>
-                    <div class="d-flex  justify-content-center ">
-
-                        <p>Got the course, but worried about the brand?</p>
-
-                    </div>
-<!---carousel-2----------->
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <?php
-        $first = true;
-        foreach ($resp_get_course as $r) :
-            ?>
-            <div class="carousel-item <?php echo ($first ? 'active' : ''); ?>">
-                <div class="carousel-size" style="width: 100%; height: 400px; border: 2px solid #ccc; border-radius: 10px; position: relative; padding: 80px;">
-
-                    <img class="card-img-top" style="height: 80%; width: 70%; padding: 0px 0px 0px 450px;"
-                         src="<?php echo base_url('uploads/product/image/' . $r->product_image); ?>"
-                         alt="<?php echo $r->product_name; ?>">
-                    <h5 class="card-title mb-1 text-center" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%);"><?php echo $r->product_name; ?></h5>
-
-                    <div class="card-body text-center">
-                        <div class="popular-star-rating m-2 text-center" >
-                            <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                <i class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
-                            <?php endfor; ?>
-                        </div>
-                        <div>
-                            <a href="<?php echo base_url('review?course=' . $r->product_id . '&segment=' . $course); ?>"
-                               style="text-decoration:none; ">
-                                <div class="view-program-font pt-4"><h6>VIEW PROGRAM</h6></div>
-                            </a>
-                        </div>
-                    </div>
-
+                    <a href="<?php echo base_url(); ?>brands" class="btn btn-primary btn-select">VIEW ALL BRANDS</a>
                 </div>
             </div>
+            <?php } ?>
             <?php
-            $first = false;
-        endforeach;
-        ?>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-
-<!---carousel-2 end----------->
-                
-<!-------------->
-                <div class="container p-0">
-                    <div class="row">
-                        <?php foreach ($resp_get_course as $r)  { ?>
-                        <div class="col-sm-4 col-xl-3 col-lg-4 mb-3">
-                            <div class="card">
-
-                                <img class="card-img-top" style="height: 260px;"
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
-                                    alt="<?php echo $r->product_name; ?>">
-                                <div class="card-body text-center">
-                                    <h5><?php echo $r->product_name; ?></h5>
-                                    <div class="popular-star-rating m-2">
-                                        <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                        <i
-                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
-                                        <?php } ?>
-                                    </div>
-                                    <hr>
-                                    <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
-                                        style="text-decoration:none; ">
-                                        <div class = "view-program-font"><h6>VIEW PROGRAM</h6></div>
-                                    </a>
-                                    <!-- <p class="card-text rating-number">
-                                            <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
-                                            </p> -->
-                                </div>
-
-                            </div>
-                        </div>
-                        <?php } ?>
-                    </div>
-                </div>
-<!-------------->
-<!-------veena-------
-
-
-<div class="container p-0">
-                    <div class="row">
-                        <?php foreach ($resp_get_course as $r)  { ?>
-                        <div class="col-sm-4 col-xl-3 col-lg-4 mb-4" >
-                            <div class="card" style="margin-bottom: 20px;padding:55px; ">
-
-                                <img class="card-img-top" style="height: 260px; "
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
-                                    alt="<?php echo $r->product_name; ?>">
-                                <div class="card-body text-center">
-                                    <h5><?php echo $r->product_name; ?></h5>
-                                    <div class="popular-star-rating m-2">
-                                        <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                        <i
-                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
-                                        <?php } ?>
-                                    </div>
-                                    <hr>
-                                    <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
-                                        style="text-decoration:none; ">
-                                        <div class = "view-program-font"><h6>VIEW PROGRAM</h6></div>
-                                    </a>
-                                    <!-- <p class="card-text rating-number">
-                                            <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
-                                            </p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <?php } ?>
-                    </div>
- -->
-<!-------veena------->
-                <div class="d-flex justify-content-center m-5"><a href="<?php echo base_url(); ?>course"
-                        class="btn btn-primary btn-select">VIEW ALL COURSES</a>
-                </div>
-
-            </div>
-        </div>
-        <!--row end-->
-        <?php
+                $resp_get_course = getseg_course_list($courseid);
+                if ($resp_get_course) {
+                    ?>
+            <!-- Popular Courses Section -->
+            <div class="course-row article-section" id="Popular-Courses">
+                <style>
+                .cntr {
+                    max-width: 1300px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    position: relative
                 }
-            }  ?>
+
+                .crd-cntr {
+                    display: flex;
+                    overflow-x: hidden;
+
+                }
+
+                .crd {
+                    flex: 0 0 24%;
+                    /* To show 4 cards per row */
+                    margin: 0 5px 0 0;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    background-color: #fff;
+                    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.01);
+
+                }
+
+                .crd-bdy {
+                    padding: 20px;
+                    text-align: center;
+                }
+
+                #prevBtn {
+                    position: absolute;
+
+
+                    top: 50%;
+                    left: 0px
+                }
+
+                #nextBtn {
+                    position: absolute;
+
+
+                    top: 50%;
+                    right: 40px
+                }
+
+                .btn {
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border: none;
+                    border-radius: 4px;
+                    background-color: #007BFF;
+                    color: #fff;
+                    cursor: pointer;
+                }
+
+                .btn:not(:last-child) {
+                    margin-right: 10px;
+                }
+                </style>
+                <div class="course-section-title text-center">
+                    <h2>Popular Courses</h2>
+                    <p>Got the course, but worried about the brand?</p>
+                </div>
+
+                <div class="cntr">
+                    <div class="crd-cntr">
+                        <?php foreach ($resp_get_course as $r) { ?>
+                        <div class="crd">
+                            <div class="crd-bdy">
+                                <img class="card-img-top"
+                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
+                                    alt="<?php echo $r->product_name; ?>">
+                                <h5 class="crd-ttl"><?php echo $r->product_name; ?></h5>
+                                <div class="popular-star-rating m-2">
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                    <i
+                                        class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
+                                    <?php } ?>
+                                </div>
+                                <hr>
+                                <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
+                                    style="text-decoration:none; ">
+                                    <div class="view-program-font viewButton">
+                                        View Program
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                    <div class="btn-cntr">
+                        <div id="prevBtn" class=""><img src="uploads/left.png" alt="" style="border-radius:100% ">
+                        </div>
+                        <div id="nextBtn" class=""><img src="uploads/right.png" alt="" style="border-radius:100%"></div>
+                    </div>
+
+                    <script>
+                    const cardContainer = document.querySelector('.crd-cntr');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    let scrollPosition = 0;
+                    prevBtn.addEventListener('click', () => {
+                        if (scrollPosition > 0) {
+                            scrollPosition -= 25; // Move by 25% of viewport width
+                            cardContainer.scroll({
+                                left: scrollPosition * cardContainer.offsetWidth / 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                    nextBtn.addEventListener('click', () => {
+                        if (scrollPosition < 75) { // Assuming 4 cards per row
+                            scrollPosition += 25; // Move by 25% of viewport width
+                            cardContainer.scroll({
+                                left: scrollPosition * cardContainer.offsetWidth / 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                    </script>
+                </div>
+
+                <div class="container pt-5" id="brandCard">
+                    <div class="row">
+                        <?php foreach ($resp_get_course as $r)  { 
+                            
+                            ?>
+                        <div class="col-sm-4 col-xl-3 col-lg-4 mb-3">
+                            <div class="card ">
+                                <img class="card-img-top p-3"
+                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
+                                    alt="<?php echo $r->product_name; ?>">
+                                <div class="card-body text-center">
+                                    <h5><?php echo $r->product_name; ?></h5>
+                                    <div class="popular-star-rating m-2">
+                                        <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <i
+                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
+                                        <?php } ?>
+                                    </div>
+                                    <hr>
+                                    <a href="<?php echo base_url(); ?>review?course=<?php echo $r->product_id; ?>&segment=<?php echo $course; ?>"
+                                        style="text-decoration:none; ">
+                                        <div class="view-program-font viewButton">
+                                            View Program
+                                        </div>
+                                    </a>
+                                    <!-- <p class="card-text rating-number">
+                                        <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2
+                                    </p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center m-5">
+                    <a href="<?php echo base_url(); ?>course" class="btn btn-primary btn-select">VIEW ALL
+                        COURSES</a>
+                </div>
+            </div>
+            <?php } ?>
+            <?php } ?>
+        </div>
     </div>
 </div>
 
-<div class="container pt-5">
-    <div class="row">
-        <div class="col-md-4 col-lg-6">
-            <div class="how-section1s ">
-                <div class="brand-align pt-3 ">
-                    <h4>Popular Brands</h4>
 
-                    <p class="text-muted img-sub-heading pt-3">Thousands of people, everyday, make a
-                        career
-                        choice their friend has made. In this world full of trials and errors, we dived
-                        deep
-                        to
-                        find out how mentoring and well planned out career choices has and can help any
-                        individual hit their goals and achieve their ambitions as planned.</p>
-                    <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE BRAND</a>
-                </div>
-            </div>
 
-        </div>
-
-        <div class="col-md-8 col-lg-6">
-            <div class="row">
-                <?php if ($brand_records) {
-                                foreach ($brand_records as $brand) { ?>
-                <div class="col-3 col-md-3 pt-3 pb-3 text-center">
-                    <img src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
-                        class="img-fluid" alt="<?php echo $brand->brand_name; ?>" style="height: 50px; width:auto;">
-
-                </div>
-                <?php }
-                            } ?>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <!-- Ends Popular Brands --->
 
@@ -928,15 +865,19 @@ if (empty($courseid)) {
             </div>
             <div class="col-12 col-sm-9 col-lg-8 ">
                 <h4>Review</h4>
-                <h4 class="subheading">Thousands of people, everyday, make a career choice their friend
+                <h4 class="subheading">Thousands of people, everyday, make a career
+                    choice their friend
                     has
-                    made. In this world full of trials and errors, we dived deep to find out how
+                    made. In this world full of trials and errors, we dived deep to find
+                    out how
                     mentoring
                     and
-                    well planned out career choices has and can help any individual hit their goals and
+                    well planned out career choices has and can help any individual hit
+                    their goals and
                     achieve
                     their ambitions as planned.</h4>
-                <p class="text-muted img-sub-heading">We have prepared an analytics driven real life
+                <p class="text-muted img-sub-heading">We have prepared an analytics
+                    driven real life
                     case
                     study
                     here, find out how it can work for you too!</p>
@@ -946,15 +887,19 @@ if (empty($courseid)) {
         <div class="row">
             <div class="col-md-8">
                 <h4>Complain</h4>
-                <h4 class="subheading">Thousands of people, everyday, make a career choice their friend
+                <h4 class="subheading">Thousands of people, everyday, make a career
+                    choice their friend
                     has
-                    made. In this world full of trials and errors, we dived deep to find out how
+                    made. In this world full of trials and errors, we dived deep to find
+                    out how
                     mentoring
                     and
-                    well planned out career choices has and can help any individual hit their goals and
+                    well planned out career choices has and can help any individual hit
+                    their goals and
                     achieve
                     their ambitions as planned.</h4>
-                <p class="text-muted img-sub-heading">We have prepared an analytics driven real life
+                <p class="text-muted img-sub-heading">We have prepared an analytics
+                    driven real life
                     case
                     study
                     here, find out how it can work for you too!</p>
@@ -971,18 +916,23 @@ if (empty($courseid)) {
             </div>
             <div class="col-md-8">
                 <h4>Compare</h4>
-                <h4 class="subheading">With GetLance, you have the freedom and flexibility to control
+                <h4 class="subheading">With GetLance, you have the freedom and
+                    flexibility to control
                     when,
-                    where, and how you work. Each project includes an online workspace shared by you and
+                    where, and how you work. Each project includes an online workspace
+                    shared by you and
                     your
                     client, allowing you to:</h4>
-                <p class="text-muted img-sub-heading">Send and receive files. Deliver digital assets in
+                <p class="text-muted img-sub-heading">Send and receive files. Deliver
+                    digital assets in
                     a
                     secure
                     environment.
-                    Share feedback in real time. Use GetLance Messages to communicate via text, chat, or
+                    Share feedback in real time. Use GetLance Messages to communicate
+                    via text, chat, or
                     video.
-                    Use our mobile app. Many features can be accessed on your mobile phone when on the
+                    Use our mobile app. Many features can be accessed on your mobile
+                    phone when on the
                     go.
                 </p>
                 <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE</a>
@@ -991,19 +941,25 @@ if (empty($courseid)) {
         <div class="row">
             <div class="col-md-8">
                 <h4>Counselling</h4>
-                <h4 class="subheading">All projects include GetLance Payment Protection � helping ensure
+                <h4 class="subheading">All projects include GetLance Payment Protection
+                    � helping ensure
                     that
-                    you get paid for all work successfully completed through the freelancing website.
+                    you get paid for all work successfully completed through the
+                    freelancing website.
                 </h4>
-                <p class="text-muted img-sub-heading">All invoices and payments happen through GetLance.
+                <p class="text-muted img-sub-heading">All invoices and payments happen
+                    through GetLance.
                     Count
                     on a simple and streamlined process.
-                    Hourly and fixed-price projects. For hourly work, submit timesheets through
+                    Hourly and fixed-price projects. For hourly work, submit timesheets
+                    through
                     GetLance.
                     For
-                    fixed-price jobs, set milestones and funds are released via GetLance escrow
+                    fixed-price jobs, set milestones and funds are released via GetLance
+                    escrow
                     features.
-                    Multiple payment options. Choose a payment method that works best for you, from
+                    Multiple payment options. Choose a payment method that works best
+                    for you, from
                     direct
                     deposit or PayPal to wire transfer and more.</p>
                 <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE</a>
@@ -1021,18 +977,23 @@ if (empty($courseid)) {
             </div>
             <div class="col-md-8">
                 <h4>Cohort</h4>
-                <h4 class="subheading">With GetLance, you have the freedom and flexibility to control
+                <h4 class="subheading">With GetLance, you have the freedom and
+                    flexibility to control
                     when,
-                    where, and how you work. Each project includes an online workspace shared by you and
+                    where, and how you work. Each project includes an online workspace
+                    shared by you and
                     your
                     client, allowing you to:</h4>
-                <p class="text-muted img-sub-heading">Send and receive files. Deliver digital assets in
+                <p class="text-muted img-sub-heading">Send and receive files. Deliver
+                    digital assets in
                     a
                     secure
                     environment.
-                    Share feedback in real time. Use GetLance Messages to communicate via text, chat, or
+                    Share feedback in real time. Use GetLance Messages to communicate
+                    via text, chat, or
                     video.
-                    Use our mobile app. Many features can be accessed on your mobile phone when on the
+                    Use our mobile app. Many features can be accessed on your mobile
+                    phone when on the
                     go.
                 </p>
                 <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE</a>
@@ -1042,19 +1003,25 @@ if (empty($courseid)) {
         <div class="row">
             <div class="col-md-6">
                 <h4>Coupons</h4>
-                <h4 class="subheading">All projects include GetLance Payment Protection � helping ensure
+                <h4 class="subheading">All projects include GetLance Payment Protection
+                    � helping ensure
                     that
-                    you get paid for all work successfully completed through the freelancing website.
+                    you get paid for all work successfully completed through the
+                    freelancing website.
                 </h4>
-                <p class="text-muted img-sub-heading">All invoices and payments happen through GetLance.
+                <p class="text-muted img-sub-heading">All invoices and payments happen
+                    through GetLance.
                     Count
                     on a simple and streamlined process.
-                    Hourly and fixed-price projects. For hourly work, submit timesheets through
+                    Hourly and fixed-price projects. For hourly work, submit timesheets
+                    through
                     GetLance.
                     For
-                    fixed-price jobs, set milestones and funds are released via GetLance escrow
+                    fixed-price jobs, set milestones and funds are released via GetLance
+                    escrow
                     features.
-                    Multiple payment options. Choose a payment method that works best for you, from
+                    Multiple payment options. Choose a payment method that works best
+                    for you, from
                     direct
                     deposit or PayPal to wire transfer and more.</p>
                 <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE</a>
@@ -1072,18 +1039,23 @@ if (empty($courseid)) {
             </div>
             <div class="col-md-6">
                 <h4>Mentoring Works! Read how</h4>
-                <h4 class="subheading">With GetLance, you have the freedom and flexibility to control
+                <h4 class="subheading">With GetLance, you have the freedom and
+                    flexibility to control
                     when,
-                    where, and how you work. Each project includes an online workspace shared by you and
+                    where, and how you work. Each project includes an online workspace
+                    shared by you and
                     your
                     client, allowing you to:</h4>
-                <p class="text-muted img-sub-heading">Send and receive files. Deliver digital assets in
+                <p class="text-muted img-sub-heading">Send and receive files. Deliver
+                    digital assets in
                     a
                     secure
                     environment.
-                    Share feedback in real time. Use GetLance Messages to communicate via text, chat, or
+                    Share feedback in real time. Use GetLance Messages to communicate
+                    via text, chat, or
                     video.
-                    Use our mobile app. Many features can be accessed on your mobile phone when on the
+                    Use our mobile app. Many features can be accessed on your mobile
+                    phone when on the
                     go.
                 </p>
                 <a href="https://staging.edcohort.com/" class="img-btn-explore">EXPLORE</a>
@@ -1382,4 +1354,5 @@ $('.owl-carousel').owlCarousel({
 })
 </script>
 
-<!--content end
+
+<!--content end-->
