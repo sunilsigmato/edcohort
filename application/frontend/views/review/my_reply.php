@@ -83,8 +83,108 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
             <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
                 <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
-                    <label for="rating2" class="rating-display"><img
-                            src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> </label>
+                    <label for="rating2" class="rating-display">
+                        <!--<img
+                            src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> -->
+                            <div class="dropdown">
+  <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <img
+                            src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
+  </button>
+
+  
+
+
+
+  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">
+                       
+            <!------> 
+    
+            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
+          
+  <ul class="list-group list-group-flush">
+  <li class="list-group-item d-flex">
+    <div class="single-line" style="white-space: nowrap;">
+        <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="" style="display: inline-block; margin-right: 10px;"> -->
+        <div style="display: inline-block;">
+            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
+        </div>
+    </div>
+</li>
+
+            
+    <li class="list-group-item" style="font-weight:normal;">129 Global Ratings</li>
+    <li class="list-group-item">
+    <div class="row">
+        <div class = "col-md-2 pt-1">
+            <span> 5 star </span>
+        </div>
+        <div class = "col-md-8">
+            <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">100%</div>
+            </div>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 100% </span>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 4 star </span>
+        </div>
+        <div class = "col-md-8">
+            <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">75%</div>
+            </div>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 75% </span>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 3 star </span>
+        </div>
+        <div class = "col-md-8">
+            <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">50%</div>
+            </div>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 50% </span>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 2 star </span>
+        </div>
+        <div class = "col-md-8">
+            <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: 25%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 25% </span>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 1 star </span>
+        </div>
+        <div class = "col-md-8">
+            <div class="progress my-2">
+                <div class="progress-bar" role="progressbar" style="width: 15%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">15%</div>
+            </div>
+        </div>
+        <div class = "col-md-2 pt-1">
+            <span> 15% </span>
+        </div>
+
+    </div>
+
+
+    </li>
+  </ul>
+  
+</div></a></li>
+             
+            <!------> 
+  </ul>
+</div>
+
+                        </label>
                 </div>
                 <div class="pt-3 total-review-display">
                     <h4> Excellent Review </h4>
