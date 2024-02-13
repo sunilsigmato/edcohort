@@ -371,14 +371,14 @@ if($get_breadcrumb)
                                                 </div>
                                             </div>
                                             <div class="col-md-2 d-flex align-items-center">
-                                                <div class=" coupon-card-button">Get Deal</div>
+                                               <!-- <div class=" coupon-card-button">Get Deal</div> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12  coupon-card-input ">
                                     <div class="d-flex align-items-center justify-content-center">  
                                     <div class="dropdown ">
-                                    <label for="coupons">
+                                    <!--<label for="coupons">
                                                 <h5>Enter
                                                     the number of
                                                     coupons</h5>
@@ -389,16 +389,24 @@ if($get_breadcrumb)
                                             <li><a class="dropdown-item" href="#">Today</a></li>
                                             <li><a class="dropdown-item" href="#">Tommorow</a></li>
                                             <li><a class="dropdown-item" href="#">Select Date</a></li>
-                                        </ul>
+                                        </ul>  -->                               
                                     </div>
+                                        </div>
+                                        <div>
+                                            
+                                            <fieldset id="group1">
+                                                <input type="radio" value="now" name="group1" class="date_radio"> Now 
+                                                <input type="radio" value="today" name="group1" class="date_radio"> Today  
+                                                <input type="radio" value="tommorow" name="group1" class="date_radio"> Tommorow    
+                                                <input type="radio" value="day_after_tmr" name="group1" class="date_radio"> Day After Tomorrow   
+                                            </fieldset>
+
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <label for="coupons">
-                                                <h5>Enter
-                                                    the number of
-                                                    coupons</h5>
+                                                <h5>Select a Date</h5>
                                             </label>
-                                            <input type="date" class="form-control ms-3" id="exampleInputEmail1"
+                                            <input type="date" class="form-control ms-3" id="date_sel"
                                                 style="width:300px ">
                                                 
                                         </div>
@@ -419,17 +427,15 @@ if($get_breadcrumb)
                                     
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
-
-<button type=" button" onClick="conformCoupons()"
-    class="btn btn-primary text-right btn-md mb-1 form-control">Get
-    Your
-    Coupon Here </button>
+                                            <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
+                                            <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+                                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
+<button type=" button" 
+    class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpn">Submit </button>
 <?php }else{ ?>
 <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
     data-bs-effect="effect-scale" data-bs-toggle="modal"
-    data-bs-target="#login-button">Get
-    Your
-    Coupon Here</a>
+    data-bs-target="#login-button">Submit</a>
 <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
 <?php } ?>
          
@@ -543,406 +549,68 @@ if($get_breadcrumb)
     <script>
     $(document).ready(function() {
 
-        $('#category').change(function() {
-            var category_id = $('#category').val();
-            if (category_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-class-list",
-                    method: "POST",
-                    data: {
-                        category_id: category_id
-                    },
-                    success: function(data) {
-                        $('#board').html(data);
-                        // $('#city').html('<option value="">Select City</option>');
-                    }
-                });
-            } else {
-                $('#state').html('<option value="">Select State</option>');
-                $('#city').html('<option value="">Select City</option>');
-            }
+        var radio_btn_val = '';
+        
+        $('.date_radio').click(function() {
+           
+             radio_btn_val = $(this).val();
+           
+
         });
 
-        $('#brand').change(function() {
-            var brand_id = $('#brand').val();
-            if (brand_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-board-list",
-                    method: "POST",
-                    data: {
-                        brand_id: brand_id
-                    },
-                    success: function(data) {
-                        $('#board').html(data);
-                        // $('#city').html('<option value="">Select City</option>');
-                    }
-                });
-            } else {
-                // $('#state').html('<option value="">Select State</option>');
-                // $('#city').html('<option value="">Select City</option>');
+        $('.cnfrmcpn').click(function() {
+            if(radio_btn_val == ''){
+               // alert('Please select date range');
+                alert('Please select date range'); 
+                return 
+            }else{
+              var user_id = $('.user_id').val();
+              var date_sel = $('#date_sel').val();
+              var segment = $('.segment').val();
+              var course = $('.course').val();
+              const date = new Date();
+              var day = '';
+              var month = '';
+              var year = '';
+              var currentDate = '';
+                if(radio_btn_val == 'now' || radio_btn_val == 'today')
+                {
+                     day = (date.getDate()).toString().padStart(2, "0");
+                     month = (date.getMonth() + 1).toString().padStart(2, "0");
+                     year = date.getFullYear();
+                     currentDate = `${year}-${month}-${day}`;
+                }
+                if(radio_btn_val == 'tommorow')
+                {
+                     day = (date.getDate() + 1).toString().padStart(2, "0");
+                     month = (date.getMonth() + 1).toString().padStart(2, "0");
+                     year = date.getFullYear();
+                     currentDate = `${year}-${month}-${day}`;
+                }
+                if(radio_btn_val == 'day_after_tmr')
+                {
+                    currentDate = date_sel;
+                }
+                
+            
+            console.log(currentDate);
+             $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>couponadd/test",
+              data:{
+                radio_btn_val:radio_btn_val,
+                user_id : user_id,
+                date:date_sel,
+                segment:segment,
+                course:course,
+              },    
+              success: function (response) {
+                 console.log(response);
+              }
+           })
             }
-        });
-
-        // $('#brand').change(function() {
-        //     var brand_id = $('#brand').val();
-        //     if (brand_id != '') {
-        //         $.ajax({
-        //             url: "<?php echo base_url(); ?>get-board-list",
-        //             method: "POST",
-        //             data: {
-        //                 brand_id: brand_id
-        //             },
-        //             success: function(data) {
-        //                 $('#board').html(data);
-        //                 // $('#city').html('<option value="">Select City</option>');
-        //             }
-        //         });
-        //     } else {
-        //        // $('#state').html('<option value="">Select State</option>');
-        //        // $('#city').html('<option value="">Select City</option>');
-        //     }
-        // });
-
-
-        $('#board').change(function() {
-            var brand_id = $('#brand').val();
-            var product_type = $('input[name="product_type"]:checked').val();
-            var board_id = $('#board').val();
-            //alert(product_type);
-            if (board_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-class-list",
-                    method: "POST",
-                    data: {
-                        board_id: board_id,
-                        product_type: product_type,
-                        brand_id: brand_id
-                    },
-                    success: function(data) {
-                        $('#class').html(data);
-                    }
-                });
-            }
-        });
-
-
-        $('#class').change(function() {
-            var brand_id = $('#brand').val();
-            var product_type = $('input[name="product_type"]:checked').val();
-            var board_id = $('#board').val();
-            var class_id = $('#class').val();
-            if (class_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-batch-class",
-                    method: "POST",
-                    data: {
-                        board_id: board_id,
-                        product_type: product_type,
-                        brand_id: brand_id,
-                        class_id: class_id
-                    },
-                    success: function(data) {
-                        $('#batch').html(data);
-                    }
-                });
-            }
-        });
-
-        // $('#board').change(function(){
-        //     var board_id = $('#board').val();
-        //     if(board_id != '')
-        //     {
-        //         $.ajax({
-        //             url:"<?php echo base_url(); ?>get-course-batch",
-        //             method:"POST",
-        //             data:{board_id:board_id},
-        //             success:function(data)
-        //             {
-        //                 $('#batch').html(data);
-        //             }
-        //         });
-        //     }
-        // }); 
-
-
-
-        // $('#state').change(function() {
-        //     var state_id = $('#state').val();
-        //     if (state_id != '') {
-        //         $.ajax({
-        //             url: "<?php echo base_url(); ?>dynamic_dependent/fetch_city",
-        //             method: "POST",
-        //             data: {
-        //                 state_id: state_id
-        //             },
-        //             success: function(data) {
-        //                 $('#city').html(data);
-        //             }
-        //         });
-        //     } else {
-        //         $('#city').html('<option value="">Select City</option>');
-        //     }
-        // });
-
-
-
-
+        }); 
+    
     });
 
-    function productReviewReadMore(val) {
-        //Forward browser to new url
-        $("#reviewShort_" + val).hide();
-        $("#review-read_" + val).hide();
-        $("#reviewFull_" + val).show();
-
-
-    }
-
-    function productReviewReadShort(val) {
-        //Forward browser to new url
-        $("#reviewFull_" + val).hide();
-        $("#reviewShort_" + val).show();
-        $("#review-read_" + val).show();
-
-    }
-
-    function productReviewReplyReadMore(val) {
-        //Forward browser to new url
-        $("#reviewReplyShort_" + val).hide();
-        $("#reviewReplyFull_" + val).show();
-
-    }
-
-    function productReviewReplyReadShort(val) {
-        //Forward browser to new url
-        $("#reviewReplyFull_" + val).hide();
-        $("#reviewReplyShort_" + val).show();
-
-    }
-
-    function divShow(val) {
-        //Forward browser to new url
-        if ($('#commentDiv_' + val).css('display') == 'none') {
-            $('#commentDiv_' + val).css('display', 'block');
-        } else {
-            $('#commentDiv_' + val).css('display', 'none');
-        }
-
-    }
-
-    function productReviewLike(review_id, user_id, action) {
-        // alert(review_id+' '+user_id);  
-        //$(".alert-outline-success").hide();
-        //$("#text-message-success").html(''); 
-        //var value_form = $('#product_review').serialize();          
-        $.ajax({
-            url: base_url + 'review-like',
-            dataType: 'json',
-            type: 'post',
-            data: {
-                review_id: review_id,
-                user_id: user_id,
-                action: action
-            },
-            success: function(data) {
-                if (data.status == '1') {
-                    // alert('1'); 
-                    location.reload();
-                } else if (data.status == '0') {
-                    //alert('0'); 
-                }
-            },
-            beforeSend: function() {
-                $("#global-loader").show();
-                $("#body").addClass('opacity-body');
-            },
-            complete: function() {
-                $("#global-loader").hide();
-                $("#body").removeClass('opacity-body');
-            }
-        });
-
-    }
-
-    function productReviewReply(id) { // alert();  
-        //$(".alert-outline-success").hide();
-        //$("#text-message-success").html(''); 
-        var value_form = $('#product_review_reply_' + id).serialize();
-        $.ajax({
-            url: base_url + 'review-reply-submit',
-            dataType: 'json',
-            type: 'post',
-            data: value_form,
-            success: function(data) {
-                if (data.status == '1') {
-                    $("#reg-message-success_" + id).show();
-                    $("#text-message-success_" + id).html(data.message);
-                    setTimeout(function() {
-                        $("#reg-message-success_" + id).hide();
-                        $("#text-message-success_" + id).html('');
-                        $("#reg-message-success_" + id).hide('blind', {}, 500)
-                    }, 5000);
-                } else if (data.status == '0') {
-                    $("#reg-message-error_" + id).show();
-                    $("#text-message-error_" + id).html(data.message);
-                    setTimeout(function() {
-                        $("#reg-message-error_" + id).hide();
-                        $("#text-message-error_" + id).html('');
-                        $("#reg-message-error_" + id).hide('blind', {}, 500)
-                    }, 5000);
-                }
-            },
-            beforeSend: function() {
-                $("#global-loader").show();
-                $("#body").addClass('opacity-body');
-            },
-            complete: function() {
-                $("#global-loader").hide();
-                $("#body").removeClass('opacity-body');
-            }
-        });
-
-    }
-
-
-    function prodcutType(val) {
-        //Some code
-        //alert(val);
-        var product_type = val;
-        var brand_id = $('#brand').val();
-
-        if (product_type == 1) {
-            $("#offline-toggle").removeClass('active');
-            $("#online-toggle").addClass('active');
-
-        } else {
-            $("#online-toggle").removeClass('active');
-            $("#offline-toggle").addClass('active');
-        }
-
-        $.ajax({
-            url: base_url + 'get-board-list',
-            dataType: 'json',
-            type: 'post',
-            data: {
-                product_type: product_type,
-                brand_id: brand_id
-            },
-            success: function(data) {
-                $('#board').html(data);
-                // $('#city').html('<option value="">Select City</option>');
-            },
-            beforeSend: function() {
-                $("#global-loader").show();
-                $("#body").addClass('opacity-body');
-            },
-            complete: function() {
-                $("#global-loader").hide();
-                $("#body").removeClass('opacity-body');
-            }
-        });
-    }
-    </script>
-
-
-
-
-    <!--Section-->
-
-</div>
-<!--/Section-->
-
-
-
-<!--/Coursed Listings-->
-
-<script type="text/javascript"><!--
-function doAction(val){
-        //Forward browser to new url
-        window.location= base_url+'coupon/' + val;
-    }
-    function conformCoupons()
-    {
-        var coupon_date = $('#coupon_date').val();
-        var segment_id = $('#segment_id').val();
-        var course_id = $('#course_id').val();
-        var user_id = $('#user_id').val();
-        var no_of_coupon = $('#no_of_coupon').val();
-
-        
-       $.ajax({
-        url: base_url+'test',
-        dataType: 'json',
-        type: 'post',            
-        data:{ 'course' : ''+course_id+'', 'segment_id' : ''+segment_id+'','coupon_date' : ''+coupon_date+'','user_id' : ''+user_id+'','no_of_coupon' : ''+no_of_coupon+'' },                                         
-        success: function(data){             
-                      
-    },
-    
-
-});                 
-
-    }
-
-    function conformCoupon(){   
-
-    // alert();  
-	 //$(".alert-outline-success").hide();
-     //$("#text-message-success").html(''); 
-
-     var course_type = $('#course_type').val();
-     var course = $('#course').val();
-     var brand = $('#brand').val();
-     var user_id = $('#user_id').val();
-     var confirm_bying = $('input[name="confirm_bying"]:checked').val();
-     var coupon_count = parseInt($("#label_ready_buying_"+confirm_bying).text());
-       //var value_form = $('#product_comparison').serialize();
-
-       $.ajax({
-        url: base_url+'coupon-submit',
-        dataType: 'json',
-        type: 'post',            
-        data:{ 'course' : ''+course+'', 'brand' : ''+brand+'','confirm_bying' : ''+confirm_bying+'','user_id' : ''+user_id+'' },                                         
-        success: function(data){             
-           if(data.status=='1')
-           {  
-              var newcount = parseInt(coupon_count)+1;
-              $("#label_ready_buying_"+confirm_bying).empty();
-              $("#label_ready_buying_"+confirm_bying).append(newcount);
-              $(".reg-message-success").show();
-              $("#text-message-success").html(data.message);                   
-              setTimeout(function() {
-                  $(".reg-message-success").hide();
-                  $("#text-message-success").html('');
-                  $(".reg-message-success").hide('blind', {}, 500)
-              }, 5000);                 
-          }
-          else if(data.status=='0')
-          {  
-            $(".reg-message-error").show();              
-            $("#text-message-error").html(data.message);
-            setTimeout(function() {
-             $(".reg-message-error").hide();              
-             $("#text-message-error").html('');
-             $(".reg-message-error").hide('blind', {}, 500)
-         }, 5000); 
-        }            
-    },
-    beforeSend: function () {
-        $("#global-loader").show();
-        $("#body").addClass('opacity-body');
-    },
-    complete: function () {
-        $("#global-loader").hide();
-        $("#body").removeClass('opacity-body');
-    } 
-
-});                 
-
-   }
-
-   function couponconfirm_bying(id){ 
-      $("#buyer_tr").show();
-  }
-
-</script>	
+       </script>

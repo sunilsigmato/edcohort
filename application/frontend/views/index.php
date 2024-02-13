@@ -19,7 +19,6 @@ $sort_by = $this->input->get('sort_by');
     integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
 <style>
 /* Your existing styles */
 .pt-5 {

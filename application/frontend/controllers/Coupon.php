@@ -176,6 +176,7 @@ function search()
 function test()
 {
   print_R("hii");
+  exit;
 }
   function coupon_submit() {
 

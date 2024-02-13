@@ -31,7 +31,9 @@ class admin_login extends CI_Controller
         }
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-
+        /*$resp = getHash($password);
+        print_R($resp);
+        exit;*/
         $login_detail=$this->admin_model->check_login($username,getHash($password));
 
         if(count(array_filter($login_detail)))
