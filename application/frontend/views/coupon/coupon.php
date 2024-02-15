@@ -402,7 +402,7 @@ if($get_breadcrumb)
                                             </fieldset>
 
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-center">
+                                        <div class="d-flex align-items-center justify-content-center date_div">
                                             <label for="coupons">
                                                 <h5>Select a Date</h5>
                                             </label>
@@ -548,13 +548,20 @@ if($get_breadcrumb)
 
     <script>
     $(document).ready(function() {
-
+        
+        $(".date_div").css("visibility", "hidden");
         var radio_btn_val = '';
         
         $('.date_radio').click(function() {
            
              radio_btn_val = $(this).val();
-           
+             if(radio_btn_val == 'day_after_tmr')
+             {
+                $(".date_div").css("visibility", "visible");
+             }
+             else{
+                $(".date_div").css("visibility", "hidden");
+             }
 
         });
 
@@ -573,6 +580,7 @@ if($get_breadcrumb)
               var month = '';
               var year = '';
               var currentDate = '';
+              var DateCmpr = '';
                 if(radio_btn_val == 'now' || radio_btn_val == 'today')
                 {
                      day = (date.getDate()).toString().padStart(2, "0");
@@ -589,18 +597,30 @@ if($get_breadcrumb)
                 }
                 if(radio_btn_val == 'day_after_tmr')
                 {
-                    currentDate = date_sel;
+                    day = (date.getDate()).toString().padStart(2, "0");
+                     month = (date.getMonth() + 1).toString().padStart(2, "0");
+                     year = date.getFullYear();
+                     DateCmpr = `${year}-${month}-${day}`;
+                     if(date_sel <  DateCmpr)
+                     {
+                        alert("Please select proper date");
+                        return
+                     }
+                     else{
+                        currentDate = date_sel;
+                     }
+                   
                 }
                 
             
-            console.log(currentDate);
+            //console.log(currentDate);
              $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>couponadd/test",
               data:{
                 radio_btn_val:radio_btn_val,
                 user_id : user_id,
-                date:date_sel,
+                date:currentDate,
                 segment:segment,
                 course:course,
               },    

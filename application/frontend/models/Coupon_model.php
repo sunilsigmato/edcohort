@@ -105,6 +105,57 @@ class Coupon_model extends CI_Model {
           ".$where." group by addons_id");
       return $query->result();
   }
+
+  function coupon_exist_check($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val)
+  { 
+   
+    $dateTimeString = $date_time;
+    $dateTime = new DateTime($dateTimeString);
+    $dateTime->modify('+1 day');
+    $newDateTimeString = $dateTime->format('Y-m-d H:i:s');
+    $newDateString = $dateTime->format('Y-m-d');
+    $newTimeString = $dateTime->format('H:i:s');
+    $db_time = '';
+    $db_date_time = '';
+    $db_date = '';
+    $db_test_date = '2024-02-13 12:19:07';
+    $inc_test_date = '2024-02-14 12:19:07';
+
+   /* print_R($newTimeString);
+    exit;*/
+
+     $query =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) >= '$date' and DATE(date) < '$newDateString' order by time DESC");
+     // $query =  ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) >= '$date' and DATE(date) < '$newDateString' order by time DESC");
+      $res = $query->result();
+       //print_R($query);
+       if($res)
+       {
+          //if($radio_btn_val == 'now' || $radio_btn_val == 'today')
+        //  {
+          
+            $db_time = $res[0]->time;
+            $db_date_time = $res[0]->date_time;
+            $db_date = $res[0]->date;
+            $db_date_time_concate = $newDateString.' '.$db_time;
+            print_R($db_date_time_concate);
+            if(strtotime($db_date_time_concate) <= strtotime($newDateTimeString))
+           // if(strtotime($db_test_date) <= strtotime($inc_test_date))
+            {
+             // echo json_encode(array('status'=>false,'msg'=>"This Coupon has  
+              //already been used or it is expired"));
+             // exit;
+              print_R("not expire");
+          }
+          else
+          {
+             print_R("Expired");
+          }
+       //}
+      }
+      
+       exit;
+  }
+
   function get_subcategory($category)
   {
       $this->db->select('sub_category');
