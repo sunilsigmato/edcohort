@@ -111,6 +111,7 @@ class Coupon_model extends CI_Model {
    
     $dateTimeString = $date_time;
     $dateTime = new DateTime($dateTimeString);
+
     $dateTime->modify('+1 day');
     $newDateTimeString = $dateTime->format('Y-m-d H:i:s');
     $newDateString = $dateTime->format('Y-m-d');
@@ -121,11 +122,25 @@ class Coupon_model extends CI_Model {
     $db_test_date = '2024-02-13 12:19:07';
     $inc_test_date = '2024-02-14 12:19:07';
 
-   /* print_R($newTimeString);
-    exit;*/
+
+/*** Check coupon exist or not  */
+$query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
+$res_coupon_exist = $query_coupon_exist->result();
+if($res_coupon_exist)
+{
+    print_r('coupons exist');
+}
+else{
+    print_r('coupons exist');
+}
+print_r($res_coupon_exist);
+exit;
+/*** End check coupon exist or not  */
+   //print_R($todays_datetime);
+    //exit;
 
      $query =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) >= '$date' and DATE(date) < '$newDateString' order by time DESC");
-     // $query =  ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) >= '$date' and DATE(date) < '$newDateString' order by time DESC");
+      $querys =  ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) >= '$date' and DATE(date) < '$newDateString' order by time DESC");
       $res = $query->result();
        //print_R($query);
        if($res)
@@ -137,8 +152,8 @@ class Coupon_model extends CI_Model {
             $db_date_time = $res[0]->date_time;
             $db_date = $res[0]->date;
             $db_date_time_concate = $newDateString.' '.$db_time;
-            print_R($db_date_time_concate);
-            if(strtotime($db_date_time_concate) <= strtotime($newDateTimeString))
+            print_R($querys);
+            if(strtotime($db_date_time_concate) >= strtotime($newDateTimeString))
            // if(strtotime($db_test_date) <= strtotime($inc_test_date))
             {
              // echo json_encode(array('status'=>false,'msg'=>"This Coupon has  
@@ -155,6 +170,64 @@ class Coupon_model extends CI_Model {
       
        exit;
   }
+
+  function coupon_exit_check_user($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val)
+  {
+      $res = 0;
+      
+      $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and radio_btn_selection != 'now' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
+     // $query_coupon_exist = ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
+     
+      $res_coupon_exist = $query_coupon_exist->result();
+      if($res_coupon_exist)
+      {
+          $res = 1;
+      }
+      else{
+        $res = 0;
+      }
+      return $res;
+    
+      
+  }
+
+  function coupon_exit_check_now($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val)
+  {
+    $dateTimeString = $date_time;
+    $db_time = '';
+    
+
+      $res = 0;
+      //$date->modify('+10 hours');
+      $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by time DESC LIMIT 1");
+     
+     // $query_coupon_exist = ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by desc time");
+     
+      $res_coupon_exist = $query_coupon_exist->result();
+      if($res_coupon_exist)
+      {
+          $res = 1;
+          $db_time = $res_coupon_exist[0]->time;
+          $dateTime = new DateTime($db_time);
+          $dateTime->modify('+1 hour');
+          $dbnewTimeString = $dateTime->format('H:i:s');
+
+          date_default_timezone_set('Asia/Kolkata');
+          $currentTimeString = date('H:i:s');
+          if(strtotime($dbnewTimeString) >= strtotime($currentTimeString))
+          {
+              $res =1;
+          }
+          else{
+             $res = 0;
+          }
+          return $res;
+      }
+      //exit;
+      //return $res;
+  }
+
+
 
   function get_subcategory($category)
   {

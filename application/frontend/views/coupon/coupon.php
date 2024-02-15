@@ -623,9 +623,11 @@ if($get_breadcrumb)
                 date:currentDate,
                 segment:segment,
                 course:course,
-              },    
+              }, 
+              dataType: "json",   
               success: function (response) {
-                 console.log(response);
+                 console.log(response.message);
+                 alert(response.message);
               }
            })
             }
