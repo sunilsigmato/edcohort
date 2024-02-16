@@ -226,6 +226,92 @@ exit;
       //return $res;
   }
 
+  function get_coupon_count_now($segment,$course,$user_id)
+  {
+    date_default_timezone_set('Asia/Kolkata');
+    $currentTimeString = date('H:i:s');
+    $todayDate= date("Y-m-d");
+    $todayDateTime= date("Y-m-d H:i:s");
+
+    $dateTime = new DateTime($currentTimeString);
+    $dateTime->modify('+1 hour');
+    $newTimeString = $dateTime->format('H:i:s');
+
+    $currentDateTime = new DateTime();
+    //$currentDateTime->modify('-0.5 hours');
+    $currentDateTime->sub(new DateInterval('PT0H30M'));  // half an hr
+    $back_dateTime = $currentDateTime->format('H:i:s');
+    print_R($back_dateTime );
+    exit;
+   /* $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = 'now' and DATE(date) = '2024-02-15' group by user_id ");
+    $res_coupon_res = $query_coupon_exist->result();
+    {
+        if($res_coupon_res)
+        {
+            foreach($res_coupon_res as $r)
+            {
+              if(strtotime($r->time >= $currentTimeString) && strtotime($newTimeString))
+                {
+
+                }
+            }
+        }
+    }*/
+    $today_total_count = '';
+    $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '2024-02-15' group by user_id ");
+    $res_coupon_todays_res = $query_coupon_todays->result();
+    if($res_coupon_todays_res)
+    {
+      $today_total_count = count($res_coupon_todays_res);
+    }
+    print_R(count($res_coupon_todays_res));
+    exit;
+
+
+  
+  }
+
+  function get_coupon_count_today($segment,$course,$user_id)
+  {
+    date_default_timezone_set('Asia/Kolkata');
+    $currentTimeString = date('H:i:s');
+    $todayDate= date("Y-m-d");
+    $todayDateTime= date("Y-m-d H:i:s");
+
+    $dateTime = new DateTime($currentTimeString);
+    $dateTime->modify('+1 hour');
+    $newTimeString = $dateTime->format('H:i:s');
+    $today_total_count = '';
+    $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '$todayDate' group by user_id ");
+    $res_coupon_todays_res = $query_coupon_todays->result();
+    if($res_coupon_todays_res)
+    {
+      $today_total_count = count($res_coupon_todays_res);
+    }
+    return $today_total_count;
+  }
+
+  function get_coupon_count_tommorow($segment,$course,$user_id)
+  {
+    date_default_timezone_set('Asia/Kolkata');
+    $currentTimeString = date('H:i:s');
+    $todayDate= date("Y-m-d");
+    $todayDateTime= date("Y-m-d H:i:s");
+
+    $dateTime = new DateTime($currentTimeString);
+    $dateTime->modify('+1 day');
+    $newTimeString = $dateTime->format('H:i:s');
+    $TommorowDate= $dateTime->format('Y-m-d');
+    $today_total_count = '';
+    $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '$TommorowDate' group by user_id ");
+    $res_coupon_todays_res = $query_coupon_todays->result();
+    if($res_coupon_todays_res)
+    {
+      $today_total_count = count($res_coupon_todays_res);
+    }
+    
+    return $today_total_count;
+  }
 
 
   function get_subcategory($category)

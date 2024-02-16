@@ -400,7 +400,23 @@ if($get_breadcrumb)
                                                 <input type="radio" value="tommorow" name="group1" class="date_radio"> Tommorow    
                                                 <input type="radio" value="day_after_tmr" name="group1" class="date_radio"> Day After Tomorrow   
                                             </fieldset>
-
+                                            <?php
+                                                $res_coupon_count_today = get_coupon_count_today($segment,$course,$this->session->userdata('user_id'));
+                                                $res_coupon_count_tommorow = get_coupon_count_tommorow($segment,$course,$this->session->userdata('user_id'));
+                                              //  $res_coupon_count_tommorow = get_coupon_count_now($segment,$course,$this->session->userdata('user_id'));
+                                                
+                                               
+                                            ?>
+                                            <table border='1'>
+                                                <tr>
+                                                      <td>today</td>
+                                                      <td>Tommorow </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo $res_coupon_count_today ?></td>
+                                                    <td><?php echo $res_coupon_count_tommorow ?></td>
+                                                </tr>
+                                        </table>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center date_div">
                                             <label for="coupons">
@@ -423,8 +439,9 @@ if($get_breadcrumb)
                                                 
                                         </div>
                                         <hr>-->
+                                        
                                         <div class="d-flex align-items-center justify-content-center">
-                                    
+                                            
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">

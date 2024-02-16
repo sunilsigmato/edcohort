@@ -453,3 +453,48 @@ function getClassName($class_id)
             $data = '';
         }
     }
+
+    function get_coupon_count_today($segment,$course, $user_id=null) 
+    {  
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->coupon_model->get_coupon_count_today($segment,$course,$user_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+
+    function get_coupon_count_tommorow($segment,$course, $user_id=null) 
+    {  
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->coupon_model->get_coupon_count_tommorow($segment,$course,$user_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+
+    function get_coupon_count_now($segment,$course, $user_id=null) 
+    {  
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->coupon_model->get_coupon_count_now($segment,$course,$user_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
