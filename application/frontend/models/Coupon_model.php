@@ -211,7 +211,6 @@ exit;
           $dateTime = new DateTime($db_time);
           $dateTime->modify('+1 hour');
           $dbnewTimeString = $dateTime->format('H:i:s');
-
           date_default_timezone_set('Asia/Kolkata');
           $currentTimeString = date('H:i:s');
           if(strtotime($dbnewTimeString) >= strtotime($currentTimeString))
