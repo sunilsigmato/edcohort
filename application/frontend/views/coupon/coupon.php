@@ -224,9 +224,10 @@ if($get_breadcrumb)
                     <form action="<?php echo base_url(); ?>coupon-search" method="post" name="form" id="form">
                         <?php echo csrf_field(); ?>
 
+
                         <div class="filter-col">
                             <h3 class="filter-col-title">BRAND</h3>
-                            <div class="select-box">
+                            <div class="select-box">                              
                                 <select name="brand" id="brand">
                                     <?php foreach($brand_records as $brands){?>
                                     <option value="<?php echo $brands->brand_id; ?>"
@@ -243,6 +244,7 @@ if($get_breadcrumb)
                                 <div class="input-toggle <?php if(@$product_list['0']->product_type == 1){ echo 'active';} ?>"
                                     id="online-toggle">
                                     <label>Online</label>
+
                                     <input class="btn btn-lg btn-default" type="radio" name="product_type"
                                         <?php if(@$product_list['0']->product_type == 1){ echo 'checked';} ?>
                                         id="online" value="1" onClick="prodcutType(1)">
@@ -395,7 +397,7 @@ if($get_breadcrumb)
                                         <div>
                                             
                                             <fieldset id="group1">
-                                                <input type="radio" value="now" name="group1" class="date_radio"> Now 
+                                                <!--<input type="radio" value="now" name="group1" class="date_radio"> Now -->
                                                 <input type="radio" value="today" name="group1" class="date_radio"> Today  
                                                 <input type="radio" value="tommorow" name="group1" class="date_radio"> Tommorow    
                                                 <input type="radio" value="day_after_tmr" name="group1" class="date_radio"> Day After Tomorrow   
@@ -409,12 +411,14 @@ if($get_breadcrumb)
                                             ?>
                                             <table border='1'>
                                                 <tr>
-                                                      <td>today</td>
-                                                      <td>Tommorow </td>
+                                                      <td class = "today_header">today</td>
+                                                      <td class = "tmr_header">Tommorow </td>
+                                                      <td class = "day_after_tmr_header">Day after Tommorow </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo $res_coupon_count_today ?></td>
-                                                    <td><?php echo $res_coupon_count_tommorow ?></td>
+                                                    <td class="today"><?php echo $res_coupon_count_today ?></td>
+                                                    <td class="tommorow"><?php echo $res_coupon_count_tommorow ?></td>
+                                                    <td class="day_after_tmr_data"><?php echo $res_coupon_count_tommorow ?></td>
                                                 </tr>
                                         </table>
                                         </div>
@@ -447,14 +451,14 @@ if($get_breadcrumb)
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
                                             <input type="hidden" value = "<?php echo $segment?>" class = "segment">
                                             <input type="hidden" value = "<?php echo $course ?>" class = "course">
-<button type=" button" 
-    class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpn">Submit </button>
-<?php }else{ ?>
-<a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
-    data-bs-effect="effect-scale" data-bs-toggle="modal"
-    data-bs-target="#login-button">Submit</a>
-<!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
-<?php } ?>
+                                            <button type=" button" 
+                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpn">Submit </button>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Submit</a>
+                                            <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
+                                            <?php } ?>
          
                                                 
                                         </div>
@@ -567,19 +571,102 @@ if($get_breadcrumb)
     $(document).ready(function() {
         
         $(".date_div").css("visibility", "hidden");
+
+        $(".day_after_tmr_header").css("visibility", "hidden");
+        $(".today_header").css("visibility", "hidden");
+        $(".tmr_header").css("visibility", "hidden");
+
+        $(".day_after_tmr_data").css("visibility", "hidden");
+        $(".today").css("visibility", "hidden");
+        $(".tommorow").css("visibility", "hidden");
+
+       
         var radio_btn_val = '';
         
         $('.date_radio').click(function() {
            
              radio_btn_val = $(this).val();
+             user_id = $('.user_id').val();
+             segment = $('.segment').val();
+             course = $('.course').val();
+
+             $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>couponadd/today_tommorow_coupon_list",
+              data:{
+                user_id : user_id,
+                segment:segment,
+                course:course,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                 console.log(response);
+               
+                 $(".today_header").css("visibility", "visible");
+                 $(".tmr_header").css("visibility", "visible");
+
+                
+                 $(".today").css("visibility", "visible");
+                 $(".tommorow").css("visibility", "visible");
+                 var tdElement_today = document.querySelector('.today');
+                 var tdElement_tommorow = document.querySelector('.tommorow');
+
+                 tdElement_today.innerHTML = response.today;
+                 tdElement_tommorow.innerHTML = response.tommorow;
+                
+              }
+           })
+
              if(radio_btn_val == 'day_after_tmr')
              {
                 $(".date_div").css("visibility", "visible");
              }
              else{
                 $(".date_div").css("visibility", "hidden");
+              
              }
 
+        });
+
+        $(".date_div").change(function()
+        {
+            var a = $('.date_div').val(); 
+            var user_id = $('.user_id').val();
+            var segment = $('.segment').val();
+            var course = $('.course').val();
+            var date_sel = $('#date_sel').val();
+            
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>couponadd/all_coupon_count_list",
+              data:{
+                user_id : user_id,
+                selected_date:date_sel,
+                segment:segment,
+                course:course,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                 console.log(response);
+                 $(".day_after_tmr_header").css("visibility", "visible");
+                 $(".today_header").css("visibility", "visible");
+                 $(".tmr_header").css("visibility", "visible");
+
+                 $(".day_after_tmr_data").css("visibility", "visible");
+                 $(".today").css("visibility", "visible");
+                 $(".tommorow").css("visibility", "visible");
+
+                 var tdElement_day_after_tmr = document.querySelector('.day_after_tmr_data');
+                 var tdElement_today = document.querySelector('.today');
+                 var tdElement_tommorow = document.querySelector('.tommorow');
+                 
+                 tdElement_day_after_tmr.innerHTML = response.selected_date;
+                 tdElement_today.innerHTML = response.today;
+                 tdElement_tommorow.innerHTML = response.tommorow;
+                // alert(response.message);
+              }
+           })
+            
         });
 
         $('.cnfrmcpn').click(function() {
@@ -633,7 +720,7 @@ if($get_breadcrumb)
             //console.log(currentDate);
              $.ajax({
               type : 'POST',    
-               url: "<?php echo base_url(); ?>couponadd/test",
+               url: "<?php echo base_url(); ?>couponadd/cnfrm_coupon",
               data:{
                 radio_btn_val:radio_btn_val,
                 user_id : user_id,

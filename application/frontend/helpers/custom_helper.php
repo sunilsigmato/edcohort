@@ -484,7 +484,7 @@ function getClassName($class_id)
         }
     }
 
-    function get_coupon_count_now($segment,$course, $user_id=null) 
+    /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  
         $data = '';
         $CI =& get_instance();
@@ -497,4 +497,4 @@ function getClassName($class_id)
         {
             $data = '';
         }
-    }
+    }*/

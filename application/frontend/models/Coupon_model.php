@@ -226,7 +226,7 @@ exit;
       //return $res;
   }
 
-  function get_coupon_count_now($segment,$course,$user_id)
+  /*function get_coupon_count_now($segment,$course,$user_id)
   {
     date_default_timezone_set('Asia/Kolkata');
     $currentTimeString = date('H:i:s');
@@ -257,7 +257,7 @@ exit;
             }
         }
     }*/
-    $today_total_count = '';
+    /*$today_total_count = '';
     $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '2024-02-15' group by user_id ");
     $res_coupon_todays_res = $query_coupon_todays->result();
     if($res_coupon_todays_res)
@@ -269,7 +269,7 @@ exit;
 
 
   
-  }
+  }*/
 
   function get_coupon_count_today($segment,$course,$user_id)
   {
@@ -281,7 +281,7 @@ exit;
     $dateTime = new DateTime($currentTimeString);
     $dateTime->modify('+1 hour');
     $newTimeString = $dateTime->format('H:i:s');
-    $today_total_count = '';
+    $today_total_count = 0;
     $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '$todayDate' group by user_id ");
     $res_coupon_todays_res = $query_coupon_todays->result();
     if($res_coupon_todays_res)
@@ -302,8 +302,30 @@ exit;
     $dateTime->modify('+1 day');
     $newTimeString = $dateTime->format('H:i:s');
     $TommorowDate= $dateTime->format('Y-m-d');
-    $today_total_count = '';
+    $today_total_count = 0;
     $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '$TommorowDate' group by user_id ");
+    $res_coupon_todays_res = $query_coupon_todays->result();
+    if($res_coupon_todays_res)
+    {
+      $today_total_count = count($res_coupon_todays_res);
+    }
+    
+    return $today_total_count;
+  }
+
+  function get_coupon_count_selected_date($segment,$course,$user_id,$selected_date)
+  {
+    /*date_default_timezone_set('Asia/Kolkata');
+    $currentTimeString = date('H:i:s');
+    $todayDate= date("Y-m-d");
+    $todayDateTime= date("Y-m-d H:i:s");
+
+    $dateTime = new DateTime($currentTimeString);
+    $dateTime->modify('+1 day');
+    $newTimeString = $dateTime->format('H:i:s');
+    $TommorowDate= $dateTime->format('Y-m-d');*/
+    $today_total_count = 0;
+    $query_coupon_todays = $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course'  and DATE(date) = '$selected_date' group by user_id ");
     $res_coupon_todays_res = $query_coupon_todays->result();
     if($res_coupon_todays_res)
     {
