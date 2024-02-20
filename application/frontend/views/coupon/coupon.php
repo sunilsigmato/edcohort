@@ -11,6 +11,9 @@ $segment = $this->input->get('segment');
 
   //  print_ex($product_list);
 ?>
+
+
+
 <?php 
 
 $get_breadcrumb = get_breadcrumb_value();
@@ -18,6 +21,8 @@ $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
 $get_single_course_detail = get_single_coure_detail($course);
+print_r($get_single_course_detail);
+
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 
 if($get_breadcrumb)
@@ -209,6 +214,9 @@ if($get_breadcrumb)
 
         </div>
     </div>
+
+ 
+
     <!--start-->
     <div class="review-main-box d-flex">
 
@@ -228,10 +236,10 @@ if($get_breadcrumb)
                         <div class="filter-col">
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
-                                <select name="brand" id="brand">
+                                <select name="brand" id="brand" class="brand">
                                     <?php foreach($brand_records as $brands){?>
                                     <option value="<?php echo $brands->brand_id; ?>"
-                                        <?php if($brands->brand_id == @$product_list['0']->brand_id){ echo 'selected'; } ?>>
+                                        <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>>
                                         <?php echo $brands->brand_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -241,24 +249,26 @@ if($get_breadcrumb)
                         <div class="filter-col">
 
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle <?php if(@$product_list['0']->product_type == 1){ echo 'active';} ?>"
+                                <div class="input-toggle <?php if(@$get_single_course_detail->product_type == 1){ echo 'active';} ?>"
                                     id="online-toggle">
                                     <label>Online</label>
 
                                     <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                        <?php if(@$product_list['0']->product_type == 1){ echo 'checked';} ?>
+                                        <?php if(@$get_single_course_detail->product_type == 1){ echo 'checked';} ?>
                                         id="online" value="1" onClick="prodcutType(1)">
                                 </div>
-                                <div class="input-toggle <?php if(@$product_list['0']->product_type == 2){ echo 'active';} ?>"
+                                <div class="input-toggle <?php if(@$get_single_course_detail->product_type == 2){ echo 'active';} ?>"
                                     id="offline-toggle">
                                     <label>Offline</label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                        <?php if(@$product_list['0']->product_type == 2){ echo 'checked';} ?>
+                                        <?php if(@$get_single_course_detail->product_type == 2){ echo 'checked';} ?>
                                         id="offline" value="2" onClick="prodcutType(2)">
                                 </div>
                             </div>
                             <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
                         </div>
+
+                        
 
                         <div class="filter-col">
                             <h3 class="filter-col-title">BOARD</h3>
@@ -568,8 +578,50 @@ if($get_breadcrumb)
 
 
     <script>
+
+function prodcutType(val) {
+        //Some code
+        //alert(val);
+        var product_type = val;
+        //var brand_id = $('#brand').val();
+
+        if (product_type == 1) {
+            $("#offline-toggle").removeClass('active');
+            $("#online-toggle").addClass('active');
+
+        } else {
+            $("#online-toggle").removeClass('active');
+            $("#offline-toggle").addClass('active');
+        }
+
+      /*  $.ajax({
+            url: base_url + 'get-board-list',
+            dataType: 'json',
+            type: 'post',
+            data: {
+                product_type: product_type,
+                brand_id: brand_id
+            },
+            success: function(data) {
+                $('#board').html(data);
+                // $('#city').html('<option value="">Select City</option>');
+            },
+            beforeSend: function() {
+                $("#global-loader").show();
+                $("#body").addClass('opacity-body');
+            },
+            complete: function() {
+                $("#global-loader").hide();
+                $("#body").removeClass('opacity-body');
+            }
+        });*/
+    }
+
     $(document).ready(function() {
-        
+     
+        $('.js-example-basic-single').select2();
+        $('.brand').select2();
+        /** Coupon  Code **/
         $(".date_div").css("visibility", "hidden");
 
         $(".day_after_tmr_header").css("visibility", "hidden");
@@ -579,8 +631,10 @@ if($get_breadcrumb)
         $(".day_after_tmr_data").css("visibility", "hidden");
         $(".today").css("visibility", "hidden");
         $(".tommorow").css("visibility", "hidden");
-
-       
+         /** End Coupon  Code **/
+        var filter_toggle_online = $("#online").val();
+        var filter_toggle_offline = $("#offline").val();
+        var brand_id = $('#brand').val();
         var radio_btn_val = '';
         
         $('.date_radio').click(function() {
@@ -736,6 +790,9 @@ if($get_breadcrumb)
            })
             }
         }); 
+
+        
+    
     
     });
 

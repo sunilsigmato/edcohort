@@ -370,6 +370,11 @@ $authUrl1 = $gClient->createAuthUrl();
 <script src='https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js'></script>
 <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/owlcarousel/owl.carousel.min.js"></script>
+
+  <!--Select2 js -->
+  <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/select2.js"></script>
+    
 <script type="text/javascript">
 function registration() {
 

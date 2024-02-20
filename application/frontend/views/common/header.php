@@ -89,6 +89,8 @@ if(empty($meta_description)){
     <link href="<?php echo base_url(); ?>assets/css/owlcarousel/owl.carousel.min.css" type="text/css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/owlcarousel/wl.theme.default.min.css" type="text/css"
         rel="stylesheet">
+        <!--Select2 css -->
+        <link href="<?php echo base_url(); ?>assets/plugins/select2/select2.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
