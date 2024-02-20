@@ -295,6 +295,7 @@ class admin_product extends CI_Controller
             'batch_id'=>$this->input->post("batch_name"),
             'segment_id'=>$this->input->post("segment"),
             'graduated_in_id'=>$this->input->post("grad_category"),
+            'course_id'=>$this->input->post("course_id"),
         );
 
         $product_id=$this->admin_model->insertData('tbl_product',$data);
@@ -526,6 +527,7 @@ class admin_product extends CI_Controller
                 'batch_id'=>$this->input->post("batch_name"),
                 'segment_id'=>$this->input->post("segment"),
                 'graduated_in_id'=>$this->input->post("grad_category"),
+                'course_id'=>$this->input->post("course_id"),
                 
             );
             

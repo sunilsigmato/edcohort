@@ -25,7 +25,8 @@
                                     <div class="card-body mb-0">
 
                                         <form class="form-horizontal" action="<?php echo base_url(); ?>admin_product/edit_product_submit" role="form" method="post" enctype="multipart/form-data">
-                                            <?php foreach ($product_detail as $row): ?>
+                                            <?php foreach ($product_detail as $row):
+                                                 ?>
 
                                             <input type="hidden" value="<?php echo $row->product_id; ?>" name="product_id" id="product_id">
                                            
@@ -137,6 +138,27 @@
                                                        <?php foreach ($class_list as $class) { ?>
                                                     <option value="<?php echo $class->class_id; ?>" <?php  if($class->class_id == $row->class_id){ echo 'selected'; }  ?>><?php echo getClassList($class->class_id);?></option>
                                                     <?php } ?>
+                                                    </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <?php 
+                                                 $resp_get_course_list = '';
+                                                 $resp_get_course_list = get_course();
+                                            ?>
+                                            <div class="form-group ">                                                
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Course Name</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control show-tick" name="course_id" required="" id="course_id" onchange="" >
+                                                        <!-- <option value="0">Select</option> -->
+                                                        <?php foreach ($resp_get_course_list as $course) { ?>
+                                                       
+                                                        <option value="<?php echo $course->id; ?>" <?php  if($course->id == $row->course_id){ echo 'selected'; }  ?>><?php echo getCourseList($course->id);?></option>
+                                                        <?php } ?>
                                                     </select> 
                                                     </div>
                                                 </div>

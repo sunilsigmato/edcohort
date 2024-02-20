@@ -126,6 +126,19 @@
         }
         return $c3.$c2.$c1;        
     }
+    function getCourseList($course_id)
+    {
+        $CI =& get_instance();
+        $c1=$c2=$c3="";
+        
+        $data=$CI->admin_model->selectOne('tbl_course','id',$course_id);
+        foreach ($data as $category)
+        {   
+            $c1=$c2=$c3="";
+            $c1=$category->course_name;             
+        }
+        return $c3.$c2.$c1;  
+    }
 
     function getBoardList($board_id)
     {
@@ -245,6 +258,12 @@
     {
         $CI =& get_instance();
         $data=$CI->admin_model->get_category();
+        return $data;
+    }
+    function get_course()
+    {
+        $CI =& get_instance();
+        $data=$CI->admin_model->get_course();
         return $data;
     }
     function get_graduated_in()

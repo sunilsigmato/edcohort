@@ -271,6 +271,16 @@ class admin_model extends CI_Model
             return $query->result();
         }
     }
+    function get_course()
+    {
+        $this->db->select('id ,course_name');
+        $this->db->from('tbl_course c');
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
     function get_graduated_in()
     {
         $this->db->select('id ,graduated_name');

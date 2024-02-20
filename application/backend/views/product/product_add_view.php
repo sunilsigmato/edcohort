@@ -131,6 +131,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php 
+                                                 $resp_get_course_list = '';
+                                                 $resp_get_course_list = get_course();
+                                            ?>
+                                            <div class="form-group ">                                                
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Course Name</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control show-tick" name="course_id" required="" id="course_id" onchange="" >
+                                                        <!-- <option value="0">Select</option> -->
+                                                        <?php foreach ($resp_get_course_list as $course) { ?>
+                                                        <option value="<?php echo $course->id; ?>"><?php echo $course->course_name;?></option>
+                                                        <?php } ?>
+                                                    </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                                <div class="form-group ">                                                
                                                 <div class="row">
