@@ -336,6 +336,23 @@ class Common_model extends CI_Model {
         }
        
     }
+	function get_segement()
+	{
+		$query = '';
+		$this->db->select('*');
+		$this->db->where('status = 1');
+        $this->db->from('tbl_segment b');
+		$query=$this->db->get();
+		if($query)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return $query;
+        }
+	}
+	
 	function get_all_brand()
 	{
 		$query = '';

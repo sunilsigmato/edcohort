@@ -230,14 +230,31 @@ if($get_breadcrumb)
 
                     <h3 class="filter-title">Filter</h3>
                     <form action="<?php echo base_url(); ?>coupon-search" method="post" name="form" id="form">
-                        <?php echo csrf_field(); ?>
+                        <?php echo csrf_field(); 
+                        $res_filter_brand = getseg_brand_list($segment);
+                        $res_filter_segment = get_segement();
+                      //  print_R($res_filter_segment);
 
+                        
+                        ?>
+                        <div class="filter-col">
+                            <h3 class="filter-col-title">Segement</h3>
+                            <div class="select-box">                              
+                                <select name="brand" id="filter_segment" class="filter_segment">
+                                    <?php foreach($res_filter_segment as $segments){?>
+                                    <option value="<?php echo $segments->id; ?>"
+                                        <?php if($segment == @$segments->id){ echo 'selected'; } ?>>
+                                        <?php echo $segments->segment_name; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="filter-col">
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="brand" class="brand">
-                                    <?php foreach($brand_records as $brands){?>
+                                    <?php foreach($res_filter_brand as $brands){?>
                                     <option value="<?php echo $brands->brand_id; ?>"
                                         <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>>
                                         <?php echo $brands->brand_name; ?></option>
@@ -455,12 +472,12 @@ if($get_breadcrumb)
                                         <hr>-->
                                         
                                         <div class="d-flex align-items-center justify-content-center">
-                                            
+                                        <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+                                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
-                                            <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
+                                            
                                             <button type=" button" 
                                                 class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpn">Submit </button>
                                             <?php }else{ ?>
@@ -618,7 +635,7 @@ function prodcutType(val) {
     }
 
     $(document).ready(function() {
-     
+        var radio_btn_val = '';
         $('.js-example-basic-single').select2();
         $('.brand').select2();
         /** Coupon  Code **/
@@ -632,10 +649,38 @@ function prodcutType(val) {
         $(".today").css("visibility", "hidden");
         $(".tommorow").css("visibility", "hidden");
          /** End Coupon  Code **/
+
+             /** Start Filter Section */
+
         var filter_toggle_online = $("#online").val();
         var filter_toggle_offline = $("#offline").val();
-        var brand_id = $('#brand').val();
-        var radio_btn_val = '';
+        var filter_brand_id = $('#brand').val();
+        var filter_segment_id = $('.segment').val();
+       /* $("#filter_segment").change(function()
+        {
+        }*/
+        $("#brand").change(function()
+        {
+           var segment_brand = $('.segment').val();
+           // alert(segment_brand);
+            filter_brand_id = $(this).val();
+             $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>couponadd/get_brand_detail",
+              data:{
+                brand_id : filter_brand_id,
+                segment:filter_segment_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                 console.log(response);
+              }
+           });
+
+        });
+
+
+        /** End Filter Section */
         
         $('.date_radio').click(function() {
            

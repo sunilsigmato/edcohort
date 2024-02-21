@@ -16,6 +16,8 @@ public function __construct()
 function index(){
 
   $course = $this->input->get('course');
+  $segment = $this->input->get('segment');
+  
   ////Filter data ////////
   $where_brand = 'brand_status = 1';
   $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');

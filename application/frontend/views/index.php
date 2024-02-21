@@ -273,6 +273,7 @@ $sort_by = $this->input->get('sort_by');
    <!-- <div class="container">
         <div class="row justify-content-center">
             <?php
+            
             $class_records_count = count($segment_record);
             if ($class_records_count > 0) {
                 foreach ($segment_record as $class) { ?>
@@ -371,7 +372,9 @@ $sort_by = $this->input->get('sort_by');
             <?php
             $class_records_count = count($segment_record);
             if ($class_records_count > 0) {
-                foreach ($segment_record as $class) { ?>
+                foreach ($segment_record as $class) { 
+                    print_r($segment_record)
+                    ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card text-center">
                     <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
@@ -631,6 +634,7 @@ if (empty($courseid)) {
             <?php if (!empty($courseid)) { ?>
             <?php
                 $resp_get_brand = getseg_brand_list($courseid);
+                
                 if ($resp_get_brand) {
                     ?>
             <!-- Popular Brands Section -->
