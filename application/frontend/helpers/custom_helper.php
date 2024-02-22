@@ -358,7 +358,39 @@ function getClassName($class_id)
         }
                 
     }
+    function getseg_class_list($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getseg_class_list($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    }
 
+    function getseg_crse_list($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getseg_crse_list($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    } 
     function get_segement()
     {
         $data = '';

@@ -373,7 +373,7 @@ $sort_by = $this->input->get('sort_by');
             $class_records_count = count($segment_record);
             if ($class_records_count > 0) {
                 foreach ($segment_record as $class) { 
-                    print_r($segment_record)
+                   
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card text-center">
