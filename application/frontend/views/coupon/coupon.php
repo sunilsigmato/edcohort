@@ -264,8 +264,7 @@ if($get_breadcrumb)
                             </div>
                         </div>
 
-                        <div class="filter-col">
-
+                      <!--  <div class="filter-col">
                             <div class="btn-group btn-toggle filter-toggle-box">
                                 <div class="input-toggle <?php if(@$get_single_course_detail->product_type == 1){ echo 'active';} ?>"
                                     id="online-toggle">
@@ -283,8 +282,7 @@ if($get_breadcrumb)
                                         id="offline" value="2" onClick="prodcutType(2)">
                                 </div>
                             </div>
-                            <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
-                        </div>
+                        </div> -->
 
                         <div class="filter-col">
                         <h3 class="filter-col-title">BOARD</h3>
@@ -298,20 +296,20 @@ if($get_breadcrumb)
                             }
                         ?>
                             <div class="btn-group btn-toggle filter-toggle-box">
-                            <div class="input-toggle <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                            <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                 id="cbsc-toggle">
                                 <label><?php echo $filter_cbsc_name ?> </label>
 
                                 <input class="btn btn-lg btn-default" type="radio" name="product_type"
                                     <?php if(@$filter_cbsc_id == 1){ echo 'checked';} ?>
-                                    id="cbsc" value="1" onClick="boardType(1)">
+                                    id="cbsc" value="1" >
                             </div>
-                            <div class="input-toggle <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                            <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                 id="icsc-toggle">
                                 <label><?php echo $filter_icsc_name ?></label>
                                 <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
                                     <?php if(@$filter_icsc_id == 2){ echo 'checked';} ?>
-                                    id="icsc" value="2" onClick="boardType(2)">
+                                    id="icsc" value="2" >
                             </div>
                         </div>
                         <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
@@ -321,7 +319,7 @@ if($get_breadcrumb)
                         <!--<div class="filter-col">
                             <h3 class="filter-col-title">BOARD</h3>
                             <div class="select-box">
-                                <?php print_R($board_records[0]->board_name); ?>
+                                
                                 <select name="board" id="board">
                                     <?php foreach($board_records as $boards){
                                        
@@ -337,7 +335,7 @@ if($get_breadcrumb)
                         <div class="filter-col">
                             <h3 class="filter-col-title">CLASS</h3>
                             <div class="select-box">
-                                <select name="class" id="class">
+                                <select name="filter_class_dropdown" id="filter_class_dropdown">
                                     <?php foreach($res_filter_class as $classes){?>
                                     <option value="<?php echo $classes->class_id; ?>"
                                         <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
@@ -350,7 +348,7 @@ if($get_breadcrumb)
                         <div class="filter-col">
                             <h3 class="filter-col-title">COURSE</h3>
                             <div class="select-box">
-                                <select name="course" id="course">
+                                <select name="filter_course_dropdown" id="filter_course_dropdown">
                                     <?php foreach($res_filter_course as $classes){?>
                                     <option value="<?php echo $classes->id; ?>"
                                         <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
@@ -663,19 +661,7 @@ function prodcutType(val) {
 
       
     }
-    function boardType(val){
-        var board_type = val;
-        if(board_type == 1)
-        {
-            $("#cbsc-toggle").addClass('active');
-            $("#icsc-toggle").removeClass('active');
-        }
-        else
-        {
-            $("#cbsc-toggle").removeClass('active');
-            $("#icsc-toggle").addClass('active');
-        }
-    }
+  
     $(document).ready(function() {
         var radio_btn_val = '';
      
@@ -696,17 +682,18 @@ function prodcutType(val) {
             /** Apply Select 2 */
             $('.filter_segment').select2();
             $('.brand').select2();
-            $('#class').select2();
-            $('#course').select2();
+            $('#filter_class_dropdown').select2();
+            $('#filter_course_dropdown').select2();
             
             /**End   Apply Select 2 */
         var filter_toggle_online = $("#online").val();
         var filter_toggle_offline = $("#offline").val();
         var filter_segment_id = $('.segment').val();
         var filter_brand_id = $('#brand').val();
-        var filter_class_id = $('.filter_class').val();
+        var filter_class_id = $('.filter_class_dropdown').val();
         var filter_course_id = $('.filter_course').val();
-               
+      
+        
         $("#filter_segment").change(function()
         {
             filter_segment_id =  $(this).val();
@@ -729,6 +716,19 @@ function prodcutType(val) {
            });
         });
 
+        $('.toggle_cbsc').click(function() {
+            
+            $("#icsc-toggle").removeClass('active');
+            $("#cbsc-toggle").addClass('active');
+
+        });
+        $('.toggle_icsc').click(function() {
+            
+            $("#icsc-toggle").addClass('active');
+            $("#cbsc-toggle").removeClass('active');
+
+        });
+       
         $("#brand").change(function()
         {
             filter_brand_id = $(this).val();
@@ -747,17 +747,21 @@ function prodcutType(val) {
                     options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
                 }
                 //console.log(options);
-                $('#class').empty().append(options); 
+                $('#filter_class_dropdown').empty().append(options); 
               }
            });
 
+        });
+
+        $("#filter_class_dropdown").change(function()
+        {
+            
         });
 
 
         /** End Filter Section */
         
         $('.date_radio').click(function() {
-           
              radio_btn_val = $(this).val();
              user_id = $('.user_id').val();
              segment = $('.segment').val();
