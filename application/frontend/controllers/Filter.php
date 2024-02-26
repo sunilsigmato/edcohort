@@ -18,15 +18,7 @@ public function __construct()
   function get_brand_detail()
   {
       $segment= $this->input->post('segment');
-     // print_R($segment);
-      //getseg_brand_list
       $res_filter_brand_list = $this->common_model->getseg_brand_list($segment);
-      /*$options = array(
-        array('value' => '1', 'text' => 'Option 1'),
-        array('value' => '2', 'text' => 'Option 2'),
-        array('value' => '3', 'text' => 'Option 3'),
-        // Add more options as needed
-    );*/
       http_response_code(200);
       echo json_encode(array("status"=>"1","data"=>$res_filter_brand_list)); 
    
@@ -40,6 +32,44 @@ public function __construct()
     http_response_code(200);
     echo json_encode(array("status"=>"1","data"=>$res_filter_brand_list)); 
 
+  }
+
+  function get_filter_course_detail()
+  {
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $get_filter_course_detail = $this->common_model->get_filter_course_detail($segment,$board_id,$brand_id,$class_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$get_filter_course_detail)); 
+
+  }
+
+  function get_filter_batch_detail()
+  {
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $course_id= $this->input->post('course');
+    $get_filter_batch_detail = $this->common_model->get_filter_batch_detail($segment,$board_id,$brand_id,$class_id,$course_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$get_filter_batch_detail)); 
+
+  }
+
+  function get_filter_result_detail()
+  {
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $course_id= $this->input->post('course');
+    $batch_id= $this->input->post('batch');
+    $get_filter_result_detail = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$get_filter_result_detail)); 
   }
 
  

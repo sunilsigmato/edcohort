@@ -301,15 +301,15 @@ if($get_breadcrumb)
                                 <label><?php echo $filter_cbsc_name ?> </label>
 
                                 <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                    <?php if(@$filter_cbsc_id == 1){ echo 'checked';} ?>
-                                    id="cbsc" value="1" >
+                                    <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
+                                    id="cbsc" value="2" >
                             </div>
                             <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                 id="icsc-toggle">
                                 <label><?php echo $filter_icsc_name ?></label>
                                 <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                    <?php if(@$filter_icsc_id == 2){ echo 'checked';} ?>
-                                    id="icsc" value="2" >
+                                    <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
+                                    id="icsc" value="1" >
                             </div>
                         </div>
                         <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
@@ -365,7 +365,7 @@ if($get_breadcrumb)
                                 <select name="batch" id="batch">
                                     <?php foreach($batch_records as $batches){?>
                                     <option value="<?php echo $batches->batch_id; ?>"
-                                        <?php if($batches->batch_id == @$product_list['0']->batch_id){ echo 'selected'; } ?>>
+                                        <?php if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
                                         <?php echo $batches->batch_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -373,7 +373,7 @@ if($get_breadcrumb)
                         </div>
                         <div class=" filter-col ">
                             <div class="filter-list-box">
-                                <button type="submit" class="apply-btn">Apply Filter</button>
+                                <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
                         </div>
                     </form>
@@ -521,6 +521,8 @@ if($get_breadcrumb)
                                             <input type="hidden" value = "<?php echo $course ?>" class = "course">
                                             <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
                                             <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
                                            
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
@@ -684,16 +686,19 @@ function prodcutType(val) {
             $('.brand').select2();
             $('#filter_class_dropdown').select2();
             $('#filter_course_dropdown').select2();
+            $('#batch').select2();
             
             /**End   Apply Select 2 */
         var filter_toggle_online = $("#online").val();
         var filter_toggle_offline = $("#offline").val();
         var filter_segment_id = $('.segment').val();
         var filter_brand_id = $('#brand').val();
-        var filter_class_id = $('.filter_class_dropdown').val();
+        var filter_class_id = $('.filter_class').val();
         var filter_course_id = $('.filter_course').val();
+        var filter_batch_id = $('.filter_batch').val();
+        var filter_board_id = $('.filter_board').val();
+        var product_id = '';
       
-        
         $("#filter_segment").change(function()
         {
             filter_segment_id =  $(this).val();
@@ -717,12 +722,13 @@ function prodcutType(val) {
         });
 
         $('.toggle_cbsc').click(function() {
-            
+            filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
 
         });
         $('.toggle_icsc').click(function() {
+            filter_board_id = $('#icsc').val();
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
@@ -755,9 +761,96 @@ function prodcutType(val) {
 
         $("#filter_class_dropdown").change(function()
         {
-            
+            filter_class_id = $(this).val();
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
+              data:{
+                segment:filter_segment_id,
+                board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
+                }
+                //console.log(options);
+                $('#filter_course_dropdown').empty().append(options); 
+              }
+           });
+
         });
 
+        $("#filter_course_dropdown").change(function()
+        {
+            filter_course_id = $(this).val();
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
+              data:{
+                segment:filter_segment_id,
+                board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+                course : filter_course_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].batch_id + '">' + response.data[i].batch_name + '</option>';
+                }
+                //console.log(options);
+                $('#batch').empty().append(options); 
+              }
+           });
+
+        });
+
+        $("#batch").change(function()
+        {
+             filter_batch_id = $(this).val();
+        });
+        $(".apply_filter").click(function()
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_result_detail",
+              data:{
+                segment:filter_segment_id,
+                board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+                course : filter_course_id,
+                batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data[0]);
+                   if(response.data == "")
+                   {
+                        alert("No data found");
+                   }else{
+                        filter_batch_id = response.data[0].batch_id;
+                        filter_segment_id = response.data[0].segment_id;
+                        filter_board_id = response.data[0].board_id;
+                        product_id = response.data[0].product_id;
+                    
+                        window.location="<?php echo base_url();?>coupon/?course="+product_id+"&segment="+filter_segment_id;
+                     
+                   }
+              }
+           });
+
+        })
+        
 
         /** End Filter Section */
         
