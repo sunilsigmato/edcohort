@@ -842,9 +842,7 @@ function prodcutType(val) {
                         filter_segment_id = response.data[0].segment_id;
                         filter_board_id = response.data[0].board_id;
                         product_id = response.data[0].product_id;
-                    
                         window.location="<?php echo base_url();?>coupon/?course="+product_id+"&segment="+filter_segment_id;
-                     
                    }
               }
            });
