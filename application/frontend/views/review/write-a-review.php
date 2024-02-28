@@ -22,14 +22,19 @@
           $customer_rating = $this->input->get('customer_rating');
           $date_posted = $this->input->get('date_posted');
           $sort_by = $this->input->get('sort_by');
+          $segment = $this->input->get('segment');
+          $res_filter_brand = getseg_brand_list($segment);
+          $res_filter_segment = get_segement();
+          $res_filter_class = getseg_class_list($segment);
+          $res_filter_course = getseg_crse_list($segment);
           
     ?>
 
     <!--start-->
     <div class="review-box">
-    <div class="container">
+    <div class="container bg-1 ">
     <?php echo message(); ?>
-<form action="<?php echo base_url(); ?>review-submit" method="post" enctype="multipart/form-data">
+<!--<form action="<?php echo base_url(); ?>review-submit" method="post" enctype="multipart/form-data">-->
    
     <?php echo csrf_field(); ?>
     <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder="Your Name" value="<?php echo $course; ?>">
@@ -38,9 +43,9 @@
     <input type="hidden" class="form-control" name="email" id="email"  value="<?php echo $this->session->userdata('user_email'); ?>">
     <input type="hidden" class="form-control" name="name" id="name"  value="<?php echo $this->session->userdata('user_fullname'); ?>">
     <input type="hidden" class="form-control" id="phone" name="phone" value="<?php echo $this->session->userdata('user_phone'); ?>">
-        <div class="review-field-row d-flex column-2">
+        <div class="row">
 
-            <div class="review-col col-4">
+            <div class=" col-md-6">
                 <label class="input-title">Write a*</label>
                 <div class="select-box">
                     <select name="write_review" id="write_review">
@@ -48,33 +53,18 @@
                     </select>
                 </div>
             </div>
-            <div class="review-col col-6">
-                <label class="input-title">Catagory*</label>
+            <div class="col-md-6">
+                <label class="input-title">Segment*</label>
                 <div class="select-box">
-                    <select name="category" id="category">
-                <?php foreach($category_records as $category){ ?>
-                        <option value="<?php echo $category->class_id; ?>" <?php if($category->class_id == $class){ echo 'selected'; } ?>><?php echo $category->title; ?></option>
+                    <select name="filter_segment" id="filter_segment">
+                <?php foreach($res_filter_segment as $segments){ ?>
+                        <option value="<?php echo $segments->id; ?>" <?php if($segments->id
+                         == $segment){ echo 'selected'; } ?>><?php echo $segments->segment_name; ?></option>
                     <?php } ?>
                     </select>
                 </div>
             </div>
-        </div>
-
-        <div class="review-field-row">
-            <label class="input-title">Select Board</label>
-            <div class="select-box">
-            <select name="board" id="board">
-                            <?php foreach($board_records as $boards){?>
-                            <option value="<?php echo $boards->board_id; ?>" <?php if($boards->board_id == $board){ echo 'selected'; } ?>><?php echo $boards->board_name; ?></option>
-                            <?php } ?>
-                        </select>
-            </div>
-        </div>
-
-
-        <div class="review-field-row d-flex column-2">
-
-            <div class="review-col col-4">
+            <div class="col-6">
                 <label class="input-title">Brand name*</label>
                 <div class="select-box">
                     <select name="brand" id="brand">
@@ -85,20 +75,44 @@
                 </div>
             </div>
 
-            <div class="review-col col-6">
-                <label class="input-title">Course (Optional)</label>
+            <div class="col-6">
+                <label class="input-title">Class</label>
                 <div class="select-box">
-                <select name="class" id="class">
-                            <?php foreach($class_records as $classes){?>
-                            <option value="<?php echo $classes->class_id; ?>" <?php if($classes->class_id == $class){ echo 'selected'; } ?>><?php echo $classes->title; ?></option>
-                            <?php } ?>
+                <select name="filter_class_dropdown" id="filter_class_dropdown">
+                <?php foreach($res_filter_class as $classes){?>
+                <option value="<?php echo $classes->class_id; ?>" <?php if($classes->class_id == $class){ echo 'selected'; } ?>><?php echo $classes->title; ?></option>
+                <?php } ?>
                         </select>
-                </div>
+        </div>
+        </div>
+            
+            <div class="col-6">
+                <label class="input-title">Select Board</label>
+                <div class="select-box">
+                <select name="board" id="board">
+                <?php foreach($board_records as $boards){?>
+                <option value="<?php echo $boards->board_id; ?>" <?php if($boards->board_id == $board){ echo 'selected'; } ?>><?php echo $boards->board_name; ?></option>
+                <?php } ?>
+                        </select>
             </div>
+            </div>
+            
+            
+
+            <div class="col-6">
+                <label class="input-title">Select Course</label>
+                <div class="select-box">
+                <select name="filter_course_dropdown" id="filter_course_dropdown">
+                <?php foreach($res_filter_course as $classes){?>
+                <option value="<?php echo $classes->id; ?>" <?php if($classes->id == $class){ echo 'selected'; } ?>><?php echo $classes->course_name; ?></option>
+                <?php } ?>
+                        </select>
+        </div>
         </div>
 
-        <div class="review-field-row">
-            <div class="review-col">
+        
+                    
+        <div class="col-6">
                 <label class="input-title">Batch (Cohort) <span>Please select year that you will be appearing exam</span></label>
                 <div class="select-box">
                 <select name="batch" id="batch">
@@ -107,8 +121,9 @@
                         <?php } ?>
                     </select>
                 </div>
-            </div>
         </div>
+
+
         <div class="review-field-row">
             <div class="review-col">
                 <label class="input-title">Title</label>
@@ -150,18 +165,31 @@
                         Get updates on this discussion
                     </div>
                 </div>
-                <?php if($this->session->userdata('user_id')){ ?>
+                <!--<?php if($this->session->userdata('user_id')){ ?>
                  <div class="reply-footer-right">
                     <button type="submit"  data-bs-effect="effect-scale"  class="reply-footer-btn">Post</button>
                 </div>
                 <?php }else{ ?>
                     <div class="reply-footer-right">
                     <a href="javascript:void(0)" class="reply-footer-btn" data-bs-effect="effect-scale"  data-bs-target="#login-button">Post</a></div>
-                <?php } ?>
+                <?php } ?> -->
+
+
+                <?php if($this->session->userdata('user_id')){ ?>
+                                            <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
+                                            
+                                            <button type=" button" 
+                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmreview">Submit </button>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Submit</a>
+                                            <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
+                                            <?php } ?>
                 
             </div>
         </div>
-</form>
+<!--</form>-->
     </div>
     </div>
     <!--end-->
@@ -286,10 +314,188 @@ $(document).ready(function() {
 //     $("form").on('submit', function(){
 //    $('#rateModal').show();
 // })
+
+
+
     $('.summernote').summernote({
 height: 300,
 });
-    $('#category').change(function() {
+
+  /** Apply Select 2 */
+  $('.filter_segment').select2();
+            $('.brand').select2();
+            $('#filter_class_dropdown').select2();
+            $('#filter_course_dropdown').select2();
+            $('#batch').select2();
+            $('#board').select2();
+var filter_toggle_online = $("#online").val();
+        var filter_toggle_offline = $("#offline").val();
+        var filter_segment_id = $('.segment').val();
+        var filter_brand_id = $('#brand').val();
+        var filter_class_id = $('.filter_class').val();
+        var filter_course_id = $('.filter_course').val();
+        var filter_batch_id = $('.filter_batch').val();
+        var filter_board_id = $('.filter_board').val();
+        var product_id = '';
+      
+        $("#filter_segment").change(function()
+        {
+            filter_segment_id =  $(this).val();
+             $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_brand_detail",
+              data:{
+                segment:filter_segment_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                // console.log(response.data);
+                 var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].brand_id + '">' + response.data[i].brand_name + '</option>';
+                }
+                //console.log(options);
+                $('#brand').empty().append(options); 
+              }
+           });
+        });
+
+        $('.toggle_cbsc').click(function() {
+            filter_board_id = $('#cbsc').val();
+            $("#icsc-toggle").removeClass('active');
+            $("#cbsc-toggle").addClass('active');
+
+        });
+        $('.toggle_icsc').click(function() {
+            filter_board_id = $('#icsc').val();
+            
+            $("#icsc-toggle").addClass('active');
+            $("#cbsc-toggle").removeClass('active');
+
+        });
+       
+        $("#brand").change(function()
+        {
+            filter_brand_id = $(this).val();
+             $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_class_detail",
+              data:{
+                brand_id : filter_brand_id,
+                segment:filter_segment_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                  // console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
+                }
+                //console.log(options);
+                $('#filter_class_dropdown').empty().append(options); 
+              }
+           });
+
+        });
+
+        $("#filter_class_dropdown").change(function()
+        {
+            filter_class_id = $(this).val();
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
+              data:{
+                segment:filter_segment_id,
+                board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
+                }
+                //console.log(options);
+                $('#filter_course_dropdown').empty().append(options); 
+              }
+           });
+
+        });
+
+        $("#filter_course_dropdown").change(function()
+        {
+            filter_course_id = $(this).val();
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_batch_detail_write_review",
+              data:{
+                segment:filter_segment_id,
+                //board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+                course : filter_course_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    options += '<option value="' + response.data[i].batch_id + '">' + response.data[i].batch_name + '</option>';
+                }
+                //console.log(options);
+                $('#batch').empty().append(options); 
+              }
+           });
+
+        });
+
+        $("#batch").change(function()
+        {
+             filter_batch_id = $(this).val();
+        });
+        $(".apply_filter").click(function()
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_result_detail",
+              data:{
+                segment:filter_segment_id,
+                board: filter_board_id,
+                class: filter_class_id,
+                brand_id : filter_brand_id,
+                course : filter_course_id,
+                batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data[0]);
+                   if(response.data == "")
+                   {
+                        alert("No data found");
+                   }else{
+                        filter_batch_id = response.data[0].batch_id;
+                        filter_segment_id = response.data[0].segment_id;
+                        filter_board_id = response.data[0].board_id;
+                        product_id = response.data[0].product_id;
+                        window.location="<?php echo base_url();?>coupon/?course="+product_id+"&segment="+filter_segment_id;
+                   }
+              }
+           });
+
+        })
+
+          /** End Filter Section */
+
+
+            $('.cnfrmreview').click(function() {
+            alert("hi");
+          });
+
+   /* $('#category').change(function() {
         var category_id = $('#category').val();
         if (category_id != '') {
             $.ajax({
@@ -377,7 +583,7 @@ height: 300,
         });
         }
     }); 
-});
+});*/
 
 $('.rating').on('click', '.ratings_stars', function () {
   var star = $(this)
@@ -385,5 +591,7 @@ $('.rating').on('click', '.ratings_stars', function () {
   star.prevAll().addClass('selected')
   star.nextAll().removeClass('selected')
   $('#rating').val(star.data('rating'))
+});
+
 });
 </script>

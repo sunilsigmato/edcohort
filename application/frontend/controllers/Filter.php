@@ -59,6 +59,19 @@ public function __construct()
 
   }
 
+  function get_filter_batch_detail_write_review()
+  {
+    $segment= $this->input->post('segment');
+    //$board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $course_id= $this->input->post('course');
+    $get_filter_batch_detail_review = $this->common_model->get_filter_batch_detail_write_review($segment,$brand_id,$class_id,$course_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$get_filter_batch_detail_review)); 
+
+  }
+
   function get_filter_result_detail()
   {
     $segment= $this->input->post('segment');

@@ -228,6 +228,12 @@ Header
 .total-review-display h4 {
   font-size: 18px;
 }
+.bg-1 {
+  background-color: #fff;
+  padding: 41px;
+  border-radius: 8px;
+  box-shadow: 0 1px 11px 0 rgba(92, 89, 143, 0.1);
+}
 
 .rating-btn-display {
   background: #19874a;
