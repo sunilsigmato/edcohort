@@ -512,7 +512,7 @@ if($get_breadcrumb)
                                 <div
                                     class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
                                     <h2 class="review-title">
-                                        <?php echo ucwords($review->user_name); ?> <span><img
+                                        <?php echo ucwords($review->v); ?> <span><img
                                                 src="<?php  base_url() ?>assets/images/verifyicon.png" alt=""></span>
 
                                         <div class="review-title-dropdown">

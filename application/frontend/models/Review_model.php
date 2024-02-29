@@ -154,6 +154,8 @@ class Review_model extends CI_Model {
       $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_review as pr 
         join tbl_product as p ON pr.product_id=p.product_id 
         join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$offset." , ".$limit);
+
+        
       return $query->result();  
   }
   function getProductReview($where)
