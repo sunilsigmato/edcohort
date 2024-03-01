@@ -505,14 +505,15 @@ if($get_breadcrumb)
                         </div>
                         <div class="review-box">
                             <?php if($review_list){ ?>
-                            <?php foreach($review_list as $review){?>
+                            <?php foreach($review_list as $review){
+                                ?>
                             <!--review row start-->
                             <div class="review-row">
                                 <div class="review-user-image"><span></span></div>
                                 <div
                                     class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
                                     <h2 class="review-title">
-                                        <?php echo ucwords($review->v); ?> <span><img
+                                        <?php echo ucwords($review->user_name); ?> <span><img
                                                 src="<?php  base_url() ?>assets/images/verifyicon.png" alt=""></span>
 
                                         <div class="review-title-dropdown">
@@ -623,11 +624,11 @@ if($get_breadcrumb)
             $likeCount = $review_reply_cnt['0']->like_count;
             
             if($this->session->userdata('user_id')){
-               
               $where_like_check = 'review_id = '.$review->product_review_id.' and user_id = '.$this->session->userdata('user_id').' and action = 1';
               $review_reply_check = $this->review_model->review_like_count($where_like_check);
                                    //echo  $this->db->last_query();
               $likeCountCheck = $review_reply_check['0']->like_count;}?>
+                                         <!-- Start Like Section -->
                                         <?php if($this->session->userdata('user_id')){ ?>
                                         <?php if($likeCount > 0 ){ ?>
                                         <a href="javascript:void(0)"
@@ -661,6 +662,9 @@ if($get_breadcrumb)
                                             </svg> <?php echo $likeCount; ?>
                                         </a>
                                         <?php } ?>
+                                        <!-- Start Like Section -->
+
+                                         <!-- Start Reply Section -->
                                         <?php if($this->session->userdata('user_id')){ ?>
                                         <a href="javascript:void(0)" id="reply-"
                                             onclick="divShow(<?php echo $review->product_review_id;?>);">
@@ -680,6 +684,8 @@ if($get_breadcrumb)
                                             </svg> Reply
                                         </a>
                                         <?php } ?>
+                                        <!-- End Reply Section -->
+                                            <!-- Start Share Section -->
                                         <a href="#" class="share-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
                                                 width="24" height="24">
@@ -688,6 +694,7 @@ if($get_breadcrumb)
                                             </svg> Share
                                             <div class="sharethis-inline-share-buttons"></div>
                                         </a>
+                                          <!-- End Share Section -->
 
                                     </div>
                                 </div>
@@ -741,7 +748,8 @@ if($get_breadcrumb)
                                 </div>
                                 <div class="reply-box">
                                     <?php //print_ex($review_reply);
-                     foreach($review_reply as $reply){ ?>
+                     foreach($review_reply as $reply){
+                        //print_R($reply); ?>
                                     <div class="review-row-reply review_reply_<?php echo $reply->review_id;?>"
                                         style="display:none">
                                         <div class="review-user-image"><span></span></div>
@@ -764,6 +772,49 @@ if($get_breadcrumb)
                                                         More)</a></small>
                                                 <?php } ?>
                                             </div>
+
+                                            <!-- Comment Section Start -->
+                                            <div class="form-group" style="display:none"
+                                        id="subcommentDiv_<?php echo $reply->prr_id; ?>">
+                                                
+                                                <?php $form_name = 'comment_sub_reply_'.$reply->prr_id; ?>
+                                                <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $reply->prr_id; ?>"
+                                                    placeholder="Comment" required="required"
+                                                    maxlength="250"></textarea>
+                                            </div>
+                                            <?php if ($this->session->userdata('user_id')) { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                id="review_reply_submit"
+                                                onclick="divSubReply(<?php echo $reply->review_id. ',' .$reply->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Reply</a>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Reply</a>
+                                            <?php } ?>
+
+                                            <!-- Comment Section Ends -->
+<!-- Start Reply Section -->
+                                        <?php if($this->session->userdata('user_id')){ ?>
+                                            <a href="javascript:void(0)" id="reply-"
+                                                onclick="ed_comment(<?php echo $reply->prr_id ;?>);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                    viewBox="0 0 24 24" width="24" height="24">
+                                                    <path
+                                                        d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                                </svg> Reply
+                                            </a>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                    viewBox="0 0 24 24" width="24" height="24">
+                                                    <path
+                                                        d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                                </svg> Reply
+                                            </a>
+                                            <?php } ?>
+                                        <!-- End Reply Section -->
+
                                             <div class="review-content" style="display:none"
                                                 id="reviewReplyFull_<?php echo $reply->prr_id;?>">
                                                 <?php echo $reply->reply; ?> <small class="review-read remove-bg"><a
@@ -1050,7 +1101,7 @@ if($get_breadcrumb)
 
           /** End Filter Section */
 
-
+        
 
       /*  $('#category').change(function() {
             var category_id = $('#category').val();
@@ -1237,6 +1288,47 @@ if($get_breadcrumb)
             $('#commentDiv_' + val).css('display', 'none');
         }
 
+    }
+
+    function divSubReply(reviewId,prrId,product_id,user_id) {
+     
+        sub_comment_content= $('#commentid_'+prrId).val();
+        if(sub_comment_content== ''){
+            alert("Enter the comment");
+            return false;
+        }
+      
+        $.ajax({
+            url: base_url + 'review/review-sub-replys',
+            dataType: 'json',
+            type: 'post',
+            data: {
+                review_id: reviewId,
+                user_id: user_id,
+                product_id: product_id,
+                prr_id : prrId,
+                sub_comment_content : sub_comment_content
+            },
+            success: function(data) {
+                if (data.status == '1') {
+                    // alert('1'); 
+                    location.reload();
+                } else if (data.status == '0') {
+                    //alert('0'); 
+                }
+            }
+           
+        });
+
+    }
+
+    function ed_comment(val)
+    {
+        if ($('#subcommentDiv_' + val).css('display') == 'none') {
+            $('#subcommentDiv_' + val).css('display', 'block');
+        } else {
+            $('#subcommentDiv_' + val).css('display', 'none');
+        }
     }
 
     function viewRepliesAll(val) {

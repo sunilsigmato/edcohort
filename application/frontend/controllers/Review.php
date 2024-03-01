@@ -597,6 +597,27 @@ class Review extends CI_Controller
     echo json_encode(array('message' => $message, 'status' => $status));
     exit();
   }
+
+  function review_sub_reply()
+  {
+      $user_id =  $this->input->post('user_id');
+      $product_id =  $this->input->post('product_id');
+      $reviewId =  $this->input->post('reviewId');
+      $prrId =  $this->input->post('prrId');
+
+
+      /*$where.=" c.prr_id = ".$prrId." and c.review_id = ".$reviewId." and c.product_id = ".$product_id." and c.user_id = ".$user_id." ";
+      $this->db->select('c.sub_id ,c.set_level');
+      $this->db->from('tbl_product_review_reply c');
+       $this->db->where($where);*/
+     
+     // $query=$this->db->get();
+
+      print_R($user_id);
+      exit;
+
+    
+  }
   function boost_review_submit()
   {
     // print_ex($_REQUEST);
