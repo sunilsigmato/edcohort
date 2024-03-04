@@ -602,7 +602,7 @@ if($get_breadcrumb)
                                 <hr />
                                 <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
                                     <?php 
-         $where_review_reply = 'tbl_product_review_reply.status = 1 and review_id = '.$review->product_review_id.'';
+         $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id  IS NULL and  review_id = '.$review->product_review_id.'';
          $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
          $review_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
          ?>
@@ -749,9 +749,28 @@ if($get_breadcrumb)
                                 <div class="reply-box">
                                     <?php //print_ex($review_reply);
                      foreach($review_reply as $reply){
-                        //print_R($reply); ?>
-                                    <div class="review-row-reply review_reply_<?php echo $reply->review_id;?>"
+                     //  print_R($reply); ?>
+                                    <div class="review-row-reply review_reply_<?php echo $reply->review_id;?> prr_id_<?php echo $reply->prr_id;?>"
                                         style="display:none">
+                                        <?php 
+                                        //$this->review_model->get_sub_comment($reply->prr_id);
+                                        $temp_prr_id = $reply->prr_id;
+                                        $temp_review_id = $reply->review_id;
+                                        
+                                        $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$temp_prr_id.' and  review_id = '.$temp_review_id.'';
+                                        $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
+                                        $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+                                        // print_R($review_sub_reply);
+                                        $res =display_sub_review($reply->prr_id , $reply->review_id);
+                                        print_R($res);
+                                        /* foreach($review_sub_reply as $sub_reply){
+                                            print_r($sub_reply);
+                                         }*/
+                                         
+
+                                        ?>
+
+                                        
                                         <div class="review-user-image"><span></span></div>
                                         <div
                                             class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
@@ -836,11 +855,21 @@ if($get_breadcrumb)
                                 <h4>No result found..!!</h4>
                             </div>
                             <?php } ?>
+                            <?php 
+
+function display_sub_review($id, $id1)
+{                                                       
+   return $a ='55555555555555555555555555555555'; 
+}
+?>
                         </div>
+
+                       
                     </div>
                 </div>
             </div>
             <!-- Review Ends -->
+           
             <!-- Review right side content -->
             <div class="col-md-2">
                 <div class="review-right">
@@ -1299,7 +1328,7 @@ if($get_breadcrumb)
         }
       
         $.ajax({
-            url: base_url + 'review/review-sub-replys',
+            url: base_url + 'filter/review_sub_reply',
             dataType: 'json',
             type: 'post',
             data: {
@@ -1311,10 +1340,11 @@ if($get_breadcrumb)
             },
             success: function(data) {
                 if (data.status == '1') {
-                    // alert('1'); 
+
+                     alert(data.data); 
                     location.reload();
                 } else if (data.status == '0') {
-                    //alert('0'); 
+                    alert(data.data); 
                 }
             }
            

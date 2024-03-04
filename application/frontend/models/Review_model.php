@@ -402,6 +402,12 @@ function getreview($where)
       $query = $this->db->query("select ".$select." from tbl_product_review_like ".$where."  ");
       return $query->result();
   }
+  function get_sub_comment($prr_id)
+  {
+    $select='count(prl_id) as like_count';
+    $query = $this->db->query("select ".$select." from tbl_product_review_like ".$where."  ");
+    return $query->result();
+  }
 
   function selectJoinWhereOrderby($table1,$column1,$table2,$column2,$where,$orderby)
   { 
@@ -410,7 +416,7 @@ function getreview($where)
       $this->db->join($table2, $table1.'.'.$column1.' = '.$table2.'.'.$column2);
       $this->db->where($where);
       $this->db->order_by($orderby); 
-      $query=$this->db->get();     
+      $query=$this->db->get(); 
       return $query->result();
   }
 

@@ -125,6 +125,48 @@ public function __construct()
     echo json_encode(array("status"=>"1","data"=>"Review Data Added Successfully")); 
   }
 
+  function review_sub_reply()
+  {
+      $where= '';
+      $query = '';
+      $user_id =  $this->input->post('user_id');
+      $product_id =  $this->input->post('product_id');
+      $reviewId =  $this->input->post('review_id');
+      $prrId =  $this->input->post('prr_id');
+      $sub_comment_content =  $this->input->post('sub_comment_content');
+      $data = array(
+        'sub_id' => $prrId,
+        'review_id' => $reviewId,
+        'product_id' => $product_id,
+        'user_id' => $user_id,
+        'reply'=> $sub_comment_content,
+        'status'=>'1',
+        'date_added' => date('Y-m-d H:i:s'),
+      );
+      $inser_id = $this->common_model->insertData('tbl_product_review_reply', $data);
+      if($inser_id)
+      {
+        http_response_code(200);
+        echo json_encode(array("status"=>"1","data"=>"Data Added Successfully")); 
+      }
+      else{
+        http_response_code(200);
+        echo json_encode(array("status"=>"2","data"=>"Invalid")); 
+      }
+
+      /*$where.=" c.prr_id = ".$prrId." and c.review_id = ".$reviewId." and c.product_id = ".$product_id." and c.user_id = ".$user_id." ";
+      $this->db->select('c.sub_id ,c.set_level');
+      $this->db->from('tbl_product_review_reply c');
+      $this->db->where($where);
+      $query=$this->db->get();
+      $res_sql = $query->result();*/
+
+      /*print_R($res_sql);
+      exit;*/
+
+    
+  }
+
  
 }
 ?>
