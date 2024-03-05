@@ -94,6 +94,7 @@ class Review extends CI_Controller
     }
     $orderby = '';
     if (!empty($sort_by)) {
+      
       $orderby = " pr.product_rating " . $sort_by . " ";
     }
 	$page = 1;

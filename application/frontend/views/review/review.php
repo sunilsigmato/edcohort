@@ -769,8 +769,6 @@ if($get_breadcrumb)
                                          
 
                                         ?>
-
-                                        
                                         <div class="review-user-image"><span></span></div>
                                         <div
                                             class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
