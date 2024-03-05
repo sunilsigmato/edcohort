@@ -63,14 +63,14 @@ function index(){
     }
   }
   $order = "product_name ASC";
-  $data['product_list'] = $this->jewelry_model->jewelry_list($where, $order);
+  //$data['product_list'] = $this->jewelry_model->jewelry_list($where, $order);
   //echo $this->db->last_query();
  
   //$data['group_list'] = $this->coupon_model->jewelry_list_limit($where,$limit,$offset,$order);
 
 
-  $where_coupon = 'coupon_status = "active" and product_id = '.$data['product_list']['0']->product_id.'';
-  $data['coupon_records'] = $this->common_model->selectWhereorderby('tbl_coupon',$where_coupon,'coupon_id','ASC');
+  //$where_coupon = 'coupon_status = "active" and product_id = '.$data['product_list']['0']->product_id.'';
+  //$data['coupon_records'] = $this->common_model->selectWhereorderby('tbl_coupon',$where_coupon,'coupon_id','ASC');
 
   //print_pre($data['ongoing_group_list']);
 

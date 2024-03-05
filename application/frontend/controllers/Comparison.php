@@ -118,7 +118,7 @@ class comparison extends CI_Controller {
 
     $order = "product_name ASC";
 
-    $data['product_list'] = $this->comparison_model->comparison_list($where, $order);
+    //$data['product_list'] = $this->comparison_model->comparison_list($where, $order);
 
    // echo $this->db->last_query();
     //print_ex($_POST);

@@ -54,9 +54,9 @@ class Home extends CI_Controller {
 	     	$data['brand_records'] = $this->common_model->selectWhereOrderlimit('tbl_brand',$where_class,10,0,'order by brand_sort_order ASC'); 
 			
 			$where_product = 'product_status = "active"'.$productwhare;
-	     	$data['courses_records'] = $this->common_model->selectWhereOrderlimit('v_product',$where_product,10,0,'order by product_sort ASC'); 
+	     	//$data['courses_records'] = $this->common_model->selectWhereOrderlimit('v_product',$where_product,10,0,'order by product_sort ASC'); 
 			
-			foreach ($data['courses_records']  as $row) 
+			/*foreach ($data['courses_records']  as $row) 
 	     	{
 				
 	     		$img=$this->list_image($row->NM_FOLDER_NAME,$row->product_id);
@@ -65,7 +65,7 @@ class Home extends CI_Controller {
 				$row->avg = @$avg['0']->average;
 				
 				
-	     	}
+	     	}*/
 			
 			$where_type = 'status = 1';
 	     	$data['type_records'] = $this->common_model->selectWhereorderby('tbl_type',$where_type,'type_id','ASC');
@@ -129,7 +129,7 @@ class Home extends CI_Controller {
 		//print_ex($ids);
 		//echo $ids; die;
 		
-		$where = 'product_status = "active" and class_id IN ('.$ids.')';
+		/**$where = 'product_status = "active" and class_id IN ('.$ids.')';
 	    $brandrecords = $this->home_model->getBrandlist('brand_id','v_product',$where,'brand_id','brand_id','ASC');
 		
 		foreach ($brandrecords as $brand) {
@@ -144,7 +144,7 @@ class Home extends CI_Controller {
 		foreach ($productrecords as $product) {
 			
                 $product_array[]=$product->product_id;
-        }
+        }*/
 		
 		//echo $this->db->last_query(); die();
 		$data['brand']= $brand_array;

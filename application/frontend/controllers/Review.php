@@ -73,7 +73,7 @@ class Review extends CI_Controller
     }
 
     $order = "product_name ASC";
-    $data['product_list'] = $this->review_model->review_list($where, $order);
+    //$data['product_list'] = $this->review_model->review_list($where, $order);
 
     ////////////////////////////////////
 
