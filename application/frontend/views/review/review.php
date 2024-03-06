@@ -748,8 +748,8 @@ if($get_breadcrumb)
                                 </div>
                                 <div class="reply-box">
                                     <?php //print_ex($review_reply);
-                     foreach($review_reply as $reply){
-                     //  print_R($reply); ?>
+                                    foreach($review_reply as $reply){
+                                     // print_R($reply); ?>
                                     <div class="review-row-reply review_reply_<?php echo $reply->review_id;?> prr_id_<?php echo $reply->prr_id;?>"
                                         style="display:none">
                                         <?php 
@@ -757,12 +757,12 @@ if($get_breadcrumb)
                                         $temp_prr_id = $reply->prr_id;
                                         $temp_review_id = $reply->review_id;
                                         
-                                        $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$temp_prr_id.' and  review_id = '.$temp_review_id.'';
+                                        /*$where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$temp_prr_id.' and  review_id = '.$temp_review_id.'';
                                         $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
-                                        $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+                                        $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);*/
                                         // print_R($review_sub_reply);
-                                        $res =display_sub_review($reply->prr_id , $reply->review_id);
-                                        print_R($res);
+
+                                        //print_R($res_sub_review);
                                         /* foreach($review_sub_reply as $sub_reply){
                                             print_r($sub_reply);
                                          }*/
@@ -781,8 +781,8 @@ if($get_breadcrumb)
                                             <div id="reviewReplyShort_<?php echo $reply->prr_id;?>">
                                                 <?php echo substr($reply->reply,0,185); ?>
                                                 <?php  $words = substr_count($reply->reply, " ");
-                                 if($words > 30){
-                                   ?>
+                                            if($words > 30){
+                                            ?>
                                                 <small class="review-read remove-bg"><a href="javascript:void(0)"
                                                         id="reviewReplyShortRM_<?php echo $reply->prr_id;?>"
                                                         onclick="productReviewReplyReadMore('<?php echo $reply->prr_id;?>')">(Read
@@ -792,7 +792,7 @@ if($get_breadcrumb)
 
                                             <!-- Comment Section Start -->
                                             <div class="form-group" style="display:none"
-                                        id="subcommentDiv_<?php echo $reply->prr_id; ?>">
+                                             id="subcommentDiv_<?php echo $reply->prr_id; ?>">
                                                 
                                                 <?php $form_name = 'comment_sub_reply_'.$reply->prr_id; ?>
                                                 <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $reply->prr_id; ?>"
@@ -802,12 +802,15 @@ if($get_breadcrumb)
                                             <?php if ($this->session->userdata('user_id')) { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 id="review_reply_submit"
-                                                onclick="divSubReply(<?php echo $reply->review_id. ',' .$reply->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Reply</a>
+                                                onclick="divSubReply(<?php echo $reply->review_id. ',' .$reply->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Submit</a>
                                             <?php }else{ ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                                data-bs-target="#login-button">Reply</a>
+                                                data-bs-target="#login-button">Submit</a>
                                             <?php } ?>
+
+
+                                            
 
                                             <!-- Comment Section Ends -->
 <!-- Start Reply Section -->
@@ -830,6 +833,176 @@ if($get_breadcrumb)
                                                 </svg> Reply
                                             </a>
                                             <?php } ?>
+
+                                                   <?php
+                                        $res_sub_review = display_sub_review($reply->prr_id , $reply->review_id);
+                                        if($res_sub_review)
+                                        {
+                                            foreach ($res_sub_review as $sub_review)
+                                            {
+                                               // print_r($sub_review);
+                                                ?>
+                                                <div class="review-row-reply review_reply_<?php echo $sub_review->review_id;?> prr_id_<?php echo $sub_review->prr_id;?>"
+                                                    style="">
+                                                    <div class="review-user-image"><span></span></div>
+                                                        <div
+                                                            class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                                            <h2 class="review-title">
+                                                                <?php echo ucfirst($sub_review->firstname.' '.$sub_review->lastname); ?></h2>
+                                                            <div class="review-date">
+                                                                <?php echo  date('d F Y',strtotime($sub_review->reply_date)); ?></div>
+                                                        </div>
+                                                        <div class="review-content">
+                                                            <div id="reviewReplyShort_<?php echo $sub_review->prr_id;?>">
+                                                                <?php echo substr($sub_review->reply,0,185); ?>
+                                                                <?php  $words = substr_count($sub_review->reply, " ");
+                                                if($words > 30){
+                                                ?>
+                                                                <small class="review-read remove-bg"><a href="javascript:void(0)"
+                                                                        id="reviewReplyShortRM_<?php echo $sub_review->prr_id;?>"
+                                                                        onclick="productReviewReplyReadMore('<?php echo $sub_review->prr_id;?>')">(Read
+                                                                        More)</a></small>
+                                                                <?php } ?>
+                                                            </div>
+
+                                                                
+                                                          <!-- Comment Section Start -->
+                                            <div class="form-group" style="display:none"
+                                        id="subcommentDiv_<?php echo $sub_review->prr_id; ?>">
+                                                
+                                                <?php $form_name = 'comment_sub_reply_'.$sub_review->prr_id; ?>
+                                                <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $sub_review->prr_id; ?>"
+                                                    placeholder="Comment" required="required"
+                                                    maxlength="250"></textarea>
+                                            </div>
+                                            <?php if ($this->session->userdata('user_id')) { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                id="review_reply_submit"
+                                                onclick="divSubReply(<?php echo $sub_review->review_id. ',' .$sub_review->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Submit</a>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Submit</a>
+                                            <?php } ?>
+
+                                            <!-- Comment Section Ends -->
+
+                                                <!-- Start Reply Section -->
+                                        <?php if($this->session->userdata('user_id')){ ?>
+                                            <a href="javascript:void(0)" id="reply-"
+                                                onclick="ed_comment(<?php echo $sub_review->prr_id ;?>);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                    viewBox="0 0 24 24" width="24" height="24">
+                                                    <path
+                                                        d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                                </svg> Reply
+                                            </a>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                    viewBox="0 0 24 24" width="24" height="24">
+                                                    <path
+                                                        d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                                </svg> Reply
+                                            </a>
+                                            <?php } 
+
+                                            /** Start sub_review level 2  */
+                                            $res_sub_review_level2 = display_sub_review($sub_review->prr_id , $sub_review->review_id);
+                                            if($res_sub_review_level2)
+                                            {
+                                                foreach ($res_sub_review_level2 as $sub_review_level2)
+                                                {
+                                                   // print_R($sub_review_level2);
+
+                                                   ?>
+                                                   <div class="review-row-reply review_reply_<?php echo $sub_review->review_id;?> prr_id_<?php echo $sub_review->prr_id;?>"
+                                                       style="">
+                                                       <div class="review-user-image"><span></span></div>
+                                                           <div
+                                                               class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                                               <h2 class="review-title">
+                                                                   <?php echo ucfirst($sub_review->firstname.' '.$sub_review->lastname); ?></h2>
+                                                               <div class="review-date">
+                                                                   <?php echo  date('d F Y',strtotime($sub_review->reply_date)); ?></div>
+                                                           </div>
+                                                           <div class="review-content">
+                                                               <div id="reviewReplyShort_<?php echo $sub_review->prr_id;?>">
+                                                                   <?php echo substr($sub_review->reply,0,185); ?>
+                                                                   <?php  $words = substr_count($sub_review->reply, " ");
+                                                   if($words > 30){
+                                                   ?>
+                                                                   <small class="review-read remove-bg"><a href="javascript:void(0)"
+                                                                           id="reviewReplyShortRM_<?php echo $sub_review->prr_id;?>"
+                                                                           onclick="productReviewReplyReadMore('<?php echo $sub_review->prr_id;?>')">(Read
+                                                                           More)</a></small>
+                                                                   <?php } ?>
+                                                               </div>
+   
+                                                                   
+                                                             <!-- Comment Section Start -->
+                                               <div class="form-group" style="display:none"
+                                           id="subcommentDiv_<?php echo $sub_review->prr_id; ?>">
+                                                   
+                                                   <?php $form_name = 'comment_sub_reply_'.$sub_review->prr_id; ?>
+                                                   <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $sub_review->prr_id; ?>"
+                                                       placeholder="Comment" required="required"
+                                                       maxlength="250"></textarea>
+                                               </div>
+                                               <?php if ($this->session->userdata('user_id')) { ?>
+                                               <a href="javascript:void(0)" class="btn btn-primary"
+                                                   id="review_reply_submit"
+                                                   onclick="divSubReply(<?php echo $sub_review->review_id. ',' .$sub_review->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Submit</a>
+                                               <?php }else{ ?>
+                                               <a href="javascript:void(0)" class="btn btn-primary"
+                                                   data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                   data-bs-target="#login-button">Submit</a>
+                                               <?php } ?>
+   
+                                               <!-- Comment Section Ends -->
+   
+                                                   <!-- Start Reply Section -->
+                                           <?php if($this->session->userdata('user_id')){ ?>
+                                               <a href="javascript:void(0)" id="reply-"
+                                                   onclick="ed_comment(<?php echo $sub_review->prr_id ;?>);">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                       viewBox="0 0 24 24" width="24" height="24">
+                                                       <path
+                                                           d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                                   </svg> Reply
+                                               </a>
+                                               <?php }else{ ?>
+                                               <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#login-button">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                       viewBox="0 0 24 24" width="24" height="24">
+                                                       <path
+                                                           d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                                   </svg> Reply
+                                               </a>
+                                               <?php } 
+                                                    
+                                            ?>
+                                            </div>
+                                                    </div>
+
+                                                 <?php
+                                                   
+                                                }
+                                             
+                                                
+                                            }
+                                            /** End Sub Review level 2  */
+
+                                            ?>
+                                                        </div>
+                                                                </div>
+
+                                            <?php
+                                            }  // End off sub review foreach
+                                        } // end of sub review if condition
+                                         ?>
                                         <!-- End Reply Section -->
 
                                             <div class="review-content" style="display:none"
@@ -841,7 +1014,9 @@ if($get_breadcrumb)
                                                         Short)</a> </small></div>
                                         </div>
                                     </div>
-                                    <?php } ?>
+                                            
+                                  <?php  } ?>
+                                  
                                 </div>
                             </div>
                             <!--review row end-->
@@ -855,10 +1030,18 @@ if($get_breadcrumb)
                             <?php } ?>
                             <?php 
 
-function display_sub_review($id, $id1)
-{                                                       
-   return $a ='55555555555555555555555555555555'; 
-}
+/*function display_sub_review($prr_id,$review_id)
+{   
+    $review_sub_reply = 'ss';
+    $where_review_reply = '';
+    $orderby = '';
+    $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$prr_id.' and  review_id = '.$review_id.'';
+    $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
+    $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+    //return $review_sub_reply;
+    print_R($review_sub_reply);
+    exit;
+}*/
 ?>
                         </div>
 

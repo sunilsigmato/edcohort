@@ -531,6 +531,19 @@ function getClassName($class_id)
         }
     }
 
+    function display_sub_review($prr_id,$review_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $review_sub_reply = '';
+        $where_review_reply = '';
+        $orderby = '';
+        $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$prr_id.' and  review_id = '.$review_id.'';
+        $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
+        $review_sub_reply = $CI->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+        return $review_sub_reply;
+    }
+
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  
         $data = '';
