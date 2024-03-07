@@ -458,6 +458,8 @@ class Review extends CI_Controller
       exit();
     }
     $review_id = $this->input->post('review_id');
+
+    
     $user_id = $this->input->post('user_id');
     $action = $this->input->post('action');
     //print_ex($result);

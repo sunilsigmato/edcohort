@@ -408,6 +408,19 @@ function getreview($where)
     $query = $this->db->query("select ".$select." from tbl_product_review_like ".$where."  ");
     return $query->result();
   }
+  function get_reply_count($prr_id, $review_id)
+  {
+    $res = 0;
+    $query = $this->db->query("select count(prr_id) as tot_count from tbl_product_review_reply where sub_id = $prr_id");
+    $result = $query->result();
+    if($result)
+    {
+       return $res = $result[0]->tot_count;
+ 
+    }
+    return $res;
+   
+  }
 
   function selectJoinWhereOrderby($table1,$column1,$table2,$column2,$where,$orderby)
   { 

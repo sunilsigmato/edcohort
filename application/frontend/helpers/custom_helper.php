@@ -544,6 +544,21 @@ function getClassName($class_id)
         return $review_sub_reply;
     }
 
+    function get_reply_count($prr_id, $review_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->review_model->get_reply_count($prr_id, $review_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  
         $data = '';
