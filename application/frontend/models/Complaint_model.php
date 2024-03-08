@@ -81,6 +81,20 @@ class Complaint_model extends CI_Model {
     $query= $this->db->query("SELECT `value` FROM `v_product` ".$where." GROUP BY value");
     return $query->result();      
   }
+
+  function get_reply_count_complaint($prr_id, $review_id)
+  {
+    $res = 0;
+    $query = $this->db->query("select count(prr_id) as tot_count from tbl_product_complaint_reply where sub_id = $prr_id");
+    $result = $query->result();
+    if($result)
+    {
+       return $res = $result[0]->tot_count;
+ 
+    }
+    return $res;
+   
+  }
   function getProductComplaintLimit($where,$order,$limit='',$offset=0)
   {
       if($where!=""){        

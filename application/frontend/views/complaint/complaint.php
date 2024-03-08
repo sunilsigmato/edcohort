@@ -547,7 +547,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                 </div>
                                 <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
                                     <?php
-                                 $where_complaint_reply = 'tbl_product_complaint_reply.status = 1 and complaint_id = ' . $complain->product_complaint_id . '';
+                                 $where_complaint_reply = 'tbl_product_complaint_reply.status = 1 and tbl_product_complaint_reply.sub_id  IS NULL and complaint_id = ' . $complain->product_complaint_id . '';
                                  $orderby = 'tbl_customer.customer_type ASC, tbl_product_complaint_reply.prr_id ASC';
                                  $complaint_reply = $this->complaint_model->selectJoinWhereOrderby('tbl_product_complaint_reply', 'user_id', 'tbl_customer', 'customer_id', $where_complaint_reply, $orderby);
 
@@ -701,8 +701,9 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                 <div class="reply-box">
                                     <?php
                                  foreach ($complaint_reply as $reply) {
+                                   // print_R($reply);
                                  ?>
-                                    <div class="review-row complaint_reply_<?php echo $reply->complaint_id; ?>"
+                                    <div class="review-row complaint_reply_<?php echo $reply->complaint_id; ?> prr_id_<?php echo $reply->prr_id;?>"
                                         style="display: none;">
                                         <div class="review-user-image"><span></span></div>
                                         <div
@@ -734,9 +735,239 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                                         onclick="productComplaintReplyReadShort('<?php echo $reply->prr_id; ?>')">(Read
                                                         Short)</a></small></div>
                                         </div>
+                                            
+                                          <!-- Relpy and like Box -->
+                                    
+
+                                          <div id="comment-form" class="row">
+                                    <div class="mt-5" style="display:none"
+                                        id="subcommentDiv_<?php echo $reply->prr_id; ?>">
+                                        <div class="alert alert-outline alert-outline-success reg-message-success"
+                                            id="reg-message-success_<?php echo $reply->complaint_id; ?>"
+                                            role="alert" style="display:none;">
+                                            <button type="button" class="close" data-bs-dismiss="alert"
+                                                aria-hidden="true">×</button>
+                                            <p id="text-message-success_<?php echo $reply->complaint_id; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-outline alert-outline-danger reg-message-error"
+                                            id="reg-message-error_<?php echo $reply->complaint_id; ?>"
+                                            role="alert" style="display:none">
+                                            <button type="button" class="close" data-bs-dismiss="alert"
+                                                aria-hidden="true">×</button>
+                                            <p id="text-message-error_<?php echo $reply->complaint_id; ?>">
+                                            </p>
+                                        </div>
+                                        <form class="form-horizontal"
+                                            name="product_complaint_reply_<?php echo $reply->complaint_id; ?>"
+                                            id="product_complaint_reply_<?php echo $reply->complaint_id; ?>"
+                                            action="javascript:void(0)" method="post">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" class="form-control" name="product_id" id="product_id"
+                                                placeholder="Your Name" value="<?php echo $course; ?>">
+                                            <input type="hidden" class="form-control" name="user_id" id="userid"
+                                                placeholder="Your Name"
+                                                value="<?php echo $this->session->userdata('user_id'); ?>">
+                                            <input type="hidden" class="form-control" name="complaint_id"
+                                                id="complaint_id_<?php echo $reply->complaint_id; ?>"
+                                                placeholder="Your Name"
+                                                value="<?php echo $reply->complaint_id; ?>">
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="comment" rows="6" id = "commentid_<?php echo $reply->prr_id; ?>"
+                                                    placeholder="Comment" required="required"
+                                                    maxlength="250"></textarea>
+                                            </div>
+                                            <?php if ($this->session->userdata('user_id')) { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                id="complaint_reply_submit"
+                                                onclick="divSubReply(<?php echo $reply->complaint_id. ',' .$reply->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Submit</a>
+                                            <?php } else { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Submit</a>
+                                            <?php } ?>
+                                        </form>
+                                    </div>
+                                </div> 
+
+                                    
+                                        <?php if ($this->session->userdata('user_id')) { ?>
+                                        <a href="javascript:void(0)" id="reply-"
+                                            onclick="ed_comment(<?php echo $reply->prr_id; ?>);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } else { ?>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                            data-bs-target="#login-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } ?>
+
+                                        
+                                        <?php 
+                                        $res_reply_count = get_reply_count_complaint($reply->prr_id , $reply->complaint_id); 
+                                             if($res_reply_count) { ?>
+                                               
+                                                <div class="review-footer-left"><a
+                                                        href="javascript:void(0)"
+                                                        onclick="viewRepliesAll_level1('<?php echo $reply->complaint_id;?>')"
+                                                        class="view-all-replies">View all replies</a></div>
+                                                <?php } 
+                                                $res_sub_complaint = display_sub_review_complaint($reply->prr_id , $reply->complaint_id);
+                                                if($res_sub_complaint)
+                                                {
+                                                    foreach ($res_sub_complaint as $sub_complaint)
+                                                    {
+                                                       // print_R($sub_complaint);
+                                                         ?>
+                                        <div class="review-row complaint_reply_lev1_<?php echo $sub_complaint->complaint_id; ?> prr_id_<?php echo $sub_complaint->prr_id;?>"
+                                        style="display: none;">
+                                        <div class="review-user-image"><span></span></div>
+                                        <div
+                                            class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                            <h2 class="review-title">
+                                                <?php echo ucfirst($sub_complaint->firstname . ' ' . $sub_complaint->lastname); ?>
+                                            </h2>
+                                            <div class="review-date">
+                                                <?php echo  date('d F Y', strtotime($sub_complaint->reply_date)); ?></div>
+                                        </div>
+                                        <div class="review-content">
+                                            <div id="complaintReplyShort_<?php echo $sub_complaint->prr_id; ?>">
+                                                <?php echo substr($sub_complaint->reply, 0, 185); ?>
+                                                <?php $words = substr_count($sub_complaint->reply, " ");
+                                             if ($words > 30) {
+                                             ?>
+                                                <small class="review-read remove-bg"><a href="javascript:void(0)"
+                                                        id="complaintReplyShortRM_<?php echo $sub_complaint->prr_id; ?>"
+                                                        onclick="productComplaintReplyReadMore('<?php echo $sub_complaint->prr_id; ?>')">(Read
+                                                        More)</a>
+                                                </small>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="review-content" style="display:none"
+                                                id="complaintReplyFull_<?php echo $sub_complaint->prr_id; ?>">
+                                                <?php echo $sub_complaint->reply; ?> <small class="review-read remove-bg"><a
+                                                        href="javascript:void(0)"
+                                                        id="complaintReplyShortRS_<?php echo $sub_complaint->prr_id; ?>"
+                                                        onclick="productComplaintReplyReadShort('<?php echo $sub_complaint->prr_id; ?>')">(Read
+                                                        Short)</a></small></div>
+                                        </div>
+                                            
+                                          <!-- Relpy and like Box -->
+                                    
+
+                                          <div id="comment-form" class="row">
+                                    <div class="mt-5" style="display:none"
+                                        id="subcommentDiv_<?php echo $reply->prr_id; ?>">
+                                        <div class="alert alert-outline alert-outline-success reg-message-success"
+                                            id="reg-message-success_<?php echo $sub_complaint->complaint_id; ?>"
+                                            role="alert" style="display:none;">
+                                            <button type="button" class="close" data-bs-dismiss="alert"
+                                                aria-hidden="true">×</button>
+                                            <p id="text-message-success_<?php echo $sub_complaint->complaint_id; ?>">
+                                            </p>
+                                        </div>
+                                        <div class="alert alert-outline alert-outline-danger reg-message-error"
+                                            id="reg-message-error_<?php echo $sub_complaint->complaint_id; ?>"
+                                            role="alert" style="display:none">
+                                            <button type="button" class="close" data-bs-dismiss="alert"
+                                                aria-hidden="true">×</button>
+                                            <p id="text-message-error_<?php echo $sub_complaint->complaint_id; ?>">
+                                            </p>
+                                        </div>
+                                        <form class="form-horizontal"
+                                            name="product_complaint_reply_<?php echo $sub_complaint->complaint_id; ?>"
+                                            id="product_complaint_reply_<?php echo $sub_complaint->complaint_id; ?>"
+                                            action="javascript:void(0)" method="post">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" class="form-control" name="product_id" id="product_id"
+                                                placeholder="Your Name" value="<?php echo $course; ?>">
+                                            <input type="hidden" class="form-control" name="user_id" id="userid"
+                                                placeholder="Your Name"
+                                                value="<?php echo $this->session->userdata('user_id'); ?>">
+                                            <input type="hidden" class="form-control" name="complaint_id"
+                                                id="complaint_id_<?php echo $sub_complaint->complaint_id; ?>"
+                                                placeholder="Your Name"
+                                                value="<?php echo $sub_complaint->complaint_id; ?>">
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="comment" rows="6" id = "commentid_<?php echo $sub_complaint->prr_id; ?>"
+                                                    placeholder="Comment" required="required"
+                                                    maxlength="250"></textarea>
+                                            </div>
+                                            <?php if ($this->session->userdata('user_id')) { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                id="complaint_reply_submit"
+                                                onclick="divSubReply(<?php echo $sub_complaint->complaint_id. ',' .$sub_complaint->prr_id.','.$course.','.$this->session->userdata('user_id') ;?>);">Submit</a>
+                                            <?php } else { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">Submit</a>
+                                            <?php } ?>
+                                        </form>
+                                    </div>
+                                </div> 
+
+                                    
+                                        <?php if ($this->session->userdata('user_id')) { ?>
+                                        <a href="javascript:void(0)" id="reply-"
+                                            onclick="ed_comment(<?php echo $sub_complaint->prr_id; ?>);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } else { ?>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                            data-bs-target="#login-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } ?>
+                                       
+                                       <?php 
+                                       $res_sub_complaint_level2 = display_sub_review_complaint($sub_complaint->prr_id , $sub_complaint->complaint_id); 
+                                       if($res_sub_complaint_level2)
+                                            {
+                                                foreach ($res_sub_complaint_level2 as $sub_complaint_level2)
+                                                { ?>
+                                                        
+                                                    
+                                               <?php }
+                                            }
+                                       
+                                       ?>
+                                       
+
+                                        </div>
+                                        
+                                                        
+                                                  <?php
+                                                    }
+                                                }
+                                                ?>
+                                                
+                                    <!--</div>
+                                </div> -->
+                              
+
+                                    <!-- End of Reply and Like Box -->
+
+
                                     </div>
                                     <?php } ?>
-                                </div>
+                                                                  </div>
                             </div>
                             <!--review row end-->
                             <?php } ?>
@@ -982,11 +1213,63 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
 
     }
 
+    function ed_comment(val)
+    {
+        alert("hi");
+        if ($('#subcommentDiv_' + val).css('display') == 'none') {
+            $('#subcommentDiv_' + val).css('display', 'block');
+        } else {
+            $('#subcommentDiv_' + val).css('display', 'none');
+        }
+    }
+
+    function divSubReply(complaint_id,prrId,product_id,user_id) {
+     
+     sub_comment_content= $('#commentid_'+prrId).val();
+     if(sub_comment_content== ''){
+         alert("Enter the comment");
+         return false;
+     }
+   
+     $.ajax({
+         url: base_url + 'filter/complaint_sub_reply',
+         dataType: 'json',
+         type: 'post',
+         data: {
+            complaint_id: complaint_id,
+             user_id: user_id,
+             product_id: product_id,
+             prr_id : prrId,
+             sub_comment_content : sub_comment_content
+         },
+         success: function(data) {
+             if (data.status == '1') {
+
+                  alert(data.data); 
+                 location.reload();
+             } else if (data.status == '0') {
+                 alert(data.data); 
+             }
+         }
+        
+     });
+
+ }
+
+
     function viewRepliesAll(val) {
         if ($('.complaint_reply_' + val).css('display') == 'none') {
             $('.complaint_reply_' + val).css('display', 'block');
         } else {
             $('.complaint_reply_' + val).css('display', 'none');
+        }
+    }
+
+    function viewRepliesAll_level1(val) {
+        if ($('.complaint_reply_lev1_' + val).css('display') == 'none') {
+            $('.complaint_reply_lev1_' + val).css('display', 'block');
+        } else {
+            $('.complaint_reply_lev1_' + val).css('display', 'none');
         }
     }
 

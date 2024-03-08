@@ -544,11 +544,39 @@ function getClassName($class_id)
         return $review_sub_reply;
     }
 
+    function display_sub_review_complaint($prr_id,$complaint_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $review_sub_reply = '';
+        $where_review_reply = '';
+        $orderby = '';
+        $where_review_reply = 'tbl_product_complaint_reply.status = 1 and tbl_product_complaint_reply.sub_id ='.$prr_id.' and  complaint_id = '.$complaint_id.'';
+        $orderby = 'tbl_customer.customer_type ASC, tbl_product_complaint_reply.prr_id ASC';
+        $review_sub_reply = $CI->review_model->selectJoinWhereOrderby('tbl_product_complaint_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+        return $review_sub_reply;
+    }
+
     function get_reply_count($prr_id, $review_id)
     {
         $data = '';
         $CI =& get_instance();
         $data=$CI->review_model->get_reply_count($prr_id, $review_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+
+    function get_reply_count_complaint($prr_id, $review_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->complaint_model->get_reply_count_complaint($prr_id, $review_id);
         if($data)
         {
             return $data;
