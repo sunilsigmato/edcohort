@@ -187,6 +187,29 @@ public function __construct()
       }
     
   }
+  function update_complaint_status()
+  {
+   
+    $user_id =  $this->input->post('user_id');
+      $status_val =  $this->input->post('status_val');
+      $complaint_id =  $this->input->post('complaint_id');
+      $where = "product_complaint_id = $complaint_id and user_id = $user_id"; 
+    $data = array(
+      'complaint_resolved' => $status_val,
+    );
+    
+    $inser_id = $this->common_model->update_entry('tbl_product_complaint', $data, $where);
+    if($inser_id)
+      {
+        http_response_code(200);
+        echo json_encode(array("status"=>"1","data"=>"Status Updated Successfully")); 
+      }
+      else{
+        http_response_code(200);
+        echo json_encode(array("status"=>"2","data"=>"Invalid")); 
+      }
+
+  }
 
  
 }

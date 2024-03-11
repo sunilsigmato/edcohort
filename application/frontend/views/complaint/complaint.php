@@ -481,11 +481,21 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                     $today = 'today';
                                  } ?>
                                     <div class="d-flex">
-                                        <?php if ($complain->complaint_resolved == 1) { ?>
-                                        <span class="badge bg-resolved">Resolved</span>
-                                        <?php } else { ?>
-                                        <span class="badge bg-unresolved">Unresolved</span>
-                                        <?php } ?>
+                                        <?php 
+                                       // $this->session->userdata('user_id') 
+                                      // print_R($complain);
+                                       if($this->session->userdata('user_id') == $complain->user_id)
+                                       {
+                                            if ($complain->complaint_resolved == 1) { ?>
+                                            <span class="badge bg-resolved">Resolved</span>
+                                            <?php } else { ?>
+                                                <a href="javascript:void(0)"
+                                            onclick="productComplaintStatusChange('<?php echo $complain->product_complaint_id; ?>','<?php echo $this->session->userdata('user_id'); ?>',1)">
+                                            <span class="badge bg-unresolved">Unresolved</span>
+                                            </a>
+                                            <?php } 
+                                       }
+                                        ?>
                                         <div class="review-date <?php echo $today ?>"> <?php if (!empty($today)) {
                                                                                        echo "Today";
                                                                                     } else {
@@ -866,7 +876,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
 
                                           <div id="comment-form" class="row">
                                     <div class="mt-5" style="display:none"
-                                        id="subcommentDiv_<?php echo $reply->prr_id; ?>">
+                                        id="subcommentDiv_<?php echo $sub_complaint->prr_id; ?>">
                                         <div class="alert alert-outline alert-outline-success reg-message-success"
                                             id="reg-message-success_<?php echo $sub_complaint->complaint_id; ?>"
                                             role="alert" style="display:none;">
@@ -937,12 +947,55 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                         <?php } ?>
                                        
                                        <?php 
+                                       
+                                       $res_reply_count_sub = get_reply_count_complaint($sub_complaint->prr_id , $sub_complaint->complaint_id); 
+                                       if($res_reply_count_sub) { ?>
+                                         
+                                          <div class="review-footer-left"><a
+                                                  href="javascript:void(0)"
+                                                  onclick="viewRepliesAll_level2('<?php echo $sub_complaint->complaint_id;?>')"
+                                                  class="view-all-replies">View all replies</a></div>
+                                          <?php } 
+
                                        $res_sub_complaint_level2 = display_sub_review_complaint($sub_complaint->prr_id , $sub_complaint->complaint_id); 
                                        if($res_sub_complaint_level2)
                                             {
                                                 foreach ($res_sub_complaint_level2 as $sub_complaint_level2)
                                                 { ?>
-                                                        
+                                                
+                                                <div class="review-row complaint_reply_lev2_<?php echo $sub_complaint_level2->complaint_id; ?> prr_id_<?php echo $sub_complaint_level2->prr_id;?>"
+                                                    style="display: none;">
+                                                    <div class="review-user-image"><span></span></div>
+                                                    <div
+                                                        class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                                        <h2 class="review-title">
+                                                            <?php echo ucfirst($sub_complaint_level2->firstname . ' ' . $sub_complaint_level2->lastname); ?>
+                                                        </h2>
+                                                        <div class="review-date">
+                                                            <?php echo  date('d F Y', strtotime($sub_complaint_level2->reply_date)); ?></div>
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <div id="complaintReplyShort_<?php echo $sub_complaint_level2->prr_id; ?>">
+                                                            <?php echo substr($sub_complaint_level2->reply, 0, 185); ?>
+                                                            <?php $words = substr_count($sub_complaint_level2->reply, " ");
+                                                        if ($words > 30) {
+                                                        ?>
+                                                            <small class="review-read remove-bg"><a href="javascript:void(0)"
+                                                                    id="complaintReplyShortRM_<?php echo $sub_complaint_level2->prr_id; ?>"
+                                                                    onclick="productComplaintReplyReadMore('<?php echo $sub_complaint_level2->prr_id; ?>')">(Read
+                                                                    More)</a>
+                                                            </small>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <div class="review-content" style="display:none"
+                                                            id="complaintReplyFull_<?php echo $sub_complaint_level2->prr_id; ?>">
+                                                            <?php echo $sub_complaint_level2->reply; ?> <small class="review-read remove-bg"><a
+                                                                    href="javascript:void(0)"
+                                                                    id="complaintReplyShortRS_<?php echo $sub_complaint_level2->prr_id; ?>"
+                                                                    onclick="productComplaintReplyReadShort('<?php echo $sub_complaint_level2->prr_id; ?>')">(Read
+                                                                    Short)</a></small></div>
+                                                    </div>
+                                                        </div>
                                                     
                                                <?php }
                                             }
@@ -1172,12 +1225,39 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
 
     });
 
+    function productComplaintStatusChange(complaint_id,user_id,status_val)
+    {
+        $.ajax({
+                    url: "<?php echo base_url(); ?>filter/update_complaint_status",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        complaint_id: complaint_id,
+                        user_id: user_id,
+                        status_val: status_val,
+                    },
+                    success: function(data) {
+                       console.log(data)
+                       if(data)
+                       {
+                            if(data.status === '1')
+                            {
+                                location.reload();
+                            }
+                            else
+                            {
+                                alert(data.data);
+                            }
+                       }
+                    }
+                });
+    }
+
     function productComplaintReadMore(val) {
         //Forward browser to new url
         $("#complaintShort_" + val).hide();
         $("#complaint-read_" + val).hide();
         $("#complaintFull_" + val).show();
-
 
     }
 
@@ -1215,7 +1295,6 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
 
     function ed_comment(val)
     {
-        alert("hi");
         if ($('#subcommentDiv_' + val).css('display') == 'none') {
             $('#subcommentDiv_' + val).css('display', 'block');
         } else {
@@ -1270,6 +1349,13 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
             $('.complaint_reply_lev1_' + val).css('display', 'block');
         } else {
             $('.complaint_reply_lev1_' + val).css('display', 'none');
+        }
+    }
+    function viewRepliesAll_level2(val) {
+        if ($('.complaint_reply_lev2_' + val).css('display') == 'none') {
+            $('.complaint_reply_lev2_' + val).css('display', 'block');
+        } else {
+            $('.complaint_reply_lev2_' + val).css('display', 'none');
         }
     }
 
