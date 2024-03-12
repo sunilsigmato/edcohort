@@ -224,7 +224,7 @@ if($get_breadcrumb)
                             $res_filter_course = getseg_crse_list($segment);
                         ?>
                         <div class="filter-col">
-                            <h3 class="filter-col-title">Segement</h3>
+                            <h3 class="filter-col-title">Segment</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="filter_segment" class="filter_segment">
                                     <?php foreach($res_filter_segment as $segments){?>
@@ -1179,7 +1179,8 @@ if($get_breadcrumb)
         var filter_board_id = $('.filter_board').val();
         var product_id = '';
       
-        $("#filter_segment").change(function()
+      
+        $('#filter_segment').on('select2:select', function() 
         {
             filter_segment_id =  $(this).val();
              $.ajax({

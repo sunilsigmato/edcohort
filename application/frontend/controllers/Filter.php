@@ -196,6 +196,7 @@ public function __construct()
       $where = "product_complaint_id = $complaint_id and user_id = $user_id"; 
     $data = array(
       'complaint_resolved' => $status_val,
+      'product_complaint_resloved_date' => date('Y-m-d'),
     );
     
     $inser_id = $this->common_model->update_entry('tbl_product_complaint', $data, $where);

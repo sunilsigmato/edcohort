@@ -21,7 +21,7 @@ $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
 $get_single_course_detail = get_single_coure_detail($course);
-print_r($get_single_course_detail);
+//print_r($get_single_course_detail);
 
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 
@@ -108,7 +108,6 @@ if($get_breadcrumb)
             <!------> 
     
             <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
-          
   <ul class="list-group list-group-flush">
   <li class="list-group-item d-flex">
     <div class="single-line" style="white-space: nowrap;">
@@ -294,24 +293,54 @@ if($get_breadcrumb)
                                 $filter_icsc_id = $board_records[1]->board_id;
                                 $filter_icsc_name = $board_records[1]->board_name;
                             }
+                                $filter_online_id = '1';
+                                $filter_online_name = 'Online';
+                                $filter_offline_id = '2';
+                                $filter_offline_name = 'Offline';
                         ?>
+                        <div class="board-k12" style="display:none">
+                                                   
                             <div class="btn-group btn-toggle filter-toggle-box">
-                            <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
-                                id="cbsc-toggle">
-                                <label><?php echo $filter_cbsc_name ?> </label>
+                                <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                    id="cbsc-toggle">
+                                    <label><?php echo $filter_cbsc_name ?> </label>
 
-                                <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                    <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
-                                    id="cbsc" value="2" >
-                            </div>
-                            <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
-                                id="icsc-toggle">
-                                <label><?php echo $filter_icsc_name ?></label>
-                                <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                    <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
-                                    id="icsc" value="1" >
+                                    <input class="btn btn-lg btn-default" type="radio" name="product_type"
+                                        <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
+                                        id="cbsc" value="2" >
+                                </div>
+                                <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                    id="icsc-toggle">
+                                    <label><?php echo $filter_icsc_name ?></label>
+                                    <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
+                                        <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
+                                        id="icsc" value="1" >
+                                </div>
                             </div>
                         </div>
+                           <!-- Online offline filter -->
+                        <div class="board-other" style="display:none">
+                                                   
+                            <div class="btn-group btn-toggle filter-toggle-box">
+                                <div class="input-toggle toggle_online <?php if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                    id="online-toggle">
+                                    <label><?php echo $filter_online_name ?> </label>
+
+                                    <input class="btn btn-lg btn-default" type="radio" name="product_type"
+                                        <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
+                                        id="cbsc" value="1" >
+                                </div>
+                                <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                    id="offline-toggle">
+                                    <label><?php echo $filter_offline_name ?></label>
+                                    <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
+                                        <?php if(@$filter_offline_id == 2){ echo 'checked';} ?>
+                                        id="icsc" value="2" >
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Online offline filter -->
+
                         <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
                         </div>
 
@@ -333,7 +362,7 @@ if($get_breadcrumb)
                         </div> -->
 
                         <div class="filter-col">
-                            <h3 class="filter-col-title">CLASS</h3>
+                            <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
                                     <?php foreach($res_filter_class as $classes){?>
@@ -523,6 +552,7 @@ if($get_breadcrumb)
                                             <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
                                             <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
                                             <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
                                            
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
@@ -697,11 +727,46 @@ function prodcutType(val) {
         var filter_course_id = $('.filter_course').val();
         var filter_batch_id = $('.filter_batch').val();
         var filter_board_id = $('.filter_board').val();
+        var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
-      
-        $("#filter_segment").change(function()
+        if(filter_segment_id == 1)
         {
+            $('.board-k12').css('display', 'block');
+            $('.board-other').css('display', 'none');
+        }
+        else
+        {
+            $('.board-other').css('display', 'block');
+            $('.board-k12').css('display', 'none');
+            
+        }
+        $("#filter_segment").change(function()
+        { 
+           
+           var drop_down_text = $('#filter_segment :selected').text();
+           drop_down_text = drop_down_text.trim();
+           //alert(drop_down_text);
+          // console.log(drop_down_text);
+           if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
+           {
+                 $(".cal-h3").html('CLASS');
+           }
+           else
+           {
+                $(".cal-h3").html('COURSE SEGMENT');
+           }
             filter_segment_id =  $(this).val();
+            if(filter_segment_id == 1)
+            {
+                $('.board-k12').css('display', 'block');
+                $('.board-other').css('display', 'none');
+            }
+            else
+            {
+                $('.board-other').css('display', 'block');
+                $('.board-k12').css('display', 'none');
+                
+            }
              $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/get_brand_detail",
@@ -732,6 +797,16 @@ function prodcutType(val) {
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+
+        });
+        $('.toggle_online').click(function() { 
+            $("#offline-toggle").removeClass('active');
+            $("#online-toggle").addClass('active');
+
+        });
+        $('.toggle_offline').click(function() {
+            $("#online-toggle").removeClass('active');
+            $("#offline-toggle").addClass('active');
 
         });
        

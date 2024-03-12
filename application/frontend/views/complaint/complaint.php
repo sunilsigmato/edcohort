@@ -448,7 +448,10 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                   ?>
                         <div class="review-box">
                             <?php if ($complaint_list) { ?>
-                            <?php foreach ($complaint_list as $complain) { ?>
+                            <?php foreach ($complaint_list as $complain) { 
+                               // print_R($complain);
+
+                                ?>
                             <!--review row start-->
                             <div class="review-row">
                                 <div class="review-user-image"><span></span></div>
@@ -475,12 +478,30 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                     <?php $current = strtotime(date("Y-m-d"));
                                  $date    = strtotime($complain->product_complaint_added);
                                  $today = '';
-                                 $datediff = $date - $current;
+                                 $datediff = $current - $date;
                                  $difference = floor($datediff / (60 * 60 * 24));
                                  if ($difference == 0) {
                                     $today = 'today';
-                                 } ?>
-                                    <div class="d-flex">
+                                 } 
+                                 if($complain->product_complaint_resloved_date)
+                                 {
+                                    $issue_resloved_date    = strtotime($complain->product_complaint_resloved_date);  
+                                    $datediff_resloved = $current - $issue_resloved_date;
+                                    $difference_resloved = floor($datediff_resloved / (60 * 60 * 24));
+                                 }
+                                 if ($complain->complaint_resolved == 0 && $difference != 0) { 
+                                        
+                                    ?>
+                                  <span>Issue not resloved from past <?php echo $difference ?> Days</span>
+                                <?php }
+                                 if ($complain->complaint_resolved == 1 ) { 
+                                    if ($difference_resloved == 0) {
+                                ?>
+                                 <span>Issue resloved Today</span>
+                                 <?php }else {?>
+                                   <span>The Issue was resloved  <?php echo $difference_resloved ?> Days ago</span>
+                                <?php  } }?>
+                                    <div class="d-flex">  
                                         <?php 
                                        // $this->session->userdata('user_id') 
                                       // print_R($complain);
@@ -493,6 +514,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                             onclick="productComplaintStatusChange('<?php echo $complain->product_complaint_id; ?>','<?php echo $this->session->userdata('user_id'); ?>',1)">
                                             <span class="badge bg-unresolved">Unresolved</span>
                                             </a>
+                                           
                                             <?php } 
                                        }
                                         ?>
@@ -501,6 +523,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                                                                     } else {
                                                                                        echo date('d F Y', strtotime($complain->product_complaint_added));
                                                                                     } ?> </div>
+                                                                                    
                                     </div>
                                 </div>
                                 <div class="review-rating">

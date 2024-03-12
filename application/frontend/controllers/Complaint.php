@@ -56,7 +56,7 @@ class Complaint extends CI_Controller {
       }
     }
     $order = "product_name ASC";
-    $data['product_list'] = $this->complaint_model->complaint_list($where, $order);
+   // $data['product_list'] = $this->complaint_model->complaint_list($where, $order);
   //echo $this->db->last_query();
   ////////////////////////////////////
     $wherecomplaint = "pr.status = 'active'";
