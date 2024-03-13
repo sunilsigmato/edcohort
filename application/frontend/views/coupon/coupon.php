@@ -89,7 +89,9 @@ if($get_breadcrumb)
             <div class="col-md-6 pt-3 course-name-display">
             <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
+                   <?php if($get_brand_compare) { ?>
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
+                  <?php } ?>
                     <label for="rating2" class="rating-display">
                         <!--<img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="">-->
@@ -328,14 +330,14 @@ if($get_breadcrumb)
 
                                     <input class="btn btn-lg btn-default" type="radio" name="product_type"
                                         <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
-                                        id="cbsc" value="1" >
+                                        id="online" value="1" >
                                 </div>
                                 <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="offline-toggle">
                                     <label><?php echo $filter_offline_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
                                         <?php if(@$filter_offline_id == 2){ echo 'checked';} ?>
-                                        id="icsc" value="2" >
+                                        id="offline" value="2" >
                                 </div>
                             </div>
                         </div>
@@ -570,7 +572,8 @@ if($get_breadcrumb)
                                                 
                                         </div>
 
-   
+                                        <button type=" button" 
+                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpnss">Submit </button>
 
                                     </div>
                                 </div>
@@ -677,11 +680,7 @@ if($get_breadcrumb)
     <script>
 
 function prodcutType(val) {
-        //Some code
-        //alert(val);
         var product_type = val;
-        //var brand_id = $('#brand').val();
-
         if (product_type == 1) {
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
@@ -693,13 +692,12 @@ function prodcutType(val) {
 
       
     }
-  
+
+
     $(document).ready(function() {
         var radio_btn_val = '';
-     
         filter_segment
         /** Coupon  Code **/
-     
         $(".date_div").css("visibility", "hidden");
         $(".day_after_tmr_header").css("visibility", "hidden");
         $(".today_header").css("visibility", "hidden");
@@ -729,6 +727,8 @@ function prodcutType(val) {
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
+
+          /** Start Filter Section */
         if(filter_segment_id == 1)
         {
             $('.board-k12').css('display', 'block');
@@ -738,15 +738,15 @@ function prodcutType(val) {
         {
             $('.board-other').css('display', 'block');
             $('.board-k12').css('display', 'none');
+            filter_board_id = filter_online_offline;
             
         }
+
         $("#filter_segment").change(function()
         { 
-           
+            
            var drop_down_text = $('#filter_segment :selected').text();
            drop_down_text = drop_down_text.trim();
-           //alert(drop_down_text);
-          // console.log(drop_down_text);
            if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
            {
                  $(".cal-h3").html('CLASS');
@@ -764,28 +764,12 @@ function prodcutType(val) {
             else
             {
                 $('.board-other').css('display', 'block');
-                $('.board-k12').css('display', 'none');
-                
+                $('.board-k12').css('display', 'none');  
             }
-             $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_brand_detail",
-              data:{
-                segment:filter_segment_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                // console.log(response.data);
-                 var options = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    options += '<option value="' + response.data[i].brand_id + '">' + response.data[i].brand_name + '</option>';
-                }
-                //console.log(options);
-                $('#brand').empty().append(options); 
-              }
-           });
+            filter_brand(filter_segment_id);
         });
 
+ 
         $('.toggle_cbsc').click(function() {
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
@@ -800,92 +784,34 @@ function prodcutType(val) {
 
         });
         $('.toggle_online').click(function() { 
+            filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
 
         });
         $('.toggle_offline').click(function() {
+            filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
-
         });
-       
+   
         $("#brand").change(function()
         {
             filter_brand_id = $(this).val();
-             $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_class_detail",
-              data:{
-                brand_id : filter_brand_id,
-                segment:filter_segment_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                  // console.log(response.data);
-                  var options = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
-                }
-                //console.log(options);
-                $('#filter_class_dropdown').empty().append(options); 
-              }
-           });
-
+            filter_class(filter_brand_id,filter_segment_id);
         });
+
 
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
-            $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
-              data:{
-                segment:filter_segment_id,
-                board: filter_board_id,
-                class: filter_class_id,
-                brand_id : filter_brand_id,
-               // batch: filter_batch_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                   console.log(response.data);
-                  var options = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
-                }
-                //console.log(options);
-                $('#filter_course_dropdown').empty().append(options); 
-              }
-           });
-
+            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
         });
 
         $("#filter_course_dropdown").change(function()
         {
             filter_course_id = $(this).val();
-            $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
-              data:{
-                segment:filter_segment_id,
-                board: filter_board_id,
-                class: filter_class_id,
-                brand_id : filter_brand_id,
-                course : filter_course_id,
-               // batch: filter_batch_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                   console.log(response.data);
-                  var options = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    options += '<option value="' + response.data[i].batch_id + '">' + response.data[i].batch_name + '</option>';
-                }
-                //console.log(options);
-                $('#batch').empty().append(options); 
-              }
-           });
+            filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
 
         });
 
@@ -923,8 +849,134 @@ function prodcutType(val) {
            });
 
         })
-        
 
+        function filter_brand(segment_id)
+        {
+            $.ajax({
+                type : 'POST',    
+                url: "<?php echo base_url(); ?>filter/get_brand_detail",
+                data:{
+                    segment:segment_id,
+                }, 
+                    dataType: "json",   
+                    success: function (response) {
+                        // console.log(response.data);
+                        var options = '';
+                        var filter_brand_id_temp = '';
+                        for (var i = 0; i < response.data.length; i++) {
+                            if(i==0)
+                            {
+                                filter_brand_id = response.data[i].brand_id;
+                                filter_brand_id_temp = filter_brand_id;
+                            }
+                            options += '<option value="' + response.data[i].brand_id + '">' + response.data[i].brand_name + '</option>';
+                        }
+                        $('#brand').empty().append(options);
+                        if(filter_brand_id_temp)
+                        {
+                            filter_class(filter_brand_id,segment_id) 
+                        }
+
+                    }
+                });
+        }
+
+        function filter_class(brand_id,segment_id)
+        {
+            $.ajax({
+                type : 'POST',    
+                url: "<?php echo base_url(); ?>filter/get_filter_class_detail",
+                data:{
+                    brand_id : brand_id,
+                    segment:segment_id,
+                }, 
+                dataType: "json",   
+                success: function (response) {
+                    // console.log(response.data);
+                    var options = '';
+                    var filter_class_id_temp = '';
+                    for (var i = 0; i < response.data.length; i++) {
+                        if(i==0)
+                    {
+                        filter_class_id = response.data[i].class_id;
+                        filter_class_id_temp = filter_class_id;
+                    }
+                        options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
+                    }
+                    //console.log(options);
+                        $('#filter_class_dropdown').empty().append(options); 
+                    if(filter_class_id_temp)
+                    {
+                        filter_course(brand_id,segment_id,filter_board_id,filter_class_id_temp)
+                    }
+                }
+            });
+        }
+        function filter_course(brand_id,segment_id,board_id,class_id)
+        {
+        $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
+              data:{
+                segment:segment_id,
+                board: board_id,
+                class: class_id,
+                brand_id : brand_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                  var filter_course_id_temp = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    if(i==0)
+                    {
+                        filter_course_id = response.data[i].id;
+                        filter_course_id_temp = filter_course_id
+                    }
+                    options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
+                }
+                //console.log(options);
+                $('#filter_course_dropdown').empty().append(options); 
+                if(filter_course_id_temp)
+                {
+                    filter_batch(brand_id,segment_id,board_id,class_id,filter_course_id_temp)
+                }
+              }
+           });
+        }
+
+        function filter_batch(brand_id,segment_id,board_id,class_id,course_id)
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
+              data:{
+                segment:segment_id,
+                board: board_id,
+                class: class_id,
+                brand_id : brand_id,
+                course : course_id,
+               // batch: filter_batch_id,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                  var options = '';
+                for (var i = 0; i < response.data.length; i++) {
+                    if(i==0)
+                    {
+                        filter_batch_id = response.data[i].batch_id;
+                    }
+                    options += '<option value="' + response.data[i].batch_id + '">' + response.data[i].batch_name + '</option>';
+                }
+                //console.log(options);
+                $('#batch').empty().append(options); 
+              }
+           });
+        }
+        
         /** End Filter Section */
         
         $('.date_radio').click(function() {

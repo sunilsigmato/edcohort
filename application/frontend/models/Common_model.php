@@ -471,7 +471,15 @@ class Common_model extends CI_Model {
 	{
 		$where= '';
         $query = '';
-        $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = ".$batch_id." ";
+		
+		if($segment != 1)
+		{
+			$where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.product_type = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = ".$batch_id." ";
+		}
+		else{
+			$where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = ".$batch_id." ";
+		}
+       
         $this->db->select('*');
         $this->db->from('tbl_product c');
          $this->db->where($where);
