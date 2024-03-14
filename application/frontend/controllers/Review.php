@@ -43,8 +43,8 @@ class Review extends CI_Controller
     $batch = $this->input->get('batch');
     $customer_rating = $this->input->get('customer_rating');
     $date_posted = $this->input->get('date_posted');
-    $sort_by = $this->input->get('sort_by');
-
+   // $sort_by = $this->input->get('sort_by');
+   $sort_by = $this->input->get('sort_by');
 
     if ($_GET) {
 
@@ -95,7 +95,19 @@ class Review extends CI_Controller
     $orderby = '';
     if (!empty($sort_by)) {
       
-      $orderby = " pr.product_rating " . $sort_by . " ";
+      //$orderby = " pr.product_rating " . $sort_by . " ";
+      if($sort_by == 'most_critical')
+      {
+        $sort_by = 2;
+      }
+      else
+      {
+        $sort_by = 1;
+      }
+    }
+    else
+    {
+      $sort_by = 1;
     }
 	$page = 1;
     $page = $this->input->get('page');
@@ -123,7 +135,7 @@ class Review extends CI_Controller
     $data['page_link'] = $this->pagination->create_links();
     //$records = $this->jewelry_model->jewelry_list_limit($wherereview, $per_page, $page, $order);
 
-    $data['review_list'] = $this->review_model->getProductReviewLimit($wherereview,$orderby, $per_page, $page);
+    $data['review_list'] = $this->review_model->getProductReviewLimit($wherereview,$orderby, $per_page, $page,$sort_by);
     //echo $this->db->last_query(); die;
     $reviewCount = $this->review_model->getProductReviewCount($wherereview);
     $n = @$reviewCount['0']->review_count;

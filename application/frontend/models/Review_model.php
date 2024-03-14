@@ -140,7 +140,7 @@ class Review_model extends CI_Model {
 	   return $output;
   }
 
-  function getProductReviewLimit($where,$order='',$limit='',$offset=0)
+  function getProductReviewLimit($where,$order='',$limit='',$offset=0,$sort_by=1)
   {
       if($where!=""){        
         $where="WHERE ".$where;
@@ -151,12 +151,24 @@ class Review_model extends CI_Model {
       else{
         $order_query="ORDER BY product_review_id DESC ";
       }
+      if($sort_by == 1)
+      {
       $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_review as pr 
         join tbl_product as p ON pr.product_id=p.product_id 
         join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$offset." , ".$limit);
-
+        return $query->result();    
+    }
+      if($sort_by == 2)
+      {
         
-      return $query->result();  
+        $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug,COUNT(prr.review_id) AS reply_count FROM tbl_product_review as pr 
+        join tbl_product as p ON pr.product_id=p.product_id 
+        join tbl_customer as c ON pr.user_id=c.customer_id  
+        LEFT JOIN tbl_product_review_reply AS prr ON pr.product_review_id = prr.review_id ".$where." and prr.sub_id IS NULL GROUP BY prr.review_id ORDER BY reply_count desc limit ".$offset." , ".$limit);
+        return $query->result();    
+    }
+        
+      //return $query->result();  
   }
   function getProductReview($where)
   {

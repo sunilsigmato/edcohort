@@ -400,40 +400,41 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">CUSTOMER RATING</h3>
                             <div class="filter-list-box">
                                 <ul>
+                                    
                                     <li>
-                                        <input type="radio" name="customer_rating" id="rating1" value="5"
+                                            <input type="radio" name="customer_rating" id="ratingall" value="all">
+                                            <label for="ratingall">All</label>
+                                            
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="customer_rating" id="rating1" value="5" 
                                             <?php if(@$customer_rating == 5){ echo 'checked';} ?>>
                                         <label for="rating1"><img
-                                                src="<?php echo base_url();?>assets/images/rating-5.png" alt=""> &
-                                            up</label>
+                                                src="<?php echo base_url();?>assets/images/rating-5.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating2" value="4"
                                             <?php if(@$customer_rating == 4){ echo 'checked';} ?>>
                                         <label for="rating2"><img
-                                                src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> &
-                                            up</label>
+                                                src="<?php echo base_url();?>assets/images/rating-4.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating3" value="3"
                                             <?php if(@$customer_rating == 3){ echo 'checked';} ?>>
                                         <label for="rating3"><img
-                                                src="<?php echo base_url();?>assets/images/rating-3.png" alt=""> &
-                                            up</label>
+                                                src="<?php echo base_url();?>assets/images/rating-3.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating4" value="2"
                                             <?php if(@$customer_rating == 2){ echo 'checked';} ?>>
                                         <label for="rating4"><img
-                                                src="<?php echo base_url();?>assets/images/rating-2.png" alt=""> &
-                                            up</label>
+                                                src="<?php echo base_url();?>assets/images/rating-2.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating5" value="1"
                                             <?php if(@$customer_rating == 1){ echo 'checked';} ?>>
                                         <label for="rating5"><img
-                                                src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> &
-                                            up</label>
+                                                src="<?php echo base_url();?>assets/images/rating-1.png" alt=""></label>
                                     </li>
                                 </ul>
                             </div>
@@ -454,12 +455,12 @@ if($get_breadcrumb)
                             <div class="filter-list-box">
                                 <ul>
                                     <li>
-                                        <input type="radio" name="sort_by" id="sort1" value="desc"
+                                        <input type="radio" name="sort_by" id="sort1" value="trending_first"
                                             <?php if(@$sort_by == 'desc'){ echo 'checked';} ?>>
                                         <label for="sort1">Trending First </label>
                                     </li>
                                     <li>
-                                        <input type="radio" name="sort_by" id="sort2" value="asc"
+                                        <input type="radio" name="sort_by" id="sort2" value="most_critical"
                                             <?php if(@$sort_by == 'asc'){ echo 'checked';} ?>>
                                         <label for="sort2">Most Critical </label>
                                     </li>
@@ -1206,8 +1207,11 @@ if($get_breadcrumb)
         var filter_course_id = $('.filter_course').val();
         var filter_batch_id = $('.filter_batch').val();
         var filter_board_id = $('.filter_board').val();
+        var parameter_course = $('.course').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
+        var ratings = '';
+        var sort_by ='';
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -1299,6 +1303,30 @@ if($get_breadcrumb)
         $("#batch").change(function()
         {
              filter_batch_id = $(this).val();
+        });
+        /** Rating Code  **/
+        $('input[name="customer_rating"]').change(function(){
+            if($(this).is(':checked')){
+                 ratings = $(this).val();
+                 if(ratings == 'all' || ratings == 'All' || ratings == 'ALL')
+                 {
+                    ratings = '';
+                 }
+                 location.reload();
+                 window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by+"&customer_rating="+ratings;
+               // console.log("Selected rating: " + ratingValue);
+               //alert(ratings);
+            }
+        });
+         /** End Rating Code  **/
+         $('input[name="sort_by"]').change(function(){
+            if($(this).is(':checked')){
+                sort_by = $(this).val();
+                location.reload();
+               // console.log("Selected rating: " + ratingValue);
+              window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by;
+              //location.reload();
+            }
         });
         $(".apply_filter").click(function()
         {
