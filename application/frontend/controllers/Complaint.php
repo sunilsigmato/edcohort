@@ -33,6 +33,7 @@ class Complaint extends CI_Controller {
     $date_posted = $this->input->get('date_posted');
     $sort_by = $this->input->get('sort_by');
     $complaint_resolved = $this->input->get('complaint_resolved');
+    $type = $this->input->get('type');
 
     if ($_GET) {
       if (!empty($brandID)) {
@@ -47,6 +48,7 @@ class Complaint extends CI_Controller {
       if (!empty($class)) {
         $where .= " and class_id = " . $class . " ";
       }
+      
       if (!empty($batch)) {
         $where .= " and batch_id = " . $batch . " ";
       }
@@ -75,10 +77,38 @@ class Complaint extends CI_Controller {
     if (!empty($complaint_resolved)) {
       $wherecomplaint .= " and pr.complaint_resolved > " . $complaint_resolved . " ";
     }
+    if (!empty($type)) {
+      if($type == 'resolved')
+      {
+        $wherecomplaint .= " and pr.complaint_resolved = 1 ";
+      }
+      if($type == 'unresolved')
+      {
+        $wherecomplaint .= " and pr.complaint_resolved = 0 ";
+      }
+      
+    }
 
     $orderby = '';
-    if (!empty($sort_by)) {
+    /*if (!empty($sort_by)) {
       $orderby = " pr.product_rating " . $sort_by . " ";
+    }*/
+
+    if (!empty($sort_by)) {
+      
+      //$orderby = " pr.product_rating " . $sort_by . " ";
+      if($sort_by == 'most_critical')
+      {
+        $sort_by = 2;
+      }
+      else
+      {
+        $sort_by = 1;
+      }
+    }
+    else
+    {
+      $sort_by = 1;
     }
 
     $page = $this->input->get('page');
@@ -104,7 +134,7 @@ class Complaint extends CI_Controller {
 
     $data['page_link'] = $this->pagination->create_links();
 
-    $data['complaint_list'] = $this->complaint_model->getProductComplaintLimit($wherecomplaint,$orderby,$per_page, $page); 
+    $data['complaint_list'] = $this->complaint_model->getProductComplaintLimit($wherecomplaint,$orderby,$per_page, $page,$sort_by); 
   //echo $this->db->last_query();
     $complaintCount = $this->complaint_model->getProductComplaintCount($wherecomplaint);
     $n = @$complaintCount['0']->complaint_count;
@@ -157,6 +187,7 @@ class Complaint extends CI_Controller {
       if (!empty($class)) {
         $where .= " and class_id = " . $class . " ";
       }
+      
       if (!empty($batch)) {
         $where .= " and batch_id = " . $batch . " ";
       }
@@ -282,24 +313,138 @@ class Complaint extends CI_Controller {
 
     $course = $this->input->get('course');
     $user_id = $this->session->userdata('user_id');
-
+  ////Filter data ////////
+    $where_brand = 'brand_status = 1';
+    $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
+    $where_board = 'status = 1';
+    $data['board_records'] = $this->common_model->selectWhereorderby('tbl_board', $where_board, 'board_name', 'ASC');
+    $where_batch = 'status = 1 and batch_end >= NOW()';
+    $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
+    $where_class = "status = 1 ";
+    $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+  ////Filter////////
+  //print_pre($_POST);
     $where = "product_status = 'active'";
-    if(!empty($course)){
-      $where .= " and product_id = " . $course . " ";
+
+    $brandID = $this->input->get('brand');
+    $product_type = $this->input->get('product_type');
+    $board = $this->input->get('board');
+    $class = $this->input->get('class');
+    $batch = $this->input->get('batch');
+    $customer_rating = $this->input->get('customer_rating');
+    $date_posted = $this->input->get('date_posted');
+    $sort_by = $this->input->get('sort_by');
+    $complaint_resolved = $this->input->get('complaint_resolved');
+    $type = $this->input->get('type');
+
+    if ($_GET) {
+      if (!empty($brandID)) {
+        $where .= " and brand_id = " . $brandID . " ";
+      }
+      if (!empty($product_type)) {
+        $where .= " and product_type = " . $product_type . " ";
+      }
+      if (!empty($board)) {
+        $where .= " and board_id = " . $board . " ";
+      }
+      if (!empty($class)) {
+        $where .= " and class_id = " . $class . " ";
+      }
+      
+      if (!empty($batch)) {
+        $where .= " and batch_id = " . $batch . " ";
+      }
+    } else {
+      if (!empty($course)) {
+        $where .= " and product_id = " . $course . " ";
+      }
     }
     $order = "product_name ASC";
-    $data['product_list'] = $this->complaint_model->complaint_list($where, $order);
-
+   // $data['product_list'] = $this->complaint_model->complaint_list($where, $order);
+  //echo $this->db->last_query();
+  ////////////////////////////////////
     $wherecomplaint = "pr.status = 'active'";
     if (!empty($course)) {
-      $wherecomplaint .= " and pr.product_id = " . $course . " and user_id = " . $user_id . " ";
+      $wherecomplaint .= " and pr.product_id = " . $course . " ";
     }
 
-    $data['complaint_list'] = $this->complaint_model->getProductComplaint($wherecomplaint);
+    if (!empty($customer_rating)) {
+      $wherecomplaint .= " and pr.product_rating = " . $customer_rating . " ";
+    }
+
+    if (!empty($date_posted)) {
+      $wherecomplaint .= " and pr.product_complaint_added > " . $date_posted . " ";
+    }
+
+    if (!empty($complaint_resolved)) {
+      $wherecomplaint .= " and pr.complaint_resolved > " . $complaint_resolved . " ";
+    }
+    if (!empty($type)) {
+      if($type == 'resolved')
+      {
+        $wherecomplaint .= " and pr.complaint_resolved = 1 ";
+      }
+      if($type == 'unresolved')
+      {
+        $wherecomplaint .= " and pr.complaint_resolved = 0 ";
+      }
+      
+    }
+    $wherecomplaint .= " and pr.use
+    r_id = " . $user_id . " ";
+
+    $orderby = '';
+    /*if (!empty($sort_by)) {
+      $orderby = " pr.product_rating " . $sort_by . " ";
+    }*/
+
+    if (!empty($sort_by)) {
+      
+      //$orderby = " pr.product_rating " . $sort_by . " ";
+      if($sort_by == 'most_critical')
+      {
+        $sort_by = 2;
+      }
+      else
+      {
+        $sort_by = 1;
+      }
+    }
+    else
+    {
+      $sort_by = 1;
+    }
+
+    $page = $this->input->get('page');
+    $per_page = $this->input->get('per_page');
+    $records_count = $this->complaint_model->getProductComplaintCount($wherecomplaint);
+  //  print_r($data['records_count']); die;
+    $data['records_count'] = @$records_count['0']->complaint_count; 
+    $per_page = ($per_page) ? $per_page : 10;
+    $config['base_url'] = base_url() . 'complaint?course=' .$course. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['total_rows'] = $data['records_count'];
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 2;
+    $config['first_link'] = false;
+    $config['last_link'] = false;
+    $page = ($page) ? $page : 0;
+    $this->pagination->initialize($config);
+
+    $data['page_link'] = $this->pagination->create_links();
+
+    $data['complaint_list'] = $this->complaint_model->getProductComplaintLimit($wherecomplaint,$orderby,$per_page, $page,$sort_by); 
+  //echo $this->db->last_query();
     $complaintCount = $this->complaint_model->getProductComplaintCount($wherecomplaint);
     $n = @$complaintCount['0']->complaint_count;
 
     $data['complaint_count'] = $this->number_format_short($n);
+
 
   //print_ex($data);
 

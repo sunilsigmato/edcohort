@@ -95,7 +95,7 @@ class Complaint_model extends CI_Model {
     return $res;
    
   }
-  function getProductComplaintLimit($where,$order,$limit='',$offset=0)
+  function getProductComplaintLimit($where,$order,$limit='',$offset=0,$sort_by=1)
   {
       if($where!=""){        
         $where="WHERE ".$where;
@@ -106,10 +106,22 @@ class Complaint_model extends CI_Model {
       else{
         $order_query="ORDER BY product_complaint_id DESC ";
       }
-      $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_complaint as pr 
-        join tbl_product as p ON pr.product_id=p.product_id 
-        join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$offset." , ".$limit);
-      return $query->result();  
+      if($sort_by == 1)
+      {
+        $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_complaint as pr 
+          join tbl_product as p ON pr.product_id=p.product_id 
+          join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$offset." , ".$limit);
+        return $query->result(); 
+      }
+      if($sort_by == 2)
+      {
+          $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug,COUNT(prr.complaint_id) AS reply_count FROM tbl_product_complaint as pr 
+          join tbl_product as p ON pr.product_id=p.product_id 
+          join tbl_customer as c ON pr.user_id=c.customer_id 
+          LEFT JOIN tbl_product_complaint_reply AS prr ON pr.product_complaint_id = prr.complaint_id ".$where." and prr.sub_id IS NULL GROUP BY prr.complaint_id ORDER BY reply_count desc limit ".$offset." , ".$limit);
+          return $query->result();
+      }
+
   }
   function getProductComplaint($where,$order='')
   {

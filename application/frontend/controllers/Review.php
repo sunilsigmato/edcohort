@@ -11,6 +11,7 @@ class Review extends CI_Controller
   function index($id = '')
   {
     $course = $this->input->get('course');
+    $user_id = $this->session->userdata('user_id');
 
     ////Filter data ////////
 
@@ -92,6 +93,9 @@ class Review extends CI_Controller
     if (!empty($date_posted)) {
       $wherereview .= " and pr.product_review_added > " . $date_posted . " ";
     }
+   
+
+    //$wherereview .= " and pr.user_id = " . $user_id . " ";
     $orderby = '';
     if (!empty($sort_by)) {
       
@@ -341,7 +345,7 @@ class Review extends CI_Controller
 
   function my_review()
   {
-    $course = $this->input->get('course');
+    /*$course = $this->input->get('course');
     $user_id = $this->session->userdata('user_id');
 
     $where = "product_status = 'active'";
@@ -360,7 +364,144 @@ class Review extends CI_Controller
     $reviewCount = $this->review_model->getProductReviewCount($wherereview);
     $n = @$reviewCount['0']->review_count;
 
+    $data['review_count'] = $this->number_format_short($n);*/
+    
+
+    $course = $this->input->get('course');
+    $user_id = $this->session->userdata('user_id');
+
+    ////Filter data ////////
+
+    $where_category = 'status = 1 and parent_id = 0';
+    $data['category_records'] = $this->common_model->selectWhereorderby('tbl_class',$where_category,'title','ASC');
+    
+    $where_brand = 'brand_status = 1';
+    $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
+
+    $where_board = 'status = 1';
+    $data['board_records'] = $this->common_model->selectWhereorderby('tbl_board', $where_board, 'board_name', 'ASC');
+
+    $where_batch = 'status = 1 and batch_end >= NOW()';
+    $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
+
+    $where_class = "status = 1 ";
+    $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+
+
+    ////Filter////////
+
+    //print_pre($_GET);
+
+    $where = "product_status = 'active'";
+
+    $brandID = $this->input->get('brand');
+    $product_type = $this->input->get('product_type');
+    $board = $this->input->get('board');
+    $class = $this->input->get('class');
+    $batch = $this->input->get('batch');
+    $customer_rating = $this->input->get('customer_rating');
+    $date_posted = $this->input->get('date_posted');
+   // $sort_by = $this->input->get('sort_by');
+   $sort_by = $this->input->get('sort_by');
+
+    if ($_GET) {
+
+      if (!empty($brandID)) {
+        $where .= " and brand_id = " . $brandID . " ";
+      }
+      if (!empty($product_type)) {
+        $where .= " and product_type = " . $product_type . " ";
+      }
+      if (!empty($board)) {
+        $where .= " and board_id = " . $board . " ";
+      }
+      if (!empty($class)) {
+        $where .= " and class_id = " . $class . " ";
+      }
+      if (!empty($batch)) {
+        $where .= " and batch_id = " . $batch . " ";
+      }
+
+    } else {
+
+      if (!empty($course)) {
+        $where .= " and product_id = " . $course . " ";
+      }
+
+    }
+
+    $order = "product_name ASC";
+    //$data['product_list'] = $this->review_model->review_list($where, $order);
+
+    ////////////////////////////////////
+
+    //print_ex($_POST);
+
+    $wherereview = "pr.status = 'active'";
+
+    if (!empty($course)) {
+      $wherereview .= " and pr.product_id = " . $course . " ";
+    }
+
+    if (!empty($customer_rating)) {
+      $wherereview .= " and pr.product_rating = " . $customer_rating . " ";
+    }
+
+    if (!empty($date_posted)) {
+      $wherereview .= " and pr.product_review_added > " . $date_posted . " ";
+    }
+
+    $wherereview .= " and pr.user_id = " . $user_id . " ";
+    $orderby = '';
+    if (!empty($sort_by)) {
+      
+      //$orderby = " pr.product_rating " . $sort_by . " ";
+      if($sort_by == 'most_critical')
+      {
+        $sort_by = 2;
+      }
+      else
+      {
+        $sort_by = 1;
+      }
+    }
+    else
+    {
+      $sort_by = 1;
+    }
+	  $page = 1;
+    $page = $this->input->get('page');
+    $per_page = $this->input->get('per_page');
+    $records_count = $this->review_model->getProductReviewCount($wherereview);
+    //echo $this->db->last_query(); die;
+    $data['records_count'] = @$records_count['0']->review_count;
+    //print_ex($data['records_count']);  
+    $per_page = ($per_page) ? $per_page : 10;
+    $config['base_url'] = base_url() . 'review?course=' .$course. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['total_rows'] = $data['records_count'];
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 2;
+    $config['first_link'] = false;
+    $config['last_link'] = false;
+    $page = ($page) ? $page : 0;
+    $this->pagination->initialize($config);
+
+    $data['page_link'] = $this->pagination->create_links();
+    //$records = $this->jewelry_model->jewelry_list_limit($wherereview, $per_page, $page, $order);
+
+    $data['review_list'] = $this->review_model->getProductReviewLimit($wherereview,$orderby, $per_page, $page,$sort_by);
+    //echo $this->db->last_query(); die;
+    $reviewCount = $this->review_model->getProductReviewCount($wherereview);
+    $n = @$reviewCount['0']->review_count;
+
     $data['review_count'] = $this->number_format_short($n);
+
 
     $this->load->view('common/header', $data);
     $this->load->view('review/my_review', $data);

@@ -514,18 +514,7 @@ if($get_breadcrumb)
                                         data-bs-target="#login-button">My Review</a>
                                 </li>
                                 <?php } ?>
-                                <?php if($this->session->userdata('user_id')){ ?>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>my-review-reply?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">My
-                                        Replies</a>
-                                </li>
-                                <?php } else{ ?>
-                                <li>
-                                    <a href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                        data-bs-target="#login-button">My Replies</a>
-                                </li>
-
-                                <?php } ?>
+                                
 
                             </ul>
                         </div>

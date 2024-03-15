@@ -571,10 +571,6 @@ if($get_breadcrumb)
          
                                                 
                                         </div>
-
-                                        <button type=" button" 
-                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpnss">Submit </button>
-
                                     </div>
                                 </div>
                             </div>
