@@ -306,9 +306,7 @@
                     <div>
                         <button type="button" class="rate-submit-btn">Submit</button>
                     </div>
-
-
-
+                    
                 </div>
 
             </div>
