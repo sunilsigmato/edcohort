@@ -499,12 +499,25 @@ if($get_breadcrumb)
                                         </div>
                                         <div>
                                             
+                                            <?php if($this->session->userdata('user_id')){ ?>
                                             <fieldset id="group1">
                                                 <!--<input type="radio" value="now" name="group1" class="date_radio"> Now -->
                                                 <input type="radio" value="today" name="group1" class="date_radio"> Today  
                                                 <input type="radio" value="tommorow" name="group1" class="date_radio"> Tommorow    
                                                 <input type="radio" value="day_after_tmr" name="group1" class="date_radio"> Day After Tomorrow   
                                             </fieldset>
+                                            <?php }else{ ?>
+                                                <fieldset id="group1">
+                                                <a href="javascript:void(0)" class=" text-right btn-md mb-1"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                                data-bs-target="#login-button">
+                                                <input type="radio" value="today" name="group1" class="date_radio"> Today  
+                                                <input type="radio" value="tommorow" name="group1" class="date_radio"> Tommorow    
+                                                <input type="radio" value="day_after_tmr" name="group1" class="date_radio"> Day After Tomorrow   
+                                            </a>
+                                            </fieldset>
+                                            <?php } ?>
+                                            
                                             <?php
                                                 $res_coupon_count_today = get_coupon_count_today($segment,$course,$this->session->userdata('user_id'));
                                                 $res_coupon_count_tommorow = get_coupon_count_tommorow($segment,$course,$this->session->userdata('user_id'));
