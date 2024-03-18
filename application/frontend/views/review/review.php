@@ -80,7 +80,9 @@ if($get_breadcrumb)
             <div class="col-md-6 pt-3 course-name-display">
                 <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
+                <?php if($get_brand_compare) { ?>
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?>/5</span>
+                    <?php } ?>
                     <label for="rating2" class="rating-display">
                     <!--<img
                             src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> </label>
@@ -342,7 +344,7 @@ if($get_breadcrumb)
                         </div>
 
                        <div class="filter-col">
-                            <h3 class="filter-col-title">CLASS</h3>
+                            <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
                                     <?php foreach($res_filter_class as $classes){?>
@@ -395,7 +397,7 @@ if($get_breadcrumb)
                </ul>
                </div>
             </div> -->
-                        <?php print_R($customer_rating);?>
+                        
                         <div class="filter-col">
                             <h3 class="filter-col-title">CUSTOMER RATING</h3>
                             <div class="filter-list-box">

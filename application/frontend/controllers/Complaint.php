@@ -34,6 +34,7 @@ class Complaint extends CI_Controller {
     $sort_by = $this->input->get('sort_by');
     $complaint_resolved = $this->input->get('complaint_resolved');
     $type = $this->input->get('type');
+    $segment = $this->input->get('segment');
 
     if ($_GET) {
       if (!empty($brandID)) {
@@ -117,7 +118,7 @@ class Complaint extends CI_Controller {
   //  print_r($data['records_count']); die;
     $data['records_count'] = @$records_count['0']->complaint_count; 
     $per_page = ($per_page) ? $per_page : 10;
-    $config['base_url'] = base_url() . 'complaint?course=' .$course. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['base_url'] = base_url() . 'complaint?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
     $config['total_rows'] = $data['records_count'];
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
@@ -336,6 +337,7 @@ class Complaint extends CI_Controller {
     $sort_by = $this->input->get('sort_by');
     $complaint_resolved = $this->input->get('complaint_resolved');
     $type = $this->input->get('type');
+    $segment = $this->input->get('segment');
 
     if ($_GET) {
       if (!empty($brandID)) {
@@ -390,8 +392,7 @@ class Complaint extends CI_Controller {
       }
       
     }
-    $wherecomplaint .= " and pr.use
-    r_id = " . $user_id . " ";
+    $wherecomplaint .= " and pr.user_id = " . $user_id . " ";
 
     $orderby = '';
     /*if (!empty($sort_by)) {
@@ -414,14 +415,14 @@ class Complaint extends CI_Controller {
     {
       $sort_by = 1;
     }
-
+    $page = 0;
     $page = $this->input->get('page');
     $per_page = $this->input->get('per_page');
     $records_count = $this->complaint_model->getProductComplaintCount($wherecomplaint);
   //  print_r($data['records_count']); die;
     $data['records_count'] = @$records_count['0']->complaint_count; 
     $per_page = ($per_page) ? $per_page : 10;
-    $config['base_url'] = base_url() . 'complaint?course=' .$course. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['base_url'] = base_url() . 'complaint?course=' .$course.'&segment='.$segment. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
     $config['total_rows'] = $data['records_count'];
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;

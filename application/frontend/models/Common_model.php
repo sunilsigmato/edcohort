@@ -320,7 +320,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$id." and b.brand_id = c.product_brand";
-        $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id');
+        $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id,c.product_id');
         $this->db->from('tbl_product c, tbl_brand b');
          $this->db->where($where);
         $this->db->group_by('b.brand_id');
@@ -342,7 +342,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$id." and b.class_id = c.class_id";
-        $this->db->select('b.title,b.class_id');
+        $this->db->select('b.title,b.class_id,c.product_id');
         $this->db->from('tbl_product c, tbl_class b');
          $this->db->where($where);
         $this->db->group_by('c.class_id');
@@ -363,7 +363,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$id." and b.id = c.course_id";
-        $this->db->select('b.course_name,b.id');
+        $this->db->select('b.course_name,b.id,c.product_id');
         $this->db->from('tbl_product c, tbl_course b');
          $this->db->where($where);
         $this->db->group_by('c.course_id');
@@ -385,7 +385,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and b.class_id = c.class_id";
-        $this->db->select('b.title,b.class_id');
+        $this->db->select('b.title,b.class_id,c.product_id');
         $this->db->from('tbl_product c, tbl_class b');
          $this->db->where($where);
         $this->db->group_by('c.class_id');
@@ -406,7 +406,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
-        $this->db->select('b.course_name,b.id');
+        $this->db->select('b.course_name,b.id,c.product_id');
         $this->db->from('tbl_product c, tbl_course b');
          $this->db->where($where);
         $this->db->group_by('c.course_id');
@@ -428,7 +428,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = b.batch_id ";
-        $this->db->select('b.batch_id ,b.batch_name');
+        $this->db->select('b.batch_id ,b.batch_name,c.product_id');
         $this->db->from('tbl_product c, tbl_batch b');
          $this->db->where($where);
        // $this->db->group_by('c.batch_id');
@@ -450,7 +450,7 @@ class Common_model extends CI_Model {
         $where= '';
         $query = '';
         $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = b.batch_id ";
-        $this->db->select('b.batch_id ,b.batch_name');
+        $this->db->select('b.batch_id ,b.batch_name,c.product_id');
         $this->db->from('tbl_product c, tbl_batch b');
          $this->db->where($where);
        // $this->db->group_by('c.batch_id');

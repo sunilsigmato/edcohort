@@ -77,7 +77,9 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
             <div class="col-md-6 pt-3 course-name-display">
             <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
+                <?php if($get_brand_compare) { ?>
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
+                    <?php } ?>
                     <label for="rating2" class="rating-display">
                         <!--<img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> -->
@@ -346,7 +348,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                         </div>
 
                        <div class="filter-col">
-                            <h3 class="filter-col-title">CLASS</h3>
+                            <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
                                     <?php foreach($res_filter_class as $classes){?>
@@ -1414,7 +1416,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                 sort_by = $(this).val();
                 location.reload();
                // console.log("Selected rating: " + ratingValue);
-              window.location="<?php echo base_url();?>complaint/?course="+parameter_course+"&segment="+filter_segment_id+"&type="+sort_by;
+              window.location="<?php echo base_url();?>complaint/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by;
               //location.reload();
             }
         });
