@@ -121,10 +121,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
        <p>1</p>
         <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
         <p>25%</p>
-
        </div>
-        
-
 
 </div>
 <div class="progress my-2">
