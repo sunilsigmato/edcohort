@@ -85,7 +85,8 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                 <?php if($get_brand_compare) { ?>
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
                     <?php } ?>
-                    
+                    <?php ?>
+                     
                             <!--VEENA-->
                             <div class="dropdown">
   <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
