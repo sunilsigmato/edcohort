@@ -79,7 +79,7 @@
                                                     <div class="form-group">
                                                         <div class="form-line ">
                                                             <input type="time" class="form-control" id="from_time" name="from_time" required placeholder="From Time" maxlength="10">
-                                                        </div>                                           
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
