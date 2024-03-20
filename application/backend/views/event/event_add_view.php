@@ -31,7 +31,7 @@
                                                 $event_code = (rand(10298,100));
                                                 $event_code = 'EVT-'.$event_code; 
                                            ?>
-                                           
+
                                              <div class="row clearfix">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
                                                     <label for="">Event Code <span style="color:red">*</span></label>
@@ -110,7 +110,6 @@
                                                 </div>
                                             </div>
                                              
-                                         
                                             <div class="form-group ">
                                                 <div class="row">
                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
