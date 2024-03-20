@@ -207,6 +207,13 @@
         $data=$CI->admin_model->get_segment_list();
         return $data;        
     }
+    function get_speaker_role_list()
+    {
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->admin_model->get_speaker_role_list();
+        return $data;        
+    }
     function get_segemnt($id)
     {
         $CI =& get_instance();

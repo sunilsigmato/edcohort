@@ -260,6 +260,19 @@ class admin_model extends CI_Model
             return $query->result();
         }
     }
+
+    function get_speaker_role_list()
+    {
+        $this->db->select('customer_id  ,firstname');
+        $this->db->from('tbl_customer c');
+         $this->db->where('status',1);
+         $this->db->where('customer_type','5');
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
     
     function get_category()
     {
