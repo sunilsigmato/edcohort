@@ -1,11 +1,11 @@
 <div class="app-content  my-3 my-md-5">
                     <div class="side-app">
                         <div class="page-header">
-                            <h4 class="page-title">Customer</h4>
+                            <h4 class="page-title">Event</h4>
                             <ol class="breadcrumb">
                             <section class="content-header">
                             <h1>
-                                <a href="<?= site_url('admin_customer') ?>" class="btn btn-info">Manage</a>
+                                <a href="<?= site_url('admin_event') ?>" class="btn btn-info">Manage</a>
                             </h1>
                             </section>
                             </ol> 
@@ -65,7 +65,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="date" class="form-control" id="event_date" name="date" required placeholder="date" maxlength="40">
+                                                            <input type="date" class="form-control" id="event_date" name="date" required placeholder="date" min="<?php echo date('Y-m-d'); ?>">
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -166,6 +166,7 @@
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="brand" id="filter_segment" >
+                                                        <option value= "" >Select</option>
                                                         <?php foreach($res_filter_segment as $segments){?>
                                                             <option value="<?php echo $segments->id; ?>">
                                                                 <?php echo $segments->segment_name; ?></option>
@@ -266,7 +267,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+               
 
 <!-- JQuery js-->
 <script src="http://localhost/edcohort/admin/assets/js/jquery-3.2.1.min.js"> </script>
@@ -357,6 +358,11 @@
                 $(".cal-h3").html('COURSE SEGMENT');
            }
             filter_segment_id =  $(this).val();
+            if(filter_segment_id == "")
+            {
+                alert("Please Select Valid Segment");
+                return false;
+            }
             if(filter_segment_id == 1)
             {
                 $('.board-k12').css('display', 'block');

@@ -277,24 +277,41 @@ public function __construct()
     {
       $product_id = $res[0]->product_id;
     }
-    $data = array(
-      'event_code' => $event_code,
-      'event_title' => $event_title,
-      'event_date' => $event_date,
-      'event_start_time' => $event_from_time,
-      'event_end_time' => $event_to_time,
-      'total_duration' => 10,
-      'event_description' => $event_description,
-      'status' => $event_status,
-      'taken_by' => $event_role,
-      'product_id' => $product_id,
-      'created_on' => date('Y-m-d H:i:s'),
-      'created_by' => '123', 
-      'event_type' => $event_type
-    );
-    $user_id = $this->common_model->insertData('tbl_event', $data);
-    http_response_code(200);
-    echo json_encode(array("status"=>"1","data"=>"Event Data Added Successfully")); 
+    if($product_id)
+    {
+
+      $starttimestamp = strtotime($event_from_time);
+	    $endtimestamp = strtotime($event_to_time);
+	    $difference = abs($endtimestamp - $starttimestamp)/3600;
+      print_R($difference);
+     
+
+      $data = array(
+        'event_code' => $event_code,
+        'event_title' => $event_title,
+        'event_date' => $event_date,
+        'event_start_time' => $event_from_time,
+        'event_end_time' => $event_to_time,
+        'total_duration' => 10,
+        'event_description' => $event_description,
+        'status' => $event_status,
+        'taken_by' => $event_role,
+        'product_id' => $product_id,
+        'created_on' => date('Y-m-d H:i:s'),
+        'created_by' => '123', 
+        'event_type' => $event_type
+      );
+     
+      $user_id = $this->common_model->insertData('tbl_event', $data);
+      http_response_code(200);
+      echo json_encode(array("status"=>"1","data"=>"Event Data Added Successfully")); 
+    }
+    else
+    {
+      http_response_code(200);
+      echo json_encode(array("status"=>"1","data"=>" Invaild Data ")); 
+    }
+     
   }
 
  

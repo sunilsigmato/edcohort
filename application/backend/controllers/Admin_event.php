@@ -19,15 +19,16 @@ class admin_event extends CI_Controller
     function index()
     {
         
-     /*   $data['active'] = "customer";
-		$where ='customer_id > 0';
-		$order_by=' ORDER BY customer_id DESC';		
-		$data['records']=$this->customer_model->customer_list($where,$order_by);
+        $data['active'] = "event";
+        $current = strtotime(date("Y-m-d"));
+		$where ='Date(event_date) >='.$current;
+		$order_by=' ORDER BY event_date DESC';		
+		$data['records']=$this->common_model->event_list($where,$order_by);
 
         $this->load->view('common/header');
         $this->load->view('common/sidebar', $data);
-        $this->load->view('customer/buyer_view' ,$data);
-        $this->load->view('common/footer'); */
+        $this->load->view('event/event_view' ,$data);
+        $this->load->view('common/footer'); 
         
     }
     function add_event()

@@ -366,6 +366,23 @@ class Common_model extends CI_Model {
         }
 	}
 
+	function event_list($where,$order_by)
+    {
+        if($where!="")
+        {
+            $where="WHERE ".$where;
+        }
+        $order_query=$order_by;
+        $select='*';
+        $table_name='tbl_event C';
+        $query = $this->db->query("select ".$select." from ".$table_name." ".$where." ".$order_query." ");
+        //$select='customer_id,sales_person_id,firstname,lastname,email,phone,date_added,date_edited,status,U.NM_USER_FULLNAME';
+        //$table_name='tbl_customer C  right join tbl_user U on C.sales_person_id=U.CD_USER_ID';
+        //$query = $this->db->query("select ".$select." from ".$table_name." ".$where." ".$order_query." LIMIT  ".$offset." , ".$limit." ");
+     //echo $this->db->last_query();die;
+        return $query->result();
+    }
+
 
 
 
