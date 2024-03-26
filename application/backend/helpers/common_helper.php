@@ -312,6 +312,79 @@
         }
         return $c3.$c2.$c1; 
     }
+    function get_segement()
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->common_model->get_segement();
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+    }
+    function getseg_brand_list($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getseg_brand_list($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    }
+    function getseg_class_list($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getseg_class_list($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    }
+
+    function getseg_crse_list($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getseg_crse_list($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    } 
+
+    function selectWhereorderby($table,$where,$col,$condition)
+	{
+			$this->db->select('*');
+			$this->db->from($table);
+			$this->db->where($where);
+			$this->db->order_by($col,$condition);
+			$query=$this->db->get();
+			return $query->result();
+	}
 
 
 

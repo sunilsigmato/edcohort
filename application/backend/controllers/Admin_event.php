@@ -10,6 +10,7 @@ class admin_event extends CI_Controller
             redirect(base_url());
         }
         $this->load->model('customer_model');
+        $this->load->model('common_model');
         $this->load->model('vendor_model');
       //  $this->load->library('excel');
         $this->load->library('pagination');      
@@ -33,7 +34,8 @@ class admin_event extends CI_Controller
     {
         $where = "customer_type = 5 ";
         $data['taken_by']=$this->admin_model->selectWhere('tbl_customer',$where);
-
+        $where_board = 'status = 1';
+        $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
         $data['active_sidebar']='event_add';
         $this->load->view('common/header');
         $this->load->view('common/sidebar',$data);
