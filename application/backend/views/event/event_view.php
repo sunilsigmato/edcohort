@@ -5,7 +5,7 @@
 							<ol class="breadcrumb">
 							<section class="content-header">
                             <h1>
-                                <a href="<?= site_url('admin_customer/add_customer') ?>" class="btn btn-info">Add New</a>
+                                <a href="<?= site_url('admin_event/add_event') ?>" class="btn btn-info">Add Event</a>
                             </h1>
                             </section>
 							</ol>

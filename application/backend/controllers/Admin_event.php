@@ -43,4 +43,19 @@ class admin_event extends CI_Controller
         $this->load->view('event/event_add_view',$data);
         $this->load->view('common/footer');
     }
+
+    function edit_event($event_id)
+    {
+        $where = "customer_type = 5 ";
+        $data['taken_by']=$this->admin_model->selectWhere('tbl_customer',$where);
+        $where_event =array('event_id'=>$event_id);
+        $data['event_detail']=$this->admin_model->selectWhere('tbl_event',$where_event); 
+        $where_board = 'status = 1';
+        $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
+        $data['active_sidebar']='event_edit';
+        $this->load->view('common/header');
+        $this->load->view('common/sidebar',$data);
+        $this->load->view('event/event_edit_view',$data);
+        $this->load->view('common/footer');
+    }
 }

@@ -386,5 +386,21 @@
 			return $query->result();
 	}
 
+    
+    function get_single_coure_detail($course_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->common_model->get_single_coure_detail($course_id);
+        if($data)
+        {
+            return $data[0];
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+
 
 

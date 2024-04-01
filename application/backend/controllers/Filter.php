@@ -10,6 +10,7 @@ public function __construct()
     $this->load->helper('form');
     $this->load->model('common_model');
     $this->load->model('coupon_model');
+    $this->load->model('admin_model');
   
 }
 
@@ -283,7 +284,7 @@ public function __construct()
       $starttimestamp = strtotime($event_from_time);
 	    $endtimestamp = strtotime($event_to_time);
 	    $difference = abs($endtimestamp - $starttimestamp)/3600;
-      print_R($difference);
+     
      
 
       $data = array(
@@ -292,7 +293,7 @@ public function __construct()
         'event_date' => $event_date,
         'event_start_time' => $event_from_time,
         'event_end_time' => $event_to_time,
-        'total_duration' => 10,
+        'total_duration' => $difference,
         'event_description' => $event_description,
         'status' => $event_status,
         'taken_by' => $event_role,
@@ -313,6 +314,75 @@ public function __construct()
     }
      
   }
+
+  function update_event_detail()
+  {
+    $product_id = '';
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $course_id= $this->input->post('course');
+    $batch_id= $this->input->post('batch');
+    
+    $event_code= $this->input->post('event_code');
+    $event_title =  $this->input->post('event_title');
+    $event_date =  $this->input->post('event_date');
+    $event_from_time =  $this->input->post('event_from_time');
+    $event_to_time =  $this->input->post('event_to_time');
+    $event_description =  $this->input->post('event_description');
+    $event_status =  $this->input->post('event_status');
+    $event_role = $this->input->post('event_role');
+    $event_type = $this->input->post('event_type');
+    $event_id = $this->input->post('event_id');
+  
+    $res = '';
+    $res = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
+    if($res)
+    {
+      $product_id = $res[0]->product_id;
+    }
+    if($product_id)
+    {
+
+      $starttimestamp = strtotime($event_from_time);
+	    $endtimestamp = strtotime($event_to_time);
+	    $difference = abs($endtimestamp - $starttimestamp)/3600;
+     
+     
+
+      $data = array(
+        'event_code' => $event_code,
+        'event_title' => $event_title,
+        'event_date' => $event_date,
+        'event_start_time' => $event_from_time,
+        'event_end_time' => $event_to_time,
+        'total_duration' => $difference,
+        'event_description' => $event_description,
+        'status' => $event_status,
+        'taken_by' => $event_role,
+        'product_id' => $product_id,
+        'created_on' => date('Y-m-d H:i:s'),
+        'created_by' => '123', 
+        'event_type' => $event_type
+      );
+    
+     
+     // $user_id = $this->common_model->insertData('tbl_event', $data);
+     $where=array('event_id'=>$event_id);
+   
+     $this->admin_model->updateData('tbl_event',$data,$where);
+      http_response_code(200);
+      echo json_encode(array("status"=>"1","data"=>"Event Data Updated Successfully")); 
+    }
+    else
+    {
+      http_response_code(200);
+      echo json_encode(array("status"=>"1","data"=>" Invaild Data ")); 
+    }
+     
+  }
+
 
  
 }

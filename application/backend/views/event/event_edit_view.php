@@ -1,3 +1,7 @@
+<?php
+$get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id);
+//PRINT_r($get_single_course_detail);
+?>
 <div class="app-content  my-3 my-md-5">
                     <div class="side-app">
                         <div class="page-header">
@@ -12,25 +16,24 @@
                         </div>
                         <!--/Page-Header-->
                         
-
+<?php
+//print_R($event_detail);
+?>
                         <div class="row">                           
                             <!-- end col -->
                             <div class="col-xl-12">
                                  <?php message(); ?>
                                 <div class="card m-b-20">
                                     <div class="card-header">
-                                        <h3 class="card-title">Add Event</h3>
+                                        <h3 class="card-title">Edit Event</h3>
                                     </div>
                                     <div class="card-body mb-0">
                                     
                                             
-                                             <?php $brand_id = $this->input->get('brand_id', TRUE); ?>
-                                             <?php
-                                                $resp_get_speaker_role_list = '';
-                                                $resp_get_speaker_role_list = get_speaker_role_list();
-                                                $event_code = (rand(10298,100));
-                                                $event_code = 'EVT-'.$event_code; 
-                                           ?>
+                                            <?php
+                                            $resp_get_speaker_role_list = '';
+                                            $resp_get_speaker_role_list = get_speaker_role_list();
+                                            ?>
 
                                              <div class="row clearfix">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
@@ -39,7 +42,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="text" class="form-control" id="code" value="<?php echo $event_code ?>" name="code" required placeholder="Event Code" maxlength="40" readonly = 'true'>
+                                                            <input type="text" class="form-control" id="code" value="<?php echo $event_detail[0]->event_code ?>" name="code" required placeholder="Event Code" maxlength="40" readonly = 'true'>
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -52,7 +55,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="text" class="form-control" id="title" name="title" required placeholder="Title" maxlength="40">
+                                                            <input type="text" class="form-control" id="title" value="<?php echo $event_detail[0]->event_title ?>" name="title" required placeholder="Title" maxlength="40">
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -65,7 +68,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="date" class="form-control" id="event_date" name="date" required placeholder="date" min="<?php echo date('Y-m-d'); ?>">
+                                                            <input type="date" class="form-control" id="event_date" value="<?php echo $event_detail[0]->event_date ?>" name="date" required placeholder="date" min="<?php echo date('Y-m-d'); ?>">
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -78,7 +81,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="time" class="form-control" id="from_time" name="from_time" required placeholder="From Time" maxlength="10">
+                                                            <input type="time" class="form-control" id="from_time" name="from_time" value="<?php echo $event_detail[0]->event_start_time ?>" required placeholder="From Time" maxlength="10">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -90,7 +93,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="time" class="form-control" id="to_time" name="to_time" required placeholder="To Time" maxlength="10">
+                                                            <input type="time" class="form-control" id="to_time" name="to_time" value="<?php echo $event_detail[0]->event_end_time ?>" required placeholder="To Time" maxlength="10">
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -103,8 +106,8 @@
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="event_type" id="event_type" required>
-                                                          <option value="1" >Online</option>
-                                                          <option value="0" >Offline</option>
+                                                          <option value="1" <?php if(@$event_detail['0']->status=="1"){ echo "selected"; } ?>>Online</option>
+                                                          <option value="0" <?php if(@$event_detail['0']->status=="0"){ echo "selected"; } ?>>Offline</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -118,7 +121,7 @@
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="role_id" id="role_id"  onchange="doAction(this)"  required>
                                                           <?php foreach ($resp_get_speaker_role_list as  $role) { ?>
-                                                              <option value="<?php echo $role->customer_id ?>"><?php echo $role->firstname ?></option>
+                                                              <option value="<?php echo $role->customer_id ?>" <?php if(@$role->customer_id == $event_detail[0]->taken_by){ echo "selected"; } ?>><?php echo $role->firstname ?></option>
                                                          <?php } ?>
                                                         </select>
                                                     </div>
@@ -132,7 +135,7 @@
                                                         <label class="form-label">Event Description</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <textarea class="form-control"  name="event_desc" id="event_desc" Placeholder= "Event Description" required=""  rows="2"></textarea>
+                                                        <textarea class="form-control"  name="event_desc" id="event_desc" Placeholder= "Event Description" required=""  rows="2"><?php echo $event_detail[0]->event_description ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,7 +171,7 @@
                                                         <select class="form-control" name="brand" id="filter_segment" >
                                                         <option value= "" >Select</option>
                                                         <?php foreach($res_filter_segment as $segments){?>
-                                                            <option value="<?php echo $segments->id; ?>">
+                                                            <option value="<?php echo $segments->id; ?>" <?php if(@$segments->id == $get_single_course_detail->segment_id){ echo "selected"; } ?>>
                                                                 <?php echo $segments->segment_name; ?></option>
                                                             <?php } ?>
                                                         </select>
@@ -184,7 +187,7 @@
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control brand" name="brand" id="brand" required>
                                                         <?php foreach($res_filter_brand as $brands){?>
-                                                        <option value="<?php echo $brands->brand_id; ?>">
+                                                        <option value="<?php echo $brands->brand_id; ?>" <?php if(@$brands->brand_id == $get_single_course_detail->brand_id){ echo "selected"; } ?>>
                                                             <?php echo $brands->brand_name; ?></option>
                                                         <?php } ?>
                                                         </select>
@@ -214,7 +217,7 @@
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
                                                     <?php foreach($res_filter_class as $classes){?>
-                                                        <option value="<?php echo $classes->class_id; ?>">
+                                                        <option value="<?php echo $classes->class_id; ?>"  <?php if(@$classes->class_id == $get_single_course_detail->class_id){ echo "selected"; } ?>>
                                                             <?php echo $classes->title; ?></option>
                                                         <?php } ?>
                                                         </select>
@@ -230,7 +233,7 @@
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="filter_course_dropdown" id="filter_course_dropdown" required>
                                                         <?php foreach($res_filter_course as $classes){?>
-                                                            <option value="<?php echo $classes->id; ?>" >
+                                                            <option value="<?php echo $classes->id; ?>"  <?php if(@$classes->id == $get_single_course_detail->course_id){ echo "selected"; } ?>>
                                                             <?php echo $classes->course_name; ?></option>
                                                             <?php } ?>
                                                         </select>
@@ -246,7 +249,7 @@
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="batch" id="batch" required>
                                                         <?php foreach($batch_records as $batches){?>
-                                                            <option value="<?php echo $batches->batch_id; ?>">
+                                                            <option value="<?php echo $batches->batch_id; ?>" <?php if(@$batches->batch_id == $get_single_course_detail->batch_id){ echo "selected"; } ?>>
                                                                 <?php echo $batches->batch_name; ?></option>
                                                             <?php } ?>
                                                         </select>
@@ -265,10 +268,20 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                
-
+                <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+                                           
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+                                            <input type="hidden" value = "<?php echo $get_single_course_detail->brand_id ?>" class = "brand" id = "brand">
+                                            <input type="hidden" value = "<?php echo $event_detail[0]->event_id ?>" class = "event_id" id = "event_id">
+                                            
+                                           
 <!-- JQuery js-->
 <script src="<?php echo base_url(); ?>admin/assets/js/jquery-3.2.1.min.js"> </script>
 <script>
@@ -318,6 +331,7 @@
         var filter_course_id = $('.filter_course').val();
         var filter_batch_id = $('.filter_batch').val();
         var filter_board_id = $('.filter_board').val();
+        var event_id = $('.event_id').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
         var event_code ='';
@@ -603,7 +617,7 @@
             
             $.ajax({
               type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/add_event_detail",
+               url: "<?php echo base_url(); ?>filter/update_event_detail",
               data:{
                 segment:filter_segment_id,
                // board: filter_board_id,
@@ -621,6 +635,7 @@
                 event_status: event_status,
                 event_role : event_role,
                 event_type : event_type,
+                event_id : event_id,
 
 
               }, 
