@@ -33,6 +33,9 @@ class admin_event extends CI_Controller
     }
     function add_event()
     {
+        $where_board = 'status = 1';
+        $data['board_records'] = $this->common_model->selectWhereorderby('tbl_board', $where_board, 'board_name', 'ASC');
+        
         $where = "customer_type = 5 ";
         $data['taken_by']=$this->admin_model->selectWhere('tbl_customer',$where);
         $where_board = 'status = 1';

@@ -157,7 +157,18 @@
                                          $res_filter_class = getseg_class_list($segment);
                                          $res_filter_course = getseg_crse_list($segment);
 
-                                        ?>
+                                        if($board_records)
+                                        {
+                                            $filter_cbsc_id = $board_records[0]->board_id ;
+                                            $filter_cbsc_name = $board_records[0]->board_name ;
+                                            $filter_icsc_id = $board_records[1]->board_id;
+                                            $filter_icsc_name = $board_records[1]->board_name;
+                                        }
+                                            $filter_online_id = '1';
+                                            $filter_online_name = 'Online';
+                                            $filter_offline_id = '2';
+                                            $filter_offline_name = 'Offline';
+                                    ?>
                                           
                                             <div class="form-group ">
                                                 <div class="row">
@@ -172,6 +183,25 @@
                                                                 <?php echo $segments->segment_name; ?></option>
                                                             <?php } ?>
                                                         </select>
+                                   <!-- <div class="btn-group btn-toggle filter-toggle-box">
+                                        <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == 1){ echo 'active';} ?>"
+                                        id="cbsc-toggle">
+                                        <label><?php echo $filter_cbsc_name ?> </label>
+
+                                        <input class="btn btn-lg btn-default" type="radio" name="product_type"
+                                            <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
+                                            id="cbsc" value="2" >
+                                        </div>
+                                    
+                                        <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == 1){ echo 'active';} ?>"
+                                            id="icsc-toggle">
+                                            <label><?php echo $filter_icsc_name ?></label>
+                                            <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
+                                                <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
+                                                id="icsc" value="1" >
+                                        </div>
+                                </div>  -->
+
                                                     </div>
                                                 </div>
                                             </div>
