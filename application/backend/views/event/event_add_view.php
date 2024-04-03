@@ -156,18 +156,8 @@
                                          $res_filter_brand = getseg_brand_list($segment);
                                          $res_filter_class = getseg_class_list($segment);
                                          $res_filter_course = getseg_crse_list($segment);
-
-                                        if($board_records)
-                                        {
-                                            $filter_cbsc_id = $board_records[0]->board_id ;
-                                            $filter_cbsc_name = $board_records[0]->board_name ;
-                                            $filter_icsc_id = $board_records[1]->board_id;
-                                            $filter_icsc_name = $board_records[1]->board_name;
-                                        }
-                                            $filter_online_id = '1';
-                                            $filter_online_name = 'Online';
-                                            $filter_offline_id = '2';
-                                            $filter_offline_name = 'Offline';
+                                         $res_filter_board = getallBoardList();
+                                        
                                     ?>
                                           
                                             <div class="form-group ">
@@ -183,24 +173,6 @@
                                                                 <?php echo $segments->segment_name; ?></option>
                                                             <?php } ?>
                                                         </select>
-                                   <!-- <div class="btn-group btn-toggle filter-toggle-box">
-                                        <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == 1){ echo 'active';} ?>"
-                                        id="cbsc-toggle">
-                                        <label><?php echo $filter_cbsc_name ?> </label>
-
-                                        <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                            <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
-                                            id="cbsc" value="2" >
-                                        </div>
-                                    
-                                        <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == 1){ echo 'active';} ?>"
-                                            id="icsc-toggle">
-                                            <label><?php echo $filter_icsc_name ?></label>
-                                            <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                                <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
-                                                id="icsc" value="1" >
-                                        </div>
-                                </div>  -->
 
                                                     </div>
                                                 </div>
@@ -221,25 +193,46 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="board-k12" style="display:none">
+                                                <div class="form-group ">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                            <label class="form-label">Board</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                        <select class="form-control" name="filter_board_online_dropdown" id="filter_board_online_dropdown" required>
+                                                            <option value= "" >Select</option>
+                                                            <option value="1" >Online</option>
+                                                            <option value="0" >Offline</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             
+                                            <div class="board-other" style="display:none">
                                             <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
                                                         <label class="form-label">Board</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                    <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
-                                                        <option value="1" >Online</option>
-                                                        <option value="0" >Offline</option>
+                                                    <select class="form-control" name="filter_board_cbse_dropdown" id="filter_board_cbse_dropdown" required>
+                                                    <option value= "" >Select</option>
+                                                    <?php foreach($res_filter_board as $board){?>
+                                                        <option value="<?php echo $board->board_id; ?>">
+                                                            <?php echo $board->board_name; ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
 
                                             <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Class</label>
+                                                        <label class="form-label cal-h3">Class</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
@@ -300,7 +293,7 @@
                
 
 <!-- JQuery js-->
-<script src="<?php echo base_url(); ?>admin/assets/js/jquery-3.2.1.min.js"> </script>
+<script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js"> </script>
 <script>
     
     
@@ -347,8 +340,8 @@
         var filter_class_id = $('.filter_class').val();
         var filter_course_id = $('.filter_course').val();
         var filter_batch_id = $('.filter_batch').val();
-        var filter_board_id = $('.filter_board').val();
-        var filter_online_offline = $('.filter_online_offline').val();
+        var filter_board_id = '';
+        //var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
         var event_code ='';
         var event_title = '';
@@ -359,8 +352,11 @@
         var event_role = '';
         var event_description = '';
         var event_status = '';
+       
 
+        console.log(filter_segment_id);
           /** Start Filter Section */
+       
         if(filter_segment_id == 1)
         {
             $('.board-k12').css('display', 'block');
@@ -370,9 +366,11 @@
         {
             $('.board-other').css('display', 'block');
             $('.board-k12').css('display', 'none');
-            filter_board_id = filter_online_offline;
+            //filter_board_id = filter_online_offline;
             
         }
+        $('.board-k12').css('display', 'none');
+          $('.board-other').css('display', 'none');
 
         $("#filter_segment").change(function()
         { 
@@ -411,6 +409,18 @@
             filter_class(filter_brand_id,filter_segment_id);
         });
 
+        $("#filter_board_online_dropdown").change(function()
+        {
+           filter_board_id =  $(this).val();
+           filter_class(filter_brand_id,filter_segment_id);
+          
+        });
+        $("#filter_board_cbse_dropdown").change(function()
+        {
+           filter_board_id =  $(this).val();
+           filter_class(filter_brand_id,filter_segment_id);
+          
+        });
 
         $("#filter_class_dropdown").change(function()
         {
@@ -497,8 +507,7 @@
                url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
               data:{
                 segment:segment_id,
-                //board: board_id,
-                board: 1,
+                board: board_id,
                 class: class_id,
                 brand_id : brand_id,
                // batch: filter_batch_id,
@@ -534,8 +543,7 @@
                url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
               data:{
                 segment:segment_id,
-               // board: board_id,
-               board: 1,
+                board: board_id,
                 class: class_id,
                 brand_id : brand_id,
                 course : course_id,
@@ -560,12 +568,12 @@
 
         $(".submit_event").click(function()
         {
-             event_code = $('#code').val();
-             event_title = $('#title').val();
-             event_date = $('#event_date').val();
-             event_from_time = $('#from_time').val();
-             event_to_time = $('#to_time').val();
-             event_type = $('#event_type').val();
+            event_code = $('#code').val();
+            event_title = $('#title').val();
+            event_date = $('#event_date').val();
+            event_from_time = $('#from_time').val();
+            event_to_time = $('#to_time').val();
+            event_type = $('#event_type').val();
             event_role =  $('#role_id').val();
             event_description =  $('#event_desc').val();
             event_status = $('#status').val();
@@ -599,17 +607,16 @@
                 alert("Event Description Cannot Be Empty");    
                 return false;
             }
-
             if(!filter_segment_id)
                 {
-                   alert("Select Segement");    
+                   alert("Select Segment");    
                    return false;
                 }
-               /* if(!filter_board_id)
+                if(!filter_board_id)
                 {
                    alert("Select Board");          
                    return false;            
-                }*/
+                }
                 if(!filter_class_id)
                 {   
                     alert("Select Class");        
@@ -636,8 +643,7 @@
                url: "<?php echo base_url(); ?>filter/add_event_detail",
               data:{
                 segment:filter_segment_id,
-               // board: filter_board_id,
-                board: 1,
+                board: filter_board_id,
                 class: filter_class_id,
                 brand_id : filter_brand_id,
                 course : filter_course_id,
@@ -651,8 +657,6 @@
                 event_status: event_status,
                 event_role : event_role,
                 event_type : event_type,
-
-
               }, 
               dataType: "json",   
               success: function (response) {

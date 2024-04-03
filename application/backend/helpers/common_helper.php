@@ -207,6 +207,13 @@
         $data=$CI->admin_model->get_segment_list();
         return $data;        
     }
+     
+    function getallBoardList()
+    {
+        $CI =& get_instance();
+        $data=$CI->admin_model->getallBoardList();
+        return $data;          
+    }
     function get_speaker_role_list()
     {
         $CI =& get_instance();

@@ -1,6 +1,6 @@
 <?php
 $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id);
-//PRINT_r($get_single_course_detail);
+
 ?>
 <div class="app-content  my-3 my-md-5">
                     <div class="side-app">
@@ -31,6 +31,7 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                     
                                             
                                             <?php
+                                            
                                             $resp_get_speaker_role_list = '';
                                             $resp_get_speaker_role_list = get_speaker_role_list();
                                             ?>
@@ -106,8 +107,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="event_type" id="event_type" required>
-                                                          <option value="1" <?php if(@$event_detail['0']->status=="1"){ echo "selected"; } ?>>Online</option>
-                                                          <option value="0" <?php if(@$event_detail['0']->status=="0"){ echo "selected"; } ?>>Offline</option>
+                                                          <option value="1" <?php if(@$event_detail['0']->event_type=="1"){ echo "selected"; } ?>>Online</option>
+                                                          <option value="0" <?php if(@$event_detail['0']->event_type=="0"){ echo "selected"; } ?>>Offline</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -139,7 +140,6 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
@@ -147,8 +147,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                         <select class="form-control" name="status" id="status" required>
-                                                          <option value="1" >Active</option>
-                                                          <option value="0" >Inactive</option>
+                                                          <option value="1"  <?php if(@$event_detail['0']->status=="1"){ echo "selected"; } ?>>Active</option>
+                                                          <option value="0"  <?php if(@$event_detail['0']->status=="0"){ echo "selected"; } ?>>Inactive</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -159,7 +159,7 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                          $res_filter_brand = getseg_brand_list($segment);
                                          $res_filter_class = getseg_class_list($segment);
                                          $res_filter_course = getseg_crse_list($segment);
-
+                                         $res_filter_board = getallBoardList();
                                         ?>
                                           
                                             <div class="form-group ">
@@ -194,25 +194,47 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                      
+                                            <div class="board-k12" style="display:none">
+                                                <div class="form-group ">
+                                                    <div class="row">
+                                                        <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                            <label class="form-label">Board</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                        <select class="form-control" name="filter_board_online_dropdown" id="filter_board_online_dropdown" required>
+                                                            <option value= "" >Select</option>
+                                                            <option value="1" >Online</option>
+                                                            <option value="0" >Offline</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="board-other" style="display:none">
                                             <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
                                                         <label class="form-label">Board</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                    <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
-                                                        <option value="1" >Online</option>
-                                                        <option value="0" >Offline</option>
+                                                    <select class="form-control" name="filter_board_cbse_dropdown" id="filter_board_cbse_dropdown" required>
+                                                    <option value= "" >Select</option>
+                                                    <?php foreach($res_filter_board as $board){?>
+                                                        <option value="<?php echo $board->board_id; ?>">
+                                                            <?php echo $board->board_name; ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            </div>
+                                       
                                             <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Class</label>
+                                                        <label class="form-label cal-h3">Class</label>
                                                     </div>
                                                     <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
@@ -283,7 +305,7 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                             
                                            
 <!-- JQuery js-->
-<script src="<?php echo base_url(); ?>admin/assets/js/jquery-3.2.1.min.js"> </script>
+<script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js"> </script>
 <script>
     
     
@@ -354,9 +376,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
         {
             $('.board-other').css('display', 'block');
             $('.board-k12').css('display', 'none');
-            filter_board_id = filter_online_offline;
-            
         }
+       
 
         $("#filter_segment").change(function()
         { 
@@ -366,10 +387,14 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
            if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
            {
                  $(".cal-h3").html('CLASS');
+                 $('.board-k12').css('display', 'block');
+                $('.board-other').css('display', 'none');
            }
            else
            {
                 $(".cal-h3").html('COURSE SEGMENT');
+                $('.board-other').css('display', 'block');
+                $('.board-k12').css('display', 'none');
            }
             filter_segment_id =  $(this).val();
             if(filter_segment_id == "")
@@ -407,6 +432,19 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
             filter_course_id = $(this).val();
             filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
 
+        });
+
+        $("#filter_board_online_dropdown").change(function()
+        {
+           filter_board_id =  $(this).val();
+           filter_class(filter_brand_id,filter_segment_id);
+          
+        });
+        $("#filter_board_cbse_dropdown").change(function()
+        {
+           filter_board_id =  $(this).val();
+           filter_class(filter_brand_id,filter_segment_id);
+          
         });
 
         function filter_brand(segment_id)
@@ -481,8 +519,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
               data:{
                 segment:segment_id,
-                //board: board_id,
-                board: 1,
+                board: board_id,
+               // board: 1,
                 class: class_id,
                 brand_id : brand_id,
                // batch: filter_batch_id,
@@ -518,8 +556,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
               data:{
                 segment:segment_id,
-               // board: board_id,
-               board: 1,
+                board: board_id,
+               //board: 1,
                 class: class_id,
                 brand_id : brand_id,
                 course : course_id,
@@ -620,8 +658,8 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                url: "<?php echo base_url(); ?>filter/update_event_detail",
               data:{
                 segment:filter_segment_id,
-               // board: filter_board_id,
-                board: 1,
+                board: filter_board_id,
+               // board: 1,
                 class: filter_class_id,
                 brand_id : filter_brand_id,
                 course : filter_course_id,

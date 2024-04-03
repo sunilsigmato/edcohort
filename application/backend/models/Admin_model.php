@@ -260,6 +260,17 @@ class admin_model extends CI_Model
             return $query->result();
         }
     }
+    function getallBoardList()
+    {
+        $this->db->select('board_id  ,board_name');
+        $this->db->from('tbl_board c');
+         $this->db->where('status',1);
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
 
     function get_speaker_role_list()
     {
