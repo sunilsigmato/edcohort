@@ -553,14 +553,14 @@ if($get_breadcrumb)
                                         </div>
                                     </h2>
                                     <?php   $current = strtotime(date("Y-m-d"));
-               $date    = strtotime($review->product_review_added);
-               $today = '';
-               $datediff = $date - $current;
-               $difference = floor($datediff/(60*60*24));
-               if($difference==0)
-               {
-                 $today = 'today';
-              } ?>
+                                    $date    = strtotime($review->product_review_added);
+                                    $today = '';
+                                    $datediff = $date - $current;
+                                    $difference = floor($datediff/(60*60*24));
+                                    if($difference==0)
+                                    {
+                                        $today = 'today';
+                                    } ?>
 
                                     <div class="review-rating">
                                         <?php if($review->product_rating == 1){?>

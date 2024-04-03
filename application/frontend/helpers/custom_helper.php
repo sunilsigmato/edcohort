@@ -586,6 +586,20 @@ function getClassName($class_id)
             $data = '';
         }
     }
+    function get_counselling_detail($type)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->counselling_model->get_counselling_detail($type);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
 
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  

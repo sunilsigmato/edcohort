@@ -119,7 +119,7 @@ class Counselling extends CI_Controller {
     }
 
     $order = "product_name ASC";
-    $data['product_list'] = $this->counselling_model->counselling_list($where1, $order);
+    //$data['product_list'] = $this->counselling_model->counselling_list($where1, $order);
 
   ////////////////////////////////////
 
