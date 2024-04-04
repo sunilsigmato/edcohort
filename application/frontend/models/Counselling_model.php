@@ -357,7 +357,7 @@ function get_counselling_detail($type)
         }
         if($type == 'upcoming')
         {
-          $where ='Date(event_date) =>'.$current;
+          $where ="Date(event_date) >'$current'";
         }
         $order_by=' ORDER BY event_date DESC';
 

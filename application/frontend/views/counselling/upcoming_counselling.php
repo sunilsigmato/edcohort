@@ -398,11 +398,11 @@ if($get_breadcrumb)
                             <ul>
                                 <li>
                                     <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
-                                        class="active">Events</a>
+                                        >Events</a>
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">UpComing  Event</a>
+                                    <a href="<?php echo base_url(); ?>upcoming_counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>" class="active">UpComing  Event</a>
                                 </li>
                                 
 
@@ -528,7 +528,7 @@ if($get_breadcrumb)
                 <div class="container">
                  
                     <?php
-                        $type = 'today';
+                        $type = 'upcoming';
                         $res_counselling = get_counselling_detail($type);
                        // print_R($res_counselling);
                                

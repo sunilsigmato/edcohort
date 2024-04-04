@@ -325,7 +325,8 @@ $route['ranking/:any/:any'] = 'ranking';
 $route['ranking/:any/:any/:any'] = 'ranking';
 $route['ranking-submit'] = 'ranking/ranking_submit';
 
-
+//-------- Counselling----//
+$route['upcoming-counselling'] = 'counselling/upcoming_counselling';
 
 /*
 | -------------------------------------------------------------------------

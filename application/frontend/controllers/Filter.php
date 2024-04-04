@@ -250,6 +250,43 @@ public function __construct()
       }
 
   }
+  function event_submit()
+  {
+      $user_id =  $this->input->post('user_id');
+      $event_id =  $this->input->post('event_id');
+      $data = array(
+        'user_id' => $user_id,
+        'event_id' => $event_id,
+        'created_on' => date('Y-m-d H:i:s'),
+      );
+      $where = '';
+      $where.=" user_id = $user_id and event_id = $event_id";
+      $this->db->select('*');
+      $this->db->from('tbl_event_submit_details');
+      $this->db->where($where);
+      $query=$this->db->get();
+
+      $query_counselling_exist =  $this->db->query("select * from tbl_event_submit_details where user_id = $user_id and event_id = $event_id");
+      $res_counselling_exist = $query_counselling_exist->result();
+      if($res_counselling_exist)
+      { 
+        http_response_code(200);
+        echo json_encode(array("status"=>"2","data"=>"Event Already Booked")); 
+      }
+    else
+    {
+      $inser_id = $this->common_model->insertData('tbl_event_submit_details', $data);
+        if($inser_id)
+        {
+          http_response_code(200);
+          echo json_encode(array("status"=>"1","data"=>"Event Booked Successfully")); 
+        }
+        else{
+          http_response_code(200);
+          echo json_encode(array("status"=>"2","data"=>"Invalid Entry")); 
+        }
+    }
+  }
 
  
 }

@@ -181,6 +181,176 @@ class Counselling extends CI_Controller {
     $this->load->view('common/footer');
   }
 
+  function upcoming_counselling($id = '')
+  {
+
+    $course = $this->input->get('course');
+
+  ////Filter data ////////
+
+    $where_category = 'status = 1 and parent_id = 0';
+    $data['category_records'] = $this->common_model->selectWhereorderby('tbl_class',$where_category,'title','ASC');
+
+    $where_brand = 'brand_status = 1';
+    $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
+
+    $where_board = 'status = 1';
+    $data['board_records'] = $this->common_model->selectWhereorderby('tbl_board', $where_board, 'board_name', 'ASC');
+
+    $where_batch = 'status = 1 and batch_end >= NOW()';
+    $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
+
+    $where_class = "status = 1 ";
+    $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+
+   ////Filter////////
+
+  //print_pre($_GET);
+
+  $where =" c_status = 1  and c_date >= CURDATE()";
+    //$where = "product_status = 'active'";
+
+  $brandID = $this->input->get('brand');
+  $product_type = $this->input->get('product_type');
+  $board = $this->input->get('board');
+  $class = $this->input->get('class');
+  $batch = $this->input->get('batch');
+  $customer_rating = $this->input->get('customer_rating');
+  $date_posted = $this->input->get('date_posted');
+  $cdate = $this->input->get('cdate');
+  $sort_by = $this->input->get('sort_by');
+
+//print_ex($_GET);
+    if ($_GET) {
+
+      if (!empty($brandID)) {
+        $where .= " and PC.brand_id = " . $brandID . " ";
+      }
+      if (!empty($product_type)) {
+        $where .= " and PR.product_type = " . $product_type . " ";
+      }
+      if (!empty($board)) {
+        $where .= " and PC.board_id = " . $board . " ";
+      }
+      if (!empty($class)) {
+        $where .= " and PC.class_id = " . $class . " ";
+      }
+      if (!empty($batch)) {
+        $where .= " and PC.batch_id = " . $batch . " ";
+      }
+      if(!empty($cdate)){
+        $where .= "and PC.c_date = ".$cdate." ";
+      }
+        if (!empty($course)) {
+        $where .= " and PC.product_id = " . $course . " ";
+      }
+
+    } else {
+
+      if (!empty($course)) {
+        $where .= " and PC.product_id = " . $course . " ";
+      }
+
+    }
+
+    $order = " PC.c_id DESC";
+    $offset = 0;
+    $limit = 200;
+    
+    $data['counselling_list'] = $this->counselling_model->counselling_list_limit($where,$limit,$offset,$order);
+    //print_ex($data['counselling_list']);
+
+
+    $where1 = "product_status = 'active'";
+    if ($_POST) {
+
+      if (!empty($brandID)) {
+        $where1 .= " and brand_id = " . $brandID . " ";
+      }
+      if (!empty($product_type)) {
+        $where1 .= " and product_type = " . $product_type . " ";
+      }
+      if (!empty($board)) {
+        $where1 .= " and board_id = " . $board . " ";
+      }
+      if (!empty($class)) {
+        $where1 .= " and class_id = " . $class . " ";
+      }
+      if (!empty($batch)) {
+        $where1 .= " and batch_id = " . $batch . " ";
+      }
+
+    } else {
+
+      if (!empty($course)) {
+        $where1 .= " and product_id = " . $course . " ";
+      }
+
+    }
+
+    $order = "product_name ASC";
+    //$data['product_list'] = $this->counselling_model->counselling_list($where1, $order);
+
+  ////////////////////////////////////
+
+  //print_ex($_POST);
+
+    $wherecounselling = "PC.c_status = 1";
+
+    if (!empty($course)) {
+      $wherecounselling .= " and PC.product_id = " . $course . " ";
+    }
+
+    if (!empty($customer_rating)) {
+      $wherecounselling .= " and PC.product_rating = " . $customer_rating . " ";
+    }
+
+    if (!empty($date_posted)) {
+      $wherecounselling .= " and PC.c_date > " . $date_posted . " ";
+    }
+    $orderby = '';
+    if (!empty($sort_by)) {
+      $orderby = " PC.product_rating " . $sort_by . " ";
+    }
+    $page = 1;
+    $page = $this->input->get('page');
+    $per_page = $this->input->get('per_page');
+    $records_count = $this->counselling_model->getProductcounsellingCount($wherecounselling);
+  //echo $this->db->last_query(); die;
+    $data['records_count'] = @$records_count['0']->counselling_count;
+  // print_ex($data['records_count']);  
+    $per_page = ($per_page) ? $per_page : 9;
+    $config['base_url'] = base_url() . 'counselling?course=' .$course. '&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['total_rows'] = $data['records_count'];
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 2;
+    $config['first_link'] = false;
+    $config['last_link'] = false;
+    $page = ($page) ? $page : 0;
+    $this->pagination->initialize($config);
+
+    $data['page_link'] = $this->pagination->create_links();
+  //$records = $this->jewelry_model->jewelry_list_limit($wherecounselling, $per_page, $page, $order);
+
+    $data['counselling_list'] = $this->counselling_model->getProductcounsellingLimit($wherecounselling,$orderby, $per_page, $page);
+ //  print_ex($data['counselling_list']);  
+  //echo $this->db->last_query();
+    $counsellingCount = $this->counselling_model->getProductcounsellingCount($wherecounselling);
+    $n = @$counsellingCount['0']->counselling_count;
+
+    $data['counselling_count'] = $this->number_format_short($n);
+
+    $this->load->view('common/header',$data);
+    $this->load->view('counselling/upcoming_counselling',$data);
+    $this->load->view('common/footer');
+  }
+
   function counselling_search()
 
   {

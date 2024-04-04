@@ -31,6 +31,22 @@ class admin_event extends CI_Controller
         $this->load->view('common/footer'); 
         
     }
+    function event_submit_details()
+    {
+        $data['active'] = "event";
+       // $current = strtotime(date("Y-m-d"));
+        $current = date('Y-m-d');
+		$where ='Date(event_date) >='.$current;
+		$order_by=' ORDER BY event_date DESC';	
+        $query = $this->db->query("select e.* , es.* from tbl_event e, tbl_event_submit_details es where e.event_id = es.event_id and Date(e.event_date) >='$current' ");
+        $res = $query->result();
+		$data['records']= $res;
+       
+        $this->load->view('common/header');
+        $this->load->view('common/sidebar', $data);
+        $this->load->view('event/event_submit_view' ,$data);
+        $this->load->view('common/footer'); 
+    }
     function add_event()
     {
         $where_board = 'status = 1';

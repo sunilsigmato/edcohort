@@ -408,6 +408,20 @@
             $data = '';
         }
     }
+    function get_user_name($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->common_model->get_user_name($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
 
 
 

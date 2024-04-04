@@ -383,15 +383,11 @@ class Common_model extends CI_Model {
         return $query->result();
     }
 
-	function get_single_coure_detail($course_id)
+	function get_single_coure_detail($id)
 	{
 		$where= '';
         $query = '';
-        $where.=" c.product_id = ".$course_id." and c.product_id = i.product_id";
-        $this->db->select('c.*,i.product_image');
-        $this->db->from('tbl_product c, tbl_product_image i');
-        $this->db->where($where);
-        $query=$this->db->get();
+		$query = $this->db->query("select firstname from tbl_customer where customer_id = $id ");
 		if($query)
 		{
 			return $query->result();
@@ -400,6 +396,26 @@ class Common_model extends CI_Model {
 		{
 			return $query;
 		}
+	}
+
+	function get_user_name($id)
+	{
+		$where= '';
+        $res = '';
+       // $this->db->group_by('c.batch_id');
+        //$sql = $this->db->get_compiled_select();
+		$query = $this->db->query("select firstname from tbl_customer where customer_id = $id");
+		$res = $query->result();
+		/*print_R($res[0]->firstname);
+		exit;*/
+        if($res)
+        {
+            return $res[0]->firstname;
+        }
+        else
+        {
+            return $res;
+        }
 	}
 
 

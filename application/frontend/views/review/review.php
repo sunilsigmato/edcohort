@@ -510,7 +510,7 @@ if($get_breadcrumb)
                                     <a href="<?php echo base_url(); ?>my-review?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">My
                                         Review</a>
                                 </li>
-                                <?php } else{  ?>
+                                <?php } else {  ?>
                                 <li>
                                     <a href="javascript:void(0)" data-bs-effect="effect-scale" data-bs-toggle="modal"
                                         data-bs-target="#login-button">My Review</a>
