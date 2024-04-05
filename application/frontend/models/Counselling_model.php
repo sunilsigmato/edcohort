@@ -344,32 +344,32 @@ function get_subcategory($category)
   return $query->result();      
 }
 
-function get_counselling_detail($type)
+function get_counselling_detail($date_picker,$type,$course)
 {
 
         $where= '';
         $query = '';
        // $current = strtotime(date("Y-m-d"));
-       $current = date('Y-m-d');
+       //$current = date('Y-m-d');
+        $date_picker = date("Y-m-d", strtotime($date_picker));
         if($type == 'today')
         {
-          $where ="Date(event_date) ='$current'";
+          $where ="Date(event_date) ='$date_picker' and product_id ='$course' ";
         }
         if($type == 'upcoming')
         {
-          $where ="Date(event_date) >'$current'";
+          $where ="Date(event_date) >='$date_picker' and product_id ='$course' ";
         }
         $order_by=' ORDER BY event_date DESC';
-
+        
         $this->db->select('*');
         $this->db->from('tbl_event c');
         $this->db->where($where);
         $query=$this->db->get();
-      //print_R($this->db->last_query());
-		if($query)
-		{
-			return $query->result();
-		}
+        if($query)
+        {
+          return $query->result();
+        }
 }
 
 

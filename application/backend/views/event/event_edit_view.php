@@ -160,6 +160,7 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                          $res_filter_class = getseg_class_list($segment);
                                          $res_filter_course = getseg_crse_list($segment);
                                          $res_filter_board = getallBoardList();
+                                         //print_R($res_filter_segment);
                                         ?>
                                           
                                             <div class="form-group ">

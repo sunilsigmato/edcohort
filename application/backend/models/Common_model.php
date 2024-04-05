@@ -383,11 +383,15 @@ class Common_model extends CI_Model {
         return $query->result();
     }
 
-	function get_single_coure_detail($id)
+	function get_single_coure_detail($course_id)
 	{
 		$where= '';
         $query = '';
-		$query = $this->db->query("select firstname from tbl_customer where customer_id = $id ");
+        $where.=" c.product_id = ".$course_id." and c.product_id = i.product_id";
+        $this->db->select('c.*,i.product_image');
+        $this->db->from('tbl_product c, tbl_product_image i');
+        $this->db->where($where);
+        $query=$this->db->get();
 		if($query)
 		{
 			return $query->result();

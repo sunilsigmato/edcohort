@@ -271,6 +271,20 @@ public function __construct()
     $event_status =  $this->input->post('event_status');
     $event_role = $this->input->post('event_role');
     $event_type = $this->input->post('event_type');
+    $link = $this->input->post('link');
+    $image_path = $this->input->post('img_upload');
+    $interest_count = $this->input->post('interested');
+    $brand_image = '';
+    $new_name1 = str_replace(".","",microtime());
+    $new_name=str_replace(" ","_",$new_name1);
+    $file_tmp =$_FILES['img_upload']['tmp_name'];
+    $file=$_FILES['img_upload']['name'];
+    $ext=substr(strrchr($file,'.'),1);
+    if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
+    {
+      move_uploaded_file($file_tmp,"../uploads/brand/".$new_name.".".$ext);
+      $brand_image=$new_name.".".$ext;
+    }
   
     $res = '';
     $res = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
@@ -300,7 +314,12 @@ public function __construct()
         'product_id' => $product_id,
         'created_on' => date('Y-m-d H:i:s'),
         'created_by' => '123', 
-        'event_type' => $event_type
+        'event_type' => $event_type,
+        'link' =>$link,
+        'image_path'=>$brand_image,
+        'interest_count'=>$interest_count
+
+
       );
      
       $user_id = $this->common_model->insertData('tbl_event', $data);

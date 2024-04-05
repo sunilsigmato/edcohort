@@ -150,6 +150,41 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row clearfix">
+                                                <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <label for="">Link</label>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-line ">
+                                                            <input type="text" class="form-control" id="link" name="link" required placeholder="Link" >
+                                                        </div>                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="inputPassword5">Image <span style="color:red">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                         <img id="upload_pic" class="img-thumbnail" src="<?php echo base_url() ?>../camera_icon.png" alt="no-image">
+                                                       <input type="file" name="img_upload" id="img_upload" onchange="readURL(this);" style="outline:none;margin-top:6px" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <label for="">No of Interest Count</label>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-line ">
+                                                            <input type="text" class="form-control" id="interested" name="link" required placeholder="Link" >
+                                                        </div>                                           
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <?php 
                                          $segment = 1;
                                          $res_filter_segment = get_segement();
@@ -309,6 +344,20 @@
           $("#role_div").hide();  
          }
     }
+    function readURL(input)
+    {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#upload_pic')
+                    .attr('src', e.target.result)
+                    .width(160)
+                    .height(140);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     
     $(document).ready(function() {
         var radio_btn_val = '';
@@ -352,7 +401,10 @@
         var event_role = '';
         var event_description = '';
         var event_status = '';
-       
+        var link = '';
+        var img_upload = '';
+        var interested = '';
+
 
         console.log(filter_segment_id);
           /** Start Filter Section */
@@ -577,6 +629,9 @@
             event_role =  $('#role_id').val();
             event_description =  $('#event_desc').val();
             event_status = $('#status').val();
+            link = $('#link').val();
+            img_upload = $('#img_upload').val();
+            interested = $('#interested').val();
             if(!event_code)
             {
                 alert("Event Code Cannot Be Empty");    
@@ -637,6 +692,22 @@
                     alert("Select Batch");
                     return false;
                 }
+                if(!link)
+                {
+                    alert("Event Link Cannot be Empty");
+                    return false;
+                }
+                if(!img_upload)
+                {
+                    alert("Event Image Cannot be Empty");
+                    return false;
+                }
+                if(!interested)
+                {
+                    alert("Interest Count Cannot be Empty");
+                    return false;
+                }
+
             
             $.ajax({
               type : 'POST',    
@@ -657,6 +728,9 @@
                 event_status: event_status,
                 event_role : event_role,
                 event_type : event_type,
+                link : link,
+                img_upload : img_upload,
+                interested : interested
               }, 
               dataType: "json",   
               success: function (response) {

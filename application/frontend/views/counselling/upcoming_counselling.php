@@ -7,7 +7,7 @@ $batch = $this->input->get('batch');
 $customer_rating = $this->input->get('customer_rating');
 $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
-$c_date = $this->input->get('c_date');
+$date_picker = $this->input->get('date_picker');
 $segment = $this->input->get('segment');
 
    // print_ex($_GET);
@@ -365,10 +365,16 @@ if($get_breadcrumb)
                                 </select>
                             </div>
                         </div>
+                        <?php
+                            $month = date('m');
+                            $day = date('d');
+                            $year = date('Y');
+                            $today = $day . '-' . $month . '-' . $year;
+                            ?>
                         <div class="filter-col date-filter">
                                 <h3 class="filter-col-title">Date</h3>
                                 <label for="datepicker">Pick a Date
-                                    <input type="text" name="cdate" id="datepicker" autocomplete="off">
+                                    <input type="text" name="cdate" id="datepicker" value = <?php echo $today ?> class ="datepicker" autocomplete="off">
                                 </label>
                             </div>
                         <div class=" filter-col ">
@@ -402,7 +408,7 @@ if($get_breadcrumb)
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo base_url(); ?>upcoming_counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>" class="active">UpComing  Event</a>
+                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>" class="active">UpComing  Event</a>
                                 </li>
                                 
 
@@ -528,15 +534,25 @@ if($get_breadcrumb)
                 <div class="container">
                  
                     <?php
+                        $tomorrow = date("Y-m-d", strtotime("+1 day"));
                         $type = 'upcoming';
-                        $res_counselling = get_counselling_detail($type);
+                        /*if($date_picker)
+                        {
+                            $res_counselling = get_counselling_detail($date_picker,$type);
+                        }
+                        else
+                        {*/
+                           // $current = date('Y-m-d');
+                            $res_counselling = get_counselling_detail($tomorrow,$type,$course);
+                       // }
+                        //$type = 'today';
+                        
                        // print_R($res_counselling);
                                
                   if($res_counselling)
                    {
                     foreach ($res_counselling as $r) 
                      {    
-                        //print_R($r);
                    ?>
                     <div class="col-md-4 col-sm-6 mb-4">
                         <div class="card-list-con">
@@ -577,7 +593,7 @@ if($get_breadcrumb)
                                         
                                         <?php }else{ ?>
                                         <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary"
-                                            data-bs-target="#login-button">Reply
+                                            data-bs-target="#login-button">Book Event
                                         </a>
                                         <?php } ?>
                             </div>
@@ -918,6 +934,7 @@ if($get_breadcrumb)
             var filter_board_id = $('.filter_board').val();
             var filter_online_offline = $('.filter_online_offline').val();
             var product_id = '';
+            var date_picker ='';
 
              /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -1012,6 +1029,8 @@ if($get_breadcrumb)
         });
         $(".apply_filter").click(function()
         {
+            
+           var date_picker = $('.datepicker').val();
             $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/get_filter_result_detail",
@@ -1022,6 +1041,7 @@ if($get_breadcrumb)
                 brand_id : filter_brand_id,
                 course : filter_course_id,
                 batch: filter_batch_id,
+                date_picker: date_picker,
               }, 
               dataType: "json",   
               success: function (response) {
@@ -1034,7 +1054,7 @@ if($get_breadcrumb)
                         filter_segment_id = response.data[0].segment_id;
                         filter_board_id = response.data[0].board_id;
                         product_id = response.data[0].product_id;
-                        window.location="<?php echo base_url();?>coupon/?course="+product_id+"&segment="+filter_segment_id;
+                        window.location="<?php echo base_url();?>counselling/?course="+product_id+"&segment="+filter_segment_id+"&date_picker="+date_picker;
                    }
               }
            });

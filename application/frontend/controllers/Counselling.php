@@ -793,6 +793,58 @@ function get_counselling_batch()
   }
 }
 
+function event_like()
+{
+  // print_ex($_REQUEST);
+  $this->form_validation->set_rules('event_id', 'event_id', 'trim|required');
+  $this->form_validation->set_rules('user_id', 'user_id', 'trim|required');
+  $this->form_validation->set_rules('action', 'action', 'trim|required');
+  if ($this->form_validation->run() == FALSE) {
+    $errors = validation_errors();
+    // echo json_encode(['message'=>$errors]);
+    $message = $errors;
+    $status = 0;
+    echo json_encode(array('message' => $message, 'status' => $status));
+    exit();
+  }
+  $event_id = $this->input->post('event_id');
+
+  
+  $user_id = $this->input->post('user_id');
+  $action = $this->input->post('action');
+  //print_ex($result);
+  // echo $this->db->last_query(); 
+  $where = 'event_id = ' . $event_id . ' and user_id = ' . $user_id . '';
+  $record = $this->common_model->selectWhereorderby('tbl_event_like', $where, 'like_id', 'ASC');
+  if ($record) {
+    //echo $record['0']->prl_id; die;
+    $this->common_model->deleteData('tbl_event_like', array('like_id' => $record['0']->like_id));
+    if ($record['0']->action != $action) {
+      $data = array(
+        'event_id' => $event_id,
+        'user_id' => $user_id,
+        'action' => $action,
+        'status' => 1,
+        'date_added' => date('Y-m-d H:i:s'),
+      );
+      $user_id = $this->common_model->insertData('tbl_event_like', $data);
+    }
+  } else {
+    $data = array(
+      'event_id' => $event_id,
+      'user_id' => $user_id,
+      'action' => $action,
+      'status' => 1,
+      'date_added' => date('Y-m-d H:i:s'),
+    );
+    $user_id = $this->common_model->insertData('tbl_event_like', $data);
+  }
+  $message = 'Like submitted successfully';
+  $status = 1;
+  echo json_encode(array('message' => $message, 'status' => $status));
+  exit();
+}
+
 }
 
 // function list_image($folder,$product_id)

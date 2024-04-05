@@ -586,11 +586,11 @@ function getClassName($class_id)
             $data = '';
         }
     }
-    function get_counselling_detail($type)
+    function get_counselling_detail($date_picker,$type,$course)
     {
         $data = '';
         $CI =& get_instance();
-        $data=$CI->counselling_model->get_counselling_detail($type);
+        $data=$CI->counselling_model->get_counselling_detail($date_picker,$type,$course);
         if($data)
         {
             return $data;
