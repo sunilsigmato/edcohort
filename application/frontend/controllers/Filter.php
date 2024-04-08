@@ -259,12 +259,20 @@ public function __construct()
         'event_id' => $event_id,
         'created_on' => date('Y-m-d H:i:s'),
       );
-      $where = '';
-      $where.=" user_id = $user_id and event_id = $event_id";
-      $this->db->select('*');
-      $this->db->from('tbl_event_submit_details');
-      $this->db->where($where);
-      $query=$this->db->get();
+      $interest_db_count = '';
+
+      $query_event_exist =  $this->db->query("select interest_count from tbl_event where event_id = $event_id");
+      $res_counselling_exist = $query_event_exist->result();
+   
+      if($res_counselling_exist)
+      {
+          $interest_db_count = $res_counselling_exist[0]->interest_count;
+        
+      }
+      if($interest_db_count != '')
+      {
+        $interest_db_count = $interest_db_count + 1;
+      }
 
       $query_counselling_exist =  $this->db->query("select * from tbl_event_submit_details where user_id = $user_id and event_id = $event_id");
       $res_counselling_exist = $query_counselling_exist->result();
@@ -278,12 +286,18 @@ public function __construct()
       $inser_id = $this->common_model->insertData('tbl_event_submit_details', $data);
         if($inser_id)
         {
-          http_response_code(200);
-          echo json_encode(array("status"=>"1","data"=>"Event Booked Successfully")); 
+            $data_event = array(
+              'interest_count'=>$interest_db_count,
+            );
+            $where=array('event_id'=>$event_id);
+            $this->common_model->updateData('tbl_event',$data_event,$where);
+            http_response_code(200);
+            echo json_encode(array("status"=>"1","data"=>"Event Booked Successfully")); 
         }
         else{
-          http_response_code(200);
-          echo json_encode(array("status"=>"2","data"=>"Invalid Entry")); 
+
+            http_response_code(200);
+            echo json_encode(array("status"=>"2","data"=>"Invalid Entry")); 
         }
     }
   }

@@ -180,7 +180,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-6 col-12">
                                                     <div class="form-group">
                                                         <div class="form-line ">
-                                                            <input type="text" class="form-control" id="interested" name="link" required placeholder="Link" >
+                                                            <input type="text" class="form-control" id="interested" name="Interest Count" required placeholder="Interest Count" >
                                                         </div>                                           
                                                     </div>
                                                 </div>
@@ -708,31 +708,40 @@
                     return false;
                 }
 
+     /*var fileInput = $('#img_upload')[0].files[0];
+        var formData = new FormData();
+        formData.append('image', fileInput)
+                console.log(formData);*/
+
+                var file_data = $('#img_upload').prop('files')[0];
+                        var form_data = new FormData();
+                        form_data.append('file', file_data);
+                        form_data.append('segment', filter_segment_id);
+                        form_data.append('board', filter_board_id);
+                        form_data.append('class', filter_class_id);
+                        form_data.append('brand_id', filter_brand_id);
+                        form_data.append('course', filter_course_id);
+                        form_data.append('batch', filter_batch_id);
+                        form_data.append('event_code', event_code);
+                        form_data.append('event_title', event_title);
+                        form_data.append('event_date', event_date);
+                        form_data.append('event_from_time', event_from_time);
+                        form_data.append('event_to_time', event_to_time);
+                        form_data.append('event_description', event_description);
+                        form_data.append('event_status', event_status);
+                        form_data.append('event_role', event_role);
+                        form_data.append('event_type', event_type);
+                        form_data.append('link', link);
+                        form_data.append('interested', interested);
+           
             
             $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/add_event_detail",
-              data:{
-                segment:filter_segment_id,
-                board: filter_board_id,
-                class: filter_class_id,
-                brand_id : filter_brand_id,
-                course : filter_course_id,
-                batch: filter_batch_id,
-                event_code : event_code,
-                event_title : event_title,
-                event_date : event_date,
-                event_from_time : event_from_time,
-                event_to_time : event_to_time,
-                event_description : event_description,
-                event_status: event_status,
-                event_role : event_role,
-                event_type : event_type,
-                link : link,
-                img_upload : img_upload,
-                interested : interested
-              }, 
-              dataType: "json",   
+               data: form_data,
+               Type: "json",   
+               contentType: false,
+               processData: false,
               success: function (response) {
                    console.log(response);
                    

@@ -153,6 +153,58 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="row clearfix">
+                                                <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <label for="">Link</label>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-line ">
+                                                            <input type="text" class="form-control" value="<?php echo $event_detail[0]->link ?>" id="link" name="link" required placeholder="Link" >
+                                                        </div>                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="inputPassword5">Image <span style="color:red">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                    <input type="hidden" name="hid_image" id="hid_image" value="<?php echo $event_detail[0]->image_path; ?>">
+                                                    <?php
+                                                         $preview_image = '';
+                                                         $currentUrl = base_url();  // Your current URL
+                                                         // Use dirname to navigate one step back in the URL
+                                                         $newUrl = dirname($currentUrl);
+                                                          if($event_detail[0]->image_path!=""){ 
+                                                            $preview_image = $newUrl.'/uploads/event/'.$event_detail[0]->image_path;
+                                                            ?>
+                                                          <img id="upload_pic" width="100" height="100" class="img-thumbnail" src="<?php echo base_url(); ?>../uploads/event/<?php echo $event_detail[0]->image_path; ?>" alt="no-image" onclick="showImagePreview()">
+                                                        <?php } else{  
+                                                            $preview_image = $newUrl.'/camera_icon.png';
+                                                            ?>
+
+                                                         <img id="upload_pic" class="img-thumbnail" src="<?php echo base_url() ?>../camera_icon.png" alt="no-image">
+                                                         <?php } ?>    
+                                                       <input type="file" name="img_upload" id="img_upload" onchange="readURL(this);" style="outline:none;margin-top:6px" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <label for="">No of Interest Count</label>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-line ">
+                                                            <input type="text" class="form-control" id="interested" value="<?php echo $event_detail[0]->interest_count ?>" name="Interest Count" required placeholder="Interest Count" >
+                                                        </div>                                           
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         <?php 
                                          $segment = 1;
                                          $res_filter_segment = get_segement();
@@ -372,12 +424,26 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
         {
             $('.board-k12').css('display', 'block');
             $('.board-other').css('display', 'none');
+            $(".cal-h3").html('CLASS');
         }
         else
         {
             $('.board-other').css('display', 'block');
             $('.board-k12').css('display', 'none');
+            $(".cal-h3").html('COURSE SEGMENT');
         }
+         /*if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
+           {
+                 $(".cal-h3").html('CLASS');
+                 $('.board-k12').css('display', 'block');
+                $('.board-other').css('display', 'none');
+           }
+           else
+           {
+                $(".cal-h3").html('COURSE SEGMENT');
+                $('.board-other').css('display', 'block');
+                $('.board-k12').css('display', 'none');
+           }*/
        
 
         $("#filter_segment").change(function()
@@ -583,15 +649,18 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
 
         $(".submit_event").click(function()
         {
-             event_code = $('#code').val();
-             event_title = $('#title').val();
-             event_date = $('#event_date').val();
-             event_from_time = $('#from_time').val();
-             event_to_time = $('#to_time').val();
-             event_type = $('#event_type').val();
+            event_code = $('#code').val();
+            event_title = $('#title').val();
+            event_date = $('#event_date').val();
+            event_from_time = $('#from_time').val();
+            event_to_time = $('#to_time').val();
+            event_type = $('#event_type').val();
             event_role =  $('#role_id').val();
             event_description =  $('#event_desc').val();
             event_status = $('#status').val();
+            link = $('#link').val();
+            img_upload = $('#img_upload').val();
+            interested = $('#interested').val();
             if(!event_code)
             {
                 alert("Event Code Cannot Be Empty");    
@@ -653,32 +722,48 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
                     alert("Select Batch");
                     return false;
                 }
+                if(!link)
+                {
+                    alert("Event Link Cannot be Empty");
+                    return false;
+                }
+                if(!interested)
+                {
+                    alert("Interest Count Cannot be Empty");
+                    return false;
+                }
             
+                        var file_data = $('#img_upload').prop('files')[0];
+                        //var file_data_hidden = $('#hid_image').prop('files')[0];
+                        var form_data = new FormData();
+                        form_data.append('file', file_data);
+                      //  form_data.append('file_hidden', file_data_hidden);
+                        form_data.append('segment', filter_segment_id);
+                        form_data.append('board', filter_board_id);
+                        form_data.append('class', filter_class_id);
+                        form_data.append('brand_id', filter_brand_id);
+                        form_data.append('course', filter_course_id);
+                        form_data.append('batch', filter_batch_id);
+                        form_data.append('event_code', event_code);
+                        form_data.append('event_title', event_title);
+                        form_data.append('event_date', event_date);
+                        form_data.append('event_from_time', event_from_time);
+                        form_data.append('event_to_time', event_to_time);
+                        form_data.append('event_description', event_description);
+                        form_data.append('event_status', event_status);
+                        form_data.append('event_role', event_role);
+                        form_data.append('event_type', event_type);
+                        form_data.append('link', link);
+                        form_data.append('interested', interested);
+                        form_data.append('event_id', event_id);
+
             $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/update_event_detail",
-              data:{
-                segment:filter_segment_id,
-                board: filter_board_id,
-               // board: 1,
-                class: filter_class_id,
-                brand_id : filter_brand_id,
-                course : filter_course_id,
-                batch: filter_batch_id,
-                event_code : event_code,
-                event_title : event_title,
-                event_date : event_date,
-                event_from_time : event_from_time,
-                event_to_time : event_to_time,
-                event_description : event_description,
-                event_status: event_status,
-                event_role : event_role,
-                event_type : event_type,
-                event_id : event_id,
-
-
-              }, 
-              dataType: "json",   
+              data:form_data, 
+              dataType: "json", 
+              contentType: false,
+              processData: false,  
               success: function (response) {
                    console.log(response);
                    

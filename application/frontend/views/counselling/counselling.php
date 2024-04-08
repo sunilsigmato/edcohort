@@ -371,10 +371,11 @@ if($get_breadcrumb)
                             $year = date('Y');
                             $today = $day . '-' . $month . '-' . $year;
                             ?>
+                            
                         <div class="filter-col date-filter">
                                 <h3 class="filter-col-title">Date</h3>
                                 <label for="datepicker">Pick a Date
-                                    <input type="text" name="cdate" id="datepicker" value = <?php echo $today ?> class ="datepicker" autocomplete="off">
+                                    <input type="text" name="cdate" id="datepicker" value = <?php echo isset($date_picker) ? $date_picker : $today; ?> class ="datepicker" autocomplete="off">
                                 </label>
                             </div>
                         <div class=" filter-col ">
@@ -552,12 +553,17 @@ if($get_breadcrumb)
                    {
                     foreach ($res_counselling as $r) 
                      {    
+                        
+                        $preview_image = '';
+                        $currentUrl = base_url(); 
+                        $newUrl = dirname($currentUrl);
+                        $preview_image = $currentUrl.'/uploads/event/'.$r->image_path;
                    ?>
                     <div class="col-md-4 col-sm-6 mb-4">
                         <div class="card-list-con">
                             <article class="card-con">
                                 <figure class="card-image-con">
-                                    <img src="https://images.unsplash.com/photo-1494253109108-2e30c049369b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYyNDcwMTUwOQ&ixlib=rb-1.2.1&q=85" alt="An orange painted blue, cut in half laying on a blue background" />
+                                <img src="<?php echo $preview_image; ?>" alt="Full-size Image">    
                                 </figure>
                                 <div class="card-header">
                                     <a href="#"><?php echo $r->event_title ?></a>
@@ -583,6 +589,13 @@ if($get_breadcrumb)
                                             <path d="M2 10h20" />
                                         </svg>
                                         <?php echo $r->event_date ?>
+                                    </div>
+                                    <div class="card-meta-con card-meta--views">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
+                                            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                        <?php echo $r->interest_count ?>
                                     </div> 
                                 </div>
 
@@ -599,7 +612,13 @@ if($get_breadcrumb)
                         </div>
                
                
-                    <?php } } ?>
+                    <?php } } 
+                   else{?>
+                    <div class="review-row-reply">
+                        <h4>No result found..!!</h4>
+                    </div>
+                    <?php } ?>
+                    
                     
                     
                     
@@ -630,71 +649,7 @@ if($get_breadcrumb)
                         </div>
                         <?php } ?>
                         <div class="counselling-col-box d-flex flex-wrap p-3">
-                            <!--col-->
-                            <?php if($counselling_list){ ?>
-                            <?php foreach($counselling_list as $counselling){ ?>
-                            <div class="counselling-col">
-                                <div class="counselling-col-img">
-                                    <!-- <img src="images/counselling-img.jpg" alt=""> -->
-                                    <img src="<?php echo base_url(); ?>uploads/user/<?php echo $counselling->image; ?>"
-                                        alt="">
-                                    <div class="review-rating">
-                                        <?php if($counselling->product_rating == 1){?>
-                                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                                            class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                        <?php } ?>
-                                        <?php if($counselling->product_rating == 2){?>
-                                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                        <?php } ?>
-                                        <?php if($counselling->product_rating == 3){?>
-                                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star text-yellow"></i> <i class="fa fa-star"></i> <i
-                                            class="fa fa-star"></i>
-                                        <?php } ?>
-                                        <?php if($counselling->product_rating == 4){?>
-                                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star"></i>
-                                        <?php } ?>
-                                        <?php if($counselling->product_rating == 5){?>
-                                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star text-yellow"></i>
-                                        <?php } ?>
-                                    </div>
-                                    <!-- <span class="rating-number"><img src="images/Star.png" alt=""> 3.2</span> -->
-                                </div>
-                                <div class="counselling-col-content">
-                                    <div class="content-top-row d-flex justify-content-between align-items-start">
-                                        <div class="top-left">
-                                            <h3><?php echo ucwords($counselling->firstname); ?></h3>
-                                            <p><?php echo ucwords($counselling->brand_name); ?></p>
-                                        </div>
-                                        <div class="top-right">Free/hr</div>
-                                    </div>
-                                    <div class="content-bottom-row d-flex justify-content-between align-items-center">
-                                        <!-- <div class="bottom-left">No. Of Counselling <b>150+</b></div> -->
-                                        <div class="bottom-right"><a href="#">Check availability</a></div>
-                                    </div>
-                                    <a href="<?php echo base_url(); ?>counselli ng-confirm/<?php echo $counselling->c_id;  ?>"
-                                        class="book-btn">Book now</a>
-                                    <!--   <?php if($this->session->userdata('user_id')){ ?>
-                                            <button type="button" class="book-btn" onclick="bookCounselling('<?php echo $counselling->c_id; ?>','<?php echo $this->session->userdata('user_id'); ?>')">Book Now</button>
-                                            <?php }else{ ?>
-                                            <button type="button" class="book-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Book Now</button>
-                                            <?php } ?> -->
-                                </div>
-                            </div>
-                            <?php } ?>
-                            <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
-                                <?php echo $page_link; ?></div>
-                            <?php }else{?>
-                            <div class="review-row-reply">
-                                <h4>No result found..!!</h4>
-                            </div>
-                            <?php } ?>
+                       
 
                             <!--    <?php if($this->session->userdata('user_id')){ ?>
                                 <div>
@@ -1204,6 +1159,7 @@ if($get_breadcrumb)
                     success: function (response) {
                          console.log(response);
                          alert(response.data);
+                         location.reload();
                        
                     }
                 });

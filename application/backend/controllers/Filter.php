@@ -275,16 +275,26 @@ public function __construct()
     $image_path = $this->input->post('img_upload');
     $interest_count = $this->input->post('interested');
     $brand_image = '';
+
     $new_name1 = str_replace(".","",microtime());
     $new_name=str_replace(" ","_",$new_name1);
-    $file_tmp =$_FILES['img_upload']['tmp_name'];
-    $file=$_FILES['img_upload']['name'];
-    $ext=substr(strrchr($file,'.'),1);
-    if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
+    if(isset($_FILES['file'])) {
+      // File details
+      $file_name = $_FILES['file']['name'];
+      $file_tmp = $_FILES['file']['tmp_name'];
+      $ext=substr(strrchr($file_name,'.'),1);
+     
+      if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
     {
-      move_uploaded_file($file_tmp,"../uploads/brand/".$new_name.".".$ext);
+      move_uploaded_file($file_tmp,"../uploads/event/".$new_name.".".$ext);
       $brand_image=$new_name.".".$ext;
     }
+     
+  } else {
+      // No file uploaded
+      echo "No file uploaded!";
+  }
+  //print_R($brand_image);
   
     $res = '';
     $res = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
@@ -299,8 +309,6 @@ public function __construct()
 	    $endtimestamp = strtotime($event_to_time);
 	    $difference = abs($endtimestamp - $starttimestamp)/3600;
      
-     
-
       $data = array(
         'event_code' => $event_code,
         'event_title' => $event_title,
@@ -317,11 +325,11 @@ public function __construct()
         'event_type' => $event_type,
         'link' =>$link,
         'image_path'=>$brand_image,
-        'interest_count'=>$interest_count
-
+        'interest_count'=>$interest_count,
+        //'image_path'=>$brand_image
 
       );
-     
+    // print_R($data);
       $user_id = $this->common_model->insertData('tbl_event', $data);
       http_response_code(200);
       echo json_encode(array("status"=>"1","data"=>"Event Data Added Successfully")); 
@@ -354,7 +362,49 @@ public function __construct()
     $event_role = $this->input->post('event_role');
     $event_type = $this->input->post('event_type');
     $event_id = $this->input->post('event_id');
-  
+    $link = $this->input->post('link');
+    $image_path = $this->input->post('img_upload');
+    $interest_count = $this->input->post('interested');
+    
+   $brand_image = '';
+    
+    $new_name1 = str_replace(".","",microtime());
+    $new_name=str_replace(" ","_",$new_name1);
+    if(isset($_FILES['file'])) {
+      // File details
+      $file_name = $_FILES['file']['name'];
+      $file_tmp = $_FILES['file']['tmp_name'];
+      $ext=substr(strrchr($file_name,'.'),1);
+     
+      if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
+    {
+      move_uploaded_file($file_tmp,"../uploads/event/".$new_name.".".$ext);
+      $brand_image=$new_name.".".$ext;
+    }
+     
+  } else {
+      // No file uploaded
+      echo "No file uploaded!";
+      $brand_image = '';
+  }
+
+  /*if(isset($_FILES['file_hidden'])) {
+    // File details
+    $file_name = $_FILES['file_hidden']['name'];
+    $file_tmp = $_FILES['file_hidden']['tmp_name'];
+    $ext=substr(strrchr($file_name,'.'),1);
+   print_R($ext);
+    if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
+  {
+    move_uploaded_file($file_tmp,"../uploads/event/".$new_name.".".$ext);
+    $brand_image=$new_name.".".$ext;
+  }
+   
+} else {
+    // No file uploaded
+    echo "No file uploaded33!";
+}*/
+
     $res = '';
     $res = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
     if($res)
@@ -383,13 +433,22 @@ public function __construct()
         'product_id' => $product_id,
         'created_on' => date('Y-m-d H:i:s'),
         'created_by' => '123', 
-        'event_type' => $event_type
+        'event_type' => $event_type,
+        'link' =>$link,
+        'interest_count'=>$interest_count,
       );
+      if($brand_image !='')
+      {
+        $data['image_path'] = $brand_image;
+      }
+   
+ 
     
      
      // $user_id = $this->common_model->insertData('tbl_event', $data);
      $where=array('event_id'=>$event_id);
-   
+     /*print_R($event_id);
+     exit;*/
      $this->admin_model->updateData('tbl_event',$data,$where);
       http_response_code(200);
       echo json_encode(array("status"=>"1","data"=>"Event Data Updated Successfully")); 
@@ -397,7 +456,7 @@ public function __construct()
     else
     {
       http_response_code(200);
-      echo json_encode(array("status"=>"1","data"=>" Invaild Data ")); 
+      echo json_encode(array("status"=>"1","data"=>" Invaild Data "));
     }
      
   }
