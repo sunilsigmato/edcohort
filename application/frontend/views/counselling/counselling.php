@@ -407,7 +407,7 @@ if($get_breadcrumb)
                                     <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
                                         class="active">Events</a>
                                 </li>
-                                
+                                        
                                 <li>
                                     <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">UpComing  Event</a>
                                 </li>
