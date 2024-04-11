@@ -349,13 +349,13 @@ Banner
 }
 
 /*** Image and Content Display **/
-.image-container {
+.logo-slider .image-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 150px;
   height: 150px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow as needed */
+  box-shadow: none;
   padding: 10px; /* Add padding for spacing if desired */
   border-radius: 8px; /* Optional: Add border-radius for rounded corners */
 }
@@ -455,8 +455,8 @@ Banner
 .brand-align h2 {
   text-align: center;
   /* color: #2256cd; */
-  /** font-weight: 700;*/
-  font-size: 36px;
+   font-weight: 600;
+  font-size: 32px;
 }
 
 /*** *****/
@@ -516,9 +516,9 @@ Banner
 }
 
 .logo-slider .slide {
-  height: 250px;
-  width: 250px;
-  padding: 50px;
+  height: auto;
+  width: auto;
+  padding: 15px;
 }
 .display-course {
   background-color: lightgrey;
@@ -3708,15 +3708,16 @@ table {
 }
 
 input[type="text"] {
-  height: 65px;
+  height: 54px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
   border: none;
   outline: 0;
   border-bottom: 0;
   padding: 0 10px;
   box-sizing: border-box;
   transition: border 0.3s; /* Optional: Add a smooth transition effect */
+  margin-left: 2px;
 }
 
 .input-text span {

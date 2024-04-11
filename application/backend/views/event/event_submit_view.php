@@ -1,7 +1,7 @@
 <div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-							<h4 class="page-title">Events</h4>
+							<h4 class="page-title">Event Registers List</h4>
 							<ol class="breadcrumb">
 							<section class="content-header">
                             <h1>
@@ -16,8 +16,7 @@
 							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Events List</h3> 
-
+										<h3 class="card-title">Event Registers List</h3> 
 										<div class="col-md-6 pull-right">
 										<?php message(); ?>
 										</div>
@@ -30,13 +29,12 @@
 													<tr>
 														<th>S.no</th>
                                                         <th>Event Code</th>
+														<th>Customer  Name</th>
 														<th>Event Date</th>
 														<th>Title</th>
 														<th>Start Time</th>
 														<th>End Time</th>
-														<th>Taken By</th>
-                                                        <th>Status</th>
-														<th>Edit</th>
+														<th>Taken By</th> 
 													</tr>
 												</thead>
 												<tbody>
@@ -48,23 +46,15 @@
 														<tr>
 														<td><?php echo $cnt; ?></td>
 														<td><?php echo ucfirst($rec->event_code); ?></td>
+														<td><?php echo (get_user_name($rec->user_id)); ?></td>
                                                         <td><?php echo date('d-m-Y',strtotime(($rec->event_date))); ?></td>
 														<td><?php echo $rec->event_title; ?></td>
 														<td><?php echo date('H:i:s',strtotime($rec->event_start_time)); ?></td>
 														<td><?php echo date('H:i:s',strtotime($rec->event_end_time)); ?></td>
                                                         <td><?php echo (get_user_name($rec->taken_by)); ?></td>
-														<td>
-															<?php if($rec->status == 1){ ?>
-																<a href="javascript:void(0)" class="btn btn-success btn-sm">Active</a>
-															<?php }else{ ?>
-																<a href="javascript:void(0)" class="btn btn-warning btn-sm">Inactive</a>
-															<?php } ?>
-															
-														</td>
-														<td>
-															<a href="<?php echo base_url(); ?>admin_event/edit_event/<?php echo $rec->event_id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
-															<!--<a href="<?php echo base_url(); ?>admin_customer/delete/<?php echo $rec->customer_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a> -->
-														</td>
+														
+														
+														
 													</tr>
 													<?php $cnt++; } ?>
 													

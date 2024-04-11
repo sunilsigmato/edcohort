@@ -222,7 +222,7 @@ class Login extends CI_Controller {
                 'firstname' => $name,                 
                 'password' => hashcode($password), 
                 'date_added' => date('Y-m-d H:i:s'), 
-                'status' => 0, 
+                'status' => 1, 
 				'otp_sms' => $six_digit_random_number,
                 'email_verify' => hashcode($email),
 				'customer_type' => $role_id,
@@ -243,16 +243,18 @@ class Login extends CI_Controller {
                 // Prepare data for POST request
                 $data = 'apikey=' . $apiKey . '&numbers=' . $numbers . '&sender=' . $sender . '&message=' . $message;
                 // Send the GET request with cURL
-                $ch = curl_init('https://api.textlocal.in/send/?' . $data);
+                
+                /*$ch = curl_init('https://api.textlocal.in/send/?' . $data);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $response = curl_exec($ch);
-                curl_close($ch);
+                curl_close($ch);*/
+
                 // Process your response here
                 //echo $response;
 
                 $this->session->set_flashdata('alert_message', 'Thank you for Registering with us! An OTP has been sent to your registered mobile number');
                 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                $config['wordwrap'] = TRUE;
+             /*   $config['wordwrap'] = TRUE;
                 $config['mailtype'] = 'html';
                 $config['charset'] = 'utf-8';
                 $config['priority'] = '1';
@@ -271,7 +273,7 @@ class Login extends CI_Controller {
                 $data_email['detail_link'] ='';        
                 $msg = $this->load->view('email/jewelry_details',$data_email, TRUE);
                 $this->email->message($msg);
-                $this->email->send();                
+                $this->email->send();  */              
                 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 $data=array(
                         'id' => mt_rand(1111,9999), 
@@ -285,7 +287,7 @@ class Login extends CI_Controller {
                 $config['priority'] = '1';
                 $config['crlf'] = "\r\n";
                 $config['newline'] = "\r\n";
-                $this->email->initialize($config);
+               /* $this->email->initialize($config);
                 $this->email->from(SITE_EMAIL, SITE_NAME);
                 $this->email->to($email);
                 $this->email->subject("Thank you from Edcohort");
@@ -299,10 +301,10 @@ class Login extends CI_Controller {
                 $this->email->message($msg);
                 if ($this->email->send()) {
                     $this->session->set_flashdata('alert_message', 'Thanks For Registration. Please Verify Your Email!');
-                }
+                }*/
             }
 
-            $message = 'Thanks For Registration. Please Verify Your Email! and An OTP has been sent to your registered mobile number';
+            $message = 'Thanks For Registration';
             $status = 1;
 			$userID = $user_id;
            echo json_encode(array('message' => $message, 'status' => $status, 'userID' => $userID));

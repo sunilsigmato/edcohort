@@ -128,7 +128,7 @@ $sort_by = $this->input->get('sort_by');
 
 <!--* Start of BAnner Section  -->
 <?php $res_banner = get_banner_images(); ?>
-<div id="imageCarousel" class="carousel slide" data-ride="carousel" style="max-height: 600px; margin: 0 auto;">
+<div id="imageCarousel" class="carousel slide carousel-fade" data-ride="carousel" style="max-height: 600px; margin: 0 auto;">
     <div class="carousel-inner">
         <?php
         if($res_banner)
@@ -187,6 +187,7 @@ $sort_by = $this->input->get('sort_by');
         <?php
         if ($resp_getall_brand) {
             foreach ($resp_getall_brand as $r) {
+                
         ?>
         <div class="slide top-brands text-center">
             <div class="image-container">
@@ -206,7 +207,7 @@ $sort_by = $this->input->get('sort_by');
 
 <!--End Logo Sectiont-->
 
-<div class="content content-bg pt-5 pb-5">
+<div class="content content-bg">
 <div class="pt-5 logo-content brand-align">
     <h2>Segment</h2>
     
@@ -253,7 +254,7 @@ $sort_by = $this->input->get('sort_by');
         transition: all .2s ease;
         border: 2px solid #ddd;
         height: 280px;
-        width: 350px;
+        /*width: 350px;*/
         border-radius: 20px;
         border: 1px solid #979797;
         background: none;
@@ -307,65 +308,7 @@ $sort_by = $this->input->get('sort_by');
 
 <div class="content content-bg pt-5 pb-5">
 
-    <style>
-    .container {
-        position: relative;
-    }
-
-    .arrow-mark {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        font-size: 30px;
-        color: black;
-        padding: 0px 5px 0px 0px;
-    }
-
-    .card-img-top {
-        position: relative;
-    }
-
-    .card-body {
-        position: relative;
-
-
-    }
-
-    .card-title {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        margin-bottom: 0;
-        font-size: 23px;
-        color: black;
-        border-radius: 10px;
-        font-weight: bold;
-        text-align: left;
-        padding-left: 5px;
-        padding-bottom: 5px;
-    }
-
-    .card {
-        transition: all .2s ease;
-        border: 2px solid #ddd;
-        height: 280px;
-        width: 350px;
-        border-radius: 20px;
-        border: 1px solid #979797;
-        background: none;
-        transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-
-
-    }
-
-    .card:hover {
-        transform: scale(1.03);
-        background: white;
-        border: none;
-        box-shadow: 0px 3px 4px 0px #979797;
-
-    }
-    </style>
+  
     
     <div class="container">
         <div class="row justify-content-center">
@@ -675,7 +618,7 @@ if (empty($courseid)) {
                     </div>
                 </div>
                 <div class="d-flex justify-content-center m-5">
-                    <a href="<?php echo base_url(); ?>brands" class="btn btn-primary btn-select">VIEW ALL BRANDS</a>
+                  <!--  <a href="<?php echo base_url(); ?>brands" class="btn btn-primary btn-select">VIEW ALL BRANDS</a> -->
                 </div>
             </div>
             <?php } ?>
@@ -844,8 +787,8 @@ if (empty($courseid)) {
                     </div>
                 </div>
                 <div class="d-flex justify-content-center m-5">
-                    <a href="<?php echo base_url(); ?>course" class="btn btn-primary btn-select">VIEW ALL
-                        COURSES</a>
+                 <!--   <a href="<?php echo base_url(); ?>course" class="btn btn-primary btn-select">VIEW ALL
+                        COURSES</a>  -->
                 </div>
             </div>
             <?php } ?>

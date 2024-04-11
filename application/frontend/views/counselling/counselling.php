@@ -412,15 +412,14 @@ if($get_breadcrumb)
                                     <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">UpComing  Event</a>
                                 </li>
                                 
-
                             </ul>
                         </div>
                                 </div>
                                 
                                 <style>
                             img {
-                                max-width: 100%;
-                                display: block;
+                                    max-width: 100%;
+                                    display: block;
                                 }
 
                                 .card-list-con {

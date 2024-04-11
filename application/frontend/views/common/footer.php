@@ -221,10 +221,10 @@ $authUrl1 = $gClient->createAuthUrl();
                         <label class="form-label"></label>
                         <button type="submit" onclick="loginPopup()" class="form-control login-btn">Login</button>
                     </div>
-                    <div class="mb-4">
+                   <!-- <div class="mb-4">
                         <a href="<?php echo base_url(); ?>forgot-password" class="forget-pass">Forget Password?</a>
-                    </div>
-                    <div class="double-line">
+                    </div> -->
+                   <!-- <div class="double-line">
                         <p class="text-center">Or</p>
                     </div>
                     <div class="mb-4">
@@ -238,13 +238,13 @@ $authUrl1 = $gClient->createAuthUrl();
                                         src="<?php echo base_url(); ?>assets/images/facebook.png"></a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--        <div class="mb-t mb-4">
                 <div class="login-number text-center">
                     <a href="#">Login with Phone Number</a>
                 </div>
             </div> -->
-                    <div class="form-group mt-4 terms-check">
+                   <!--- <div class="form-group mt-4 terms-check">
                         <input class="form-check-input" type="checkbox" id="checkbox624">
                         <label for="checkbox624" class="form-check-label white-text">I Agree all Terms and
                             Condtion</label>
@@ -253,7 +253,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         <input class="form-check-input" type="checkbox" id="checkbox624">
                         <label for="checkbox624" class="form-check-label white-text">Subscribe to Edcohort
                             newsletter</label>
-                    </div>
+                    </div> -->
                     <!--        <div class="mt-4">
                 <div class="login-counsellor text-center">
                     <a href="#">I am a Counsellor</a>
@@ -323,7 +323,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         <button type="submit" onclick="registration()" id="registraton"
                             class="form-control login-btn">Sign Up</button>
                     </div>
-                    <div class="double-line">
+                  <!--  <div class="double-line">
                         <p class="text-center">Or</p>
                     </div>
                     <div class="mb-4">
@@ -335,13 +335,13 @@ $authUrl1 = $gClient->createAuthUrl();
                                 <a href="#"><img src="<?php echo base_url(); ?>assets/images/facebook.png"></a>
                             </div>
                         </div>
-                    </div>
+                    </div>  -->
                     <!--       <div class="mb-t mb-4">
                 <div class="login-number text-center">
                     <a href="#">Login with Phone Number</a>
                 </div>
             </div> -->
-                    <div class="form-group mt-4 terms-check">
+                   <!-- <div class="form-group mt-4 terms-check">
                         <input class="form-check-input" type="checkbox" id="checkbox624">
                         <label for="checkbox624" class="form-check-label white-text">I Agree all Terms and
                             Condtion</label>
@@ -350,7 +350,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         <input class="form-check-input" type="checkbox" id="checkbox624">
                         <label for="checkbox624" class="form-check-label white-text">Subscribe to Edcohort
                             newsletter</label>
-                    </div>
+                    </div>  -->
                 </form>
             </div>
         </div>
@@ -395,6 +395,7 @@ function registration() {
                 $(".reg-message-success").show();
                 $("#text-message-success").html(data.message);
                 setTimeout(function() {
+                    location.reload();
                     $(".reg-message-success").hide();
                     $("#text-message-success").html('');
                     $("#otpModal").modal('show');

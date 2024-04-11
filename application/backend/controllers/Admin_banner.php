@@ -107,7 +107,7 @@ class Admin_banner extends CI_Controller
             $file_tmp =$_FILES['img_upload']['tmp_name'][$key];
             $file=$_FILES['img_upload']['name'][$key];
             $ext=substr(strrchr($file,'.'),1);
-            if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
+            if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg" || $ext=="webp")
             {
                 $uploaded=move_uploaded_file($file_tmp,"../uploads/banner/".$file);
                 //$product_image=$new_name.".".$ext;
