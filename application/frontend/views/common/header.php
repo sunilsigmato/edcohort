@@ -163,9 +163,9 @@ if(empty($meta_description)){
             <div class="header-right">
                 <?php if(empty($user_id)){?>
                 <a href="<?php echo base_url(); ?>" class="sign-btn" data-bs-toggle="modal"
-                    data-bs-target="#signup-button">Sign Up</a>
+                    data-bs-target="#signup-button">SIGN UP</a>
                 <a href="<?php echo base_url(); ?>" class="login-btn" data-bs-toggle="modal"
-                    data-bs-target="#login-button">Log In</a>
+                    data-bs-target="#login-button">LOG IN</a>
                 <?php }else{ ?>
                 <div class="user-info-box">
                     <h3><?php echo $user_fullname; ?></h3>

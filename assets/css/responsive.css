@@ -144,12 +144,12 @@
   .course-section-title h2,
   .section-title {
     margin: 0 0 15px;
-    font-size: 24px;
+    font-size: 26px;
     line-height: normal;
   }
   .course-section-title p {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 17px;
+    line-height: 30px;
   }
   .see-row a {
     font-size: 16px;

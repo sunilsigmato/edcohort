@@ -90,10 +90,10 @@ Header
 }
 .header-search {
   width: 45%;
-  background: #e64040;
-  border: 3px solid #f0f3fa;
+  /*background: #e64040;*/
+  border: 3px solid #dee2eb;
   box-shadow: 0px 0px 10px #f0f3fa;
-  border-radius: 13px;
+  border-radius: 0px;
 }
 .review-dropdown .dropdown-menu.show {
   filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.1));
@@ -181,30 +181,42 @@ Header
 
 .search-button {
   border: none;
-  margin: 10px;
-  padding: 8px;
+  margin: 7px;
+  /* padding: 8px; */
   cursor: pointer;
   background-color: #e64040;
+  width: 40px;
+  border-radius: 50%;
+  height: 40px;
 }
 .search-icon-color {
   color: #fff;
 }
 
-.sign-btn,
+.sign-btn{
+  background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 0px;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-weight: 700; /*font-size: 18px;*/
+}
 .login-btn {
   background: #e64040;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 15px 20px;
   color: #ffffff;
   font-weight: 700; /*font-size: 18px;*/
   text-decoration: none;
+
 }
 .sign-btn {
   margin-right: 20px;
 }
 .sign-btn:hover {
   color: #fff;
-  background: #1534de;
+  background: #000;
 }
 .login-btn {
   background: #e64040;
@@ -212,7 +224,7 @@ Header
   color: #fff;
 }
 .login-btn:hover {
-  background: #3554fe;
+  background: #000;
   color: #fff;
 }
 /*** Review Main **/
@@ -368,7 +380,7 @@ Banner
   padding: 20px;
 }
 
-.how-section1 h4 {
+.how-section1 h2 {
   color: #e64040;
   font-weight: 500;
   font-size: 33px;
@@ -392,9 +404,9 @@ Banner
   text-align: center;
 }
 .how-img img {
-  width: 70%;
+ /* width: 70%; */                                                                                                                                  
 }
-.img-sub-heading {
+.img-sub-heading {                                                                   
   font-weight: 300;
   font-size: 18px;
 }
@@ -405,15 +417,16 @@ Banner
 }
 .img-btn-explore {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 10px 30px;
   color: #fff;
-  font-weight: 300;
+  font-weight: 600;
   font-size: 13px;
   text-decoration: none;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   display: inline-block;
   background-color: #e64040;
+  border:none;
 }
 .btn-select
 {
@@ -489,7 +502,7 @@ Banner
   height: 175px;
   position: absolute;
   width: 200px;
-  z-index: 2;
+  z-index: 100%;
 }
 
 .logo-slider::after {
@@ -761,13 +774,20 @@ Home
   font-weight: 700;
   font-size: 36px;
   line-height: 42px;
-  margin: 0 0 25px;
+  margin: 0 0 11px;
+}
+.course-section-title .subheading1 {
+  font-size: 22px;
+}
+.course-section-title .row {
+  padding: 30px  0px;
 }
 .course-section-title p {
   color: #525252;
   font-weight: 400;
   font-size: 16px;
   line-height: 21px;
+  margin-top: 10px;
 }
 .brand-row {
   text-align: center;
@@ -3580,7 +3600,7 @@ table {
   position: relative;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   font-family: "Poppins", sans-serif;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
 }
 .container .card .form {
   width: 100%;
@@ -3762,6 +3782,46 @@ input[type="text"] {
 .warning {
   border-bottom: 1px solid red !important;
 }
+
+.card-background {
+  background: linear-gradient(to top, rgba(0, 0, 0, 1) 2%, rgba(0, 0, 0, 0) 100%);
+}
+
+.bg-color-review
+{
+  background-color: #fff0f0;
+    padding: 0px;
+    border-radius: 20px;
+    align-items: center;
+}
+.bg-color-complain
+{
+  background-color: #f5f0ff;
+    padding: 0px;
+    border-radius: 20px;
+    align-items: center;
+}
+.bg-color-comparison
+{
+  background-color: #f0fbff;
+    padding: 0px;
+    border-radius: 20px;
+    align-items: center;
+}
+.bg-color-counselling
+{
+  background-color: #f0fbff;
+    padding: 0px;
+    border-radius: 20px;
+    align-items: center;
+}
+.image-set
+{
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  padding: 30px;
+}
 /*right-side-end*/
 @media (max-width: 650px) {
   /* .container .card {
@@ -3773,6 +3833,16 @@ input[type="text"] {
   .container .card .left-side {
     display: none;
   }
+  .header-search {
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+.course-section-title h2 , h3 , a{
+  text-align: center;
+}
+
+
+
 }
 /* Coupon */
 .coupon-center .standard-content {
@@ -3942,21 +4012,21 @@ body
 
 
 #brandCard .viewButton{
-  font-size: 14px;
-    font-weight: 300;
+  font-size: 13px;
+    font-weight: 600;
     border: 1px solid #f1c5c5;
     display: inline-block;
     padding: 2px 20px;
-    border-radius: 30px;
+    border-radius: 0px;
     text-transform: uppercase;
     letter-spacing: 1.2px;
 }
-.cntr .viewButton{font-size: 16px;
-  font-weight: 400;
+.cntr .viewButton{font-size: 14px;
+  font-weight: 600;
   border: 1px solid #f1c5c5;
   display: inline-block;
   padding: 2px 20px;
-  border-radius: 30px;
+  border-radius: 0px;
   text-transform: uppercase;
   letter-spacing: 1.2px;}
 
