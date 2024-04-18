@@ -621,9 +621,9 @@ if($get_breadcrumb)
          $review_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
          ?>
                                     <?php if(sizeof($review_reply) == 0){ ?>
-                                    <div class="review-footer-left"><?php echo sizeof($review_reply); ?> Replies</div>
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($review_reply); ?> Replies</div>
                                     <?php } else{ ?>
-                                    <div class="review-footer-left"><?php echo sizeof($review_reply); ?> Replies <a
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($review_reply); ?> Replies <a
                                             href="javascript:void(0)"
                                             onclick="viewRepliesAll('<?php echo $review->product_review_id;?>')"
                                             class="view-all-replies">View all replies</a></div>
@@ -851,7 +851,7 @@ if($get_breadcrumb)
                                             <?php $res_reply_count = get_reply_count($reply->prr_id , $reply->review_id); 
                                              if($res_reply_count) { ?>
                                                
-                                                <div class="review-footer-left"><a
+                                                <div class="review-footer-left mt-3"><a
                                                         href="javascript:void(0)"
                                                         onclick="viewRepliesAll_level1('<?php echo $reply->review_id;?>')"
                                                         class="view-all-replies">View all replies</a></div>
@@ -935,7 +935,7 @@ if($get_breadcrumb)
                                             <?php $res_reply_count = get_reply_count($sub_review->prr_id , $sub_review->review_id); 
                                              if($res_reply_count) { ?>
                                                
-                                                <div class="review-footer-left"><a
+                                                <div class="review-footer-left mt-3"><a
                                                         href="javascript:void(0)"
                                                         onclick="viewRepliesAll_level2('<?php echo $sub_review->review_id;?>')"
                                                         class="view-all-replies">View all replies</a></div>

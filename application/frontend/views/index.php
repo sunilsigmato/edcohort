@@ -594,7 +594,7 @@ if (empty($courseid)) {
                         here.</p>
                 </div>
                 <div class="container pt-5 card-container" id="brandCard">
-                    <div class="row">
+                    <div class="d-block d-md-flex row ">
                         <?php foreach ($resp_get_brand as $brand) { ?>
                         <div class="col-4 col-xl-3 col-lg-4 mb-3">
                             <div class="card brandCard">
@@ -699,7 +699,7 @@ if (empty($courseid)) {
                     <p>Got the course, but worried about the brand?</p>
                 </div>
 
-                <div class="cntr">
+                <div class=" cntr">
                     <div class="crd-cntr">
                         <?php foreach ($resp_get_course as $r) { ?>
                         <div class="crd">
@@ -758,7 +758,7 @@ if (empty($courseid)) {
                 </div>
 
                 <div class="container pt-5" id="brandCard">
-                    <div class="row">
+                    <div class=" d-block d-md-flex row">
                         
                         <?php foreach ($resp_get_course as $r)  { 
                             

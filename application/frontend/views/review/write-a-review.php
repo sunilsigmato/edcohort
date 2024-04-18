@@ -61,7 +61,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-3">
                 <label class="input-title">Segment*</label>
                 <div class="select-box">
                     <select name="filter_segment" id="filter_segment" class="filter_segment">
@@ -72,7 +72,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 mt-3">
                 <label class="input-title">Brand name*</label>
                 <div class="select-box">
                     <select name="brand" id="brand" class = "brand">
@@ -96,7 +96,7 @@
                 $filter_offline_id = '2';
                 $filter_offline_name = 'Offline';
             ?>
-             <div class="col-6">
+             <div class="col-md-6 col-sm-12 mt-3">
              <label class="input-title">Board name</label>
              <div class="board-k12 select-box" style="display:none">
                             <div class="btn-group btn-toggle filter-toggle-box">
@@ -142,7 +142,7 @@
             </div>
             
 
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 mt-3">
                 <label class="input-title cal-h3">Class</label>
                 <div class="select-box">
                 <select name="filter_class_dropdown" id="filter_class_dropdown">
@@ -155,7 +155,7 @@
             
             
 
-            <div class="col-6">
+            <div class="col-md-6 col-sm-12 mt-3">
                 <label class="input-title">Select Course</label>
                 <div class="select-box">
                 <select name="filter_course_dropdown" id="filter_course_dropdown">
@@ -168,7 +168,7 @@
 
         
                     
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12 mt-3">
                 <label class="input-title">Batch (Cohort) <span>Please select year that you will be appearing exam</span></label>
                 <div class="select-box">
                 <select name="batch" id="batch">
@@ -180,7 +180,7 @@
         </div>
 
 
-        <div class="review-field-row">
+        <div class="review-field-row mt-3">
             <div class="review-col">
                 <label class="input-title">Title</label>
                 <input type="text" placeholder="Title related to review " name="review_title" class="review-input">
@@ -192,7 +192,7 @@
                 </div> -->
             </div>
         </div>
-        <div class="review-field-row">
+        <div class="review-field-row ">
             <div class="review-col">
                 <label class="input-title">Ratings (Optional)</label>
                 <div class="review-checkbox rating-style">
@@ -236,11 +236,11 @@
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
                                             
                                             <button type=" button" 
-                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmreview">Submit </button>
+                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmreview mt-3">Submit </button>
                                             <?php }else{ ?>
                                             <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                                data-bs-target="#login-button">Submit</a>
+                                                data-bs-target="#login-button mt-3">Submit</a>
                                             <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
                                             <?php } ?>
                 

@@ -1620,7 +1620,7 @@ ul.footer-menu-sub li {
 
 .review-row {
   position: relative;
-  padding-left: 35px;
+  padding:0px 35px;
   padding-bottom: 10px;
   margin-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
@@ -1639,6 +1639,7 @@ ul.footer-menu-sub li {
   padding-left: 35px;
   padding-bottom: 10px;
   margin-bottom: 15px;
+  margin-top: 18px;
   border-bottom: 1px solid #e0e0e0;
   background-color: #fff;
   border-radius: 10px;
@@ -1782,9 +1783,10 @@ ul.footer-menu-sub li {
   padding-right: 24px; /*line-height: 16px; display: inline-block; vertical-align: middle;*/
 }
 .review-date.today {
-  background: #3554fe;
-  border-color: #3554fe;
-  color: #ffffff;
+  /*background: #3554fe;
+  border-color: #3554fe;*/
+    color: #000000;
+    font-size: 15px;
 }
 
 .review-rating {
@@ -1820,7 +1822,7 @@ ul.footer-menu-sub li {
   font-family: "Merriweather", serif;
 }
 h2.review-cmt-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
   color: #505050;
   text-transform: capitalize;

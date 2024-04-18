@@ -211,12 +211,15 @@ if($get_breadcrumb)
         </div>
     </div>
     <!-- New Design Start -->
-    <div class="container-fluid review-top-section">
-        <div class="row review-top-next">
-            <!--- Filtr Starts  --->
-            <div class="col-md-2 review-left">
-                <h3 class="filter-title">Filter</h3>
-                <div class="" id="sideleft-fix">
+    <button type="button" class="filter-btn">Filter</button>
+
+<!--left start-->
+<div class="container-fluid review-top-section">
+    <div class="row review-top-next">
+        <!--- Filtr Starts  --->
+        <div class="col-md-2 review-left">
+
+            <h3 class="filter-title">Filter</h3>
                     <form action="<?php echo base_url(); ?>review-search" method="post" name="form" id="form">
 
                         <?php echo csrf_field(); 
@@ -477,7 +480,7 @@ if($get_breadcrumb)
                         </div>
                     </form>
                 </div>
-            </div>
+        
 
             <!-- Filter Ends -->
             <!-- Review Starts  -->
@@ -628,9 +631,9 @@ if($get_breadcrumb)
          $review_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
          ?>
                                     <?php if(sizeof($review_reply) == 0){ ?>
-                                    <div class="review-footer-left"><?php echo sizeof($review_reply); ?> Replies</div>
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($review_reply); ?> Replies</div>
                                     <?php } else{ ?>
-                                    <div class="review-footer-left"><?php echo sizeof($review_reply); ?> Replies <a
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($review_reply); ?> Replies <a
                                             href="javascript:void(0)"
                                             onclick="viewRepliesAll('<?php echo $review->product_review_id;?>')"
                                             class="view-all-replies">View all replies</a></div>
@@ -720,7 +723,7 @@ if($get_breadcrumb)
                                     </div>
                                 </div>
                                 <div id="comment-form" class="row">
-                                    <div class="mt-5" style="display:none"
+                                    <div class="mt-1" style="display:none"
                                         id="commentDiv_<?php echo $review->product_review_id; ?>">
                                         <div class="alert alert-outline alert-outline-success reg-message-success"
                                             id="reg-message-success_<?php echo $review->product_review_id; ?>"
@@ -812,7 +815,7 @@ if($get_breadcrumb)
                                             </div>
 
                                             <!-- Comment Section Start -->
-                                            <div class="form-group" style="display:none"
+                                            <div class="form-group mb-3" style="display:none"
                                              id="subcommentDiv_<?php echo $reply->prr_id; ?>">
                                                 
                                                 <?php $form_name = 'comment_sub_reply_'.$reply->prr_id; ?>
@@ -858,7 +861,7 @@ if($get_breadcrumb)
                                             <?php $res_reply_count = get_reply_count($reply->prr_id , $reply->review_id); 
                                              if($res_reply_count) { ?>
                                                
-                                                <div class="review-footer-left"><a
+                                                <div class="review-footer-left mt-3"><a
                                                         href="javascript:void(0)"
                                                         onclick="viewRepliesAll_level1('<?php echo $reply->review_id;?>')"
                                                         class="view-all-replies">View all replies</a></div>
@@ -899,7 +902,7 @@ if($get_breadcrumb)
 
                                                                 
                                                           <!-- Comment Section Start -->
-                                            <div class="form-group" style="display:none"
+                                            <div class="form-group mb-3" style="display:none"
                                         id="subcommentDiv_<?php echo $sub_review->prr_id; ?>">
                                                 
                                                 <?php $form_name = 'comment_sub_reply_'.$sub_review->prr_id; ?>
@@ -942,7 +945,7 @@ if($get_breadcrumb)
                                             <?php $res_reply_count = get_reply_count($sub_review->prr_id , $sub_review->review_id); 
                                              if($res_reply_count) { ?>
                                                
-                                                <div class="review-footer-left"><a
+                                                <div class="review-footer-left mt-3"><a
                                                         href="javascript:void(0)"
                                                         onclick="viewRepliesAll_level2('<?php echo $sub_review->review_id;?>')"
                                                         class="view-all-replies">View all replies</a></div>
@@ -958,7 +961,7 @@ if($get_breadcrumb)
                                                    // print_R($sub_review_level2);
 
                                                    ?>
-                                                   <div class="review-row-reply review_reply_lev2_<?php echo $sub_review_level2->review_id;?> prr_id_<?php echo $sub_review_level2->prr_id;?>"
+                                                   <div class="review-row-reply mt-3 review_reply_lev2_<?php echo $sub_review_level2->review_id;?> prr_id_<?php echo $sub_review_level2->prr_id;?>"
                                                        style="display:none">
                                                        <div class="review-user-image"><span></span></div>
                                                            <div
