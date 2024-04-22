@@ -554,27 +554,17 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                 ?>
                             <!--review row start-->
                             <div class="review-row">
-                                <div class="review-user-image"><span></span></div>
+                               
                                 <div
                                     class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                <div class="review-user-image"><span></span></div>
+                                               
                                     <h2 class="review-title">
                                         <?php echo ucwords($complain->user_name); ?> <span><img
                                                 src="<?php base_url() ?>assets/images/verifyicon.png" alt=""></span>
-                                        <div class="review-title-dropdown">
-                                            <h2 class="review-title">
-                                                <div class="review-user-image"><span></span></div>
-                                                <?php echo ucwords($complain->user_name); ?> <span><img
-                                                        src="<?php base_url() ?>assets/images/verifyicon.png"
-                                                        alt=""></span>
-                                                <p>Counsellor</p>
-                                            </h2>
-                                            <div class="review-info-box">
-                                                <div class="review-info-left">Followers 180</div>
-                                                <div class="review-info-right"><a href="#">Visit Profile</a></div>
-                                            </div>
-                                            <a href="#" class="follow-btn">Follow</a>
-                                        </div>
                                     </h2>
+                                   
+                                    
                                     <?php $current = strtotime(date("Y-m-d"));
                                  $date    = strtotime($complain->product_complaint_added);
                                  $today = '';
@@ -601,7 +591,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                  <?php }else {?>
                                    <span>The Issue was resloved  <?php echo $difference_resloved ?> Days ago</span>
                                 <?php  } }?>
-                                    <div class="d-flex">  
+                                    <div class=" d-flex resolve-button">  
                                         <?php 
                                        // $this->session->userdata('user_id') 
                                       // print_R($complain);
@@ -636,7 +626,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                                                                     
                                     </div>
                                 </div>
-                                <div class="review-rating">
+                                <div class="review-rating pt-3">
                                     <?php if ($complain->product_rating == 1) { ?>
                                     <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -661,6 +651,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                     <i class="fa fa-star text-yellow"></i>
                                     <?php } ?>
                                 </div>
+                                <hr />
                                 <div>
                                     <h2 class="review-cmt-title"><?php echo $complain->product_complaint_title; ?>
                                     </h2>
@@ -688,6 +679,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                             Short)</a>
                                     </div>
                                 </div>
+                                <hr />
                                 <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
                                     <?php
                                  $where_complaint_reply = 'tbl_product_complaint_reply.status = 1 and tbl_product_complaint_reply.sub_id  IS NULL and complaint_id = ' . $complain->product_complaint_id . '';
@@ -697,10 +689,10 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                  //echo  $this->db->last_query();
                                  ?>
                                     <?php if (sizeof($complaint_reply) == 0) { ?>
-                                    <div class="review-footer-left"><?php echo sizeof($complaint_reply); ?> Replies
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($complaint_reply); ?> Replies
                                     </div>
                                     <?php } else { ?>
-                                    <div class="review-footer-left"><?php echo sizeof($complaint_reply); ?> Replies
+                                    <div class="review-footer-left mt-3"><?php echo sizeof($complaint_reply); ?> Replies
                                         <a href="javascript:void(0)"
                                             onclick="viewRepliesAll('<?php echo $complain->product_complaint_id; ?>')">View
                                             all replies</a>
@@ -857,6 +849,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                             <div class="review-date">
                                                 <?php echo  date('d F Y', strtotime($reply->reply_date)); ?></div>
                                         </div>
+                                       
                                         <div class="review-content">
                                             <div id="complaintReplyShort_<?php echo $reply->prr_id; ?>">
                                                 <?php echo substr($reply->reply, 0, 185); ?>

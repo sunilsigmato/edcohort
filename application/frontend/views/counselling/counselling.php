@@ -423,16 +423,16 @@ if($get_breadcrumb)
                                 }
 
                                 .card-list-con {
-                                width: 90%;
-                                max-width: 300px;
+                                /*width: 90%;*/
+                                /*max-width: 300px;*/
                                 }
 
                                 .card-con {
-                                background-color: #FFF;
+                                background-color: #f1f1f1;
                                 box-shadow: 0 0 0 1px rgba(#000, .05), 0 20px 50px 0 rgba(#000, .1);
-                                border-radius: 15px;
+                                /*border-radius: 15px;*/
                                 overflow: hidden;
-                                padding: 1.25rem;
+                                /*padding: 1.25rem;*/
                                 position: relative;
                                 transition: .15s ease-in;
                                 
@@ -443,8 +443,13 @@ if($get_breadcrumb)
                                 }
 
                                 .card-image-con {
-                                border-radius: 10px;
+                               /* border-radius: 10px;*/
                                 overflow: hidden;
+                                height: 220px;
+                                position: relative;
+                                object-fit: cover;
+
+
                                 }
 
                                 .card-header-con {
@@ -507,6 +512,8 @@ if($get_breadcrumb)
                                 display: flex;
                                 align-items: center;
                                 flex-wrap: wrap;
+                                justify-content: space-between;
+                                padding: 14px;
                                 }
 
                                 .card-meta-con {  
@@ -532,7 +539,7 @@ if($get_breadcrumb)
                                 }
                                 </style>
                 <div class="container">
-                 
+                <div class="row">
                     <?php
                         $type = 'today';
                         if($date_picker)
@@ -562,15 +569,15 @@ if($get_breadcrumb)
                         <div class="card-list-con">
                             <article class="card-con">
                                 <figure class="card-image-con">
-                                <img src="<?php echo $preview_image; ?>" alt="Full-size Image">    
+                                    <img src="<?php echo $preview_image; ?>" style="width:100%" alt="Full-size Image">    
                                 </figure>
-                                <div class="card-header">
-                                    <a href="#"><?php echo $r->event_title ?></a>
-                                    <button class="icon-button">
+                                <div class="card-header event-title">
+                                    <?php echo $r->event_title ?>
+                                    <!--<button class="icon-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
                                         <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
                                     </svg>
-                                    </button>
+                                    </button> --> 
                                 </div>
                                 <div class="card-footer-con">
                                     <div class="card-meta-con card-meta--views">
@@ -599,13 +606,15 @@ if($get_breadcrumb)
                                 </div>
 
                                 <?php if($this->session->userdata('user_id')){ ?>
-                                      
+                                      <div class="book-event">
                                         <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit('<?php echo $r->event_id ?>' ,'<?php echo $this->session->userdata('user_id') ?>')">Reply</a>
-                                        
+                                        </div>
                                         <?php }else{ ?>
+                                            <div class="book-event">
                                         <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary"
                                             data-bs-target="#login-button">Book Event
                                         </a>
+                                        </div>
                                         <?php } ?>
                             </div>
                         </div>
@@ -632,6 +641,7 @@ if($get_breadcrumb)
                             </a>
                             <?php } ?> -->
                         </div>
+                            </div>
                         <!-- <div class="select-filter-box">
                 <ul class="select-filter">
                     <li>ICSE <a href="#"><img src="images/close.png" alt=""></a></li>

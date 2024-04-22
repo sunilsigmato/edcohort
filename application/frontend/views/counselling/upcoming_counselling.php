@@ -371,10 +371,11 @@ if($get_breadcrumb)
                             $year = date('Y');
                             $today = $day . '-' . $month . '-' . $year;
                             ?>
+                            
                         <div class="filter-col date-filter">
                                 <h3 class="filter-col-title">Date</h3>
                                 <label for="datepicker">Pick a Date
-                                    <input type="text" name="cdate" id="datepicker" value = <?php echo $today ?> class ="datepicker" autocomplete="off">
+                                    <input type="text" name="cdate" id="datepicker" value = <?php echo isset($date_picker) ? $date_picker : $today; ?> class ="datepicker" autocomplete="off">
                                 </label>
                             </div>
                         <div class=" filter-col ">
@@ -401,7 +402,7 @@ if($get_breadcrumb)
                     <div class="review-inner-center">
                         <div class="tab-link">
 
-                            <ul>
+                        <ul>
                                 <li>
                                     <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
                                         >Events</a>
@@ -413,26 +414,27 @@ if($get_breadcrumb)
                                 
 
                             </ul>
+
                         </div>
                                 </div>
                                 
                                 <style>
                             img {
-                                max-width: 100%;
-                                display: block;
+                                    max-width: 100%;
+                                    display: block;
                                 }
 
                                 .card-list-con {
-                                width: 90%;
-                                max-width: 300px;
+                                /*width: 90%;*/
+                                /*max-width: 300px;*/
                                 }
 
                                 .card-con {
-                                background-color: #FFF;
+                                background-color: #f1f1f1;
                                 box-shadow: 0 0 0 1px rgba(#000, .05), 0 20px 50px 0 rgba(#000, .1);
-                                border-radius: 15px;
+                                /*border-radius: 15px;*/
                                 overflow: hidden;
-                                padding: 1.25rem;
+                                /*padding: 1.25rem;*/
                                 position: relative;
                                 transition: .15s ease-in;
                                 
@@ -443,8 +445,13 @@ if($get_breadcrumb)
                                 }
 
                                 .card-image-con {
-                                border-radius: 10px;
+                               /* border-radius: 10px;*/
                                 overflow: hidden;
+                                height: 220px;
+                                position: relative;
+                                object-fit: cover;
+
+
                                 }
 
                                 .card-header-con {
@@ -507,6 +514,8 @@ if($get_breadcrumb)
                                 display: flex;
                                 align-items: center;
                                 flex-wrap: wrap;
+                                justify-content: space-between;
+                                padding: 14px;
                                 }
 
                                 .card-meta-con {  
@@ -532,46 +541,35 @@ if($get_breadcrumb)
                                 }
                                 </style>
                 <div class="container">
-                 
+                <div class="row">
                     <?php
-                        $tomorrow = date("Y-m-d", strtotime("+1 day"));
-                        $type = 'upcoming';
-                        /*if($date_picker)
-                        {
-                            $res_counselling = get_counselling_detail($date_picker,$type);
-                        }
-                        else
-                        {*/
-                           // $current = date('Y-m-d');
-                            $res_counselling = get_counselling_detail($tomorrow,$type,$course);
-                       // }
-                        //$type = 'today';
-                        
-                       // print_R($res_counselling);
+                           $tomorrow = date("Y-m-d", strtotime("+1 day"));
+                           $type = 'upcoming';
+                           $res_counselling = get_counselling_detail($tomorrow,$type,$course);
                                
                   if($res_counselling)
                    {
                     foreach ($res_counselling as $r) 
                      {    
+                        
                         $preview_image = '';
                         $currentUrl = base_url(); 
                         $newUrl = dirname($currentUrl);
                         $preview_image = $currentUrl.'/uploads/event/'.$r->image_path;
-                        //print_r($r);
                    ?>
                     <div class="col-md-4 col-sm-6 mb-4">
                         <div class="card-list-con">
                             <article class="card-con">
                                 <figure class="card-image-con">
-                                <img src="<?php echo $preview_image; ?>" alt="Full-size Image">
+                                    <img src="<?php echo $preview_image; ?>" style="width:100%" alt="Full-size Image">    
                                 </figure>
-                                <div class="card-header">
-                                    <a href="#"><?php echo $r->event_title ?></a>
-                                    <button class="icon-button">
+                                <div class="card-header event-title">
+                                    <?php echo $r->event_title ?>
+                                    <!--<button class="icon-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
                                         <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
                                     </svg>
-                                    </button>
+                                    </button> --> 
                                 </div>
                                 <div class="card-footer-con">
                                     <div class="card-meta-con card-meta--views">
@@ -589,35 +587,38 @@ if($get_breadcrumb)
                                             <path d="M2 10h20" />
                                         </svg>
                                         <?php echo $r->event_date ?>
-                                    </div> 
+                                    </div>
                                     <div class="card-meta-con card-meta--views">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
                                             <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
                                             <circle cx="12" cy="12" r="3" />
                                         </svg>
                                         <?php echo $r->interest_count ?>
-                                    </div>
-                                    
+                                    </div> 
                                 </div>
 
                                 <?php if($this->session->userdata('user_id')){ ?>
-                                      
-                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit('<?php echo $r->event_id ?>' ,'<?php echo $this->session->userdata('user_id') ?>')">Book Event</a>
-                                        
+                                      <div class="book-event">
+                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit('<?php echo $r->event_id ?>' ,'<?php echo $this->session->userdata('user_id') ?>')">Reply</a>
+                                        </div>
                                         <?php }else{ ?>
+                                            <div class="book-event">
                                         <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary"
                                             data-bs-target="#login-button">Book Event
                                         </a>
+                                        </div>
                                         <?php } ?>
                             </div>
                         </div>
                
                
-                    <?php } }  else {?>
+                    <?php } } 
+                   else{?>
                     <div class="review-row-reply">
                         <h4>No result found..!!</h4>
                     </div>
                     <?php } ?>
+                    
                     
                     
                     
@@ -632,6 +633,7 @@ if($get_breadcrumb)
                             </a>
                             <?php } ?> -->
                         </div>
+                            </div>
                         <!-- <div class="select-filter-box">
                 <ul class="select-filter">
                     <li>ICSE <a href="#"><img src="images/close.png" alt=""></a></li>
@@ -648,8 +650,7 @@ if($get_breadcrumb)
                         </div>
                         <?php } ?>
                         <div class="counselling-col-box d-flex flex-wrap p-3">
-                            <!--col-->
-                           
+                       
 
                             <!--    <?php if($this->session->userdata('user_id')){ ?>
                                 <div>

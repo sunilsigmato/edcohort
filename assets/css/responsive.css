@@ -440,6 +440,12 @@
   .popular-col h3 {
     font-size: 14px;
   }
+  .resolve-button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block !important;
+  }
 
   .footer {
     padding: 15px 30px 30px;

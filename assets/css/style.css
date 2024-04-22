@@ -3123,6 +3123,21 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
   text-decoration: none;
 }
 
+.event-title {
+  text-align: center;
+    border-bottom: unset;
+    background-color: unset;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0px;
+
+}
+.book-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 .confirm-btn {
   display: block;
   border: 1px solid #3554fe;
@@ -3364,6 +3379,7 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
   background: transparent;
   border-color: #2256cd;
   color: #2256cd;
+  
 }
 .pagination-design li a:hover,
 .pagination-design li a:active {
@@ -3374,6 +3390,7 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
 .pagination-design .page-link:focus {
   box-shadow: none;
 }
+
 
 .social-icon {
   background: #ffffff;
@@ -3455,6 +3472,35 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
   top: 5px;
   z-index: 1;
 }
+.coupon-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.coupon-label-type {
+  padding-top: 17px;
+  font-weight: 700;
+}
+
+label.me-3.button-cls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.today_header ,  .tmr_header , .day_after_tmr_header , .today , .tommorow , .day_after_tmr_data {
+  width: 33%;
+  font-weight :600;
+}
+.coupon-title h3 {
+  font-size: 18px; /* You can adjust the font size as needed */
+}
+
+/* .label-option{
+  display: flex;
+  align-items: center;
+  justify-content: center;flex-direction: column;
+} */
 .login-popup button.btn-close:hover,
 #register button.btn-close:hover {
   background-color: #3554fe;
