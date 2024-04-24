@@ -76,10 +76,10 @@ if($get_breadcrumb)
     <div class="container-fluid review-top-section">
 
         <div class="row">
-            <div class="col-md-1 course-img p-3 text-center">
+            <div class="col-md-1 course-img p-3 text-center brandCard">
 
             <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo  $get_single_course_detail->product_image; ?>">
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
 
             </div>
             <div class="col-md-6 pt-3 course-name-display">
@@ -88,10 +88,10 @@ if($get_breadcrumb)
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
                     <label for="rating2" class="rating-display">
                     <div class="dropdown">
-  <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
   <img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
-  </button>
+  <!-- </button>-->
 
   
 
@@ -205,9 +205,9 @@ if($get_breadcrumb)
             </div>
             <div class="col-md-4 pt-3 write-review-icon ">
             <?php if ($this->session->userdata('user_id')) { ?>
-                            <a href="<?php echo base_url();?>create-a-counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
+                            <a href="<?php echo base_url();?>write-a-complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
                     class=" text-decoration-none ">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Get Counselling </span> <label
+                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
                         for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>
                 </a>
                         <?php } else { ?>

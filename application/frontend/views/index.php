@@ -703,9 +703,9 @@ if (empty($courseid)) {
                     <div class="crd-cntr">
                         <?php foreach ($resp_get_course as $r) { ?>
                         <div class="crd">
-                            <div class="crd-bdy">
+                            <div class="crd-bdy brandCard">
                                 <img class="card-img-top" style=""
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo $r->brand_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">
                                 <h5 class="crd-ttl pt-3"><?php echo $r->product_name; ?></h5>
                                 <div class="popular-star-rating m-2">
@@ -761,12 +761,13 @@ if (empty($courseid)) {
                     <div class=" d-block d-md-flex row">
                         
                         <?php foreach ($resp_get_course as $r)  { 
+                        //   print_R($r);
                             
                             ?>
                         <div class="col-4 col-xl-3 col-lg-4 mb-3">
-                            <div class="card">
+                            <div class="card brandCard">
                                 <img class="card-img-top"
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo $r->product_image; ?>"
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo $r->brand_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">
                                 <div class="card-body text-center">
                                     <h5><?php echo $r->product_name; ?></h5>

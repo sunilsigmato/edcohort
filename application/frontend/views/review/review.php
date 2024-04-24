@@ -70,12 +70,10 @@ if($get_breadcrumb)
 ?>
 <div class="content">
     <div class="container-fluid review-top-section">
-
         <div class="row">
-            <div class="col-md-1 course-img p-3 text-center">
-               <!-- <img src="<?php echo base_url();?>assets/images/edcohort_tp_review_logo.png" alt="">-->
+            <div class="col-md-1 course-img p-3 text-center brandCard">
                 <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo  $get_single_course_detail->product_image; ?>">
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
                 <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
@@ -91,10 +89,10 @@ if($get_breadcrumb)
 
                          <!---->
                          <div class="dropdown">
-  <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
   <img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
-  </button>
+ <!-- </button>  -->
 
   
 

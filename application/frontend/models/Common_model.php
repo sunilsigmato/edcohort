@@ -533,9 +533,9 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-        $where.=" c.segment_id = ".$id." and c.product_id = i.product_id";
-        $this->db->select('c.product_id,c.product_name,c.product_rating,i.product_image');
-        $this->db->from('tbl_product c, tbl_product_image i');
+        $where.=" c.segment_id = ".$id." and c.product_id = i.product_id and b.brand_id = c.brand_id";
+        $this->db->select('c.product_id,c.product_name,c.product_rating,i.product_image,b.brand_name,b.brand_image');
+        $this->db->from('tbl_product c, tbl_product_image i, tbl_brand b');
         $this->db->where($where);
        // $sql = $this->db->get_compiled_select();
         
@@ -589,9 +589,9 @@ class Common_model extends CI_Model {
 	{
 		$where= '';
         $query = '';
-        $where.=" c.product_id = ".$course_id." and c.product_id = i.product_id";
-        $this->db->select('c.*,i.product_image');
-        $this->db->from('tbl_product c, tbl_product_image i');
+        $where.=" c.product_id = ".$course_id." and c.product_id = i.product_id and b.brand_id = c.brand_id";
+        $this->db->select('c.*,i.product_image,b.brand_image');
+        $this->db->from('tbl_product c, tbl_product_image i, tbl_brand b');
         $this->db->where($where);
         $query=$this->db->get();
 		if($query)

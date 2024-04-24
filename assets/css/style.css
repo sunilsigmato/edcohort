@@ -3390,7 +3390,12 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
 .pagination-design .page-link:focus {
   box-shadow: none;
 }
-
+.crd-image
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .social-icon {
   background: #ffffff;
