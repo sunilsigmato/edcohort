@@ -9,6 +9,7 @@ class admin_product extends CI_Controller
         $this->load->library('image_lib');
         $this->load->model('product_model');
         $this->load->model('category_model');
+        $this->load->model('common_model');
         if ($this->session->userdata('jw_admin_id')=="")
         {
             redirect(base_url().'admin_login');
@@ -36,6 +37,7 @@ class admin_product extends CI_Controller
         $this->load->view('common/sidebar',$data);
         $this->load->view('product/product_list_view',$data);
         $this->load->view('common/footer');
+         $this->load->model('common_model');
     }   
     function loadData()
     {
@@ -376,6 +378,8 @@ class admin_product extends CI_Controller
         $category_array=array();
         $brand_array=array();
         $diamond_shape_array=array();
+        $where_board = 'status = 1';
+        $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
         $data['product_detail']=$this->product_model->product_details($product_id);
         $data['category_list']=$this->category_model->get_category();
         $data['attribute_list']=$this->admin_model->selectAll('tbl_attribute');

@@ -596,7 +596,7 @@ if (empty($courseid)) {
                 <div class="container pt-5 card-container" id="brandCard">
                     <div class="d-block d-md-flex row ">
                         <?php foreach ($resp_get_brand as $brand) { ?>
-                        <div class="col-4 col-xl-3 col-lg-4 mb-3">
+                        <div class="col-4 col-xs-12 col-xl-3 col-lg-4 mb-3">
                             <div class="card brandCard">
                                 <img class="card-img-top"
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
@@ -693,6 +693,22 @@ if (empty($courseid)) {
                 .btn:not(:last-child) {
                     margin-right: 10px;
                 }
+                
+                @media (max-width: 768px) {
+                    .crd {
+        flex-basis: calc(100% - 10px); /* To show 1 card per row on smaller screens */
+        margin: 0 0 10px 0; /* Adjust margin for better spacing */
+    }
+
+    #prevBtn {
+        left: 10px; /* Adjust left position for better alignment */
+    }
+
+    #nextBtn {
+        right: 10px; /* Adjust right position for better alignment */
+    }
+}
+
                 </style>
                 <div class="course-section-title text-center">
                     <h2>Popular Courses</h2>

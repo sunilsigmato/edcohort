@@ -11,7 +11,7 @@ public function __construct()
     $this->load->model('common_model');
     $this->load->model('coupon_model');
     $this->load->model('admin_model');
-  
+    $this->load->model('product_model');
 }
 
 
@@ -251,6 +251,54 @@ public function __construct()
       }
 
   }
+  function add_product_details()
+  {
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $brand_id= $this->input->post('brand_id');
+    $class_id= $this->input->post('class');
+    $course_id= $this->input->post('course');
+    $batch_id= $this->input->post('batch');
+    $product_title =  $this->input->post('product_title');
+    $product_description =  $this->input->post('product_description');
+    $product_short_description =  $this->input->post('product_short_description');
+    $product_status =  $this->input->post('product_status');
+
+    $slug = makeSlug($this->input->post("product_title"));
+    $wheres = " product_slug like '".$slug."%'";
+    $slug_list = $this->product_model->getProductSlug($wheres);
+    if(!empty($slug_list)){
+        foreach($slug_list as $row)
+        {
+            $slug_arr[] = $row->product_slug;
+        }
+        if(in_array($slug, $slug_arr))
+        {
+            for ($i=1; in_array(($slug.'-'.$i),$slug_arr); $i++) { }                    
+            $slug = $slug.'-'.$i;
+        }
+    }
+    $data = array(
+                        
+      'product_name' => $product_title,
+      'segment_id' => $segment,
+      'board_id' => $board_id,
+      'brand_id' => $brand_id,
+      'class_id' => $class_id,
+      'course_id' => $course_id,
+      'batch_id' => $batch_id,
+      'product_status' => $product_status,
+      'product_description' => $product_description,
+      'product_short_description' => $product_short_description,
+      'product_slug'=>$slug,  
+      
+  );
+
+$user_id = $this->common_model->insertData('tbl_product', $data);
+http_response_code(200);
+echo json_encode(array("status"=>"1","data"=>"Product Data Added Successfully")); 
+
+  }
 
   function add_event_detail()
   {
@@ -388,22 +436,6 @@ public function __construct()
       $brand_image = '';
   }
 
-  /*if(isset($_FILES['file_hidden'])) {
-    // File details
-    $file_name = $_FILES['file_hidden']['name'];
-    $file_tmp = $_FILES['file_hidden']['tmp_name'];
-    $ext=substr(strrchr($file_name,'.'),1);
-   print_R($ext);
-    if($ext=="png" || $ext=="gif" || $ext=="jpg" || $ext=="jpeg")
-  {
-    move_uploaded_file($file_tmp,"../uploads/event/".$new_name.".".$ext);
-    $brand_image=$new_name.".".$ext;
-  }
-   
-} else {
-    // No file uploaded
-    echo "No file uploaded33!";
-}*/
 
     $res = '';
     $res = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
