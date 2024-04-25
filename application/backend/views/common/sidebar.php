@@ -37,13 +37,14 @@
                             </ul>
                         </li>
 
-                        <li class="slide">
+
+                      <!--  <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"><span class="side-menu__label"><i class="fa fa-life-ring" aria-hidden="true"></i> Product Category</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_category">Product Category List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_category/add_category">Add Product Category</a></li>                              
                             </ul>
-                        </li>
+                        </li>  -->
 
                          <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"><span class="side-menu__label"> <i class="fa fa-product-hunt" aria-hidden="true"></i> Product</span><i class="angle fa fa-angle-right"></i></a>
@@ -53,6 +54,33 @@
                                          
                             </ul>
                         </li>
+
+                        <li class="slide">
+                            <a class="side-menu__item slide-show" href="javascript:void(0)"><span class="side-menu__label"> <i class="fa fa-user" aria-hidden="true"></i> Segment</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_segment">Segment List</a></li>
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_segment/add_segment">Add Event</a></li>                                
+                            </ul>
+                        </li>
+
+                        <li class="slide">
+                            <a class="side-menu__item slide-show" href="javascript:void(0)"><span class="side-menu__label"> <i class="fa fa-user" aria-hidden="true"></i> Event</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_event">Event List</a></li>
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_event/add_event">Add Event</a></li>  
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_event/event_submit_details">Event Register List</a></li>                                
+                            </ul>
+                        </li>
+
+                        <li class="slide">
+                            <a class="side-menu__item slide-show" href="javascript:void(0)"><span class="side-menu__label"> <i class="fa fa-user" aria-hidden="true"></i> Course</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_course">Course List</a></li>
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_course/add_course">Add Course</a></li>                                
+                            </ul>
+                        </li>
+
+                        
                         
                         <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"><i class="fa fa-eye" aria-hidden="true"></i> Review</span><i class="angle fa fa-angle-right"></i></a>
@@ -80,13 +108,13 @@
                             </ul>
                         </li>
 
-                         <li class="slide">
+                        <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-file-archive-o" aria-hidden="true"></i> Type</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_type">Type List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_type/add_type">Add Type</a></li>                              
                             </ul>
-                        </li>
+                        </li> -->
 
                          <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-bullseye" aria-hidden="true"></i> Class</span><i class="angle fa fa-angle-right"></i></a>
@@ -110,14 +138,14 @@
                             </ul>
                         </li>
 
-                        <li class="slide">
+                       <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-compress" aria-hidden="true"></i> Counselling</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_counselling">Counselling List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_counselling/add_counselling">Add Counselling</a></li>
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_counselling/counselling_booking">Counselling Booking</a></li>                              
                             </ul>
-                        </li>
+                        </li>  -->
 
                         <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-bandcamp" aria-hidden="true"></i> Banner</span><i class="angle fa fa-angle-right"></i></a>
@@ -127,55 +155,53 @@
                             </ul>
                         </li>
 
-                         <li class="slide">
+                        <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-adjust" aria-hidden="true"></i> Sponsors</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_sponsors">Sponsors List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_sponsors/add_sponsors">Add Sponsors</a></li>                              
                             </ul>
-                        </li>
-
+                        </li> 
                          <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-certificate" aria-hidden="true"></i> Ranking</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_ranking/brand_wise">Ranking Brand Wise List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_ranking/add_brand_wise">Add Ranking Brand Wise</a></li>                              
                             </ul>
-                        </li>
-
+                        </li> 
                         <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-database" aria-hidden="true"></i> Testimonials</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_testimonial">Testimonials List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_testimonial/add_testimonial">Add Testimonials</a></li>                              
                             </ul>
-                        </li>
+                        </li> -->
 
-                        <li class="slide">
+                       <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-globe" aria-hidden="true"></i> Partner</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_partner">Partners Request</a></li>  
                                 <!-- <li><a class="slide-item" href="<?php echo base_url(); ?>admin_partner/add_partner">Add partners</a></li> -->                              
-                            </ul>
-                        </li>
+                          <!--  </ul>
+                        </li>  -->
 
-                        <li class="slide">
+                        <!--<li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-cube" aria-hidden="true"></i> Counseller</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_counseller">Counseller Request</a></li>  
                                 <!-- <li><a class="slide-item" href="<?php echo base_url(); ?>admin_partner/add_partner">Add partners</a></li> -->                              
-                            </ul>
-                        </li>
+                           <!-- </ul>
+                        </li> -->
                         
-                        <li class="slide">
+                       <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-ils" aria-hidden="true"></i> Compare</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_counseller">Compare</a></li>  
                                 <!-- <li><a class="slide-item" href="<?php echo base_url(); ?>admin_partner/add_partner">Add partners</a></li> -->                              
-                            </ul>
-                        </li>
+                          <!--  </ul>
+                        </li>  -->
 
-                        <li class="slide">
+                     <!--   <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-gg" aria-hidden="true"></i>
  Blog</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">
@@ -183,7 +209,7 @@
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_blog/add_blog">Add Blog</a></li>                              	<li><a class="slide-item" href="<?php echo base_url(); ?>admin_blog/blog_category_list">Blog Category List</a></li>  
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_blog/add_blog_category">Add Blog Category</a></li>                              	
                             </ul>
-                        </li>
+                        </li> 
 
                          <li class="slide">
                             <a class="side-menu__item" href="<?php echo base_url(); ?>admin_subscribe"></i><span class="side-menu__label"><i class="fa fa-steam" aria-hidden="true"></i> Subscriber</span></a>
@@ -192,7 +218,7 @@
                         <li class="slide">
                             <a class="side-menu__item" href="<?php echo base_url(); ?>admin_contact"></i><span class="side-menu__label"><i class="fa fa-tty" aria-hidden="true"></i>
  Contact</span></a>
-                        </li>
+                        </li>  -->
 
 
 

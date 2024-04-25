@@ -577,7 +577,7 @@ if (empty($courseid)) {
 </div>
 <?php } ?>
 <!--start-->
-<div class="all-course-box">
+<div class="all-course-box1">
     <div class="course-inner-row">
         <div class="course-right">
             <?php if (!empty($courseid)) { ?>
@@ -588,7 +588,7 @@ if (empty($courseid)) {
                     ?>
             <!-- Popular Brands Section -->
             <div class="course-row article-section" id="Popular-Brands">
-                <div class="course-section-title text-center">
+                <div class=" text-center">
                     <h2>Popular Brands</h2>
                     <p>Got the course, but worried about the brand?<br /> Read about all brands and their offerings
                         here.</p>
@@ -596,13 +596,13 @@ if (empty($courseid)) {
                 <div class="container pt-5 card-container" id="brandCard">
                     <div class="d-block d-md-flex row ">
                         <?php foreach ($resp_get_brand as $brand) { ?>
-                        <div class="col-4 col-xs-12 col-xl-3 col-lg-4 mb-3">
+                        <div class=" col-sm-12 col-xl-3 col-lg-4 mb-3">
                             <div class="card brandCard">
                                 <img class="card-img-top"
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>"
                                     alt="<?php echo $brand->brand_name; ?>">
                                 <div class="card-body text-center ">
-                                    <h5 class="card-title"><?php echo $brand->brand_name; ?></h5>
+                                    <h5 class="card-title" style = "overflow:hidden;text-overflow: ellipsis; white-space: nowrap;"><?php echo $brand->brand_name; ?></h5>
                                     <div class="popular-star-rating m-2">
                                         <i class="fa fa-star text-yellow"></i>
                                         <i class="fa fa-star text-yellow"></i>
@@ -636,7 +636,7 @@ if (empty($courseid)) {
             <div class="course-row article-section" id="Popular-Courses">
                 <style>
                 .cntr {
-                    max-width: 1300px;
+                    max-width: 100vw;
                     margin: 0 auto;
                   /*  padding: 20px;*/
                     position: relative
@@ -645,17 +645,18 @@ if (empty($courseid)) {
                 .crd-cntr {
                     display: flex;
                     overflow-x: hidden;
-
+                    scroll-snap-type: x mandatory;
                 }
 
                 .crd {
                     flex: 0 0 24%;
                     /* To show 4 cards per row */
-                    margin: 0 5px 0 0;
+                    /* margin: 0 5px 0 0; */
                     border: 1px solid #ccc;
                   /*  border-radius: 8px;*/
                     background-color: #fff;
                     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.01);
+                    
 
                 }
 
@@ -710,7 +711,7 @@ if (empty($courseid)) {
 }
 
                 </style>
-                <div class="course-section-title text-center">
+                <div class=" container course-section-title text-center">
                     <h2>Popular Courses</h2>
                     <p>Got the course, but worried about the brand?</p>
                 </div>
@@ -723,7 +724,7 @@ if (empty($courseid)) {
                                 <img class="card-img-top" style=""
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $r->brand_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">
-                                <h5 class="crd-ttl pt-3"><?php echo $r->product_name; ?></h5>
+                                <h5 class="crd-ttl pt-3" ><?php echo $r->product_name; ?></h5>
                                 <div class="popular-star-rating m-2">
                                     <?php for ($i = 1; $i <= 5; $i++) { ?>
                                     <i
@@ -752,24 +753,38 @@ if (empty($courseid)) {
                     const prevBtn = document.getElementById('prevBtn');
                     const nextBtn = document.getElementById('nextBtn');
                     let scrollPosition = 0;
-                    prevBtn.addEventListener('click', () => {
-                        if (scrollPosition > 0) {
-                            scrollPosition -= 25; // Move by 25% of viewport width
-                            cardContainer.scroll({
-                                left: scrollPosition * cardContainer.offsetWidth / 100,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                    nextBtn.addEventListener('click', () => {
-                        if (scrollPosition < 75) { // Assuming 4 cards per row
-                            scrollPosition += 25; // Move by 25% of viewport width
-                            cardContainer.scroll({
-                                left: scrollPosition * cardContainer.offsetWidth / 100,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
+                  
+                    const updateScrollPosition = () => {
+            const visibleCards = Math.floor(cardContainer.offsetWidth / document.querySelector('.crd-bdy').offsetWidth);
+            const totalCards = cardContainer.children.length;
+            scrollPosition = Math.min(scrollPosition, totalCards - visibleCards);
+            cardContainer.scroll({
+                left: scrollPosition * document.querySelector('.crd-bdy').offsetWidth,
+                behavior: 'smooth'
+            });
+        };
+
+        prevBtn.addEventListener('click', () => {
+            scrollPosition = Math.max(0, scrollPosition - 1);
+            updateScrollPosition();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            const cardWidth = document.querySelector('.card').offsetWidth;
+            const visibleCards = Math.floor(cardContainer.offsetWidth / cardWidth);
+            const totalCards = cardContainer.children.length;
+            const maxScrollPosition = totalCards - visibleCards;
+            if (scrollPosition < maxScrollPosition) {
+                scrollPosition = Math.min(scrollPosition + 1, maxScrollPosition);
+            } else {
+                // If at the end, loop back to the beginning
+                scrollPosition = 0;
+            }
+            updateScrollPosition();
+        });
+
+        window.addEventListener('resize', updateScrollPosition);
+        updateScrollPosition();
                     </script>
                 </div>
 
@@ -780,13 +795,13 @@ if (empty($courseid)) {
                         //   print_R($r);
                             
                             ?>
-                        <div class="col-4 col-xl-3 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-xl-3 col-lg-4 mb-3">
                             <div class="card brandCard">
                                 <img class="card-img-top"
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo $r->brand_image; ?>"
                                     alt="<?php echo $r->product_name; ?>">
                                 <div class="card-body text-center">
-                                    <h5><?php echo $r->product_name; ?></h5>
+                                    <h5 style ="overflow:hidden;text-overflow: ellipsis; white-space: nowrap;"><?php echo $r->product_name; ?></h5>
                                     <div class="popular-star-rating m-2">
                                         <?php for ($i = 1; $i <= 5; $i++) { ?>
                                         <i
@@ -830,7 +845,23 @@ if (empty($courseid)) {
 
 <!-- **** Choose Course Section  **** --->
 
+
 <div class="container">
+    <style>
+         @media (max-width: 550px) {
+            .row {
+                flex-direction: row;
+            }
+
+            .how-img {
+                order: unset;
+            }
+
+            .course-section-title .row:nth-child(even) .how-img {
+                order: -1;
+            }
+        }
+        </style>
     <div class="course-section-title ">
         <div class="row bg-color-review">
             <div class="col-12 col-sm-3 col-lg-6 how-img">

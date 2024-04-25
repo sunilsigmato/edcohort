@@ -49,8 +49,8 @@ class product_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_product p');
-      /*  $this->db->join('tbl_product_description pd','p.product_id=pd.product_id');
-        $this->db->join('tbl_brand b','p.product_brand=b.brand_id');*/
+        $this->db->join('tbl_product_description pd','p.product_id=pd.product_id');
+        $this->db->join('tbl_brand b','p.product_brand=b.brand_id');
         $this->db->where('p.product_id',$product_id);
         $query=$this->db->get();
         return $query->result();

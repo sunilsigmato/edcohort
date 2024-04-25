@@ -21,159 +21,60 @@
                                 <div class="card m-b-20">
                                     <div class="card-header">
                                         <h3 class="card-title">Edit Product</h3>
-
-                                        
                                     </div>
                                     <div class="card-body mb-0">
 
-                                       <!-- <form class="form-horizontal" action="<?php echo base_url(); ?>admin_product/add_product_submit" role="form" method="post" enctype="multipart/form-data">  -->
-                                       <?php foreach ($product_detail as $row): 
-                                       
-                                        ?>     
-                                       <div class="form-group ">                                                
+                                        <form class="form-horizontal" action="<?php echo base_url(); ?>admin_product/edit_product_submit" role="form" method="post" enctype="multipart/form-data">
+                                            <?php foreach ($product_detail as $row):
+                                                 ?>
+
+                                            <input type="hidden" value="<?php echo $row->product_id; ?>" name="product_id" id="product_id">
+                                           
+
+                                            <div class="form-group ">                                                
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label" id="examplenameInputname2">Item Title <span style="color:red">*</span></label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <input class="form-control" type="text" value="<?php echo $row->product_name ?>" required="" name="item_title" id="item_title" >
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Item Title</label>
+                                                    </div> 
+                                                    <div class="col-md-9">
+                                                        <input class="form-control" type="text"  name="item_title" id="item_title" value="<?php echo $row->product_name; ?>" required="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <?php 
                                                         $resp_get_seg_list = '';
                                                          $resp_get_seg_list = getSegmentList();
-                                                      
-                                                         $segment = 1;
-                                                         $res_filter_segment = get_segement();
-                                                         $res_filter_brand = getseg_brand_list($segment);
-                                                         $res_filter_class = getseg_class_list($segment);
-                                                         $res_filter_course = getseg_crse_list($segment);
-                                                         $res_filter_board = getallBoardList();
-                                                    ?>
-                                                    
-                                                    
-                                                    <div class="form-group ">
+                                                    ?>   
+                                             <div class="form-group ">                                                
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Segment</label>
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Select Segement  <span style="color:red">*</span></label>
                                                     </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <select class="form-control" name="brand" id="filter_segment" >
-                                                        <option value= "" >Select</option>
-                                                        <?php foreach($res_filter_segment as $segments){?>
-                                                         <option value="<?php echo $segments->id; ?>" <?php if(@$segments->id == $row->segment_id){ echo "selected"; } ?>>
-                                                                <?php echo $segments->segment_name; ?></option>
-                                                            <?php } ?>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Brand</label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <select class="form-control brand" name="brand" id="brand" required>
-                                                        <?php foreach($res_filter_brand as $brands){?>
-                                                        <option value="<?php echo $brands->brand_id; ?>" <?php if(@$segments->id == $row->brand_id){ echo "selected"; } ?>>
-                                                            <?php echo $brands->brand_name; ?></option>
-                                                        <?php } ?>
-                                                        </select>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control" name="segment" id="segment" onchange="" required>
+                                                            <option value="0">Select</option>
+                                                              <?php if($resp_get_seg_list){ ?>
+                                                            <?php foreach ($resp_get_seg_list as $r) { ?>
+                                                            <option value="<?php echo $r->id; ?>" <?php if($r->id == $row->segment_id){ echo 'selected="selected"';} ?> ><?php echo $r->segment_name ;?></option>
+                                                            <?php } } ?>
+                                                        </select>  
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="board-k12" style="display:none">
-                                                <div class="form-group ">
-                                                    <div class="row">
-                                                        <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                            <label class="form-label">Board</label>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <select class="form-control" name="filter_board_online_dropdown" id="filter_board_online_dropdown" required>
-                                                            <option value= "" >Select</option>
-                                                            <option value="1" >Online</option>
-                                                            <option value="0" >Offline</option>
-                                                        </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?php
+                                           
                                             
-                                            <div class="board-other" style="display:none">
-                                            <div class="form-group ">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Board</label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                    <select class="form-control" name="filter_board_cbse_dropdown" id="filter_board_cbse_dropdown" required>
-                                                    <option value= "" >Select</option>
-                                                    <?php foreach($res_filter_board as $board){?>
-                                                        <option value="<?php echo $board->board_id; ?>">
-                                                            <?php echo $board->board_name; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group ">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label cal-h3">Class</label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                    <select class="form-control" name="filter_class_dropdown" id="filter_class_dropdown" required>
-                                                    <?php foreach($res_filter_class as $classes){?>
-                                                        <option value="<?php echo $classes->class_id; ?>"  <?php if(@$classes->class_id == $row->class_id){ echo "selected"; } ?>>
-                                                            <?php echo $classes->title; ?></option>
-                                                        <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group ">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">Course</label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <select class="form-control" name="filter_course_dropdown" id="filter_course_dropdown" required>
-                                                        <?php foreach($res_filter_course as $classes){?>
-                                                            <option value="<?php echo $classes->id; ?>"  <?php if(@$classes->id == $row->course_id){ echo "selected"; } ?>>
-                                                            <?php echo $classes->course_name; ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group ">
-                                                <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
-                                                        <label class="form-label">BATCH</label>
-                                                    </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <select class="form-control" name="batch" id="batch" required>
-                                                        <?php foreach($batch_records as $batches){?>
-                                                            <option value="<?php echo $batches->batch_id; ?>"  <?php if(@$batches->batch_id == $row->batch_id){ echo "selected"; } ?>>
-                                                                <?php echo $batches->batch_name; ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-                                            
-                                          <!--  <div class="form-group ">                                                
+                                                $resp_get_cat_list = '';
+                                                $resp_get_cat_list = get_category();
+                                                $edit_cat_id = '';
+                                                if($product_category)
+                                                {
+                                                    $edit_cat_id = $product_category[0]->category_id;
+                                                }
+                                            //print_R($edit_cat_id);
+                                               
+                                            ?>
+                                             <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Select Category  <span style="color:red">*</span></label>
@@ -183,16 +84,32 @@
                                                             <option value="0">Select</option>
                                                               <?php if($resp_get_cat_list){ ?>
                                                             <?php foreach ($resp_get_cat_list as $r) { ?>
-                                                            <option value="<?php echo $r->category_id; ?>"><?php echo $r->category_name ;?></option>
+                                                            <option value="<?php echo $r->category_id; ?>" <?php if($r->category_id == $edit_cat_id){ echo 'selected="selected"';} ?>><?php echo $r->category_name ;?></option>
                                                             <?php } } ?>
                                                         </select>  
                                                     </div>
                                                 </div>
-                                            </div> 
-                                            
-                                       
+                                            </div>
 
+                                            <!--<div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="inputEmail3">Category</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                         <select class="form-control show-tick" name="parent_category[]" required="" id="parent_category" onchange="" multiple>
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php /*foreach ($category_list as $parent_category) { ?>
+                                                    <option value="<?php echo $parent_category->category_id; ?>" <?php  if(in_array($parent_category->category_id,$category_array)){ echo 'selected'; }  ?>><?php echo getMenuList($parent_category->category_id);?></option>
+                                                    <?php }*/ ?>
+                                                   <!-- </select>  
+                                                    </div>
+                                                </div>
+                                            </div> -->
 
+                                            <?php
+                                                          //  print_R($brand_list);
+                                                        ?>
 
                                             <div class="form-group ">                                                
                                                 <div class="row">
@@ -201,30 +118,31 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control show-tick" name="brand_name" required="" id="brand_name" onchange="" >
-                                                      
-                                                        <?php foreach ($brand_list as $brand) { ?>
-                                                        <option value="<?php echo $brand->brand_id; ?>"><?php echo getBrandList($brand->brand_id);?></option>
-                                                        <?php } ?>
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php foreach ($brand_list as $brand) { ?>
+                                                    <option value="<?php echo $brand->brand_id; ?>" <?php  if($brand->brand_id == $row->brand_id){ echo 'selected'; }  ?>><?php echo getBrandList($brand->brand_id);?></option>
+                                                    <?php } ?>
                                                     </select> 
                                                     </div>
                                                 </div>
                                             </div>
 
-                                             <div class="form-group ">                                                
+                                            <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Class Name</label>
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control show-tick" name="class_name" required="" id="class_name" onchange="" >
-                                                      
-                                                        <?php foreach ($class_list as $class) { ?>
-                                                        <option value="<?php echo $class->class_id; ?>"><?php echo getClassList($class->class_id);?></option>
-                                                        <?php } ?>
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php foreach ($class_list as $class) { ?>
+                                                    <option value="<?php echo $class->class_id; ?>" <?php  if($class->class_id == $row->class_id){ echo 'selected'; }  ?>><?php echo getClassList($class->class_id);?></option>
+                                                    <?php } ?>
                                                     </select> 
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <?php 
                                                  $resp_get_course_list = '';
                                                  $resp_get_course_list = get_course();
@@ -236,54 +154,55 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control show-tick" name="course_id" required="" id="course_id" onchange="" >
-                                                       
+                                                        <!-- <option value="0">Select</option> -->
                                                         <?php foreach ($resp_get_course_list as $course) { ?>
-                                                        <option value="<?php echo $course->id; ?>"><?php echo $course->course_name;?></option>
+                                                       
+                                                        <option value="<?php echo $course->id; ?>" <?php  if($course->id == $row->course_id){ echo 'selected'; }  ?>><?php echo getCourseList($course->id);?></option>
                                                         <?php } ?>
                                                     </select> 
                                                     </div>
                                                 </div>
                                             </div>
 
-                                               <div class="form-group ">                                                
+                                            <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Board Name</label>
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control show-tick" name="board_name" required="" id="board_name" onchange="" >
-                                                        
-                                                        <?php foreach ($board_list as $board) { ?>
-                                                        <option value="<?php echo $board->board_id; ?>"><?php echo getboardList($board->board_id);?></option>
-                                                        <?php } ?>
-                                                    </select>  
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php foreach ($board_list as $board) { ?>
+                                                    <option value="<?php echo $board->board_id; ?>" <?php  if($board->board_id == $row->board_id){ echo 'selected'; }  ?>><?php echo getBoardList($board->board_id);?></option>
+                                                    <?php } ?>
+                                                    </select> 
                                                     </div>
                                                 </div>
                                             </div>
 
-                                               <div class="form-group ">                                                
+                                            <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Batch Name</label>
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control show-tick" name="batch_name" required="" id="batch_name" onchange="" >
-                                                     
-                                                        <?php foreach ($batch_list as $batch) { ?>
-                                                        <option value="<?php echo $batch->batch_id; ?>"><?php echo getbatchList($batch->batch_id);?></option>
-                                                        <?php } ?>
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php foreach ($batch_list as $batch) { ?>
+                                                    <option value="<?php echo $batch->batch_id; ?>" <?php  if($batch->batch_id == $row->batch_id){ echo 'selected'; }  ?>><?php echo getbatchList($batch->batch_id);?></option>
+                                                    <?php } ?>
                                                     </select> 
                                                     </div>
                                                 </div>
-                                            </div>  -->
+                                            </div>
 
                                             <div class="form-group ">                                                
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Product Short Description</label>
                                                     </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <textarea class="form-control"  name="product_short_description" id="product_short_description" required=""  rows="2"><?php echo $row->product_short_description ?></textarea>
+                                                    <div class="col-md-9">
+                                                        <textarea class="form-control"  name="product_short_description" id="product_short_description" required=""  rows="2"><?php echo $row->product_short_description; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,22 +211,31 @@
 
                                              <div class="form-group ">
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Product Long Description</label>
                                                     </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
-                                                        <textarea class="form-control product_descriptions"  name="product_descriptions" id="product_descriptions"  rows="4"><?php echo $row->product_description ?></textarea>
+                                                    <div class="col-md-9">
+                                                        <textarea class="form-control"  name="product_description" id="product_description"  rows="4"><?php echo $row->product_description; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
+
                                              <?php
                                            
                                             
-                                               // $resp_get_grad_list = '';
-                                              //  $resp_get_grad_list = get_graduated_in();
+                                                $resp_get_grad_list = '';
+                                                $resp_get_grad_list = get_graduated_in();
+                                                $edit_grad_id = '';
+                                               /* print_R($product_detail[0]->graduated_in_id);
+                                                exit;*/
+                                                if($product_detail)
+                                                {
+                                                    $edit_grad_id = $product_detail[0]->graduated_in_id;
+                                                }
+                                                //print_R($resp_get_cat_list);
                                                
                                             ?>
-                                            <!--  <div class="form-group ">                                                
+                                             <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Graduated In  <span style="color:red">*</span></label>
@@ -317,26 +245,22 @@
                                                             <option value="0">Select</option>
                                                               <?php if($resp_get_grad_list){ ?>
                                                             <?php foreach ($resp_get_grad_list as $r) { ?>
-                                                            <option value="<?php echo $r->id; ?>"><?php echo $r->graduated_name ;?></option>
-                                                            <?php } } ?> 
+                                                            <option value="<?php echo $r->id; ?> <?php if($r->id == $row->graduated_in_id){ echo 'selected="selected"';} ?> "><?php echo $r->graduated_name ;?></option>
+                                                            <?php } } ?>
                                                         </select>  
                                                     </div>
                                                 </div>
                                             </div>
-
                                              <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Sort Order</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                       <input class="form-control" type="text" name="product_sort" id="product_sort" >
+                                                       <input class="form-control" type="text" name="product_sort" id="product_sort"  value="<?php echo $row->product_sort; ?>">
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
 
                                             <div class="form-group ">
                                                 <div class="row">
@@ -349,9 +273,9 @@
                                                        <input type="file" name="img_upload[]" id="img_upload" onchange="readURL(this);" style="padding: 12px 0px;width:206px;margin-left:0px;outline:none">
                                                     </div>
                                                 </div>
-                                            </div>  -->
+                                            </div>  
 
-                                            <!--<div class="form-group ">
+                                            <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Select multiple files:</label>
@@ -361,23 +285,40 @@
                                                         <div class="col-md-12" id="output_img" style="margin-bottom: 12px;">
                                                             <output id="result" />
                                                         </div>
+                                                        <input type="hidden" id="product_image_count" value="<?php echo count($product_image); ?>">
+                                                        <?php foreach ($product_image as $pro_image): ?>
+                                                            <div>
+                                                                <img style='height:170px;float:left;' class='thumbnail' src='<?php echo base_url(); ?>../uploads/product/image/<?php echo $pro_image->product_image; ?>' title=''/>
+                                                                <a style="float:left;margin-right: 10px;font-weight: bold;" href="javascript:void(0)" class="remove_pict btn bg-red" onclick="removeImage('<?php echo $pro_image->product_image; ?>',this)">X</a>
+                                                            </div>
+                                                        <?php endforeach ?>
                                                     </div>
                                                 </div>
-                                            </div> --> 
+                                            </div>  
 
-                                           <!-- <div class="form-group ">
+                                            <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Video File</label>
                                                     </div>
                                                     <div class="col-md-9">
                                                         <input type="file" name="video_upload[]" id="video_upload"  multiple style="padding: 12px 5px;width:206px;margin-left:0px;outline:none">    
-                                                        <span>File format should be mp4</span>                
+                                                        <span>File format should be mp4</span>  
+                                                        <input type="hidden" id="product_video_count" value="<?php echo count($product_video_file); ?>">    
+                                                    <?php foreach ($product_video_file as $pro_video): ?>
+                                                        <div>
+                                                            <a target="_blank" href='<?php echo base_url(); ?>../uploads/product/video/<?php echo $pro_video->product_video; ?>'>
+                                                            <img style='height:100px;float:left;' class='thumbnail' src='<?php echo base_url(); ?>../assets/vdobig.png' title="<?php echo $pro_video->product_video; ?>"/></a>
+                                                            <a style="float:left;margin-right: 10px;font-weight: bold;" href="javascript:void(0)" class="remove_pict btn bg-red" onclick="removeVideo('<?php echo $pro_video->product_video; ?>',this)">X</a>
+                                                        </div>
+                                                    <?php endforeach ?>              
                                                     </div>
                                                 </div>
                                             </div> 
 
-                                            <div id="product_video"> 
+                                            <div id="product_video">                                                 
+
+                                                <?php if (!count($product_video_link)): ?>
                                                 <div class="row clearfix" id="form_vd_id_0">
                                                     <div class="col-md-3">
                                                         <label for="">Video Url Link</label>
@@ -389,20 +330,43 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+                                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
                                                         <button  type="button" class="btn btn-info" onclick="return product_video()"><i class="fa fa-plus"></i> Add</button>                                     
                                                     </div>
                                                 </div>
-                                            </div>  -->
+                                                <?php endif ?>
+                                                <?php foreach ($product_video_link as $key => $value): ?>
+                                                    <div class="row clearfix" id="form_vd_id_<?php echo $key; ?>">
+                                                        <div class="col-md-3">
+                                                            <label for="">Video Url Link</label>
+                                                        </div>
+                                                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input class="form-control" type="text" value="<?php echo $value->product_video; ?>" name="video_link[]" id="product_video_<?php echo $key; ?>" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+                                                            <?php if($key=='0'){ ?>
+                                                            <button type="button" class="btn btn-info" onclick="return product_video()"><i class="fa fa-plus"></i> Add</button>
+                                                            <?php }else{ ?>
+                                                            <button type="button" class="btn bg-red wave-effects" id="remove_<?php echo $key; ?>" value="remove" onclick="return remove_product_video(<?php echo $key; ?>)"><i class="fa fa-times"></i> Remove</button>                                         
+                                                            <?php } ?>                                    
+                                                        </div>
+                                                    </div>
+                                                    <?php endforeach ?> 
+
+                                            </div>
 
 
-                                          <!--  <div class="form-group ">
+                                            <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputEmail3">Meta Tag Title</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <input type="text" class="form-control" name="meta_title" id="meta_title" placeholder="Meta Tag Title">
+                                                        <input type="text" class="form-control" name="meta_title" id="meta_title" placeholder="Meta Tag Title" value="<?php echo $row->product_meta_title; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,7 +376,7 @@
                                                         <label class="form-label" id="inputEmail3">Meta Tag Description</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <textarea class="form-control no-resize" id="meta_description" name="meta_description" rows="3" cols="80" placeholder="Meta Tag Description"></textarea>
+                                                        <textarea class="form-control no-resize" id="meta_description" name="meta_description" rows="3" cols="80" placeholder="Meta Tag Description"><?php echo $row->product_meta_description; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -422,13 +386,14 @@
                                                         <label class="form-label" id="inputEmail3">Meta Tag Keyword</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <textarea class="form-control no-resize" id="meta_keyword" name="meta_keyword" rows="3" cols="80" placeholder="Meta Tag Keyword"></textarea>
+                                                        <textarea class="form-control no-resize" id="meta_keyword" name="meta_keyword" rows="3" cols="80" placeholder="Meta Tag Keyword"><?php echo $row->product_meta_keyword; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div id="product_feature" >
-                                                <div class="row clearfix" id="form_gr_id_0">
+                                             <?php if (!count($product_feature)): ?>
+                                            <div class="row clearfix" id="form_gr_id_0">
                                                 <div class="col-md-3">
                                                     <label for="">Product Features</label>
                                                 </div>
@@ -436,53 +401,74 @@
                                                     <div class="form-group">
                                                         <div class="form-line">
                                                             <input class="form-control" type="text" name="product_feature[]" id="product_feature_0" >
-                                                        </div> 
-                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+                                                    <button  type="button" class="btn btn-info" onclick="return product_feature()"><i class="fa fa-plus"></i> Add</button>                                     
+                                                </div>
+                                            </div>
+                                            <?php endif ?>
+                                            <?php foreach ($product_feature as $key => $value): ?>
+                                            <div class="row clearfix" id="form_gr_id_<?php echo $key; ?>">
+                                                <div class="col-md-3">
+                                                    <label for="">Product Features</label>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input class="form-control" type="text" value="<?php echo $value->product_feature; ?>" name="product_feature[]" id="product_feature_<?php echo $key; ?>" >
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
-                                                    <button  type="button" class="btn btn-info" onclick="return product_feature()"><i class="fa fa-plus"></i> Add</button>                                     
+                                                    <?php if($key=='0'){ ?>
+                                                    <button type="button" class="btn btn-info" onclick="return product_feature()"><i class="fa fa-plus"></i> Add</button>
+                                                    <?php }else{ ?>
+                                                    <button type="button" class="btn bg-red wave-effects" id="remove_<?php echo $key; ?>" value="remove" onclick="return remove_product_feature(<?php echo $key; ?>)"><i class="fa fa-times"></i> Remove</button>                                         
+                                                    <?php } ?>                                    
                                                 </div>
-                                            </div> 
                                             </div>
-
-                                            <div class="form-group ">
+                                            <?php endforeach ?> 
+                                        </div>
+											
+                                           <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Product Type</label>
                                                     </div>
                                                     <div class="col-md-9">
                                                         <select class="form-control"  name="product_type" id="product_type" >
-                                                        <option value="1">Online</option>
-                                                        <option value="2">Offline</option>
-                                                    </select> 
+                                                            <option value="1" <?php if ($row->product_type=='1') { echo 'selected'; } ?> >Online</option>
+                                                            <option value="2" <?php if ($row->product_type=='2') { echo 'selected'; } ?>>Offline</option>
+                                                        </select>  
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
+                                            
                                             
                                             <div class="form-group ">
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
+                                                    <div class="col-md-3">
                                                         <label class="form-label">Status</label>
                                                     </div>
-                                                    <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                                    <div class="col-md-9">
                                                         <select class="form-control"  name="product_status" id="product_status" >
-                                                        <option value="active">Active</option>
-                                                        <option value="inactive">Inactive</option>
-                                                    </select> 
+                                                            <option value="active" <?php if ($row->product_status=='active') { echo 'selected'; } ?> >Active</option>
+                                                            <option value="inactive" <?php if ($row->product_status=='inactive') { echo 'selected'; } ?>>Inactive</option>
+                                                        </select>  
                                                     </div>
                                                 </div>
                                             </div>
                                            
                                             <div class="form-group mb-0 row justify-content-end">
                                                 <div class="col-md-9 float-end">
-                                                    <button type="submit" class="submit_event btn btn-primary waves-effect waves-light" >Submit</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light" onclick="return validateForm()">Submit</button>
                                                      <button type="button" class="btn btn-danger waves-effect waves-light" onclick="window.history.back()">Cancel</button>
                                                 </div>
                                             </div>
-                                            <?php endforeach ?>
-                                            
-                                       <!-- </form>  -->
+                                        <?php endforeach ?>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -490,19 +476,10 @@
                     </div>
                 </div>
 
-<input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                                           
-<input type="hidden" value = "<?php echo $product_detail[0]->class_id ?>" class = "filter_class">
-<input type="hidden" value = "<?php echo $product_detail[0]->course_id ?>" class = "filter_course">
-<input type="hidden" value = "<?php echo $product_detail[0]->batch_id ?>" class = "filter_batch">
-<input type="hidden" value = "<?php echo $product_detail[0]->board_id ?>" class = "filter_board">
-<input type="hidden" value = "<?php echo $product_detail[0]->product_type ?>" class = "filter_online_offline">
-<input type="hidden" value = "<?php echo $product_detail[0]->brand_id ?>" class = "brand" id = "brand">
 
 <script>
     CKEDITOR.replace( 'product_description' );
 </script>
-<script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js"> </script>
 <script>
     function product_attribute()
     {
@@ -564,14 +541,14 @@
         $("#form_gr_id_"+value).remove();
     }
 </script>
+
 <script>
     function product_video()
     {
-
         var count= $('#product_video').children('.row').length;
         console.log(count)
         $("#product_video").append(`<div class="row clearfix" id="form_vd_id_`+count+`">
-            <div class="col-md-3">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-12 form-control-label">
                 <label for="">Video Url Link</label>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
@@ -581,7 +558,7 @@
                     </div> 
                 </div>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
                 <button type="button" style="" class="btn bg-red wave-effects" id="remove_`+count+`" value="remove" onclick="return remove_product_video(`+count+`)"><i class="fa fa-times"></i> Remove</button>
             </div>
         </div> `);
@@ -589,6 +566,34 @@
     function remove_product_video(value)
     {
         $("#form_vd_id_"+value).remove();
+    }
+</script>
+<script>
+    function removeVideo(video,e)
+    {
+        var product_video_count=$("#product_video_count").val();
+        confirm(
+                siteName, 
+                'Are you sure! you want to Delete?', 
+                function(evt, value)
+                {                             
+                    $.ajax(
+                        {
+                            type: "POST",
+                            dataType:'json',
+                            url:"<?php echo base_url();?>admin_product/removeVideo",
+                            data: {video: video},
+                            async: false,
+                            success: function(data)
+                            {   
+                                $("#product_video_count").val(parseInt(product_video_count)-1);                 
+                                $(e).parent('div').remove();
+                            }
+                        });                 
+                }
+                ,function(){ 
+             }); 
+        
     }
 </script>
 <script>
@@ -608,41 +613,31 @@
     }
 </script>
 <script>
-   /* window.onload = function(){
+    window.onload = function(){
         //Check File API support
         if(window.File && window.FileList && window.FileReader)
         {
             var filesInput = document.getElementById("files");
-
             filesInput.addEventListener("change", function(event){
-
                 var files = event.target.files; //FileList object
                 var output = document.getElementById("result");
-                //output.innerHTML="";
+                output.innerHTML="";
                 for(var i = 0; i< files.length; i++)
                 {
                     var file = files[i];
-
                     //Only pics
                     if(!file.type.match('image'))
                         continue;
-
                     var picReader = new FileReader();
-
                     picReader.addEventListener("load",function(event){
-
                         var picFile = event.target;
-
                         var div = document.createElement("div");
-
                         div.innerHTML = "<img style='height:170px;float:left;' class='thumbnail' src='" + picFile.result + "'" +
                             "title='" + picFile.name + "'/> ";
-
                         output.insertBefore(div,null);
                         div.children[1].addEventListener("click", function(event){
                             div.parentNode.removeChild(div);
                         });
-
                     });
                     $('#output_img').on({
                         'click': function(e) {
@@ -651,18 +646,16 @@
                             e.stopPropagation();
                         }
                     })
-
                     //Read the image
                     picReader.readAsDataURL(file);
                 }
-
             });
         }
         else
         {
             console.log("Your browser does not support File API");
         }
-    }*/
+    }
 
     function getAttrValue(id,val)
     {
@@ -698,38 +691,83 @@
     function getOptionValue(id) 
     {
         var value=$("#option_name").val();
-        console.log(value)
+        //console.log(value)
     }
 </script>
 <script>
 function showProductOptoin(id,chk) {
     if(chk==true)
     {
-        $('#product_option_div_'+id).show();
+      $('#product_option_div_'+id).show();
     }
     else
     {
-        $('#product_option_div_'+id).hide();
-        $('#product_option_div_'+id+ ' select').selectpicker('deselectAll');
-        $('#product_option_div_'+id+ ' input').removeAttr('checked');
+     $('#product_option_div_'+id).hide();
+     $('#product_option_div_'+id+ ' select').selectpicker('deselectAll');
+     $('#product_option_div_'+id+ ' input').removeAttr('checked');
     }
 }
+</script>
+<script>
+    function removeImage(image,e)
+    {
+        var product_image_count=$("#product_image_count").val();
+
+        confirm(
+                siteName, 
+                'Are you sure! you want to Delete?', 
+                function(evt, value)
+                {  
+
+                    $.ajax(
+                        {
+                            type: "POST",
+                            dataType:'json',
+                            url:"<?php echo base_url();?>admin_product/removeImage",
+                            data: {image: image},
+                            async: false,
+                            success: function(data)
+                            {   
+                                $("#product_image_count").val(parseInt(product_image_count)-1);                 
+                                $(e).parent('div').remove();
+                            }
+                        });                 
+                }
+                ,function(){ 
+             }); 
+        
+    }
 </script>
 <script>
     function saveOption(){
         var option =$("#options select").serializeArray();
         var check =$("#options input:checkbox").serializeArray();
         var name =$("#options input:hidden").serializeArray();
-
+        var product_id =$("#product_id").val();
         $.ajax({
                 type: "post",
                 dataType:'html',
                 url:"<?php echo base_url();?>admin_product/saveOption",
-                data: {option: option,check: check,name:name},
+                data: {option: option,check: check,name:name,product_id:product_id},
+                success: function(data)
+                {
+                    //$('#variation_div_first').html(data);
+                    //$('#variation_div').html('');
+                }
+            });        
+    }
+</script>
+<script>
+    function getVariation(product_id){
+        $.ajax({
+                type: "post",
+                dataType:'html',
+                url:"<?php echo base_url();?>admin_product/updateSaveOption",
+                data: {product_id: product_id},
                 success: function(data)
                 {
                     $('#variation_div_first').html(data);
-                    $('#variation_div').html('');
+                    //$('#variation_div').html('');
                 }
             });        
     }
@@ -762,411 +800,52 @@ function showProductOptoin(id,chk) {
     });
 </script>
 <script>
-    
+    $(document).ready(function(){
+        var product_id=$("#product_id").val();
+        getVariation(product_id);
+    });
 </script>
 
 <script>
- $(document).ready(function() {
-        var radio_btn_val = '';
-        filter_segment
-        /** Coupon  Code **/
-        $(".date_div").css("visibility", "hidden");
-        $(".day_after_tmr_header").css("visibility", "hidden");
-        $(".today_header").css("visibility", "hidden");
-        $(".tmr_header").css("visibility", "hidden");
+    function validateForm(){
+        var item_title=$("#item_title").val();
+        var parent_category=$("#parent_category").val();
+       // var seller_sku=$("#seller_sku").val();
+        var product_short_description=$("#product_short_description").val();
+       // var price=$("#price").val();
 
-        $(".day_after_tmr_data").css("visibility", "hidden");
-        $(".today").css("visibility", "hidden");
-        $(".tommorow").css("visibility", "hidden");
-         /** End Coupon  Code **/
+        var file1=document.getElementById("img_upload").files.length;
+        var file2=document.getElementById("files").files.length;
+        var product_image_count=$("#product_image_count").val();
+        var file_length=parseInt(file1)+parseInt(file2)+parseInt(product_image_count);
 
-        /** Start Filter Section */
-            /** Apply Select 2 */
-           /* $('.filter_segment').select2();
-            $('.brand').select2();
-            $('#filter_class_dropdown').select2();
-            $('#filter_course_dropdown').select2();
-            $('#batch').select2();
-            
-            /**End   Apply Select 2 */
-        var filter_toggle_online = $("#online").val();
-        var filter_toggle_offline = $("#offline").val();
-        var filter_segment_id = $('.segment').val();
-        var filter_brand_id = $('#brand').val();
-        var filter_class_id = $('.filter_class').val();
-        var filter_course_id = $('.filter_course').val();
-        var filter_batch_id = $('.filter_batch').val();
-        var filter_board_id = '';
-        //var filter_online_offline = $('.filter_online_offline').val();
-        var product_id = '';
-        var event_code ='';
-        var event_title = '';
-        var event_date = '';
-        var event_from_time ='';
-        var event_to_time ='';
-        var event_type ='';
-        var event_role = '';
-        var event_description = '';
-        var event_status = '';
-        var link = '';
-        var img_upload = '';
-        var interested = '';
-
-
-        console.log(filter_segment_id);
-          /** Start Filter Section */
-       
-        if(filter_segment_id == 1)
-        {
-            $('.board-k12').css('display', 'block');
-            $('.board-other').css('display', 'none');
+        var message="";
+        if($.trim(item_title)==""){
+            message +="<span>Title should not be empty.</span>";            
         }
-        else
-        {
-            $('.board-other').css('display', 'block');
-            $('.board-k12').css('display', 'none');
-            //filter_board_id = filter_online_offline;
-            
+        if(parent_category== "" || parent_category== null){
+            message+="<span>Category should not be empty.</span>"; 
         }
-        $('.board-k12').css('display', 'none');
-          $('.board-other').css('display', 'none');
-
-        $("#filter_segment").change(function()
-        { 
-           
-           var drop_down_text = $('#filter_segment :selected').text();
-           drop_down_text = drop_down_text.trim();
-           if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
-           {
-                 $(".cal-h3").html('CLASS');
-           }
-           else
-           {
-                $(".cal-h3").html('COURSE SEGMENT');
-           }
-            filter_segment_id =  $(this).val();
-            if(filter_segment_id == "")
-            {
-                alert("Please Select Valid Segment");
-                return false;
-            }
-            if(filter_segment_id == 1)
-            {
-                $('.board-k12').css('display', 'block');
-                $('.board-other').css('display', 'none');
-            }
-            else
-            {
-                $('.board-other').css('display', 'block');
-                $('.board-k12').css('display', 'none');  
-            }
-            filter_brand(filter_segment_id);
-        });
-        $("#brand").change(function()
-        {
-            filter_brand_id = $(this).val();
-            filter_class(filter_brand_id,filter_segment_id);
-        });
-
-        $("#filter_board_online_dropdown").change(function()
-        {
-           filter_board_id =  $(this).val();
-           filter_class(filter_brand_id,filter_segment_id);
-          
-        });
-        $("#filter_board_cbse_dropdown").change(function()
-        {
-           filter_board_id =  $(this).val();
-           filter_class(filter_brand_id,filter_segment_id);
-          
-        });
-
-        $("#filter_class_dropdown").change(function()
-        {
-            filter_class_id = $(this).val();
-            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
-        });
-
-        $("#filter_course_dropdown").change(function()
-        {
-            filter_course_id = $(this).val();
-            filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
-
-        });
-
-        function filter_brand(segment_id)
-        {
-            filter_brand_id ='';
-            $.ajax({
-                type : 'POST',    
-                url: "<?php echo base_url(); ?>filter/get_brand_detail",
-                data:{
-                    segment:segment_id,
-                }, 
-                    dataType: "json",   
-                    success: function (response) {
-                        // console.log(response.data);
-                        var options = '';
-                        var filter_brand_id_temp = '';
-                        for (var i = 0; i < response.data.length; i++) {
-                            if(i==0)
-                            {
-                                filter_brand_id = response.data[i].brand_id;
-                                filter_brand_id_temp = filter_brand_id;
-                            }
-                            options += '<option value="' + response.data[i].brand_id + '">' + response.data[i].brand_name + '</option>';
-                        }
-                        $('#brand').empty().append(options);
-                        if(filter_brand_id_temp)
-                        {
-                           filter_class(filter_brand_id,segment_id) 
-                        }
-
-                    }
-                });
+        // if($.trim(seller_sku)==""){
+        //     message+="<span>SKU should not be empty.</span>";
+        // }       
+        if($.trim(product_short_description)==""){
+            message+="<span>Short Description should not be empty.</span>";
+        }       
+        // if($.trim(price)==""|| parseFloat(price) < 0){
+        //     message+="<span>Price should not be empty or Zero.</span>";
+        // }       
+        if(parseInt(file_length) == 0){
+            message+="<span>Image should not be empty.</span>";
         }
 
-        function filter_class(brand_id,segment_id)
-        {
-            filter_class_id = '';
-            $.ajax({
-                type : 'POST',    
-                url: "<?php echo base_url(); ?>filter/get_filter_class_detail",
-                data:{
-                    brand_id : brand_id,
-                    segment:segment_id,
-                }, 
-                dataType: "json",   
-                success: function (response) {
-                    // console.log(response.data);
-                    var options = '';
-                    var filter_class_id_temp = '';
-                    for (var i = 0; i < response.data.length; i++) {
-                        if(i==0)
-                    {
-                        filter_class_id = response.data[i].class_id;
-                        filter_class_id_temp = filter_class_id;
-                    }
-                        options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
-                    }
-                    //console.log(options);
-                        $('#filter_class_dropdown').empty().append(options); 
-                    if(filter_class_id_temp)
-                    {
-                        filter_course(brand_id,segment_id,filter_board_id,filter_class_id_temp)
-                    }
-                }
-            });
-        }
-        function filter_course(brand_id,segment_id,board_id,class_id)
-        {
-            filter_course_id = '';
-        $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
-              data:{
-                segment:segment_id,
-                board: board_id,
-                class: class_id,
-                brand_id : brand_id,
-               // batch: filter_batch_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                   console.log(response.data);
-                  var options = '';
-                  var filter_course_id_temp = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    if(i==0)
-                    {
-                        filter_course_id = response.data[i].id;
-                        filter_course_id_temp = filter_course_id
-                    }
-                    options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
-                }
-                //console.log(options);
-                $('#filter_course_dropdown').empty().append(options); 
-                if(filter_course_id_temp)
-                {
-                    filter_batch(brand_id,segment_id,board_id,class_id,filter_course_id_temp)
-                }
-              }
-           });
-        }
-
-        function filter_batch(brand_id,segment_id,board_id,class_id,course_id)
-        {
-            filter_batch_id = '';
-            $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_batch_detail",
-              data:{
-                segment:segment_id,
-                board: board_id,
-                class: class_id,
-                brand_id : brand_id,
-                course : course_id,
-               // batch: filter_batch_id,
-              }, 
-              dataType: "json",   
-              success: function (response) {
-                   console.log(response.data);
-                  var options = '';
-                for (var i = 0; i < response.data.length; i++) {
-                    if(i==0)
-                    {
-                        filter_batch_id = response.data[i].batch_id;
-                    }
-                    options += '<option value="' + response.data[i].batch_id + '">' + response.data[i].batch_name + '</option>';
-                }
-                //console.log(options);
-                $('#batch').empty().append(options); 
-              }
-           });
-        }
-
-    //     function validateForm(){
-    //     var item_title=$("#item_title").val();
-    //     var parent_category=$("#parent_category").val();
-    //    // var seller_sku=$("#seller_sku").val();
-    //     var product_short_description=$("#product_short_description").val();
-    //    // var price=$("#price").val();
-
-    //     /*var file1=document.getElementById("img_upload").files.length;
-    //     var file2=document.getElementById("files").files.length;
-    //     var file_length=parseInt(file1)+parseInt(file2);*/
-
-    //     var message="";
-    //     if($.trim(item_title)==""){
-    //         alert("Title should not be empty");
-    //         return;
-    //         message +="<span>Title should not be empty.</span>";            
-    //     }
-    //     if(parent_category== "" || parent_category== null){
-    //         message+="<span>Category should not be empty.</span>"; 
-    //     }
-    //     // if($.trim(seller_sku)==""){
-    //     //     message+="<span>SKU should not be empty.</span>";
-    //     // }       
-    //     if($.trim(product_short_description)==""){
-    //         message+="<span>Short Description should not be empty.</span>";
-    //     }       
-    //     // if($.trim(price)==""|| parseFloat(price) < 0){
-    //     //     message+="<span>Price should not be empty or Zero.</span>";
-    //     // }       
-    //    /* if(parseInt(file_length) == 0){
-    //         message+="<span>Image should not be empty.</span>";
-    //     }*/
-
-    //     $("#errorMsgDiv").html("");
-    //     $("#errorMsgDiv").html(message);
-    //     if(message.length){
-    //         return false;
-    //     }else{
-    //         return true;
-    //     }       
+        $("#errorMsgDiv").html("");
+        $("#errorMsgDiv").html(message);
+        if(message.length){
+            return false;
+        }else{
+            return true;
+        }       
         
-    // }
-
-        $(".submit_event").click(function()
-        {
-           
-            product_title = $('#item_title').val();
-            product_short_description =  $('#product_short_description').val();
-            product_description =  $('.product_descriptions').val();
-            product_status = $('#product_status').val();
-           
-            if(!product_title)
-            {
-                alert("Event Title Cannot Be Empty");    
-                return false;
-            }
-          
-            
-            if(!product_short_description)
-            {
-                alert("Event Short Description Cannot Be Empty");    
-                return false;
-            }
-            if(!product_status)
-            {
-                alert("Event Status Cannot Be Empty");    
-                return false;
-            }
-            if(!filter_segment_id)
-                {
-                   alert("Select Segment");    
-                   return false;
-                }
-                if(!filter_board_id)
-                {
-                   alert("Select Board");          
-                   return false;            
-                }
-                if(!filter_class_id)
-                {   
-                    alert("Select Class");        
-                    return false;       
-                }
-                if(!filter_course_id)
-                {   
-                    alert("Select Course");        
-                    return false;       
-                }
-                if(!filter_brand_id)
-                {   
-                    alert("Select Brand");        
-                    return false;       
-                }
-                if(!filter_batch_id)
-                {
-                    alert("Select Batch");
-                    return false;
-                }
-                
-
-     
-
-              
-                        var form_data = new FormData();
-                        form_data.append('segment', filter_segment_id);
-                        form_data.append('board', filter_board_id);
-                        form_data.append('class', filter_class_id);
-                        form_data.append('brand_id', filter_brand_id);
-                        form_data.append('course', filter_course_id);
-                        form_data.append('batch', filter_batch_id);
-                        form_data.append('product_title', product_title);
-                        form_data.append('product_description', product_description);
-                        form_data.append('product_short_description', product_short_description);
-                        form_data.append('product_status', product_status);
-                        
-                    
-
-            $.ajax({
-              type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/edit_product_details",
-               data: form_data,
-               Type: "json",   
-               contentType: false,
-               processData: false,
-              success: function (response) {
-                   console.log(response);
-                   
-                   if(response.data == "")
-                   {
-                        alert("No data found");
-                   }else{
-                        if(response.status == "1")
-                        {
-                            alert(response.data);
-                            window.location="<?php echo base_url();?>admin_event";
-                        }
-                      
-                   }
-              }
-           });
-
-        })
-
-    });
+    }
 </script>

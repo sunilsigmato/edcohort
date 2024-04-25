@@ -111,7 +111,7 @@ class Cohort extends CI_Controller {
 
     $order = "product_name ASC";
 
-    $data['product_list'] = $this->cohort_model->cohort_list($where1, $order);
+    //$data['product_list'] = $this->cohort_model->cohort_list($where1, $order);
 
 
     //echo $this->db->last_query(); 

@@ -27,7 +27,7 @@ if($get_breadcrumb)
 }
 ?>
 <!--banner start-->
-<div class="inner-banner d-flex">
+<div class="inner-banner">
     <div class="col-md-3 col-sm-12 breadcrumb-design">
 
         <div class="breadcrumb">
@@ -72,10 +72,10 @@ if($get_breadcrumb)
     <div class="container-fluid review-top-section">
 
         <div class="row">
-            <div class="col-md-1 course-img p-3 text-center">
+            <div class="col-md-1 course-img p-3 text-center brandCard">
 
             <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/product/image/<?php echo  $get_single_course_detail->product_image; ?>">
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
 
             </div>
             <div class="col-md-6 pt-3 course-name-display">
@@ -229,7 +229,7 @@ if($get_breadcrumb)
                 <!--- Filtr Starts  --->
                 <div class="col-md-2 review-left">
                     <div class="review-left" id="sideleft-fix">
-                        <form action="<?php echo base_url(); ?>counselling-search" id="form" name="form" method="post">
+                        <form action="#" id="form" name="form" method="post">
                             <h3 class="filter-title">Filter</h3>
                             <?php echo csrf_field(); ?>
                             <div class="filter-col">
@@ -376,20 +376,7 @@ if($get_breadcrumb)
                     <!--center start-->
                     <div class="review-center p-3">
                         <?php echo message(); ?>
-                        <?php if($this->session->userdata('user_id')){ ?>
-                        <div class="review-btn-box">
-                            <a href="<?php echo base_url(); ?>create-cohort?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
-                                class="review-btn"> <img src="<?php echo base_url();?>assets/images/review-icon2.png"
-                                    alt="">
-                                Create a discussion</a>
-                        </div>
-                        <?php }else{ ?>
-
-                        <a href="javascript:void(0)" class="review-btn" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"> <img
-                                src="<?php echo base_url();?>assets/images/review-icon2.png" alt=""> Create a
-                            discussion</a>
-                        <?php } ?>
+                        
 
 
 
@@ -556,7 +543,7 @@ if($get_breadcrumb)
 
                         </div>
 
-                        <?php }else{ echo "<div class='across-row'><h3>No Cohort Found..!</h3></div>"; } ?>
+                        <?php }else{ echo "<div class='across-row'><h3>COMING SOON</h3></div>"; } ?>
 
                     </div>
                 </div>
