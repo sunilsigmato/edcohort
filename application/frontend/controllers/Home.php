@@ -11,6 +11,7 @@ class Home extends CI_Controller {
 		  $this->load->model('jewelry_model');
 		  $this->load->model('diamond_model');
 		  $this->load->model('home_model');
+		  $this->load->model('review_model');
 		  
 		  //$this->load->library('curl');
 	  }
@@ -80,7 +81,18 @@ class Home extends CI_Controller {
 			$this->load->view('common/header',$data);
 			$this->load->view('index',$data);
 			$this->load->view('common/footer');
-    } 
+    }
+	function all_product()
+	{
+		$where_class = 'status = 1';
+		$data['segment_record'] = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
+	   
+	   //print_ex($data);
+		
+	   $this->load->view('common/header',$data);
+	   $this->load->view('all_product',$data);
+	   $this->load->view('common/footer');
+	}
 	
 	   
   function list_image($folder,$product_id)

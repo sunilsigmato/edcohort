@@ -791,7 +791,7 @@ if (empty($courseid)) {
                     <div class=" d-block d-md-flex row">
                         
                         <?php foreach ($resp_get_course as $r)  { 
-                        //   print_R($r);
+                          
                             
                             ?>
                         <div class="col-sm-12 col-xl-3 col-lg-4 mb-3">

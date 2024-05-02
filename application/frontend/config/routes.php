@@ -328,6 +328,12 @@ $route['ranking-submit'] = 'ranking/ranking_submit';
 //-------- Counselling----//
 $route['upcoming-counselling'] = 'counselling/upcoming_counselling';
 
+//-------- Index----//
+$route['all-product'] = 'home/all_product';
+/*$route['all-product/:any'] = 'home/all_product';
+$route['all-product/:any/:any'] = 'home/all_product';
+$route['all-product/:any/:any/:any'] = 'home/all_product';*/
+
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING

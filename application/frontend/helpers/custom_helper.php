@@ -439,6 +439,23 @@ function getClassName($class_id)
                 
     }
 
+    function getall_course_list($id,$brand_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+       // print_R("hiii"); 
+        $data=$CI->common_model->getall_course_list($id,$brand_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+                
+    }
+
     function get_brand_details($id)
     {   $data = '';
         $CI =& get_instance();

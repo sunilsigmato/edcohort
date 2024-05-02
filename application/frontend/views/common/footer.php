@@ -323,34 +323,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         <button type="submit" onclick="registration()" id="registraton"
                             class="form-control login-btn">Sign Up</button>
                     </div>
-                  <!--  <div class="double-line">
-                        <p class="text-center">Or</p>
-                    </div>
-                    <div class="mb-4">
-                        <div class="social-login">
-                            <div class="social-icon mt-4">
-                                <a href="#"><img src="<?php echo base_url(); ?>assets/images/google.png"></a>
-                            </div>
-                            <div class="social-icon facebook-color mt-4">
-                                <a href="#"><img src="<?php echo base_url(); ?>assets/images/facebook.png"></a>
-                            </div>
-                        </div>
-                    </div>  -->
-                    <!--       <div class="mb-t mb-4">
-                <div class="login-number text-center">
-                    <a href="#">Login with Phone Number</a>
-                </div>
-            </div> -->
-                   <!-- <div class="form-group mt-4 terms-check">
-                        <input class="form-check-input" type="checkbox" id="checkbox624">
-                        <label for="checkbox624" class="form-check-label white-text">I Agree all Terms and
-                            Condtion</label>
-                    </div>
-                    <div class="form-group mt-2 terms-check">
-                        <input class="form-check-input" type="checkbox" id="checkbox624">
-                        <label for="checkbox624" class="form-check-label white-text">Subscribe to Edcohort
-                            newsletter</label>
-                    </div>  -->
+                 
                 </form>
             </div>
         </div>
@@ -362,7 +335,7 @@ $authUrl1 = $gClient->createAuthUrl();
 
 <div class="modal fade login-popup" id="segment-button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-dialog modal-dialog-centered segment-dialog">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
@@ -443,8 +416,8 @@ $authUrl1 = $gClient->createAuthUrl();
 
     }
     @media (min-width: 576px) {
-    .modal-dialog {
-        max-width: 70%;
+    .segment-dialog {
+        max-width: 70% !important;
         margin: 1.75rem auto;
     }
 }
@@ -459,7 +432,6 @@ $authUrl1 = $gClient->createAuthUrl();
             $class_records_count = count($segment_record);
             if ($class_records_count > 0) {
                 foreach ($segment_record as $class) { 
-                
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 
@@ -473,7 +445,7 @@ $authUrl1 = $gClient->createAuthUrl();
                     <div class="card-body d-flex flex-column justify-content-center card-background">
                         <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
 
-                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                        <a href="<?php echo base_url(); ?>/all-product?segment=<?php echo $class->id; ?>&brand=1" class="mt-auto">
                             <div class="arrow-mark">&#8594;</div>
                         </a>
 
