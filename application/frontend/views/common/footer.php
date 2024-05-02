@@ -358,6 +358,145 @@ $authUrl1 = $gClient->createAuthUrl();
 </div>
 
 
+<!-- Segment -->
+
+<div class="modal fade login-popup" id="segment-button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+
+                <form id="loginPopup" action="javascript:void(0)" method="post">
+                    <div class="alert alert-outline alert-outline-success login-message-success"
+                        id="#login-message-success" role="alert" style="display:none;"><button type="button"
+                            class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+                        <p id="text-message-login-success"></p>
+                    </div>
+                    <div class="alert alert-outline alert-outline-danger login-message-error" id="#login-message-error"
+                        role="alert" style="display:none"><button type="button" class="close" data-bs-dismiss="alert"
+                            aria-hidden="true">×</button>
+                        <p id="text-message-login-error"></p>
+                    </div>
+
+                    <div class="content content-bg pt-5 pb-5">
+
+                    <style>
+    .container {
+        position: relative;
+    }
+
+    .arrow-mark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+        color: white;
+        padding: 0px 5px 0px 0px;
+    }
+
+    .card-img-top {
+        position: relative;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .card-body {
+        position: relative;
+
+
+    }
+
+    .card-title {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        margin-bottom: 0;
+        font-size: 23px;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: left;
+        padding-left: 5px;
+        padding-bottom: 5px;
+    }
+
+    .card {
+        transition: all .2s ease;
+        border: 2px solid #ddd;
+        height: 280px;
+        /*width: 350px;*/
+        /*border-radius: 20px;*/
+        border: 1px solid #979797;
+        background: none;
+        transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+
+
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        background: white;
+        border: none;
+        box-shadow: 0px 3px 4px 0px #979797;
+
+    }
+    @media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 70%;
+        margin: 1.75rem auto;
+    }
+}
+    </style>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <?php
+             $where_class = 'status = 1';
+	     	$segment_record = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
+
+            $class_records_count = count($segment_record);
+            if ($class_records_count > 0) {
+                foreach ($segment_record as $class) { 
+                
+                    ?>
+            <div class="col-md-4 col-sm-6 mb-4">
+                
+                <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
+
+               
+                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
+                        style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
+                        <?php //echo $class->segment_img; ?>
+                    </div> 
+                    <div class="card-body d-flex flex-column justify-content-center card-background">
+                        <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
+
+                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                            <div class="arrow-mark">&#8594;</div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Segment -->
+
+
 <!--libs-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
