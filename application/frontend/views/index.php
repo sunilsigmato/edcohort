@@ -321,7 +321,7 @@ $sort_by = $this->input->get('sort_by');
                 foreach ($segment_record as $class) { 
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
-                
+            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                
@@ -331,13 +331,12 @@ $sort_by = $this->input->get('sort_by');
                     </div> 
                     <div class="card-body d-flex flex-column justify-content-center card-background">
                         <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
-
-                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
                             <div class="arrow-mark">&#8594;</div>
-                        </a>
+                       
 
                     </div>
                 </div>
+                </a>
             </div>
             <?php
                 }

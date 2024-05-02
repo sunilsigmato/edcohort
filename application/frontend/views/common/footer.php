@@ -432,6 +432,7 @@ $authUrl1 = $gClient->createAuthUrl();
             $class_records_count = count($segment_record);
             if ($class_records_count > 0) {
                 foreach ($segment_record as $class) { 
+                  //  print_R($class);
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 
