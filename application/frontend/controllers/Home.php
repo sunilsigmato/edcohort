@@ -93,7 +93,31 @@ class Home extends CI_Controller {
 	   $this->load->view('all_product',$data);
 	   $this->load->view('common/footer');
 	}
-	
+
+	function about_us()
+	{
+		$this->load->view('common/header');
+		$this->load->view('about_us');
+		$this->load->view('common/footer');
+	}
+	function get_in_touch()
+	{
+		$this->load->view('common/header');
+		$this->load->view('get_in_touch');
+		$this->load->view('common/footer');
+	}
+	function privacy_policy()
+	{
+		$this->load->view('common/header');
+		$this->load->view('privacy_policy');
+		$this->load->view('common/footer');
+	}
+	function terms_conditions()
+	{
+		$this->load->view('common/header');
+		$this->load->view('terms_conditions');
+		$this->load->view('common/footer');
+	}
 	   
   function list_image($folder,$product_id)
 	{

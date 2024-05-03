@@ -330,6 +330,10 @@ $route['upcoming-counselling'] = 'counselling/upcoming_counselling';
 
 //-------- Index----//
 $route['all-product'] = 'home/all_product';
+$route['about-us'] = 'home/about_us';
+$route['get-in-touch'] = 'home/get_in_touch';
+$route['privacy-policy'] = 'home/privacy_policy';
+$route['terms-conditions'] = 'home/terms_conditions';
 /*$route['all-product/:any'] = 'home/all_product';
 $route['all-product/:any/:any'] = 'home/all_product';
 $route['all-product/:any/:any/:any'] = 'home/all_product';*/
