@@ -160,7 +160,7 @@ if(empty($meta_description)){
 
             <!--header right-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -176,7 +176,7 @@ if(empty($meta_description)){
           <a class="dropdown-item" href="<?php echo base_url(); ?>#review-section">Review</a>
           <a class="dropdown-item" href="#">Complain</a>
           <!--<div class="dropdown-divider"></div>-->
-          <a class="dropdown-item" href="#">Comparison</a>
+         <!-- <a class="dropdown-item" href="#">Comparison</a>
           <a class="dropdown-item" href="#">Counselling</a>
           <a class="dropdown-item" href="#">Cohort</a>
           <a class="dropdown-item" href="#">Coupons</a>
@@ -184,7 +184,7 @@ if(empty($meta_description)){
       </li>
     </ul>
   </div>
-</nav>
+</nav> -->
 
             <div class="header-right">
                 <?php if(empty($user_id)){?>

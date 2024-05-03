@@ -81,7 +81,9 @@ if($get_breadcrumb)
             <div class="col-md-6 pt-3 course-name-display">
             <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
                 <div>
-                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
+                <?php if($get_brand_compare) { ?>
+                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?>/5</span>
+                    <?php } ?>
                     <label for="rating2" class="rating-display">
                         <!--<img
                             src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> -->
