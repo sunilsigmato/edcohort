@@ -131,6 +131,19 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Type</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control"  name="product_type" id="product_type" >
+                                                        <option value="1">Online</option>
+                                                        <option value="2">Offline</option>
+                                                    </select> 
+                                                    </div>
+                                                </div>
+                                            </div>  
 
                                              <div class="form-group ">                                                
                                                 <div class="row">

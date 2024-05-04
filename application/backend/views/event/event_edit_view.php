@@ -767,17 +767,17 @@ $get_single_course_detail = get_single_coure_detail($event_detail[0]->product_id
               success: function (response) {
                    console.log(response);
                    
-                   if(response.data == "")
+                 /*  if(response.data == "")
                    {
                         alert("No data found");
                    }else{
                         if(response.status == "1")
                         {
-                            alert(response.data);
+                            alert(response.data);*/
                             window.location="<?php echo base_url();?>admin_event";
-                        }
+                      /*  }
                       
-                   }
+                   }*/
               }
            });
 

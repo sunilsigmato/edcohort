@@ -354,7 +354,8 @@ class Common_model extends CI_Model {
         $this->db->from('tbl_product c');
          $this->db->where($where);
        // $this->db->group_by('c.batch_id');
-        //$sql = $this->db->get_compiled_select();
+      //  $sql = $this->db->get_compiled_select();
+		//print_R($sql);
         $query=$this->db->get();
         if($query)
         {

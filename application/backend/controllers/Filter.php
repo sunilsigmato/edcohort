@@ -350,6 +350,8 @@ echo json_encode(array("status"=>"1","data"=>"Product Data Added Successfully"))
     {
       $product_id = $res[0]->product_id;
     }
+
+
     if($product_id)
     {
 

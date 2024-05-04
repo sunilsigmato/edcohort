@@ -745,17 +745,17 @@
               success: function (response) {
                    console.log(response);
                    
-                   if(response.data == "")
+                  /* if(response.data == "")
                    {
                         alert("No data found");
                    }else{
                         if(response.status == "1")
-                        {
-                            alert(response.data);
+                        {*/
+                            //alert(response);
                             window.location="<?php echo base_url();?>admin_event";
-                        }
+                      //  }
                       
-                   }
+                 //  }
               }
            });
 

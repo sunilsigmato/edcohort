@@ -1244,6 +1244,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
     <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
     <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
     <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
+    <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
         <!-- <div class="add-review-box">
       <div class="container">
           <div class="reply-box">

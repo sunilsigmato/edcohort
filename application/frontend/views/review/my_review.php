@@ -1171,6 +1171,7 @@ if($get_breadcrumb)
     <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
     <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
     <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
+    <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
     <!--content end-->
     <!-- <script src="<?php echo base_url(); ?>assets/js/ajax/manage_review_ajax.js"></script> -->
     <script>

@@ -143,6 +143,20 @@
                                                 </div>
                                             </div>
 
+                                              <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Type</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control"  name="product_type" id="product_type" >
+                                                            <option value="1" <?php if ($row->product_type=='1') { echo 'selected'; } ?> >Online</option>
+                                                            <option value="2" <?php if ($row->product_type=='2') { echo 'selected'; } ?>>Offline</option>
+                                                        </select>  
+                                                    </div>
+                                                </div>
+                                            </div> 
+
                                             <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
