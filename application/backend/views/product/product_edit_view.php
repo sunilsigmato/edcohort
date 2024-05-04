@@ -74,7 +74,7 @@
                                             //print_R($edit_cat_id);
                                                
                                             ?>
-                                             <div class="form-group ">                                                
+                                            <!-- <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Select Category  <span style="color:red">*</span></label>
@@ -89,7 +89,7 @@
                                                         </select>  
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <!--<div class="form-group ">
                                                 <div class="row">
@@ -121,6 +121,22 @@
                                                         <!-- <option value="0">Select</option> -->
                                                        <?php foreach ($brand_list as $brand) { ?>
                                                     <option value="<?php echo $brand->brand_id; ?>" <?php  if($brand->brand_id == $row->brand_id){ echo 'selected'; }  ?>><?php echo getBrandList($brand->brand_id);?></option>
+                                                    <?php } ?>
+                                                    </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group ">                                                
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Board Name</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control show-tick" name="board_name" required="" id="board_name" onchange="" >
+                                                        <!-- <option value="0">Select</option> -->
+                                                       <?php foreach ($board_list as $board) { ?>
+                                                    <option value="<?php echo $board->board_id; ?>" <?php  if($board->board_id == $row->board_id){ echo 'selected'; }  ?>><?php echo getBoardList($board->board_id);?></option>
                                                     <?php } ?>
                                                     </select> 
                                                     </div>
@@ -164,21 +180,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group ">                                                
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label" id="examplenameInputname2">Board Name</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select class="form-control show-tick" name="board_name" required="" id="board_name" onchange="" >
-                                                        <!-- <option value="0">Select</option> -->
-                                                       <?php foreach ($board_list as $board) { ?>
-                                                    <option value="<?php echo $board->board_id; ?>" <?php  if($board->board_id == $row->board_id){ echo 'selected'; }  ?>><?php echo getBoardList($board->board_id);?></option>
-                                                    <?php } ?>
-                                                    </select> 
-                                                    </div>
-                                                </div>
-                                            </div>
+                                          
 
                                             <div class="form-group ">                                                
                                                 <div class="row">
@@ -235,7 +237,7 @@
                                                 //print_R($resp_get_cat_list);
                                                
                                             ?>
-                                             <div class="form-group ">                                                
+                                            <!-- <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Graduated In  <span style="color:red">*</span></label>
@@ -250,7 +252,7 @@
                                                         </select>  
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  
                                              <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -260,7 +262,7 @@
                                                        <input class="form-control" type="text" name="product_sort" id="product_sort"  value="<?php echo $row->product_sort; ?>">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group ">
                                                 <div class="row">
@@ -277,14 +279,14 @@
 
                                             <div class="form-group ">
                                                 <div class="row">
-                                                    <div class="col-md-3">
+                                                   <!-- <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Select multiple files:</label>
                                                     </div>
                                                     <div class="col-md-9">                                                         
                                                        <input id="files" type="file" name="img_upload[]" multiple style="outline:none"/>
                                                         <div class="col-md-12" id="output_img" style="margin-bottom: 12px;">
                                                             <output id="result" />
-                                                        </div>
+                                                        </div> -->
                                                         <input type="hidden" id="product_image_count" value="<?php echo count($product_image); ?>">
                                                         <?php foreach ($product_image as $pro_image): ?>
                                                             <div>
@@ -296,7 +298,7 @@
                                                 </div>
                                             </div>  
 
-                                            <div class="form-group ">
+                                           <!-- <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Video File</label>
@@ -314,9 +316,9 @@
                                                     <?php endforeach ?>              
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div> -->
 
-                                            <div id="product_video">                                                 
+                                          <!--  <div id="product_video">                                                 
 
                                                 <?php if (!count($product_video_link)): ?>
                                                 <div class="row clearfix" id="form_vd_id_0">
@@ -357,7 +359,7 @@
                                                     </div>
                                                     <?php endforeach ?> 
 
-                                            </div>
+                                            </div>-->
 
 
                                             <div class="form-group ">
@@ -391,7 +393,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="product_feature" >
+                                          <!--  <div id="product_feature" >
                                              <?php if (!count($product_feature)): ?>
                                             <div class="row clearfix" id="form_gr_id_0">
                                                 <div class="col-md-3">
@@ -430,9 +432,9 @@
                                                 </div>
                                             </div>
                                             <?php endforeach ?> 
-                                        </div>
+                                        </div>  -->
 											
-                                           <div class="form-group ">
+                                         <!--  <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Product Type</label>
@@ -444,7 +446,7 @@
                                                         </select>  
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             
                                             
                                             <div class="form-group ">

@@ -227,7 +227,7 @@ class admin_product extends CI_Controller
         }
         //print_ex($product_image_array);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        foreach ($_FILES['video_upload']['name'] as $key => $value)
+     /*   foreach ($_FILES['video_upload']['name'] as $key => $value)
         {   
             $new_name1 = str_replace(".","",microtime());
             $new_name=str_replace(" ","_",$new_name1);
@@ -240,15 +240,15 @@ class admin_product extends CI_Controller
                 $product_video=$file;
                 $product_video_array[]=$product_video;
             }
-        }
+        }*/
         
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        $product_attribute=$this->input->post("product_attribute");
-        $attribute_name=$this->input->post("attribute_name");
-        $product_feature=$this->input->post("product_feature"); 
+      //  $product_attribute=$this->input->post("product_attribute");
+     //   $attribute_name=$this->input->post("attribute_name");
+      //  $product_feature=$this->input->post("product_feature"); 
         $parent_category=$this->input->post("parent_category");
-        $builder_diamond_shape=$this->input->post("builder_diamond_shape");
-        $video_link=$this->input->post("video_link");
+      //  $builder_diamond_shape=$this->input->post("builder_diamond_shape");
+      //  $video_link=$this->input->post("video_link");
        /* print_R($video_link);
         exit;*/
         /*print_R($parent_category);
@@ -319,7 +319,8 @@ class admin_product extends CI_Controller
             {*/
                 $data_category=array(
                     'product_id'=>$product_id,
-                    'category_id'=>$parent_category,
+                   // 'category_id'=>$parent_category,
+                   'category_id'=>1,
                 );
                 $this->admin_model->insertData('tbl_product_category',$data_category);
            // }
@@ -465,9 +466,11 @@ class admin_product extends CI_Controller
             }
            
         }
+       
+       
        // print_ex($_POST);
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        foreach ($_FILES['video_upload']['name'] as $key => $value)
+       /* foreach ($_FILES['video_upload']['name'] as $key => $value)
         {   
             $new_name1 = str_replace(".","",microtime());
             $new_name=str_replace(" ","_",$new_name1);
@@ -480,14 +483,14 @@ class admin_product extends CI_Controller
                 $product_video=$file;
                 $product_video_array[]=$product_video;
             }
-        }
+        }*/
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        $product_attribute=$this->input->post("product_attribute");
+       /* $product_attribute=$this->input->post("product_attribute");
         $attribute_name=$this->input->post("attribute_name");
         $product_feature=$this->input->post("product_feature"); 
         $parent_category=$this->input->post("parent_category");             
         $builder_diamond_shape=$this->input->post("builder_diamond_shape");        
-        $video_link=$this->input->post("video_link");        
+        $video_link=$this->input->post("video_link"); */       
         if($product_id)
         {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -554,14 +557,17 @@ class admin_product extends CI_Controller
             {
                 $data_category=array(
                     'product_id'=>$product_id,
-                    'category_id'=>$value,
+                    'category_id'=>1,
                 );
                 $this->admin_model->insertData('tbl_product_category',$data_category);
             }
 
               //  print_r($product_image_array); 
                 //exit;      
-
+                if (!empty($product_image_array)) 
+                {
+                    $this->admin_model->deleteData('tbl_product_image',$where);
+                }
             foreach ($product_image_array as $key => $value) 
             {
                 $data_image=array(

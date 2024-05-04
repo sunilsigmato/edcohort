@@ -65,7 +65,7 @@
                                                
                                             ?>
                                             
-                                            <div class="form-group ">                                                
+                                         <!--   <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Select Category  <span style="color:red">*</span></label>
@@ -80,7 +80,7 @@
                                                         </select>  
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             
                                           <!--  <div class="form-group ">
                                                 <div class="row">
@@ -112,6 +112,22 @@
                                                         <option value="<?php echo $brand->brand_id; ?>"><?php echo getBrandList($brand->brand_id);?></option>
                                                         <?php } ?>
                                                     </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group ">                                                
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label" id="examplenameInputname2">Board Name</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control show-tick" name="board_name" required="" id="board_name" onchange="" >
+                                                        <!-- <option value="0">Select</option> -->
+                                                        <?php foreach ($board_list as $board) { ?>
+                                                        <option value="<?php echo $board->board_id; ?>"><?php echo getboardList($board->board_id);?></option>
+                                                        <?php } ?>
+                                                    </select>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,21 +167,7 @@
                                                 </div>
                                             </div>
 
-                                               <div class="form-group ">                                                
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label" id="examplenameInputname2">Board Name</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select class="form-control show-tick" name="board_name" required="" id="board_name" onchange="" >
-                                                        <!-- <option value="0">Select</option> -->
-                                                        <?php foreach ($board_list as $board) { ?>
-                                                        <option value="<?php echo $board->board_id; ?>"><?php echo getboardList($board->board_id);?></option>
-                                                        <?php } ?>
-                                                    </select>  
-                                                    </div>
-                                                </div>
-                                            </div>
+                                               
 
                                                <div class="form-group ">                                                
                                                 <div class="row">
@@ -213,7 +215,7 @@
                                                 $resp_get_grad_list = get_graduated_in();
                                                
                                             ?>
-                                              <div class="form-group ">                                                
+                                              <!--<div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Graduated In  <span style="color:red">*</span></label>
@@ -239,7 +241,7 @@
                                                        <input class="form-control" type="text" name="product_sort" id="product_sort" >
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  -->
 
 
 
@@ -271,7 +273,7 @@
                                                 </div>
                                             </div> --> 
 
-                                            <div class="form-group ">
+                                            <!--<div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Video File</label>
@@ -281,9 +283,9 @@
                                                         <span>File format should be mp4</span>                
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div> -->
 
-                                            <div id="product_video"> 
+                                          <!--  <div id="product_video"> 
                                                 <div class="row clearfix" id="form_vd_id_0">
                                                     <div class="col-md-3">
                                                         <label for="">Video Url Link</label>
@@ -299,7 +301,7 @@
                                                         <button  type="button" class="btn btn-info" onclick="return product_video()"><i class="fa fa-plus"></i> Add</button>                                     
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
 
                                             <div class="form-group ">
@@ -333,7 +335,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="product_feature" >
+                                         <!--   <div id="product_feature" >
                                                 <div class="row clearfix" id="form_gr_id_0">
                                                 <div class="col-md-3">
                                                     <label for="">Product Features</label>
@@ -364,7 +366,7 @@
                                                     </select> 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  -->
                                             
                                             <div class="form-group ">
                                                 <div class="row">
