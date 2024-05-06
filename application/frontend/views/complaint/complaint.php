@@ -549,9 +549,15 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                         <div class="review-box">
                             <?php if ($complaint_list) { ?>
                             <?php foreach ($complaint_list as $complain) { 
-                               // print_R($complain);
 
-                                ?>
+                            $current = strtotime(date("Y-m-d"));
+                            $date    = strtotime($complain->product_complaint_added);
+                            $today = '';
+                            $datediff = $current - $date;
+                            $difference = floor($datediff / (60 * 60 * 24));
+
+                            ?>
+                               
                             <!--review row start-->
                             <div class="review-row">
                                
@@ -562,14 +568,17 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                     <h2 class="review-title">
                                         <?php echo ucwords($complain->user_name); ?> <span><img
                                                 src="<?php base_url() ?>assets/images/verifyicon.png" alt=""></span>
+
+                                                <div class="review-date <?php echo $today ?>"> <?php if (!empty($today)) {
+                                                                                       echo "Today";
+                                                                                    } else {
+                                                                                       echo date('d F Y', strtotime($complain->product_complaint_added));
+                                                                                    } ?> </div>
                                     </h2>
                                    
-                                    
-                                    <?php $current = strtotime(date("Y-m-d"));
-                                 $date    = strtotime($complain->product_complaint_added);
-                                 $today = '';
-                                 $datediff = $current - $date;
-                                 $difference = floor($datediff / (60 * 60 * 24));
+                                   
+
+                                   <?php 
                                  if ($difference == 0) {
                                     $today = 'today';
                                  } 
@@ -582,7 +591,12 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                  if ($complain->complaint_resolved == 0 && $difference != 0) { 
                                         
                                     ?>
-                                  <span>Issue not resloved from past <?php echo $difference ?> Days</span>
+                                  <!-- <span>Issue not resloved from past <?php echo $difference ?> Days</span> -->
+
+                                  <div class="d-xl-flex d-md-flex d-lg-flex d-sm-block align-items-center pt-2">
+                                    <p>Issue not resloved from past <?php echo $difference ?> Days</p>
+                                   
+                                  </div>
                                 <?php }
                                  if ($complain->complaint_resolved == 1 ) { 
                                     if ($difference_resloved == 0) {
@@ -591,7 +605,7 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
                                  <?php }else {?>
                                    <span>The Issue was resloved  <?php echo $difference_resloved ?> Days ago</span>
                                 <?php  } }?>
-                                    <div class=" d-flex resolve-button">  
+                                    <div class=" d-flex align-items-center resolve-button">  
                                         <?php 
                                        // $this->session->userdata('user_id') 
                                       // print_R($complain);
@@ -618,15 +632,11 @@ $get_brand_compare = get_brand_compare_detail($course,$segment);
 
                                        }
                                         ?>
-                                        <div class="review-date <?php echo $today ?>"> <?php if (!empty($today)) {
-                                                                                       echo "Today";
-                                                                                    } else {
-                                                                                       echo date('d F Y', strtotime($complain->product_complaint_added));
-                                                                                    } ?> </div>
+                                       
                                                                                     
                                     </div>
                                 </div>
-                                <div class="review-rating pt-3">
+                                <div class="review-rating pt-1">
                                     <?php if ($complain->product_rating == 1) { ?>
                                     <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>

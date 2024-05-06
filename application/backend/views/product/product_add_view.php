@@ -100,7 +100,7 @@
 
 
 
-                                            <div class="form-group ">                                                
+                                            <div class="form-group">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Brand Name</label>
@@ -116,8 +116,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group ">                                                
-                                                <div class="row">
+                                            <div class="form-group board-div" style="display:none">                                                
+                                                <div class="row" >
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Board Name</label>
                                                     </div>
@@ -131,7 +131,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group ">
+                                            <div class="form-group type-div" style="display:none">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Type</label>
@@ -413,7 +413,7 @@
 <script>
     CKEDITOR.replace( 'product_description' );
 </script>
- <script src="https://staging.edcohort.com/admin/assets/js/jquery-3.2.1.min.js"></script>
+ <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js"></script> 
 <script>
     function product_attribute()
     {
@@ -716,8 +716,20 @@ function showProductOptoin(id,chk) {
 </script>
 
 <script>
- /*$(document).on("change", "#segment", function() {  
-        alert("hisss");
+      $("#segment").change(function(){
+ 
+        var drop_down_text = $('#segment :selected').text();
+           drop_down_text = drop_down_text.trim();
+           if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
+           {
+             $('.board-div').css('display', 'block');
+             $('.type-div').css('display', 'none');
+           }
+           else
+           {
+                $('.board-div').css('display', 'none');
+                $('.type-div').css('display', 'block');
+           }
     
-    });*/
+    });
 </script>

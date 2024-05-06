@@ -1620,7 +1620,7 @@ ul.footer-menu-sub li {
 
 .review-row {
   position: relative;
-  padding:0px 35px;
+  padding:0px 24px;
   padding-bottom: 10px;
   margin-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
@@ -1636,7 +1636,7 @@ ul.footer-menu-sub li {
 
 .review-row-reply {
   position: relative;
-  padding-left: 35px;
+  padding-left: 27px;
   padding-bottom: 10px;
   margin-bottom: 15px;
   margin-top: 18px;
@@ -1654,12 +1654,12 @@ ul.footer-menu-sub li {
   padding-right: 25px;
 }
 .review-user-image {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   background: #949da8;
   position: absolute;
-  left: 31px;
-  top: 15px;
+  left: 26px;
+  top: 20px;
   border-radius: 100%;
 }
 .review-user-image span {
@@ -1676,8 +1676,8 @@ ul.footer-menu-sub li {
 /*.review-title-row {  margin-bottom: 10px; }*/
 .review-title {
   color: #505050;
-  font-weight: 600;
-  font-size: 16px; /* position: relative; */
+  font-weight: 300;
+  font-size: 14px;  /*position: relative; */
   cursor: pointer;
   padding-top: 17px;
   padding-left: 34px;
@@ -1754,14 +1754,14 @@ ul.footer-menu-sub li {
 }
 
 .review-title-row .badge {
-  padding: 8px 10px;
+  padding: 4px 5px;
   background: #f1fff1;
   border: 0.25px solid #079a04;
   border-radius: 100px;
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 16px;
 }
 .review-title-row .badge.bg-resolved {
@@ -1778,9 +1778,10 @@ ul.footer-menu-sub li {
 .review-date {
   /*border:1px solid #505050; border-radius: 100px; padding: 8px 10px;*/
   color: #505050;
-  font-size: 13px;
-  padding-left: 30px;
+  font-size: 12px;
+  padding-left: 0px;
   padding-right: 24px; /*line-height: 16px; display: inline-block; vertical-align: middle;*/
+  margin-top: 4px;
 }
 .review-date.today {
   /*background: #3554fe;

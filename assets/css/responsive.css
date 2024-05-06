@@ -226,12 +226,12 @@
     margin: 0 0 10px;
   }
   .review-title {
-    font-size: 15px;
+    font-size: 12px;
   }
   .review-date,
   .review-title-row .badge {
-    padding: 5px 10px;
-    font-size: 15px;
+    padding: 3px 7px;
+    font-size: 12px;
     line-height: normal;
   }
   .review-content p,
@@ -492,7 +492,7 @@
     text-align: center;
   }
   .review-title {
-    margin: 0 0 10px;
+    /*margin: 0 0 10px;*/
   }
   .review-main-box,
   .helpful-inner-box,
@@ -848,7 +848,7 @@
     font-size: 15px;
   }
   .review-date{
-    padding: 10px 0px 0px 0px;
+    padding: 0px;
   
   }
 

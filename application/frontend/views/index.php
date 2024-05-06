@@ -609,7 +609,7 @@ if (empty($courseid)) {
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <hr>
-                                    <a href="#" style="text-decoration:none; ">
+                                    <a  href="<?php echo base_url(); ?>/all-product?segment=<?php echo $course; ?>&brand=<?php echo $brand->product_brand; ?>" style="text-decoration:none; ">
                                         <div class="view-program-font viewButton">View Brand</div>
                                     </a>
                                     <!-- <p class=" card-text rating-number">
@@ -876,7 +876,7 @@ if (empty($courseid)) {
             </div>
         </div>
         <div class="row bg-color-complain mt-3">
-            <div class="col-md-8 col-sm-9 col-lg-6 ">
+            <div class="col-md-8 col-sm-9 col-lg-6 " id="complain-section">
                 <h2>Complain</h2>
                 <h3 class="subheading mb-2">Speak Up, Get Justice</h3>
                 <h3 class="subheading1">Your Voice, Your Justice</h3>
@@ -893,7 +893,7 @@ if (empty($courseid)) {
                 <img src="<?php echo base_url(); ?>assets/images/1ct.webp" class="rounded-circle img-fluid image-set"
                     alt="" />
             </div>
-            <div class="col-md-8 col-sm-9 col-lg-6">
+            <div class="col-md-8 col-sm-9 col-lg-6" id="comparision-section">
                 <h2>Comparison</h2>
                 <h3 class="subheading mb-2">Choose Wisely, Decide Confidently</h3>
                 <h3 class="subheading1">Informed Decision-Making through Detailed Comparisons</h3>
@@ -904,7 +904,7 @@ if (empty($courseid)) {
             </div>
         </div>
         <div class="row bg-color-review mt-3">
-            <div class="col-md-8 col-sm-9 col-lg-6">
+            <div class="col-md-8 col-sm-9 col-lg-6" id="counselling-section">
                 <h2>Counselling</h2>
                 <h3 class="subheading mb-2">Navigate Uncertainty with Confidence</h3>
                 <h3 class="subheading1">Expert Guidance, Tailored to You</h3>
@@ -923,7 +923,7 @@ if (empty($courseid)) {
                 <img src="<?php echo base_url(); ?>assets/images/cohort-study-img.jpeg" class="rounded-circle img-fluid image-set"
                     alt="" />
             </div>
-            <div class="col-md-8 col-sm-9 col-lg-6">
+            <div class="col-md-8 col-sm-9 col-lg-6" id="cohort-section">
                 <h2>Cohort</h2>
                 <h3 class="subheading mb-2">Connect, Learn, Succeed Together</h3>
                 <h3 class="subheading1">Collaborative Learning Communities</h3>
@@ -935,7 +935,7 @@ if (empty($courseid)) {
         </div>
 
         <div class="row mt-3 d-flex flex-sm-row-reverse">
-            <div class="col-md-6 col-sm-9 col-lg-6 p-2">
+            <div class="col-md-6 col-sm-9 col-lg-6 p-2" id="coupons-section">
                 <h2>Group Coupons</h2>
                 <h3 class="subheading mb-2">Save Together, Learn Together</h3>
                 <h3 class="subheading1">Collective Buying Power, Maximum Discounts</h3>
