@@ -226,7 +226,9 @@
     margin: 0 0 10px;
   }
   .review-title {
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
+        padding-top: 22px;
   }
   .review-date,
   .review-title-row .badge {
@@ -504,6 +506,9 @@
   .calendar-main-box {
     display: block !important;
   }
+  .review-rating {
+    padding-top: 15px;
+}
   .review-center {
     width: 100%;
     padding: 30px 15px 0;
