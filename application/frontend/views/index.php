@@ -321,7 +321,8 @@ $sort_by = $this->input->get('sort_by');
                 foreach ($segment_record as $class) { 
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
-            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                <input type ="hidden" value = "<?php echo $class->id ?>" class="segment_id">
+            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="segment-link mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                
@@ -332,8 +333,6 @@ $sort_by = $this->input->get('sort_by');
                     <div class="card-body d-flex flex-column justify-content-center card-background">
                         <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
                             <div class="arrow-mark">&#8594;</div>
-                       
-
                     </div>
                 </div>
                 </a>
@@ -351,229 +350,7 @@ $sort_by = $this->input->get('sort_by');
 
 
 <!-- -------------------------------------- -->
-<?php $courseid = $this->input->get('segment');
-if (empty($courseid)) {
-
-
-?>
-<!-- Overlay image -->
-
-<div class="over-lay text-center">
-    <div class="course-category-overlay">
-        <div class="text-over-lay">
-            <svg width="36" height="41" viewBox="0 0 36 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.8333 3.00033L17.8333 37.667M33 18.167L17.8333 3.00033L2.66667 18.167" stroke="#E8F9FD"
-                    stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <h2>Please select your course catagory for curated views</h2>
-            <span>You can change this later anytime</span>
-        </div>
-    </div>
-    <!-- <img src="<?php echo base_url(); ?>assets/images/over-image.png"> -->
-    <div class="course-row article-section" id="Popular-Brands">
-        <div class="course-inner-row">
-            <div class="popular-row">
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/084303700_1650530610.jpg" width="50"
-                                alt="Buyjs">
-                        </div>
-                        <h3>Buyjsss</h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/066533300_1650530932.png" width="50"
-                                alt="Career point">
-                        </div>
-                        <h3>Career point</h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/002345000_1650531005.png" width="50"
-                                alt="Safalta">
-                        </div>
-                        <h3>Safalta</h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/065041600_1650530864.jpg" width="50"
-                                alt="Unacademy">
-                        </div>
-                        <h3>Unacademy </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/082543200_1650531102.png" width="50"
-                                alt="Adda247">
-                        </div>
-                        <h3>
-                            Adda247 </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/073155400_1650531207.png" width="50"
-                                alt="Exampur">
-                        </div>
-                        <h3>
-                            Exampur </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/065112400_1650531318.png" width="50"
-                                alt="Career launcher">
-                        </div>
-                        <h3>
-                            Career launcher </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/045179100_1650531407.png" width="50"
-                                alt="TIME">
-                        </div>
-                        <h3>
-                            TIME </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-                <!--col-->
-                <div class="popular-col">
-                    <a href="#">
-                        <div class="popular-col-image">
-                            <img src="<?php echo base_url(); ?>/uploads/brand/052746400_1650538170.png" width="50"
-                                alt="Career Power">
-                        </div>
-                        <h3>
-                            Career Power </h3>
-                        <div class="popular-col-rating">
-                            <div class="popular-star-rating">
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star text-yellow"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="rating-number">
-                                <img src="<?php echo base_url(); ?>/assets/images/Star.png" alt="">3.2</span>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<?php } ?>
+<?php $courseid = $this->input->get('segment'); ?>
 <!--start-->
 <div class="all-course-box1">
     <div class="course-inner-row">
@@ -1023,6 +800,29 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+
+ $(document).ready(function() {
+    $(".segment-link").on("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of the anchor tag
+        var href = $(this).attr("href"); // Get the value of the href attribute
+        var segmentId = href.split('=')[1]; // Extract the value of segment from the href
+        console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
+
+        $.ajax({
+            url: base_url + 'filter/get_product_id',
+            dataType: 'json',
+            type: 'post',
+            data: {
+                segment_id: segmentId
+            },
+            success: function(data) {
+               console.log(data);
+                // $('#city').html('<option value="">Select City</option>');
+            }
+           
+        });
+    });
+}); 
 </script>
 
 

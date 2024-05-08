@@ -146,6 +146,8 @@ class Home extends CI_Controller {
 
       return $image_array; 
 	} 
+
+
 	
 	function getBrand($courseid)
 	{

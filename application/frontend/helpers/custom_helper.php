@@ -617,6 +617,35 @@ function getClassName($class_id)
             $data = '';
         }
     }
+    function get_review_average_rating($course_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->review_model->get_review_average_rating($course_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+    function get_complaint_average_rating($course_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->complaint_model->get_complaint_average_rating($course_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
+    
 
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  

@@ -245,5 +245,30 @@ function getcomplaint($where)
       $query=$this->db->get();     
       return $query->result();
 	}
+  function get_complaint_average_rating($course_id)  // Average rating function 
+  {
+    $res = 0;
+    $average_rating = 0;
+    // Procut Rating Query 
+    $query = $this->db->query(" SELECT COUNT(case when product_rating = 1 THEN 1 END) as one_star, COUNT(case when product_rating = 2 THEN 1 END) as two_star, 
+                                COUNT(case when product_rating = 3 THEN 1 END) as three_star, COUNT(case when product_rating = 4 THEN 1 END) as four_star,
+                                COUNT(case when product_rating = 5 THEN 1 END) as five_star FROM `tbl_product_complaint` WHERE product_id=$course_id");
+    $result = $query->result();
+    if($result)
+    {
+        $total_count = 0;
+        $rating = 0;
+        $total_count = 5 * $result[0]->five_star  + 4 * $result[0]->four_star + 3 * $result[0]->three_star + 2 * $result[0]->two_star + 1 * $result[0]->one_star;  // total Calculation 
+        $sum_of_rating  =   $result[0]->five_star + $result[0]->four_star + $result[0]->three_star + $result[0]->two_star + $result[0]->one_star;  // sum of rating 
+        $average_rating = $total_count / $sum_of_rating; // average rating calculation 
+    }
+    if($result)
+    {
+      $average_rating = number_format($average_rating, 1);
+       return $res = $average_rating;
+    }
+    return $res;
+   
+  }
 	
 }

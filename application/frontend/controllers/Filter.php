@@ -302,6 +302,60 @@ public function __construct()
     }
   }
 
+  function get_product_id()
+	{
+    $segment_id =  $this->input->post('segment_id');
+    $where = 0;
+    $i = '1';
+    $res_counselling_exist = '';
+    $get_product_id = '';
+    
+      $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
+      $res_counselling_exist = $query_counselling_exist->result();
+      if($res_counselling_exist)
+      {
+        print_R($res_counselling_exist[0]->product_id);
+        $get_product_id = $res_counselling_exist[0]->product_id;
+        $res = $this->get_product();
+        print_R($res);
+        exit;
+       /* if($get_product_id)
+        {
+          $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
+        }*/
+       /* while($i== '1')
+        {
+          $i= '1';
+        
+          exit;
+        }*/
+      }
+    
+	}
+
+  function get_product()
+  {
+    $get_product_id = '';
+    $where = '';
+    if($where)
+    {
+      $where = "product_review_id = $id";
+    }
+    else
+    {
+      $order_query = 'order by product_review_id DESC limit 1';
+    }
+    $query_product_review =  $this->db->query("select * from tbl_product_review $where $order_query");
+    $get_product_id = $query_product_review[0]->product_id;
+   /* if($get_product_id)
+    {
+          $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
+    }*/
+    return $get_product_id;
+  }
+
+  
+
  
 }
 ?>
