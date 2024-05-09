@@ -51,6 +51,7 @@
     <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
     <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
     <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
+    <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
         <div class="row">
 
             <div class=" col-md-6">
@@ -362,6 +363,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 
 $(document).ready(function() {
@@ -399,6 +401,7 @@ height: 300,
         var email = $('#email').val();
         var name = $('#name').val();
         var product_id = $('#product_id').val();
+        var filter_online_offline = $('.filter_online_offline').val();
         
         if(filter_segment_id == 1)
         {
@@ -635,7 +638,7 @@ height: 300,
 
          
             $('.cnfrmreview').click(function() {
-
+                
                 write_review_notes = $('.write_review_notes').val();
                 review_title = $('.review-input').val();
                 if(!filter_segment_id)

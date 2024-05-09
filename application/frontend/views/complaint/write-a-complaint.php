@@ -44,6 +44,7 @@
     <input type="hidden" class="form-control" name="email" id="email"  value="<?php echo $this->session->userdata('user_email'); ?>">
     <input type="hidden" class="form-control" name="name" id="name"  value="<?php echo $this->session->userdata('user_fullname'); ?>">
     <input type="hidden" class="form-control" id="phone" name="phone" value="<?php echo $this->session->userdata('user_phone'); ?>">
+    <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
 
     <input type="hidden" value = "<?php echo $segment?>" class = "segment">
     <input type="hidden" value = "<?php echo $course ?>" class = "course">
@@ -399,6 +400,7 @@ height: 300,
         var email = $('#email').val();
         var name = $('#name').val();
         var product_id = $('#product_id').val();
+        var filter_online_offline = $('.filter_online_offline').val();
         
         if(filter_segment_id == 1)
         {

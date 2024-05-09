@@ -463,10 +463,11 @@ function getreview($where)
         $rating = 0;
         $total_count = 5 * $result[0]->five_star  + 4 * $result[0]->four_star + 3 * $result[0]->three_star + 2 * $result[0]->two_star + 1 * $result[0]->one_star;  // total Calculation 
         $sum_of_rating  =   $result[0]->five_star + $result[0]->four_star + $result[0]->three_star + $result[0]->two_star + $result[0]->one_star;  // sum of rating 
-        $average_rating = $total_count / $sum_of_rating; // average rating calculation 
-    }
-    if($result)
-    {
+        if($total_count)
+        {
+          $average_rating = $total_count / $sum_of_rating; // average rating calculation 
+        } 
+   
        $average_rating = number_format($average_rating, 1);
        return $res = $average_rating;
     }

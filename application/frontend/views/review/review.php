@@ -199,6 +199,7 @@ if($get_breadcrumb)
                 <h4> Excellent   Review </h4>
                 </div>
             </div>
+            <?php if ($this->session->userdata('user_id')) { ?>
             <div class="col-md-4 pt-3 write-review-icon">
                 <a href="<?php echo base_url();?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
                     class="review-btns text-decoration-none">
@@ -206,8 +207,13 @@ if($get_breadcrumb)
                         for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>
                 </a>
 
+                
+                <?php } else { ?>
+                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
+                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
+                        for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label></a>
+                        <?php } ?>
             </div>
-
         </div>
     </div>
     <!-- New Design Start -->

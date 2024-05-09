@@ -304,36 +304,45 @@ public function __construct()
 
   function get_product_id()
 	{
+   
     $segment_id =  $this->input->post('segment_id');
     $where = 0;
     $i = '1';
+    $res ='';
     $res_counselling_exist = '';
     $get_product_id = '';
-    
-      $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
-      $res_counselling_exist = $query_counselling_exist->result();
-      if($res_counselling_exist)
+    $get_seg_id = '';
+    $return_product_id ='';
+    while($i <='2')
+    {
+      print_R("jh");
+      $res = $this->get_product($segment_id,$where);
+      if($res)
       {
-        print_R($res_counselling_exist[0]->product_id);
-        $get_product_id = $res_counselling_exist[0]->product_id;
-        $res = $this->get_product();
-        print_R($res);
-        exit;
-       /* if($get_product_id)
-        {
-          $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
-        }*/
-       /* while($i== '1')
-        {
-          $i= '1';
-        
-          exit;
-        }*/
+              $query_tbl_product =  $this->db->query("select * from tbl_product where product_id=$res");
+              $res_query_tbl_product = $query_tbl_product->result();
+              $get_seg_id = $res_query_tbl_product[0]->segment_id;
+              if($get_seg_id == $segment_id)
+              {
+                print_R($res_query_tbl_product[0]->product_id);
+                $return_product_id = $res_query_tbl_product[0]->product_id;
+                $i++;
+                return $return_product_id;
+              }
+              $i = 1;
+              $where = $res - 1;
+              print_R($res);
+              exit;
+
+              
       }
-    
+    }
+    print_R("jhss");
+    exit;
+
 	}
 
-  function get_product()
+  function get_product($segment_id,$where)
   {
     $get_product_id = '';
     $where = '';
@@ -346,11 +355,8 @@ public function __construct()
       $order_query = 'order by product_review_id DESC limit 1';
     }
     $query_product_review =  $this->db->query("select * from tbl_product_review $where $order_query");
-    $get_product_id = $query_product_review[0]->product_id;
-   /* if($get_product_id)
-    {
-          $query_counselling_exist =  $this->db->query("select * from tbl_product_review order by product_review_id DESC limit 1");
-    }*/
+    $res_query_product_review = $query_product_review->result();
+    $get_product_id = $res_query_product_review[0]->product_id;
     return $get_product_id;
   }
 
