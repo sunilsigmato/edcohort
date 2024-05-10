@@ -809,14 +809,23 @@ $('.owl-carousel').owlCarousel({
         console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
 
         $.ajax({
-            url: base_url + 'filter/get_product_id',
+            url: base_url + 'filter/get_product_id_table',
             dataType: 'json',
             type: 'post',
             data: {
                 segment_id: segmentId
             },
             success: function(data) {
-               console.log(data);
+               console.log(data.data);
+               if(data.status == 1)
+               {
+                    window.location="<?php echo base_url();?>review/?course="+data.data+"&segment="+segmentId;
+               }
+               else
+               {
+                    alert("No data found");
+               }
+
                 // $('#city').html('<option value="">Select City</option>');
             }
            

@@ -11,6 +11,7 @@ class comparison extends CI_Controller {
       $this->load->model('comparison_model');
     $this->load->model('comparison_model');
     $this->load->model('review_model');
+    $this->load->model('Common_model');
   }
   function index($id = '')
   {

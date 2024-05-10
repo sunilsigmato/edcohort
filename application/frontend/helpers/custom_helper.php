@@ -645,6 +645,21 @@ function getClassName($class_id)
             $data = '';
         }
     }
+
+    function get_course_detail($course_id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->Common_model->get_course_detail($course_id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            $data = '';
+        }
+    }
     
 
     /*function get_coupon_count_now($segment,$course, $user_id=null) 

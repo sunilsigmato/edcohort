@@ -19,9 +19,11 @@ $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
 $get_single_course_detail = get_single_coure_detail($course);
+//print_R($get_single_course_detail->course_id);
+
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 $get_review_average_rating = get_review_average_rating($course);
-
+$get_course_detail = get_course_detail($get_single_course_detail->course_id);
 if($get_breadcrumb)
 {   
     $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
@@ -77,7 +79,7 @@ if($get_breadcrumb)
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-                <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
+                <h1 class="mb-3"><?php echo  $get_course_detail; ?></h1>
                 <div>
                 <span class="rating-btn-display"><?php echo $get_review_average_rating ?> / 5</span>
                 <!--<?php if($get_brand_compare) { ?>

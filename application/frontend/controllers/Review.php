@@ -7,6 +7,7 @@ class Review extends CI_Controller
     $this->load->library('pagination');
     $this->load->helper('form');
     $this->load->model('review_model');
+    $this->load->model('Common_model');
   }
   function index($id = '')
   {

@@ -644,6 +644,18 @@ class Common_model extends CI_Model {
 			return $query;
 		}
 	}
+
+	function get_course_detail($course_id)
+	{
+	    $course_name= '';
+		$query = $this->db->query("select course_name from tbl_course where id =$course_id");
+		$res= $query->result();
+		if($res)
+		{
+			$course_name = $res[0]->course_name;
+		}
+		return $course_name;
+	}
 	 
 }
 ?>

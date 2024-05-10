@@ -11,6 +11,7 @@ public function __construct()
     $this->load->model('jewelry_model');
     $this->load->model('coupon_model');
     $this->load->model('review_model');
+    $this->load->model('Common_model');
 }
 
 function index(){

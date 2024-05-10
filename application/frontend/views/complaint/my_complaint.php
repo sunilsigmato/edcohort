@@ -25,6 +25,7 @@ if($get_breadcrumb)
 $get_single_course_detail = get_single_coure_detail($course);
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 $get_review_average_rating = get_complaint_average_rating($course);
+$get_course_detail = get_course_detail($get_single_course_detail->course_id);
 ?>
 <!--banner start-->
 <div class="inner-banner">
@@ -76,7 +77,7 @@ $get_review_average_rating = get_complaint_average_rating($course);
                                     src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-            <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
+            <h1 class="mb-3"><?php echo  $get_course_detail; ?></h1>
                 <div>
                 <span class="rating-btn-display"><?php echo $get_review_average_rating ?> / 5</span>
                 <!--<?php if($get_brand_compare) { ?>
