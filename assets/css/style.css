@@ -1659,7 +1659,7 @@ ul.footer-menu-sub li {
   background: #949da8;
   position: absolute;
   left: 26px;
-  top: 20px;
+  top: 13px;
   border-radius: 100%;
 }
 .review-user-image span {
@@ -1684,7 +1684,7 @@ ul.footer-menu-sub li {
 }
 
 .review-title:hover .review-title-dropdown {
-  display: block;
+  /*display: block;*/
 }
 .review-title-dropdown {
   position: absolute;

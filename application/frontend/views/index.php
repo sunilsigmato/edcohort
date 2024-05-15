@@ -807,7 +807,7 @@ $('.owl-carousel').owlCarousel({
         var href = $(this).attr("href"); // Get the value of the href attribute
         var segmentId = href.split('=')[1]; // Extract the value of segment from the href
         console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
-
+     
         $.ajax({
             url: base_url + 'filter/get_product_id_table',
             dataType: 'json',

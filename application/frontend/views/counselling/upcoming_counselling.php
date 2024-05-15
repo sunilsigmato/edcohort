@@ -93,8 +93,7 @@ if($get_breadcrumb)
                     <label for="rating2" class="rating-display">
                     <div class="dropdown">
   <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
-  <img
-                            src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> </label>
+  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> --> </label>
   <!-- </button>-->
 
   
@@ -212,12 +211,12 @@ if($get_breadcrumb)
                             <a href="<?php echo base_url();?>write-a-complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
                     class=" text-decoration-none ">
                     <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
-                        for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>
+                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt="">--> </label>
                 </a>
                         <?php } else { ?>
                         <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
                             data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
-                        for="rating2"><img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label></a>
+                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt="">--> </label></a>
                         <?php } ?>
 
                 </a>

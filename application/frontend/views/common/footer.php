@@ -429,7 +429,7 @@ $authUrl1 = $gClient->createAuthUrl();
                   //  print_R($class);
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
-            <a href="<?php echo base_url(); ?>/all-product?segment=<?php echo $class->id; ?>&brand=1" class="mt-auto">
+            <a href="<?php echo base_url(); ?>/all-product?segment=<?php echo $class->id; ?>" class=" segment-link mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                

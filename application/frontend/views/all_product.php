@@ -8,13 +8,8 @@ $segment = $this->input->get('segment');
 
 
 
-<div class="content">
-    <div class="container-fluid review-top-section">
-        <div class="row">
-           
-            
-    <!-- New Design Start -->
-    <button type="button" class="filter-btn">Filter</button>
+  <!-- New Design Start -->
+  <button type="button" class="filter-btn">Filter</button>
 
 <!--left start-->
 <div class="container-fluid review-top-section">
@@ -56,9 +51,7 @@ $segment = $this->input->get('segment');
                                 </select>
                             </div>
                         </div>
-
-
-                     
+                        
                         <div class=" filter-col ">
                             <div class="filter-list-box">
                                 <!--<button type="submit" class="apply-btn">Apply Filter</button>-->
@@ -116,7 +109,7 @@ $segment = $this->input->get('segment');
                                     <div class="popular-star-rating m-2">
                                         <?php for ($i = 1; $i <= 5; $i++) { ?>
                                         <i
-                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>
+                                            class="fa fa-star<?php echo ($r->product_rating >= $i) ? ' text-yellow' : ''; ?>"></i>  
                                         <?php } ?>
                                     </div>
                                     <hr>
@@ -254,7 +247,7 @@ $segment = $this->input->get('segment');
         var product_id = '';
         var ratings = '';
         var sort_by ='';
-
+        
           /** Start Filter Section */
         if(filter_segment_id == 1)
         {
