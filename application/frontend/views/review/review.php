@@ -1216,6 +1216,16 @@ if($get_breadcrumb)
         var product_id = '';
         var ratings = '';
         var sort_by ='';
+        /** Ajax Cal Variable declare  */
+        var isClickedBrand = false;
+        var FilterBrandText = '';
+        var BrandParamKey ='brand';
+        var isClickedSegment = true;
+        var drop_down_text =$('#filter_segment :selected').text().trim(); // for segment text
+        var SegmentParamKey ='segment';
+        var isClickedClass = false;
+        var FilterClassText = '';
+        var ClassParamKey ='class';
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -1234,7 +1244,7 @@ if($get_breadcrumb)
         $("#filter_segment").change(function()
         { 
             
-           var drop_down_text = $('#filter_segment :selected').text();
+           drop_down_text = $('#filter_segment :selected').text();
            drop_down_text = drop_down_text.trim();
            if(drop_down_text == 'K12' || drop_down_text == 'K-12' || drop_down_text == 'k12')
            {
@@ -1287,14 +1297,18 @@ if($get_breadcrumb)
         $("#brand").change(function()
         {
             filter_brand_id = $(this).val();
+            FilterBrandText = $('#brand :selected').text().trim();
             filter_class(filter_brand_id,filter_segment_id);
+            isClickedBrand =true;
         });
 
 
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
+            FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
+            isClickedClass =true;
         });
 
         $("#filter_course_dropdown").change(function()
@@ -1486,21 +1500,38 @@ if($get_breadcrumb)
                 }
                 //console.log(options);
                 $('#batch').empty().append(options); 
-                /*if(filter_batch_id)
+                if(filter_batch_id)
                 {
-                    temp_res()
-                }*/
+                    get_all_data()
+                }
               }
            });
         }
-      /*  function temp_res()
+        function get_all_data()
         {
-            //alert("hi");
-            param1="new_url1";
-            param2="new_url2";
-            var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?param1=' + param1 + '&param2=' + param2;
-            window.history.pushState({path: newURL}, '', newURL);
-        }*/
+            var urlParams = new URLSearchParams(window.location.search);
+            if(isClickedSegment)
+            {
+                urlParams.set(SegmentParamKey, drop_down_text);
+                // Check if the parameter already exists
+               /* if (urlParams.has(paramKeyToReplace)) {
+                    // Replace existing parameter value with new value
+                    urlParams.set(paramKeyToReplace, newParamValue);
+                } else {
+                    // Add new parameter
+                    urlParams.append(paramKeyToReplace, newParamValue);
+                }*/
+            }
+            if (isClickedBrand) {
+                urlParams.set(BrandParamKey, FilterBrandText);
+            }
+            if (isClickedClass) {
+                urlParams.set(ClassParamKey, FilterClassText);
+            }
+
+           var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+            window.history.pushState({ path: newURL }, '', newURL);
+        }
         
         /** End Filter Section */
 
