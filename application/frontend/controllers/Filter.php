@@ -21,8 +21,6 @@ public function __construct()
       $res_filter_brand_list = $this->common_model->getseg_brand_list($segment);
       http_response_code(200);
       echo json_encode(array("status"=>"1","data"=>$res_filter_brand_list)); 
-   
-
   }
   function get_filter_class_detail()
   {
@@ -365,9 +363,8 @@ public function __construct()
     $item = new stdClass;
     $item->product_id = $get_product_id;
     $item->product_review_id = $get_product_review_id;
-    //var_dump($objectsArray);
     return $item;
-  } // paass array of object value product id and review id
+  } 
 
   function get_product_id_table()
   {
@@ -381,7 +378,7 @@ public function __construct()
         http_response_code(200);
                 echo json_encode(array("status"=>"1","data"=>$product_id)); 
                 return ;
-    }
+    } 
     else
     {
       http_response_code(200);
