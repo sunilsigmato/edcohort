@@ -1486,9 +1486,21 @@ if($get_breadcrumb)
                 }
                 //console.log(options);
                 $('#batch').empty().append(options); 
+                /*if(filter_batch_id)
+                {
+                    temp_res()
+                }*/
               }
            });
         }
+      /*  function temp_res()
+        {
+            //alert("hi");
+            param1="new_url1";
+            param2="new_url2";
+            var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?param1=' + param1 + '&param2=' + param2;
+            window.history.pushState({path: newURL}, '', newURL);
+        }*/
         
         /** End Filter Section */
 
