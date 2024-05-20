@@ -1154,7 +1154,20 @@ if($get_breadcrumb)
         </div>
 
         <!-- New Design Ends -->
+<style>
+.value-span {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px;
+            background-color: lightblue;
+        }
 
+.closeButton {
+  cursor: pointer;
+}
+    </style>
+<div id="selectedValues"></div>
+    </div>
 
         <!--end-->
         <div class="helpful-box">
@@ -1179,8 +1192,6 @@ if($get_breadcrumb)
             </div>
         </div>
 
-
-    </div>
   
     <input type="hidden" value = "<?php echo $segment?>" class = "segment">
     <input type="hidden" value = "<?php echo $course ?>" class = "course">
@@ -1226,6 +1237,21 @@ if($get_breadcrumb)
         var isClickedClass = false;
         var FilterClassText = '';
         var ClassParamKey ='class';
+        var isClickedCourse = false;
+        var FilterCourseText = '';
+        var CourseParamKey ='course';
+        var isClickedBatch = false;
+        var FilterBatchText = '';
+        var BatchParamKey ='batch';
+        var isClickedRating = false;
+        var FilterRatingText = '';
+        var RatingParamKey ='rating';
+        var isClickedSortby = false;
+        var FilterSortbyText = '';
+        var SortbyParamKey ='sortby';
+        var isClickedBoard = false;
+        var FilterBoardText = '';
+        var BoardParamKey ='board';
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -1273,6 +1299,7 @@ if($get_breadcrumb)
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
+            isClickedBoard = true;
 
         });
         $('.toggle_icsc').click(function() {
@@ -1280,18 +1307,21 @@ if($get_breadcrumb)
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+            isClickedBoard = true;
 
         });
         $('.toggle_online').click(function() { 
             filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
+            isClickedBoard = true;
 
         });
         $('.toggle_offline').click(function() {
             filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
+            isClickedBoard = true;
         });
    
         $("#brand").change(function()
@@ -1314,13 +1344,17 @@ if($get_breadcrumb)
         $("#filter_course_dropdown").change(function()
         {
             filter_course_id = $(this).val();
+            FilterCourseText = $('#filter_course_dropdown :selected').text().trim();
             filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
-
+            isClickedCourse =true;
         });
 
         $("#batch").change(function()
         {
              filter_batch_id = $(this).val();
+             FilterBatchText = $('#batch :selected').text().trim();
+             isClickedBatch =true;
+             
         });
         /** Rating Code  **/
         $('input[name="customer_rating"]').change(function(){
@@ -1330,6 +1364,8 @@ if($get_breadcrumb)
                  {
                     ratings = '';
                  }
+                 isClickedRating =true;
+                 
                  location.reload();
                  window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by+"&customer_rating="+ratings;
                // console.log("Selected rating: " + ratingValue);
@@ -1340,6 +1376,7 @@ if($get_breadcrumb)
          $('input[name="sort_by"]').change(function(){
             if($(this).is(':checked')){
                 sort_by = $(this).val();
+                isClickedSortby = true;
                 location.reload();
                // console.log("Selected rating: " + ratingValue);
               window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by;
@@ -1509,28 +1546,104 @@ if($get_breadcrumb)
         }
         function get_all_data()
         {
+              const selectedValuesDiv = document.getElementById("selectedValues");
             var urlParams = new URLSearchParams(window.location.search);
             if(isClickedSegment)
             {
                 urlParams.set(SegmentParamKey, drop_down_text);
-                // Check if the parameter already exists
-               /* if (urlParams.has(paramKeyToReplace)) {
-                    // Replace existing parameter value with new value
-                    urlParams.set(paramKeyToReplace, newParamValue);
-                } else {
-                    // Add new parameter
-                    urlParams.append(paramKeyToReplace, newParamValue);
-                }*/
+              
             }
             if (isClickedBrand) {
                 urlParams.set(BrandParamKey, FilterBrandText);
+                add_filter_values(BrandParamKey,FilterBrandText);
             }
             if (isClickedClass) {
                 urlParams.set(ClassParamKey, FilterClassText);
+                add_filter_values(ClassParamKey,FilterClassText);
+            }
+            if (isClickedCourse) {
+                urlParams.set(CourseParamKey, FilterCourseText);
+                add_filter_values(CourseParamKey,FilterCourseText);
+            }
+            if (isClickedBatch) {
+                urlParams.set(BatchParamKey, FilterBatchText);
+                add_filter_values(BatchParamKey,FilterBatchText);
             }
 
            var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
             window.history.pushState({ path: newURL }, '', newURL);
+        }
+
+        function add_filter_values(val1,val2)
+        {
+            var urlParams = new URLSearchParams(window.location.search);
+            var brn_value = val1 + '=' + val2 ;
+            var span = document.createElement("span");
+            span.classList.add("value-span");
+             // Set text content
+            span.textContent = val2;
+            // Set display value
+            span.style.display = "block"; 
+            var div = document.getElementById("selectedValues");
+            var closeButton = document.createElement("button");
+            closeButton.textContent = "X";
+            closeButton.setAttribute("data-value", brn_value);
+
+            var selectedValuesDiv = document.getElementById("selectedValues");
+            
+            // Get all the span elements within the selectedValuesDiv
+            var spans = selectedValuesDiv.getElementsByTagName("span");
+           // Loop through the spans and retrieve their values
+           for (var i = 0; i < spans.length; i++) 
+           {
+               var value = spans[i].innerHTML;
+               // Create a temporary div element
+               var tempDiv = document.createElement('div');
+               // Set the innerHTML of the div
+               tempDiv.innerHTML = value;
+               // Get the button element from the div
+               var buttonElement = tempDiv.querySelector('button');
+               // Retrieve the value of the data-value attribute
+               var dataValue = buttonElement.getAttribute('data-value');
+               var parts = dataValue.split("="); // Split = before values ex: brand=Buyjs
+                var split_val = parts[0]; // output : brand
+                if(val1 == split_val) // check param key Duplicate exist or not 
+                {
+                    spans[i].remove(); // remove if duplicate exist
+                }
+               
+           }
+
+            closeButton.onclick = function() // close button for remove filters
+            {
+                var valueToRemove = this.getAttribute("data-value"); 
+                var spans = document.getElementsByClassName("value-span");
+                var parts = valueToRemove.split("=");
+                var split_val = parts[0];
+                console.log(split_val);
+                    if(split_val == BrandParamKey)
+                    {
+                        isClickedBrand = false;
+                    }
+                    if(split_val == ClassParamKey)
+                    {
+                        //console.log("hii");
+                        isClickedClass = false;
+                    }
+             //   if (urlParams.has(split_val)) {
+                    urlParams.delete(split_val);
+             //   }
+                var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+                
+                window.history.pushState({ path: newURL }, '', newURL);
+                span.remove();
+                
+            };
+            span.appendChild(closeButton);
+            // Append the span to the div
+            div.appendChild(span);
+            document.getElementById("selectedValues").appendChild(span);
+           
         }
         
         /** End Filter Section */
