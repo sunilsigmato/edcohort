@@ -5,12 +5,12 @@ class filter extends CI_Controller {
 public function __construct()
 {
     parent::__construct();
-
     $this->load->library('pagination');
     $this->load->helper('form');
     $this->load->model('common_model');
     $this->load->model('coupon_model');
-  
+    $this->load->model('review_model');
+
 }
 
 
@@ -81,6 +81,22 @@ public function __construct()
     $get_filter_result_detail = $this->common_model->get_filter_result_detail($segment,$board_id,$brand_id,$class_id,$course_id,$batch_id);
     http_response_code(200);
     echo json_encode(array("status"=>"1","data"=>$get_filter_result_detail)); 
+  }
+
+  function get_all_data()
+  {
+    $segment= $this->input->post('segment');
+    $brand= $this->input->post('brand');
+    $board= $this->input->post('board');
+    $class= $this->input->post('class');
+    $course= $this->input->post('course');
+    $batch= $this->input->post('batch');
+    $rating= $this->input->post('rating');
+    $sortby = $this->input->post('sortby');
+    $page = $this->input->post('page');
+    $user = $this->input->post('user');
+    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$page,$user);
+
   }
 
   function submit_review()

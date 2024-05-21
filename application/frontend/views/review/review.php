@@ -253,9 +253,9 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="brand" class="brand">
+                                <option value="all">All</option>
                                     <?php foreach($res_filter_brand as $brands){?>
-                                    <option value="<?php echo $brands->brand_id; ?>"
-                                        <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>>
+                                    <option value="<?php echo $brands->brand_id; ?>">
                                         <?php echo $brands->brand_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -358,9 +358,9 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
+                                <option value="all">All</option>
                                     <?php foreach($res_filter_class as $classes){?>
-                                    <option value="<?php echo $classes->class_id; ?>"
-                                        <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
+                                    <option value="<?php echo $classes->class_id; ?>">
                                         <?php echo $classes->title; ?></option>
                                     <?php } ?>
                                 </select>
@@ -371,9 +371,9 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">COURSE</h3>
                             <div class="select-box">
                                 <select name="filter_course_dropdown" id="filter_course_dropdown">
-                                    <?php foreach($res_filter_course as $classes){?>
-                                    <option value="<?php echo $classes->id; ?>"
-                                        <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
+                                <option value="all">All</option>    
+                                <?php foreach($res_filter_course as $classes){?>
+                                    <option value="<?php echo $classes->id; ?>">
                                         <?php echo $classes->course_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -384,9 +384,9 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
                             <div class="select-box">
                                 <select name="batch" id="batch">
+                                <option value="all">All</option>
                                     <?php foreach($batch_records as $batches){?>
-                                    <option value="<?php echo $batches->batch_id; ?>"
-                                        <?php if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
+                                    <option value="<?php echo $batches->batch_id; ?>">
                                         <?php echo $batches->batch_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -1253,6 +1253,18 @@ if($get_breadcrumb)
         var FilterBoardText = '';
         var BoardParamKey ='board';
 
+        var requestData = {};
+            requestData.segment = filter_segment_id;
+            requestData.brand = '';
+            requestData.board = '';
+            requestData.class = '';
+            requestData.course = '';
+            requestData.batch = '';
+            requestData.rating = '';
+            requestData.sortby = '';
+            requestData.page = '';
+            requestData.user = '';
+
           /** Start Filter Section */
         if(filter_segment_id == 1)
         {
@@ -1300,6 +1312,8 @@ if($get_breadcrumb)
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
             isClickedBoard = true;
+            FilterBoardText = 'cbsc';
+            get_all_data();
 
         });
         $('.toggle_icsc').click(function() {
@@ -1308,6 +1322,8 @@ if($get_breadcrumb)
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
             isClickedBoard = true;
+            FilterBoardText = 'icsc';
+            get_all_data();
 
         });
         $('.toggle_online').click(function() { 
@@ -1315,6 +1331,8 @@ if($get_breadcrumb)
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
             isClickedBoard = true;
+            FilterBoardText = 'online';
+            get_all_data();
 
         });
         $('.toggle_offline').click(function() {
@@ -1322,6 +1340,8 @@ if($get_breadcrumb)
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
             isClickedBoard = true;
+            FilterBoardText = 'offline';
+            get_all_data();
         });
    
         $("#brand").change(function()
@@ -1330,6 +1350,7 @@ if($get_breadcrumb)
             FilterBrandText = $('#brand :selected').text().trim();
             filter_class(filter_brand_id,filter_segment_id);
             isClickedBrand =true;
+            get_all_data();
         });
 
 
@@ -1339,6 +1360,7 @@ if($get_breadcrumb)
             FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
             isClickedClass =true;
+            get_all_data();
         });
 
         $("#filter_course_dropdown").change(function()
@@ -1347,6 +1369,7 @@ if($get_breadcrumb)
             FilterCourseText = $('#filter_course_dropdown :selected').text().trim();
             filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
             isClickedCourse =true;
+            get_all_data();
         });
 
         $("#batch").change(function()
@@ -1354,20 +1377,23 @@ if($get_breadcrumb)
              filter_batch_id = $(this).val();
              FilterBatchText = $('#batch :selected').text().trim();
              isClickedBatch =true;
+             get_all_data();
              
         });
         /** Rating Code  **/
         $('input[name="customer_rating"]').change(function(){
             if($(this).is(':checked')){
                  ratings = $(this).val();
+                 FilterRatingText = ratings;
                  if(ratings == 'all' || ratings == 'All' || ratings == 'ALL')
                  {
                     ratings = '';
                  }
                  isClickedRating =true;
-                 
-                 location.reload();
-                 window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by+"&customer_rating="+ratings;
+                // console.log(FilterRatingText);
+                 get_all_data();
+                // location.reload();
+                // window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by+"&customer_rating="+ratings;
                // console.log("Selected rating: " + ratingValue);
                //alert(ratings);
             }
@@ -1377,9 +1403,12 @@ if($get_breadcrumb)
             if($(this).is(':checked')){
                 sort_by = $(this).val();
                 isClickedSortby = true;
-                location.reload();
+                FilterSortbyText = sort_by;
+                get_all_data();
+               // console.log(FilterSortbyText);
+            //    location.reload();
                // console.log("Selected rating: " + ratingValue);
-              window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by;
+              //window.location="<?php echo base_url();?>review/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by;
               //location.reload();
             }
         });
@@ -1539,7 +1568,7 @@ if($get_breadcrumb)
                 $('#batch').empty().append(options); 
                 if(filter_batch_id)
                 {
-                    get_all_data()
+                   // get_all_data()
                 }
               }
            });
@@ -1550,36 +1579,58 @@ if($get_breadcrumb)
             var urlParams = new URLSearchParams(window.location.search);
             if(isClickedSegment)
             {
-                urlParams.set(SegmentParamKey, drop_down_text);
-              
+                urlParams.set(SegmentParamKey, drop_down_text);  
             }
             if (isClickedBrand) {
                 urlParams.set(BrandParamKey, FilterBrandText);
+                requestData.brand = filter_brand_id;
                 add_filter_values(BrandParamKey,FilterBrandText);
+            }
+            if (isClickedBoard) {
+                urlParams.set(BoardParamKey, FilterBoardText);
+                requestData.board = filter_board_id;
+                add_filter_values(BoardParamKey,FilterBoardText);
             }
             if (isClickedClass) {
                 urlParams.set(ClassParamKey, FilterClassText);
+                requestData.class = filter_class_id;
                 add_filter_values(ClassParamKey,FilterClassText);
             }
             if (isClickedCourse) {
                 urlParams.set(CourseParamKey, FilterCourseText);
+                requestData.course = filter_course_id;
                 add_filter_values(CourseParamKey,FilterCourseText);
             }
             if (isClickedBatch) {
                 urlParams.set(BatchParamKey, FilterBatchText);
+                requestData.batch = filter_batch_id;
                 add_filter_values(BatchParamKey,FilterBatchText);
+            }
+            if (isClickedRating) {
+                urlParams.set(RatingParamKey, FilterRatingText);
+                requestData.rating = FilterRatingText;
+                add_filter_values(RatingParamKey,FilterRatingText);
+            }
+            if (isClickedSortby) {
+                urlParams.set(SortbyParamKey, FilterSortbyText);
+                requestData.sortby = sort_by;
+                add_filter_values(SortbyParamKey,FilterSortbyText);
             }
 
            var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
             window.history.pushState({ path: newURL }, '', newURL);
+            ajax_cal_data();
         }
 
         function add_filter_values(val1,val2)
         {
+            
+            console.log(requestData);
             var urlParams = new URLSearchParams(window.location.search);
             var brn_value = val1 + '=' + val2 ;
             var span = document.createElement("span");
             span.classList.add("value-span");
+            console.log(brn_value);
              // Set text content
             span.textContent = val2;
             // Set display value
@@ -1620,15 +1671,40 @@ if($get_breadcrumb)
                 var spans = document.getElementsByClassName("value-span");
                 var parts = valueToRemove.split("=");
                 var split_val = parts[0];
-                console.log(split_val);
                     if(split_val == BrandParamKey)
                     {
                         isClickedBrand = false;
+                        requestData.brand = '';
+                    }
+                    if(split_val == BoardParamKey)
+                    {
+                        isClickedBoard = false;
+                        requestData.board = '';
                     }
                     if(split_val == ClassParamKey)
                     {
-                        //console.log("hii");
                         isClickedClass = false;
+                        requestData.class = '';
+                    }
+                    if(split_val == CourseParamKey)
+                    {
+                        isClickedCourse = false;
+                        requestData.course = '';
+                    }
+                    if(split_val == BatchParamKey)
+                    {
+                        isClickedBatch = false;
+                        requestData.batch = '';
+                    }
+                    if(split_val == RatingParamKey)
+                    {
+                        isClickedRating = false;
+                        requestData.rating = '';
+                    }
+                    if(split_val == SortbyParamKey)
+                    {
+                        isClickedSortby = false;
+                        requestData.sortby = '';
                     }
              //   if (urlParams.has(split_val)) {
                     urlParams.delete(split_val);
@@ -1637,6 +1713,7 @@ if($get_breadcrumb)
                 
                 window.history.pushState({ path: newURL }, '', newURL);
                 span.remove();
+                ajax_cal_data();
                 
             };
             span.appendChild(closeButton);
@@ -1645,155 +1722,21 @@ if($get_breadcrumb)
             document.getElementById("selectedValues").appendChild(span);
            
         }
+        function ajax_cal_data()
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_all_data",
+              data: requestData, 
+              dataType: "json",   
+              success: function (response) {
+                   
+                   
+              }
+           });
+        }
         
         /** End Filter Section */
-
-
-        
-
-      /*  $('#category').change(function() {
-            var category_id = $('#category').val();
-            if (category_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-class-list",
-                    method: "POST",
-                    data: {
-                        category_id: category_id
-                    },
-                    success: function(data) {
-                        $('#board').html(data);
-                        // $('#city').html('<option value="">Select City</option>');
-                    }
-                });
-            } else {
-                $('#state').html('<option value="">Select State</option>');
-                $('#city').html('<option value="">Select City</option>');
-            }
-        });
-
-        $('#brand').change(function() {
-            var brand_id = $('#brand').val();
-            if (brand_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-board-list",
-                    method: "POST",
-                    data: {
-                        brand_id: brand_id
-                    },
-                    success: function(data) {
-                        $('#board').html(data);
-                        // $('#city').html('<option value="">Select City</option>');
-                    }
-                });
-            } else {
-                // $('#state').html('<option value="">Select State</option>');
-                // $('#city').html('<option value="">Select City</option>');
-            }
-        });*/
-
-        // $('#brand').change(function() {
-        //     var brand_id = $('#brand').val();
-        //     if (brand_id != '') {
-        //         $.ajax({
-        //             url: "<?php echo base_url(); ?>get-board-list",
-        //             method: "POST",
-        //             data: {
-        //                 brand_id: brand_id
-        //             },
-        //             success: function(data) {
-        //                 $('#board').html(data);
-        //                 // $('#city').html('<option value="">Select City</option>');
-        //             }
-        //         });
-        //     } else {
-        //        // $('#state').html('<option value="">Select State</option>');
-        //        // $('#city').html('<option value="">Select City</option>');
-        //     }
-        // });
-
-
-     /*   $('#board').change(function() {
-            var brand_id = $('#brand').val();
-            var product_type = $('input[name="product_type"]:checked').val();
-            var board_id = $('#board').val();
-            //alert(product_type);
-            if (board_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-class-list",
-                    method: "POST",
-                    data: {
-                        board_id: board_id,
-                        product_type: product_type,
-                        brand_id: brand_id
-                    },
-                    success: function(data) {
-                        $('#class').html(data);
-                    }
-                });
-            }
-        });
-
-
-        $('#class').change(function() {
-            var brand_id = $('#brand').val();
-            var product_type = $('input[name="product_type"]:checked').val();
-            var board_id = $('#board').val();
-            var class_id = $('#class').val();
-            if (class_id != '') {
-                $.ajax({
-                    url: "<?php echo base_url(); ?>get-batch-class",
-                    method: "POST",
-                    data: {
-                        board_id: board_id,
-                        product_type: product_type,
-                        brand_id: brand_id,
-                        class_id: class_id
-                    },
-                    success: function(data) {
-                        $('#batch').html(data);
-                    }
-                });
-            }
-        });*/
-
-        // $('#board').change(function(){
-        //     var board_id = $('#board').val();
-        //     if(board_id != '')
-        //     {
-        //         $.ajax({
-        //             url:"<?php echo base_url(); ?>get-course-batch",
-        //             method:"POST",
-        //             data:{board_id:board_id},
-        //             success:function(data)
-        //             {
-        //                 $('#batch').html(data);
-        //             }
-        //         });
-        //     }
-        // }); 
-
-
-
-        // $('#state').change(function() {
-        //     var state_id = $('#state').val();
-        //     if (state_id != '') {
-        //         $.ajax({
-        //             url: "<?php echo base_url(); ?>dynamic_dependent/fetch_city",
-        //             method: "POST",
-        //             data: {
-        //                 state_id: state_id
-        //             },
-        //             success: function(data) {
-        //                 $('#city').html(data);
-        //             }
-        //         });
-        //     } else {
-        //         $('#city').html('<option value="">Select City</option>');
-        //     }
-        // });
-
-
-
 
     });
 

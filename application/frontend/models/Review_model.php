@@ -140,6 +140,47 @@ class Review_model extends CI_Model {
 	   return $output;
   }
 
+  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$page=0,$user)
+  {
+      $where = "";
+      $limit = 20;
+      if(!empty($segment))
+      {
+          $where .="pr.segment_id = $segment";
+      }
+      if(!empty($board))
+      {
+          $where .= "pr.board_id = $board";
+      }
+      if(!empty($brand))
+      {
+          $where .= "pr.brand_id = $brand";
+      }
+     /* if(!empty($class))
+      {
+          $where .= "pr.brand_id = $class";
+      }*/
+      if(!empty($course))
+      {
+          $where .= "pr.course_id = $course";
+      }
+      if(!empty($batch))
+      {
+          $where .= "pr.batch_id = $batch";
+      }
+      if(!empty($rating))
+      {
+          $where .= "pr.product_rating = $rating";
+      }
+      if(!empty($user))
+      {
+          $where .= "pr.user_id = $user";
+      }
+
+      // sort by pending 
+      
+  }
+
   function getProductReviewLimit($where,$order='',$limit='',$offset=0,$sort_by=1)
   {
       if($where!=""){        
