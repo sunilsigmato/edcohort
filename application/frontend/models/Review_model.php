@@ -140,44 +140,89 @@ class Review_model extends CI_Model {
 	   return $output;
   }
 
-  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$page=0,$user)
+  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user,$page=0)
   {
+    // if its all display all id ids 
       $where = "";
       $limit = 20;
       if(!empty($segment))
       {
           $where .="pr.segment_id = $segment";
       }
-      if(!empty($board))
+      if(!empty($board) && ($board != 'all'))
       {
-          $where .= "pr.board_id = $board";
+          $where .= " and pr.board_id = $board";
       }
-      if(!empty($brand))
+      if(!empty($brand) && ($brand != 'all'))
       {
-          $where .= "pr.brand_id = $brand";
+          $where .= " and pr.brand_id = $brand";
       }
-     /* if(!empty($class))
+      if(!empty($class) && ($class != 'all'))
       {
-          $where .= "pr.brand_id = $class";
-      }*/
-      if(!empty($course))
-      {
-          $where .= "pr.course_id = $course";
+          $where .= " and pr.class_id = $class";
       }
-      if(!empty($batch))
+      if(!empty($course) && ($course != 'all'))
       {
-          $where .= "pr.batch_id = $batch";
+          $where .= " and pr.course_id = $course";
       }
-      if(!empty($rating))
+      if(!empty($batch) && ($batch != 'all'))
       {
-          $where .= "pr.product_rating = $rating";
+          $where .= " and pr.batch_id = $batch";
+      }
+      if(!empty($rating) && ($rating != 'all'))
+      {
+          $where .= " and pr.product_rating = $rating";
       }
       if(!empty($user))
       {
-          $where .= "pr.user_id = $user";
+          $where .= "and pr.user_id = $user";
+      }
+      $orderby = '';
+      if (!empty($sortby)) {
+      
+        //$orderby = " pr.product_rating " . $sort_by . " ";
+        if($sortby == 'most_critical')
+        {
+          $sortby = 2;
+        }
+        else
+        {
+          $sortby = 1;
+        }
+      }
+      else
+      {
+        $sortby = 1;
       }
 
       // sort by pending 
+
+
+    //$page = $this->input->get('page');
+    $per_page = 10;
+    $records_count = $this->review_model->getProductReviewCount($where);
+    //echo $this->db->last_query(); die;
+    $data['records_count'] = @$records_count['0']->review_count;
+    //print_ex($data['records_count']);  
+    $per_page = ($per_page) ? $per_page : 10;
+    //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['total_rows'] = $data['records_count'];
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 2;
+    $config['first_link'] = false;
+    $config['last_link'] = false;
+    $page = ($page) ? $page : 0;
+    $this->pagination->initialize($config);
+    $data['page_link'] = $this->pagination->create_links();
+
+    $data['review_list'] = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
+print_R($data['review_list']);
       
   }
 
@@ -203,13 +248,10 @@ class Review_model extends CI_Model {
       if($sort_by == 2)
       {
         
-        
-        
         $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug,COUNT(prr.review_id) AS reply_count FROM tbl_product_review as pr 
         join tbl_product as p ON pr.product_id=p.product_id 
         join tbl_customer as c ON pr.user_id=c.customer_id  
-        LEFT JOIN tbl_product_review_reply AS prr ON pr.product_review_id = prr.review_id ".$where." and prr.sub_id IS NULL GROUP BY prr.review_id ORDER BY reply_count desc limit ".$limit." offset ".$offset);
-        
+        LEFT JOIN tbl_product_review_reply AS prr ON pr.product_review_id = prr.review_id ".$where." and prr.sub_id IS NULL GROUP BY prr.review_id ORDER BY reply_count desc limit ".$limit." offset ".$offset);   
         return $query->result();    
     }
         

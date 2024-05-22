@@ -94,8 +94,8 @@ public function __construct()
     $rating= $this->input->post('rating');
     $sortby = $this->input->post('sortby');
     $page = $this->input->post('page');
-    $user = $this->input->post('user');
-    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$page,$user);
+    $user_id = $this->input->post('user_id');
+    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page=0);
 
   }
 
@@ -126,10 +126,11 @@ public function __construct()
       'brand_id' => $brand_id,
       'board_id' => $board_id,
       'batch_id' => $batch_id,
-      'course_id' => $class_id,
+      'course_id' => $course_id,
+      'class_id' => $class_id,
       'product_rating' => $rating,
      // 'review_associated_offline' => $review_associated_offline,
-      //'review_discussion' => $review_discussion,
+      //'review_discussion' => $review_discussion, 
       //'media' => $media,
       'product_review_added' => date('Y-m-d H:i:s'),
       'status' => 'active',

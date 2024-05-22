@@ -1263,7 +1263,7 @@ if($get_breadcrumb)
             requestData.rating = '';
             requestData.sortby = '';
             requestData.page = '';
-            requestData.user = '';
+            requestData.user_id = '';
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
