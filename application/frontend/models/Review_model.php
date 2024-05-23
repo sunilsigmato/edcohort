@@ -202,11 +202,11 @@ class Review_model extends CI_Model {
     $per_page = 10;
     $records_count = $this->review_model->getProductReviewCount($where);
     //echo $this->db->last_query(); die;
-    $data['records_count'] = @$records_count['0']->review_count;
+    $datas['records_count'] = @$records_count['0']->review_count;
     //print_ex($data['records_count']);  
     $per_page = ($per_page) ? $per_page : 10;
     //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
-    $config['total_rows'] = $data['records_count'];
+    $config['total_rows'] = $datas['records_count'];
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
     $config['query_string_segment'] = 'page';
@@ -219,11 +219,128 @@ class Review_model extends CI_Model {
     $config['last_link'] = false;
     $page = ($page) ? $page : 0;
     $this->pagination->initialize($config);
-    $data['page_link'] = $this->pagination->create_links();
+    $datas['page_link'] = $this->pagination->create_links();
 
-    $data['review_list'] = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
-print_R($data['review_list']);
+    $get_product_list = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
+//print_R($get_product_list);
+    $data = new stdClass;
+    /*$data->per_page=$limit;
+    $data->next_page=$next;*/
+    $data->total_items=$records_count['0']->review_count;
+    $data->page_link =$this->pagination->create_links();
+    $items='';
+    $data->items = array();
+   if(count($get_product_list)!=0)
+   {  
+      foreach($get_product_list as $r)
+      {
+        //print_R($r);
+        $item = new stdClass;
+        $item->product_review_id = $r->product_review_id;
+        $item->product_id = $r->product_id;
+        $item->user_id = $r->user_id;
+        $item->brand_id = $r->brand_id;
+        $item->category_id = $r->category_id;
+        $item->board_id = $r->board_id;
+        $item->batch_id = $r->batch_id;
+        $item->course_id = $r->course_id;
+        $item->write_review = $r->write_review;
+        $item->review_associated_offline  =$r->review_associated_offline;
+        $item->product_rating = $r->product_rating;
+        $item->product_review_title =  $r->product_review_title;
+        $item->product_review = $r->product_review;
+        $item->product_review_type = $r->product_review_type;
+        $item->product_review_added = $r->product_review_added;
+        $item->status = $r->status;
+        $item->firstname = $r->user_name;
+        $item->lastname = $r->lastname;
+        $item->user_email = $r->user_email;
+        $item->like_count = $r->like_count;
+        $item->dislike_count = $r->dislike_count;
+        $item->share_count = $r->share_count;
+        $item->segment_id = $r->segment_id;
+        $item->class_id = $r->class_id;
+        $item->product_name = $r->product_name;
+        $item->product_slug = $r->product_slug;
+        $item->sub_review = $this->get_subreview($r->product_review_id);
+        array_push($data->items,$item);
+      }
+     
+   }
+   else
+   {
+    
+   }
+   $code =200;
+   $this->output->set_status_header($code)->set_content_type('application/json')->
+            set_output(json_encode($data));
+  
+    //$data->items=$items;
       
+  }
+  function get_subreview($product_review_id)
+  {
+    $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id  IS NULL and  review_id = '.$product_review_id.'';
+    $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
+    $review_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+    if($review_reply)
+    {
+      $data = [];
+      foreach($review_reply as $r)
+      {
+        $sub_review_lv1 = new stdClass;
+        $sub_review_lv1->prr_id = $r->prr_id;
+        $sub_review_lv1->review_id = $r->review_id;
+        $sub_review_lv1->product_id = $r->product_id;
+        $sub_review_lv1->user_id = $r->user_id;
+        $sub_review_lv1->reply = $r->reply;
+        $sub_review_lv1->status = $r->status;
+        $sub_review_lv1->date_added = $r->date_added;
+        $sub_review_lv1->firstname = $r->firstname;
+        $sub_review_lv1->lastname = $r->lastname;
+        $sub_review_lv1->email = $r->email; 
+        $sub_review_lv1->sub_review_lv1 = $this->get_subreview_lv1($r->prr_id,$r->review_id,$i=2);  
+        array_push($data,$sub_review_lv1);
+      }
+      return $data;
+    }
+    return [];
+  }
+
+  function get_subreview_lv1($prr_id,$review_id,$i)
+  {
+        //$data = '';
+        $review_sub_reply = '';
+        $where_review_reply = '';
+        $orderby = '';
+        $where_review_reply = 'tbl_product_review_reply.status = 1 and tbl_product_review_reply.sub_id ='.$prr_id.' and  review_id = '.$review_id.'';
+        $orderby = 'tbl_customer.customer_type ASC, tbl_product_review_reply.prr_id ASC';
+        $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_review_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+        if($review_sub_reply)
+        {
+            $data = [];
+           // $i =2;
+            foreach($review_sub_reply as $r)
+            {
+              $sub_review_lv2 = new stdClass;
+              $sub_review_lv2->prr_id = $r->prr_id;
+              $sub_review_lv2->review_id = $r->review_id;
+              $sub_review_lv2->product_id = $r->product_id;
+              $sub_review_lv2->user_id = $r->user_id;
+              $sub_review_lv2->reply = $r->reply;
+              $sub_review_lv2->status = $r->status;
+              $sub_review_lv2->date_added = $r->date_added;
+              $sub_review_lv2->firstname = $r->firstname;
+              $sub_review_lv2->lastname = $r->lastname;
+              $sub_review_lv2->email = $r->email; 
+              $sublist = 'sub_review_lv'.$i;
+              $sub_review_lv2->$sublist = $this->get_subreview_lv1($r->prr_id,$r->review_id,$i+1);  
+              array_push($data,$sub_review_lv2);
+             // $i++;
+            }
+            return $data;
+        }
+        return [];
   }
 
   function getProductReviewLimit($where,$order='',$limit='',$offset=0,$sort_by=1)
@@ -243,6 +360,8 @@ print_R($data['review_list']);
       $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_review as pr 
         join tbl_product as p ON pr.product_id=p.product_id 
         join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$limit." offset ".$offset);
+        /*$res = $this->db->last_query();
+        print_R($res);*/
         return $query->result();    
     }
       if($sort_by == 2)

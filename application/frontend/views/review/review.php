@@ -1264,6 +1264,7 @@ if($get_breadcrumb)
             requestData.sortby = '';
             requestData.page = '';
             requestData.user_id = '';
+            ajax_cal_data();
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -1304,6 +1305,8 @@ if($get_breadcrumb)
                 $('.board-k12').css('display', 'none');  
             }
             filter_brand(filter_segment_id);
+            get_all_data();
+
         });
 
  
@@ -1456,6 +1459,7 @@ if($get_breadcrumb)
                         // console.log(response.data);
                         var options = '';
                         var filter_brand_id_temp = '';
+                        options += '<option value="all">All</option>';
                         for (var i = 0; i < response.data.length; i++) {
                             if(i==0)
                             {
@@ -1580,6 +1584,7 @@ if($get_breadcrumb)
             if(isClickedSegment)
             {
                 urlParams.set(SegmentParamKey, drop_down_text);  
+                requestData.segment = filter_segment_id;
             }
             if (isClickedBrand) {
                 urlParams.set(BrandParamKey, FilterBrandText);
