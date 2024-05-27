@@ -1,3 +1,35 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script>
+Handlebars.registerHelper('xif', function (v1, operator, v2, options) {
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '!=':
+            return (v1 != v2) ? options.fn(this) : options.inverse(this);
+        case '!==':
+            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
+
+      
+    </script>
 <?php $course = $this->input->get('course'); 
 $brandID = $this->input->get('brand');
 $product_type = $this->input->get('product_type');
@@ -8,6 +40,11 @@ $customer_rating = $this->input->get('customer_rating');
 $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $segment = $this->input->get('segment');
+$user_id = '';
+if($this->session->userdata('user_id'))
+{
+    $user_id = $this->session->userdata('user_id');
+}
 
    // print_ex($_GET);
 ?>
@@ -493,24 +530,11 @@ if($get_breadcrumb)
             <!-- Filter Ends -->
             <!-- Review Starts  -->
             <div class="col-md-8">
-                <!-- <div class="write-review-section">
-            <div class="row">
-                 <div class="col-md-4 pt-3 write-review-icon ">
-                <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label for="rating2"><img src="<?php //echo base_url();?>assets/images/rating-1.png"
-                              alt=""> </label>
-            
-            
-        </div>
-            </div>
-        </div> -->
                 <div class="review-center">
                     <div class="review-btn-box">
-
                     </div>
-
                     <div class="review-inner-center">
                         <div class="tab-link">
-
                             <ul>
                                 <li>
                                     <a href="<?php echo base_url(); ?>review?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
@@ -527,14 +551,348 @@ if($get_breadcrumb)
                                         data-bs-target="#login-button">My Review</a>
                                 </li>
                                 <?php } ?>
-                                
-
                             </ul>
                         </div>
 
-                        <div class="total-review">
-                            <!-- 9 of --><?php echo $review_count;?> Review<?php if($review_count > 1){ echo "s"; } ?>
+    <script id="review-template" type="text/x-handlebars-template">
+    <div class="total-review">{{total_items}} Review</div>
+    <div class="review-box">
+        {{#if items}}
+    {{#each items}}
+    <div class="review-row">
+        <div class="review-user-image"><span></span></div>
+            <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center"> 
+                    <h2 class="review-title"> {{firstname}} <span>
+                    <img src="{{base_url}}assets/images/verifyicon.png" alt=""></span>
+                    </h2>
+                    <div class="review-rating">
+                        {{#xif product_rating "==" "1"}}
+                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
+                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        {{/xif}}
+                        {{#xif product_rating "==" "2"}}
+                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
+                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        {{/xif}}
+                        {{#xif product_rating "==" "3"}}
+                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
+                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i>
+                        {{/xif}}
+                        {{#xif product_rating "==" "4"}}
+                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
+                                            class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
+                                        <i class="fa fa-star"></i>
+                        {{/xif}}
+                        {{#xif product_rating "==" "5"}}
+                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
+                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
+                        <i class="fa fa-star text-yellow"></i>
+                        {{/xif}}
+                    </div>
+                </div>
+            <div class="review-date "> {{product_review_added}} </div>
+        <hr />
+        <div>
+            <h2 class="review-cmt-title">{{product_review_title}}</h2>
+        </div>
+        <div class="review-content" id="reviewShort_{{product_review_id}}">
+               {{product_review}}
+        </div>
+        <hr />
+        
+        <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
+        {{#xif sub_review.length ">" 0}} 
+        <div class="review-footer-left mt-3">{{sub_review.length }} Replies 
+            <a href="javascript:void(0)"
+            onclick="viewRepliesAll({{product_review_id}})"
+            class="view-all-replies">View all replies</a></div>
+        
+        {{else}}
+        <div class="review-footer-left mt-3">{{sub_review.length}} Replies</div> 
+        {{/xif}}
+        <div class="review-footer-right d-flex">
+        <?php $likeCount = 0;
+        $likeCountCheck =0; 
+        ?>  
+        <!-- Start Like Section -->
+        {{#xif like "<" "0"}}     
+            <a href="javascript:void(0)"
+            onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1'))">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+            width="24" height="24">
+            <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
+            </svg> {{like}} </a>
+        {{/xif}}
+        {{#xif like "<" "1"}} 
+        <a href="javascript:void(0)" onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1'))">
+        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+        width="24" height="24">
+        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
+        </svg> {{like}}</a>  
+        {{else}}
+        <a href="javascript:void(0)" data-bs-effect="effect-scale"
+        data-bs-toggle="modal" data-bs-target="#login-button">
+        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+        width="24" height="24">
+        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
+                                            </svg> {{like}}
+                                        </a>
+        {{/xif}}  
+           <!-- End Like Section -->
+
+             <!-- Start Reply Section -->
+             <?php if($this->session->userdata('user_id')){ ?>
+                                        <a href="javascript:void(0)" id="reply-"
+                                            onclick="divShow({{product_review_id}});">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php }else{ ?>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                            data-bs-target="#login-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } ?>
+                                        <!-- End Reply Section -->
+                                           <!-- Start Share Section -->
+                                           <a href="#" class="share-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                                                width="24" height="24">
+                                                <path
+                                                    d="M19.333,14.667a4.66,4.66,0,0,0-3.839,2.024L8.985,13.752a4.574,4.574,0,0,0,.005-3.488l6.5-2.954a4.66,4.66,0,1,0-.827-2.643,4.633,4.633,0,0,0,.08.786L7.833,8.593a4.668,4.668,0,1,0-.015,6.827l6.928,3.128a4.736,4.736,0,0,0-.079.785,4.667,4.667,0,1,0,4.666-4.666ZM19.333,2a2.667,2.667,0,1,1-2.666,2.667A2.669,2.669,0,0,1,19.333,2ZM4.667,14.667A2.667,2.667,0,1,1,7.333,12,2.67,2.67,0,0,1,4.667,14.667ZM19.333,22A2.667,2.667,0,1,1,22,19.333,2.669,2.669,0,0,1,19.333,22Z" />
+                                            </svg> Share
+                                            <div class="sharethis-inline-share-buttons"></div>
+                                        </a>
+                                          <!-- End Share Section -->
+        </div>
+        </div>
+
+        <!-- Reply Lv1 -->
+        
+        <div id="comment-form" class="row">
+            <div class="mt-1" style="display:none"
+                id="commentDiv_{{product_review_id}}">
+                <div class="alert alert-outline alert-outline-success reg-message-success"
+                    id="reg-message-success_{{product_review_id}}"
+                    role="alert" style="display:none;">
+                    <button type="button" class="close" data-bs-dismiss="alert"
+                        aria-hidden="true">×</button>
+                    <p id="text-message-success_{{product_review_id}}"></p>
+                </div>
+                <div class="alert alert-outline alert-outline-danger reg-message-error"
+                    id="reg-message-error_{{product_review_id}}"
+                    role="alert" style="display:none">
+                    <button type="button" class="close" data-bs-dismiss="alert"
+                        aria-hidden="true">×</button>
+                    <p id="text-message-error_{{product_review_id}}"></p>
+                </div>
+                <form class="form-horizontal"
+                    name="product_review_reply_{{product_review_id}}"
+                    id="product_review_reply_{{product_review_id}}"
+                    action="javascript:void(0)" method="post">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" class="form-control" name="product_id" id="product_id"
+                        placeholder="Your Name" value="<?php echo $course; ?>">
+                    <input type="hidden" class="form-control" name="user_id" id="userid"
+                        placeholder="Your Name"
+                        value="<?php echo $this->session->userdata('user_id'); ?>">
+                    <input type="hidden" class="form-control" name="review_id"
+                        id="review_id_{{product_review_id}}"
+                        placeholder="Your Name"
+                        value="{{product_review_id}}">
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" rows="6"
+                            placeholder="Comment" required="required"
+                            maxlength="250"></textarea>
+                    </div>
+                    <?php if ($this->session->userdata('user_id')) { ?>
+                    <a href="javascript:void(0)" class="btn btn-primary"
+                        id="review_reply_submit"
+                        onclick="productReviewReply({{product_review_id}})">Reply</a>
+                    <?php }else{ ?>
+                    <a href="javascript:void(0)" class="btn btn-primary"
+                        data-bs-effect="effect-scale" data-bs-toggle="modal"
+                        data-bs-target="#login-button">Reply</a>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
+        <!-- End Reply Lv1 -->
+        <div class="reply-box">
+        {{#xif sub_review.length ">" 0}} 
+            {{#each sub_review}}
+            <div class="review-row-reply review_reply_{{review_id}} prr_id_{{prr_id}}"
+                                        style="display:none">
+              <!--  <?php 
+                $temp_prr_id = $reply->prr_id;
+                $temp_review_id = $reply->review_id;  
+                ?> -->
+                 <div class="review-user-image"><span></span></div>
+                 <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                    <h2 class="review-title"> {{firstname}} </h2>
+                    <div class="review-date"> {{date_added}} </div>
+                 </div>
+                 <div class="review-content">
+                 <div id="reviewReplyShort_{{prr_id}}">
+                    {{reply}}
+                 </div>
+                   <!-- Comment Section Start -->
+                <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
+                <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
+                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $reply->prr_id; ?>"
+                    placeholder="Comment" required="required"
+                    maxlength="250"></textarea>
+                </div>
+                <?php if ($this->session->userdata('user_id')) { ?>
+                <a href="javascript:void(0)" class="btn btn-primary" id="review_reply_submit"
+                    onclick="divSubReply({{product_review_id}} ,{{prr_id}},{{product_id}},'<?php $this->session->userdata('user_id') ;?>')">Submit</a>
+                <?php }else{ ?>
+                    <a href="javascript:void(0)" class="btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                    data-bs-target="#login-button">Submit</a>
+                <?php  } ?>
+                <!-- Comment Section Ends -->
+                <!-- Start Reply Section -->
+                <?php if($this->session->userdata('user_id')){ ?>
+                    <a href="javascript:void(0)" id="reply-"
+                        onclick="ed_comment({{prr_id}});">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                            viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                        </svg> Reply
+                    </a>
+                    <?php }else{ ?>
+                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                        data-bs-target="#login-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                            viewBox="0 0 24 24" width="24" height="24">
+                            <path
+                                d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                        </svg> Reply
+                    </a>
+                    <?php } ?>
+                        
+                    {{#if sub_review_lv1}}
+                        {{#xif sub_review_lv1.length ">" 0}} 
+                        <div class="review-footer-left mt-3"><a
+                            href="javascript:void(0)"
+                            onclick="viewRepliesAll_level1({{review_id}})"
+                            class="view-all-replies">View all replies</a></div>
+                            {{#each sub_review_lv1}}
+                            <div class="review-row-reply review_reply_lev1_{{review_id}} prr_id_{{prr_id}}" style="display:none">
+                                <div class="review-user-image"><span></span></div>
+                                    <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                        <h2 class="review-title">{{firstname}} </h2>
+                                        <div class="review-date"> {{date_added}}</div>
+                                    </div>
+                                    <div class="review-content">
+                                    <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
+                                     <!-- Comment Section Start -->
+                                     <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
+                                     <?php $form_name = 'comment_sub_reply_{{prr_id}}'; ?>
+                                        <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
+                                        placeholder="Comment" required="required" maxlength="250"></textarea>
+                                    </div>
+                                    <?php if ($this->session->userdata('user_id')) { ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                id="review_reply_submit"
+                                                onclick="divSubReply({{product_review_id}} ,{{prr_id}},{{product_id}},'<?php $this->session->userdata('user_id') ;?>')">Submit</a>
+                                            <?php }else{ ?>
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                                data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Submit</a>
+                                    <?php } ?>
+                                     <!-- Comment Section Ends -->
+                                      <!-- Start Reply Section -->
+                                      <?php if($this->session->userdata('user_id')){ ?>
+                                        <a href="javascript:void(0)" id="reply-"
+                                            onclick="ed_comment({{prr_id}});">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php }else{ ?>
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                            data-bs-target="#login-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="24" height="24">
+                                                <path
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
+                                            </svg> Reply
+                                        </a>
+                                        <?php } ?>
+                                         <!-- Start sub_review level 2  -->
+                                        {{#if sub_review_lv2}}
+                                            {{#xif sub_review_lv2.length ">" 0}}
+
+                                            <div class="review-footer-left mt-3"><a
+                                                        href="javascript:void(0)"
+                                                        onclick="viewRepliesAll_level2('{{review_id}}')"
+                                                        class="view-all-replies">View all replies</a></div>
+                                            {{/xif}}
+                                            
+                                                {{#each sub_review_lv2}}
+                                                <div class="review-row-reply mt-3 review_reply_lev2_{{review_id}} prr_id_{{prr_id}}" style="display:none">
+                                                <div class="review-user-image"><span></span></div>
+                                                <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
+                                                    <h2 class="review-title">{{firstname}} </h2>
+                                                    <div class="review-date"> {{date_added}} </div>
+                                                </div>
+                                                <div class="review-content">
+                                                <div id="reviewReplyShort_{{prr_id}}"> {{reply}} </div>
+                                                  <!-- Comment Section Start -->
+                                               <div class="form-group" style="display:none" id="subcommentDiv_{{prr_id}}">
+                                                    <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
+                                                   <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
+                                                       placeholder="Comment" required="required" maxlength="250"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                            {{/each}}
+
+                                        {{/if}} 
+                                        <!-- End sub_review level 2  -->
+                                        </div>
+                                    </div>
+                            {{/each}}
+                        {{/xif}}
                         </div>
+                                                                </div>
+                    {{/if}}
+
+            {{/each}}
+        {{/xif}}
+        </div>
+                                    </div>
+        </div>
+            
+        </div> </div>
+    {{/each}}
+    <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
+                                <?php echo $page_link; ?></div>
+    {{else}}
+    <div class="review-row-reply">
+                                <h4>No result found..!!</h4>
+                            </div>
+    {{/if}}
+
+  
+                        </script>
+<div class="reviews-wrapper"></div>
+
+<hr />       
+<hr />       
+<hr />       
                         <div class="review-box">
                             <?php if($review_list){ ?>
                             <?php foreach($review_list as $review){
@@ -1066,6 +1424,7 @@ if($get_breadcrumb)
                                                         Short)</a> </small></div>
                                         </div>
                                     </div>
+                                    
                                             
                                   <?php  } ?>
                                   
@@ -1200,8 +1559,12 @@ if($get_breadcrumb)
     <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
     <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
     <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+    <input type="hidden" value = "<?php echo $user_id ?>" class = "user_id">
     <!--content end-->
     <!-- <script src="<?php echo base_url(); ?>assets/js/ajax/manage_review_ajax.js"></script> -->
+    
+    
+
     <script>
     $(document).ready(function() {
 
@@ -1214,6 +1577,7 @@ if($get_breadcrumb)
             $('#batch').select2();
             
                /**End   Apply Select 2 */
+      //  var user_id = $(".user_id").val();
         var filter_toggle_online = $("#online").val();
         var filter_toggle_offline = $("#offline").val();
         var filter_segment_id = $('.segment').val();
@@ -1630,12 +1994,12 @@ if($get_breadcrumb)
         function add_filter_values(val1,val2)
         {
             
-            console.log(requestData);
+            //console.log(requestData);
             var urlParams = new URLSearchParams(window.location.search);
             var brn_value = val1 + '=' + val2 ;
             var span = document.createElement("span");
             span.classList.add("value-span");
-            console.log(brn_value);
+            //console.log(brn_value);
              // Set text content
             span.textContent = val2;
             // Set display value
@@ -1736,7 +2100,29 @@ if($get_breadcrumb)
               dataType: "json",   
               success: function (response) {
                    
-                   
+                if (response && response.items.length > 0) {
+                    
+                // Compile the Handlebars template
+                var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                    
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+            }
+            else{
+                  // Compile the Handlebars template
+                  var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                    
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+            }
               }
            });
         }

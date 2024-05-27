@@ -199,6 +199,7 @@ class Review_model extends CI_Model {
 
 
     //$page = $this->input->get('page');
+    $this->load->library('pagination');
     $per_page = 10;
     $records_count = $this->review_model->getProductReviewCount($where);
     //echo $this->db->last_query(); die;
@@ -218,16 +219,17 @@ class Review_model extends CI_Model {
     $config['first_link'] = false;
     $config['last_link'] = false;
     $page = ($page) ? $page : 0;
-    $this->pagination->initialize($config);
-    $datas['page_link'] = $this->pagination->create_links();
-
+  
+    $resss =$this->pagination->initialize($config);
+    /*$datas['page_link'] = $this->pagination->create_links($resss);
+    print$datas['page_link']);*/
     $get_product_list = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
-//print_R($get_product_list);
+
     $data = new stdClass;
     /*$data->per_page=$limit;
     $data->next_page=$next;*/
     $data->total_items=$records_count['0']->review_count;
-    $data->page_link =$this->pagination->create_links();
+    //$data->page_link = $datas['page_link'];
     $items='';
     $data->items = array();
    if(count($get_product_list)!=0)
@@ -263,6 +265,7 @@ class Review_model extends CI_Model {
         $item->product_name = $r->product_name;
         $item->product_slug = $r->product_slug;
         $item->sub_review = $this->get_subreview($r->product_review_id);
+        $item->like = $this->review_like_count_new($r->product_review_id);
         array_push($data->items,$item);
       }
      
@@ -376,6 +379,24 @@ class Review_model extends CI_Model {
         
       //return $query->result();  
   }
+  function review_like_count_new($product_review_id)
+  {
+   $where = 'review_id = '.$product_review_id.' and action = 1';
+                                   // $review_reply_cnt = $this->review_model->review_like_count($where_like);
+                                  
+      if($where!=""){        
+        $where="WHERE ".$where;
+      }
+      $select='count(prl_id) as like_count';
+      //$table_name='tbl_product as P';   
+      $query = $this->db->query("select ".$select." from tbl_product_review_like ".$where."  ");
+      $res = $query->result();
+      if($res)
+      {
+        return $res[0]->like_count;
+      }
+
+  }
   function getProductReview($where)
   {
       if($where!=""){        
@@ -392,6 +413,8 @@ class Review_model extends CI_Model {
         $where="WHERE ".$where;
       }
       $query=$this->db->query("SELECT count(product_id) as review_count FROM tbl_product_review as pr ".$where."");
+      $res = $this->db->last_query();
+    //  print_r($res);
       return $query->result();  
   }
   function getProductReviewSum($where)
@@ -612,6 +635,9 @@ function getreview($where)
   
   function review_like_count($where)
   {
+   // $where_like = 'review_id = '.$review->product_review_id.' and action = 1';
+                                   // $review_reply_cnt = $this->review_model->review_like_count($where_like);
+                                  
       if($where!=""){        
         $where="WHERE ".$where;
       }

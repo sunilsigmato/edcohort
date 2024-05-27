@@ -146,7 +146,7 @@ class Review extends CI_Controller
     $reviewCount = $this->review_model->getProductReviewCount($wherereview);
     $n = @$reviewCount['0']->review_count;
 
-    $data['review_count'] = $this->number_format_short($n);
+    //$data['review_count'] = $this->number_format_short($n);
 
     $this->load->view('common/header', $data);
     $this->load->view('review/review', $data);
