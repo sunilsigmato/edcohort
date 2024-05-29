@@ -10,7 +10,7 @@ public function __construct()
     $this->load->model('common_model');
     $this->load->model('coupon_model');
     $this->load->model('review_model');
-
+    $this->load->model('complaint_model');
 }
 
 
@@ -96,6 +96,23 @@ public function __construct()
     $page = $this->input->post('page');
     $user_id = $this->input->post('user_id');
     $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page=0);
+
+  }
+
+  function get_all_data_complaint()
+  {
+    $segment= $this->input->post('segment');
+    $brand= $this->input->post('brand');
+    $board= $this->input->post('board');
+    $class= $this->input->post('class');
+    $course= $this->input->post('course');
+    $batch= $this->input->post('batch');
+    $rating= $this->input->post('rating');
+    $sortby = $this->input->post('sortby');
+    $type = $this->input->post('type');
+    $page = $this->input->post('page');
+    $user_id = $this->input->post('user_id');
+    $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page=0);
 
   }
 

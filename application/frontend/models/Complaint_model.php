@@ -95,6 +95,162 @@ class Complaint_model extends CI_Model {
     return $res;
    
   }
+
+  function get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user,$page=0)
+  {
+    // if its all display all id ids 
+      $where = "";
+      $limit = 20;
+      if(!empty($segment))
+      {
+          $where .="pr.segment_id = $segment";
+      }
+      if(!empty($board) && ($board != 'all'))
+      {
+          $where .= " and pr.board_id = $board";
+      }
+      if(!empty($brand) && ($brand != 'all'))
+      {
+          $where .= " and pr.brand_id = $brand";
+      }
+      if(!empty($class) && ($class != 'all'))
+      {
+          $where .= " and pr.class_id = $class";
+      }
+      if(!empty($course) && ($course != 'all'))
+      {
+          $where .= " and pr.course_id = $course";
+      }
+      if(!empty($batch) && ($batch != 'all'))
+      {
+          $where .= " and pr.batch_id = $batch";
+      }
+      if(!empty($rating) && ($rating != 'all'))
+      {
+          $where .= " and pr.product_rating = $rating";
+      }
+      if(!empty($user))
+      {
+          $where .= "and pr.user_id = $user";
+      }
+      $orderby = '';
+      if (!empty($sortby)) {
+      
+        //$orderby = " pr.product_rating " . $sort_by . " ";
+        if($sortby == 'most_critical')
+        {
+          $sortby = 2;
+        }
+        else
+        {
+          $sortby = 1;
+        }
+      }
+      else
+      {
+        $sortby = 1;
+      }
+
+      if (!empty($type)) {
+        if($type == 'resolved')
+        {
+          $where .= " and pr.complaint_resolved = 1 ";
+        }
+        if($type == 'unresolved')
+        {
+          $where .= " and pr.complaint_resolved = 0 ";
+        }
+        
+      }
+
+      // sort by pending 
+
+
+    //$page = $this->input->get('page');
+    $this->load->library('pagination');
+    $per_page = 10;
+    $records_count = $this->getProductComplaintCount($where);
+    //echo $this->db->last_query(); die;
+    $datas['records_count'] = @$records_count['0']->review_count;
+    //print_ex($data['records_count']);  
+    $per_page = ($per_page) ? $per_page : 10;
+    //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['total_rows'] = $datas['records_count'];
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 2;
+    $config['first_link'] = false;
+    $config['last_link'] = false;
+    $page = ($page) ? $page : 0;
+  
+    $resss =$this->pagination->initialize($config);
+    /*$datas['page_link'] = $this->pagination->create_links($resss);
+    print$datas['page_link']);*/
+    $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page,$sortby);
+
+    $data = new stdClass;
+    /*$data->per_page=$limit;
+    $data->next_page=$next;*/
+    //$data->total_items=$records_count['0']->review_count;
+    //$data->page_link = $datas['page_link'];
+    $items='';
+    $data->items = array();
+   if(count($get_product_list)!=0)
+   {  
+      foreach($get_product_list as $r)
+      {
+       // print_R($r);
+        $item = new stdClass;
+        $item->product_complaint_id = $r->product_complaint_id;
+        $item->product_id = $r->product_id;
+        $item->user_id = $r->user_id;
+        $item->brand_id = $r->brand_id;
+        $item->category_id = $r->category_id;
+        $item->board_id = $r->board_id;
+        $item->batch_id = $r->batch_id;
+        $item->course_id = $r->course_id;
+        $item->write_complaint = $r->write_complaint;
+        $item->complaint_associated_offline  =$r->complaint_associated_offline;
+        $item->product_rating = $r->product_rating;
+        $item->product_complaint_title =  $r->product_complaint_title;
+        $item->product_complaint = $r->product_complaint;
+        $item->product_complaint_type = $r->product_complaint_type;
+        $item->status = $r->status;
+        $item->complaint_resolved = $r->complaint_resolved;
+        $item->product_complaint_added = $r->product_complaint_added;
+        $item->firstname = $r->user_name;
+        $item->lastname = $r->lastname;
+        $item->user_email = $r->user_email;
+       // $item->like_count = $r->like_count;
+       // $item->dislike_count = $r->dislike_count;
+        //$item->share_count = $r->share_count;
+        $item->segment_id = $r->segment_id;
+        $item->class_id = $r->class_id;
+        $item->product_name = $r->product_name;
+        $item->product_slug = $r->product_slug;
+       // $item->sub_review = $this->get_subreview($r->product_review_id);
+        //$item->like = $this->review_like_count_new($r->product_review_id);
+        array_push($data->items,$item);
+      }
+     
+   }
+   else
+   {
+    
+   }
+   $code =200;
+   $this->output->set_status_header($code)->set_content_type('application/json')->
+            set_output(json_encode($data));
+  
+    //$data->items=$items;
+      
+  }
+
   function getProductComplaintLimit($where,$order,$limit='',$offset=0,$sort_by=1)
   {
       if($where!=""){        

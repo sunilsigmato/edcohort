@@ -405,6 +405,20 @@ function getClassName($class_id)
             return $data;
         }
     }
+    function get_segement_id($id)
+    {
+        $data = '';
+        $CI =& get_instance();
+        $data=$CI->common_model->get_segement_id($id);
+        if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+    }
 
     function get_all_brand()
     {

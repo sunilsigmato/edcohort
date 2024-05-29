@@ -1,35 +1,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-<script>
-Handlebars.registerHelper('xif', function (v1, operator, v2, options) {
-    switch (operator) {
-        case '==':
-            return (v1 == v2) ? options.fn(this) : options.inverse(this);
-        case '===':
-            return (v1 === v2) ? options.fn(this) : options.inverse(this);
-        case '!=':
-            return (v1 != v2) ? options.fn(this) : options.inverse(this);
-        case '!==':
-            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-        case '<':
-            return (v1 < v2) ? options.fn(this) : options.inverse(this);
-        case '<=':
-            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-        case '>':
-            return (v1 > v2) ? options.fn(this) : options.inverse(this);
-        case '>=':
-            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-        case '&&':
-            return (v1 && v2) ? options.fn(this) : options.inverse(this);
-        case '||':
-            return (v1 || v2) ? options.fn(this) : options.inverse(this);
-        default:
-            return options.inverse(this);
-    }
-});
-
-      
-    </script>
+<script src="<?php echo base_url(); ?>assets/js/handlebar-custom.min.js" type="text/javascript"></script>
 <?php $course = $this->input->get('course'); 
 $brandID = $this->input->get('brand');
 $product_type = $this->input->get('product_type');
@@ -46,14 +17,26 @@ if($this->session->userdata('user_id'))
     $user_id = $this->session->userdata('user_id');
 }
 
+$res_segment=get_segement_id($segment);
+if($res_segment)
+{
+   $segment = $res_segment;
+}
+else
+{
+    header("Location: " . base_url());
+    exit;
+}
+
+
    // print_ex($_GET);
 ?>
 <!--banner start-->
 <?php 
 
-$get_breadcrumb = get_breadcrumb_value();
+/*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
-$breadcrumb_name2 = '';
+$breadcrumb_name2 = '';*/
 
 //$get_single_course_detail = get_single_coure_detail($course);
 
@@ -61,19 +44,19 @@ $breadcrumb_name2 = '';
 //$get_brand_compare = get_brand_compare_detail($course,$segment);
 //$get_review_average_rating = get_review_average_rating($course);
 //$get_course_detail = get_course_detail($get_single_course_detail->course_id);
-if($get_breadcrumb)
+/*if($get_breadcrumb)
 {   
     $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
     $breadcrumb_name2 = $get_breadcrumb->breadcrumb2_name;
-}
+}*/
 ?>
 <div class="inner-banner ">
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
             <ul>
                 <li>Home </li>
-                <li><?php echo @$breadcrumb_name1; ?> </li>
-                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
+                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -225,11 +208,6 @@ if($get_breadcrumb)
             <!------> 
   </ul>
 </div>
-
-
-
-
-
 
                          <!----->
                 </div>
@@ -533,6 +511,19 @@ if($get_breadcrumb)
                 <div class="review-center">
                     <div class="review-btn-box">
                     </div>
+                    <style>
+                        .value-span {
+                                    display: inline-block;
+                                    margin-right: 10px;
+                                    padding: 5px;
+                                    background-color: lightblue;
+                                }
+
+                        .closeButton {
+                        cursor: pointer;
+                        }
+                            </style>
+                        <div id="selectedValues"></div>  <!-- for filter values display -->
                     <div class="review-inner-center">
                         <div class="tab-link">
                             <ul>
@@ -879,7 +870,7 @@ if($get_breadcrumb)
         </div> </div>
     {{/each}}
     <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
-                                <?php echo $page_link; ?></div>
+                               <!-- <?php echo $page_link; ?> --></div>
     {{else}}
     <div class="review-row-reply">
                                 <h4>No result found..!!</h4>
@@ -947,19 +938,7 @@ if($get_breadcrumb)
         </div>
 
         <!-- New Design Ends -->
-<style>
-.value-span {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px;
-            background-color: lightblue;
-        }
 
-.closeButton {
-  cursor: pointer;
-}
-    </style>
-<div id="selectedValues"></div>
     </div>
 
         <!--end-->
@@ -997,8 +976,6 @@ if($get_breadcrumb)
     <!--content end-->
     <!-- <script src="<?php echo base_url(); ?>assets/js/ajax/manage_review_ajax.js"></script> -->
     
-    
-
     <script>
     $(document).ready(function() {
 

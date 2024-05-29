@@ -11,7 +11,7 @@ class Review extends CI_Controller
   }
   function index($id = '')
   {
-    $course = $this->input->get('course');
+    //$course = $this->input->get('course');
     $user_id = $this->session->userdata('user_id');
 
     ////Filter data ////////
@@ -38,7 +38,7 @@ class Review extends CI_Controller
 
     $where = "product_status = 'active'";
 
-    $brandID = $this->input->get('brand');
+    /*$brandID = $this->input->get('brand');
     $product_type = $this->input->get('product_type');
     $board = $this->input->get('board');
     $class = $this->input->get('class');
@@ -115,7 +115,7 @@ class Review extends CI_Controller
     {
       $sort_by = 1;
     }
-	$page = 0;
+	/*$page = 0;
     $page = $this->input->get('page');
     $per_page = $this->input->get('per_page');
     $records_count = $this->review_model->getProductReviewCount($wherereview);
@@ -138,16 +138,16 @@ class Review extends CI_Controller
     $page = ($page) ? $page : 0;
     $this->pagination->initialize($config);
 
-    $data['page_link'] = $this->pagination->create_links();
+    $data['page_link'] = $this->pagination->create_links();*/
     //$records = $this->jewelry_model->jewelry_list_limit($wherereview, $per_page, $page, $order);
 
-    $data['review_list'] = $this->review_model->getProductReviewLimit($wherereview,$orderby, $per_page, $page,$sort_by);
+    //$data['review_list'] = $this->review_model->getProductReviewLimit($wherereview,$orderby, $per_page, $page,$sort_by);
     //echo $this->db->last_query(); die;
-    $reviewCount = $this->review_model->getProductReviewCount($wherereview);
-    $n = @$reviewCount['0']->review_count;
+    /*$reviewCount = $this->review_model->getProductReviewCount($wherereview);
+    $n = @$reviewCount['0']->review_count;*/
 
     //$data['review_count'] = $this->number_format_short($n);
-
+    //$data =[];
     $this->load->view('common/header', $data);
     $this->load->view('review/review', $data);
     $this->load->view('common/footer');

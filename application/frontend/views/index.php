@@ -291,7 +291,7 @@ $sort_by = $this->input->get('sort_by');
                         <p class="card-text" style="text-align: left;">Some quick example text to build on the card
                             title and make up the bulk of
                             the card's content.</p>
-                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="mt-auto">
+                        <a href="<?php echo base_url(); ?>?segment=<?php echo $class->segment_name; ?>" class="mt-auto">
                             <div class="arrow-mark">&#8594;</div>
                         </a>
 
@@ -322,7 +322,7 @@ $sort_by = $this->input->get('sort_by');
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
                 <input type ="hidden" value = "<?php echo $class->id ?>" class="segment_id">
-            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->id; ?>" class="segment-link mt-auto">
+            <a href="<?php echo base_url(); ?>?segment=<?php echo $class->segment_name; ?>" class="segment-link mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                
@@ -807,8 +807,8 @@ $('.owl-carousel').owlCarousel({
         var href = $(this).attr("href"); // Get the value of the href attribute
         var segmentId = href.split('=')[1]; // Extract the value of segment from the href
         console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
-     
-        $.ajax({
+        window.location="<?php echo base_url();?>review/?segment="+segmentId;
+       /* $.ajax({
             url: base_url + 'filter/get_product_id_table',
             dataType: 'json',
             type: 'post',
@@ -819,7 +819,7 @@ $('.owl-carousel').owlCarousel({
                console.log(data.data);
                if(data.status == 1)
                {
-                    window.location="<?php echo base_url();?>review/?course="+data.data+"&segment="+segmentId;
+                    window.location="<?php echo base_url();?>review/?segment="+segmentId;
                }
                else
                {
@@ -829,7 +829,7 @@ $('.owl-carousel').owlCarousel({
                 // $('#city').html('<option value="">Select City</option>');
             }
            
-        });
+        });*/
     });
 }); 
 </script>

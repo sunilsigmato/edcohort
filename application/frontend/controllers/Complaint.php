@@ -119,7 +119,7 @@ class Complaint extends CI_Controller {
   //  print_r($data['records_count']); die;
     $data['records_count'] = @$records_count['0']->complaint_count; 
     $per_page = ($per_page) ? $per_page : 10;
-    $config['base_url'] = base_url() . 'complaint?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    //$config['base_url'] = base_url() . 'complaint?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
     $config['total_rows'] = $data['records_count'];
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;

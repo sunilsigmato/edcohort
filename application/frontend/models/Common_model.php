@@ -512,6 +512,29 @@ class Common_model extends CI_Model {
             return $query;
         }
 	}
+
+	function get_segement_id($id)
+	{
+		$cleaned_string = str_replace(['&', '+'], ' ', $id);
+		$where ="segment_name = '$cleaned_string'";
+		$this->db->select('id');
+		$this->db->where($where);
+		$this->db->from('tbl_segment ');
+		$query=$this->db->get();
+		if($query)
+        {
+            $res_data = $query->result();
+			if($res_data)
+			{
+				//print_R($res_data[0]->id);
+				return $res_data[0]->id;
+			}
+        }
+        else
+        {
+            return $query;
+        }
+	}
 	
 	function get_all_brand()
 	{
