@@ -690,7 +690,7 @@ $breadcrumb_name2 = '';*/
                     action="javascript:void(0)" method="post">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" class="form-control" name="product_id" id="product_id"
-                        placeholder="Your Name" value="<?php echo $course; ?>">
+                        placeholder="Your Name" value="{{product_id}}">
                     <input type="hidden" class="form-control" name="user_id" id="userid"
                         placeholder="Your Name"
                         value="<?php echo $this->session->userdata('user_id'); ?>">
@@ -737,13 +737,13 @@ $breadcrumb_name2 = '';*/
                    <!-- Comment Section Start -->
                 <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
                 <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
-                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_<?php echo $reply->prr_id; ?>"
+                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
                     placeholder="Comment" required="required"
                     maxlength="250"></textarea>
                 </div>
                 <?php if ($this->session->userdata('user_id')) { ?>
                 <a href="javascript:void(0)" class="btn btn-primary" id="review_reply_submit"
-                    onclick="divSubReply({{product_review_id}} ,{{prr_id}},{{product_id}},'<?php $this->session->userdata('user_id') ;?>')">Submit</a>
+                    onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submit</a>
                 <?php }else{ ?>
                     <a href="javascript:void(0)" class="btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal"
                     data-bs-target="#login-button">Submit</a>
@@ -794,7 +794,7 @@ $breadcrumb_name2 = '';*/
                                     <?php if ($this->session->userdata('user_id')) { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 id="review_reply_submit"
-                                                onclick="divSubReply({{product_review_id}} ,{{prr_id}},{{product_id}},'<?php $this->session->userdata('user_id') ;?>')">Submit</a>
+                                                onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submit</a>
                                             <?php }else{ ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Submit</a>

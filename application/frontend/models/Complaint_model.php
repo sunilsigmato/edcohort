@@ -171,7 +171,7 @@ class Complaint_model extends CI_Model {
     $per_page = 10;
     $records_count = $this->getProductComplaintCount($where);
     //echo $this->db->last_query(); die;
-    $datas['records_count'] = @$records_count['0']->review_count;
+    $datas['records_count'] = @$records_count['0']->complaint_count;
     //print_ex($data['records_count']);  
     $per_page = ($per_page) ? $per_page : 10;
     //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
@@ -196,7 +196,7 @@ class Complaint_model extends CI_Model {
     $data = new stdClass;
     /*$data->per_page=$limit;
     $data->next_page=$next;*/
-    //$data->total_items=$records_count['0']->review_count;
+    $data->total_items=$records_count['0']->complaint_count;
     //$data->page_link = $datas['page_link'];
     $items='';
     $data->items = array();
@@ -233,8 +233,8 @@ class Complaint_model extends CI_Model {
         $item->class_id = $r->class_id;
         $item->product_name = $r->product_name;
         $item->product_slug = $r->product_slug;
-       // $item->sub_review = $this->get_subreview($r->product_review_id);
-        //$item->like = $this->review_like_count_new($r->product_review_id);
+        $item->sub_review = $this->get_subreview($r->product_complaint_id);
+        $item->like = $this->complaint_like_count_new($r->product_complaint_id);
         array_push($data->items,$item);
       }
      
@@ -251,6 +251,89 @@ class Complaint_model extends CI_Model {
       
   }
 
+  function get_subreview($product_complaint_id)
+  {
+    $where_complaint_reply = 'tbl_product_complaint_reply.status = 1 and tbl_product_complaint_reply.sub_id  IS NULL and complaint_id = ' .$product_complaint_id . '';
+    $orderby = 'tbl_customer.customer_type ASC, tbl_product_complaint_reply.prr_id ASC';
+    $complaint_reply = $this->complaint_model->selectJoinWhereOrderby('tbl_product_complaint_reply', 'user_id', 'tbl_customer', 'customer_id', $where_complaint_reply, $orderby);
+    if($complaint_reply)
+    {
+      $data = [];
+      foreach($complaint_reply as $r)
+      {
+        $sub_review_lv1 = new stdClass;
+        $sub_review_lv1->prr_id = $r->prr_id;
+        $sub_review_lv1->complaint_id = $r->complaint_id;
+        $sub_review_lv1->product_id = $r->product_id;
+        $sub_review_lv1->user_id = $r->user_id;
+        $sub_review_lv1->reply = $r->reply;
+        $sub_review_lv1->status = $r->status;
+        $sub_review_lv1->date_added = $r->date_added;
+        $sub_review_lv1->firstname = $r->firstname;
+        $sub_review_lv1->lastname = $r->lastname;
+        $sub_review_lv1->email = $r->email; 
+        $sub_review_lv1->customer_id = $r->customer_id;
+        $sub_review_lv1->sub_review_lv1 = $this->get_subreview_lv1($r->prr_id,$r->complaint_id,$i=2);  
+        array_push($data,$sub_review_lv1);
+      }
+      return $data;
+    }
+    return [];
+  }
+
+  function get_subreview_lv1($prr_id,$complaint_id,$i)
+  {         
+        $review_sub_reply = '';
+        $where_review_reply = '';
+        $orderby = '';
+        $where_review_reply = 'tbl_product_complaint_reply.status = 1 and tbl_product_complaint_reply.sub_id ='.$prr_id.' and  complaint_id = '.$complaint_id.'';
+        $orderby = 'tbl_customer.customer_type ASC, tbl_product_complaint_reply.prr_id ASC';
+        $review_sub_reply = $this->review_model->selectJoinWhereOrderby('tbl_product_complaint_reply','user_id','tbl_customer','customer_id',$where_review_reply,$orderby);
+
+        if($review_sub_reply)
+        {
+            $data = [];
+           // $i =2;
+            foreach($review_sub_reply as $r)
+            { 
+              $sub_review_lv2 = new stdClass;
+              $sub_review_lv2->prr_id = $r->prr_id;
+              $sub_review_lv2->complaint_id = $r->complaint_id;
+              $sub_review_lv2->product_id = $r->product_id;
+              $sub_review_lv2->user_id = $r->user_id;
+              $sub_review_lv2->reply = $r->reply;
+              $sub_review_lv2->status = $r->status;
+              $sub_review_lv2->date_added = $r->date_added;
+              $sub_review_lv2->firstname = $r->firstname;
+              $sub_review_lv2->lastname = $r->lastname;
+              $sub_review_lv2->email = $r->email; 
+              $sublist = 'sub_review_lv'.$i;
+              $sub_review_lv2->$sublist = $this->get_subreview_lv1($r->prr_id,$r->complaint_id,$i+1);  
+              array_push($data,$sub_review_lv2);
+             // $i++;
+            }
+            return $data;
+        }
+        return [];
+  }
+
+  function complaint_like_count_new($product_complaint_id)
+  {
+      $where = 'complaint_id = '.$product_complaint_id.' and action = 1';      
+      if($where!=""){        
+        $where="WHERE ".$where;
+      }
+      $select='count(prl_id) as like_count';
+      //$table_name='tbl_product as P';   
+      $query = $this->db->query("select ".$select." from tbl_product_complaint_like ".$where."  ");
+      $res = $query->result();
+      if($res)
+      {
+        return $res[0]->like_count;
+      }
+
+  }
+
   function getProductComplaintLimit($where,$order,$limit='',$offset=0,$sort_by=1)
   {
       if($where!=""){        
@@ -262,6 +345,7 @@ class Complaint_model extends CI_Model {
       else{
         $order_query="ORDER BY product_complaint_id DESC ";
       }
+
       if($sort_by == 1)
       {
         
@@ -280,6 +364,8 @@ class Complaint_model extends CI_Model {
       }
 
   }
+
+  
   function getProductComplaint($where,$order='')
   {
     if($where!=""){        

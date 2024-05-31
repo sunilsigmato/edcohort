@@ -185,13 +185,15 @@ public function __construct()
       'brand_id' => $brand_id,
       'board_id' => $board_id,
       'batch_id' => $batch_id,
-      'course_id' => $class_id,
+      'course_id' => $course_id,
+      'class_id' => $class_id,
       'product_rating' => $rating,
      // 'review_associated_offline' => $review_associated_offline,
       //'review_discussion' => $review_discussion,
       //'media' => $media,
       'product_complaint_added' => date('Y-m-d H:i:s'),
-      'status' => 'active'
+      'status' => 'active',
+      'segment_id' => $segment
     );
     $user_id = $this->common_model->insertData('tbl_product_complaint', $data);
     http_response_code(200);
