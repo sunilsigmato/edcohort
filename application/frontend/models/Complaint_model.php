@@ -162,41 +162,55 @@ class Complaint_model extends CI_Model {
         }
         
       }
+      
 
       // sort by pending 
 
 
-    //$page = $this->input->get('page');
+    $page = $this->input->get('page');
     $this->load->library('pagination');
-    $per_page = 10;
+      
+    
+    $per_page = 1;
+    $per_page = ($per_page) ? $per_page : 10;
+    $page = ($page) ? $page : 0;
+   
     $records_count = $this->getProductComplaintCount($where);
+    $total_pages = ceil($records_count['0']->complaint_count / $per_page); 
+    
+    //print_R($total_pages);
     //echo $this->db->last_query(); die;
     $datas['records_count'] = @$records_count['0']->complaint_count;
+    
     //print_ex($data['records_count']);  
-    $per_page = ($per_page) ? $per_page : 10;
-    //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
-    $config['total_rows'] = $datas['records_count'];
+    
+    $config['base_url'] = base_url() . '/review';
+    $config['total_rows'] = $records_count['0']->complaint_count;
+    $config['uri_segment'] = '';
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
     $config['query_string_segment'] = 'page';
-    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+    //$config['cur_tag_open'] = '<a class="active paginate_button current">';
     $config['cur_tag_close'] = '</a>';
     $config['next_link'] = '>';
     $config['prev_link'] = '<';
     $config['num_links'] = 2;
     $config['first_link'] = false;
     $config['last_link'] = false;
-    $page = ($page) ? $page : 0;
+
   
     $resss =$this->pagination->initialize($config);
-    /*$datas['page_link'] = $this->pagination->create_links($resss);
-    print$datas['page_link']);*/
+    $datas['link'] = $this->pagination->create_links();
+    //print$datas['page_link']);*/
     $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page,$sortby);
 
     $data = new stdClass;
     /*$data->per_page=$limit;
     $data->next_page=$next;*/
     $data->total_items=$records_count['0']->complaint_count;
+    $data->total_pages=$total_pages;
+   // $data->page_link=$pagLink;
+    $data->page_link= $datas['link'];
     //$data->page_link = $datas['page_link'];
     $items='';
     $data->items = array();
@@ -233,6 +247,7 @@ class Complaint_model extends CI_Model {
         $item->class_id = $r->class_id;
         $item->product_name = $r->product_name;
         $item->product_slug = $r->product_slug;
+        $item->product_complaint_resloved_date = $r->product_complaint_resloved_date;
         $item->sub_review = $this->get_subreview($r->product_complaint_id);
         $item->like = $this->complaint_like_count_new($r->product_complaint_id);
         array_push($data->items,$item);

@@ -565,54 +565,67 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
         {{#if items}}
     {{#each items}}
     <?php 
+        $temp = '';
+        $temp_product_complaint_resloved_date = '{{product_complaint_resloved_date}}';
+        $complaint_resolved = `'{{product_complaint_added}}'`;
+        $temp = '{{product_complaint_added}}';
         $current = strtotime(date("Y-m-d"));
-        $date    = strtotime('{{product_complaint_added}}');
+        $date = strtotime($temp);
+       // print_R($temp);
         $today = '';
         $datediff = $current - $date;
+        
         $difference = floor($datediff / (60 * 60 * 24));
-
+       // print_R($date);
         $difference_resloved ='';
         if ($difference == 0) {
         $today = 'today';
         } 
-        if('{{product_complaint_resloved_date}}')
+        if($temp_product_complaint_resloved_date)
         {
-        $issue_resloved_date    = strtotime('{{product_complaint_resloved_date}}');  
+            
+        $issue_resloved_date    = strtotime($temp_product_complaint_resloved_date);  
         $datediff_resloved = $current - $issue_resloved_date;
         $difference_resloved = floor($datediff_resloved / (60 * 60 * 24));
+       
         }
+      
+        // print_R($temp_product_complaint_resloved_date);
     ?>
-         
+       <hr>  
     <div class="review-row">
         <div class="review-user-image"><span></span></div>
             <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center"> 
                     <h2 class="review-title"> {{firstname}} <span>
                     <img src="{{base_url}}assets/images/verifyicon.png" alt=""></span>
                     </h2>
-                    {{#xif complaint_resolved "==" "1"}}
-                        {{#xif difference "!=" "0"}}
-           
-                            <!-- <span>Issue not resloved from past <?php echo $difference ?> Days</span> -->
-                            <div class="d-xl-flex d-md-flex d-lg-flex d-sm-block align-items-center pt-2">
-                            <p>Issue not resloved from past <?php echo $difference ?> Days</p>
-                            </div>
-                        {{/xif}}
-                    {{/xif}}
-                    {{#xif complaint_resolved "==" "1"}}
-                        {{#xif difference "==" "0"}}
-                            <span>Issue resloved Today</span>
-                                {{xelse}}
-                                   <span>The Issue was resloved  <?php echo $difference_resloved ?> Days ago</span>
-                        {{/xif}}
-                    {{/xif}}  
+                  <?php  if ($complaint_resolved == 0 && $difference != 0) { 
+                                        
+                                        ?>
+                                      <!-- <span>Issue not resloved from past <?php echo $difference ?> Days</span> -->
+    
+                                      <div class="d-xl-flex d-md-flex d-lg-flex d-sm-block align-items-center pt-2">
+                                        <p>Issue not resloved from past <?php echo $difference ?> Days</p>
+                                       
+                                      </div>
+                                    <?php }
+                                     if ($complaint_resolved == 1 ) { 
+                                        if ($difference_resloved == 0) {
+                                    ?>
+                                     <span>Issue resloved Today</span>
+                                     <?php }else {?>
+                                       <span>The Issue was resloved  <?php echo $difference_resloved ?> Days ago</span>
+                                    <?php  } }?>
                     <div class=" d-flex align-items-center resolve-button">  
                                         <?php 
+                                        $u_id = '{{user_id}}';
+                                      
                                        if($this->session->userdata('user_id') == '{{user_id}}')
                                        { ?>
                                        
                                         {{#xif complaint_resolved "==" "1"}}
                                             <span class="badge bg-resolved">Resolved</span>
-                                            {{xelse}}
+                                            {{else}}
                                                 <a href="javascript:void(0)"
                                             onclick="productComplaintStatusChange({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>',1)">
                                             <span class="badge bg-unresolved">Unresolved</span>
@@ -624,8 +637,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                           
                                             {{#xif complaint_resolved "==" "1"}}
                                             <span class="badge bg-resolved">Resolved</span>
-                                            {{xelse}}
-                                            <span class="badge bg-unresolved">Unresolved</span>
+                                            {{else}}
+                                            <span class="badge bg-unresolved">Unresolveds</span>
                                           
                                            
                                             {{/xif}}
@@ -1019,7 +1032,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
 </div> </div>
 {{/each}}
 <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
-<!-- <?php echo $page_link; ?> --></div>
+    
+</div>
 {{else}}
 <div class="review-row-reply">
 <h4>No result found..!!</h4>
@@ -1045,10 +1059,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
 
                             $current = strtotime(date("Y-m-d"));
                             $date    = strtotime($complain->product_complaint_added);
+                          
                             $today = '';
                             $datediff = $current - $date;
+                            
                             $difference = floor($datediff / (60 * 60 * 24));
-
+                         
                             ?>
                                
                             <!--review row start-->
@@ -1081,7 +1097,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                     $issue_resloved_date    = strtotime($complain->product_complaint_resloved_date);  
                                     $datediff_resloved = $current - $issue_resloved_date;
                                     $difference_resloved = floor($datediff_resloved / (60 * 60 * 24));
+                                    print_R($difference_resloved);
                                  }
+                               
                                  if ($complain->complaint_resolved == 0 && $difference != 0) { 
                                         
                                     ?>
@@ -2344,12 +2362,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                 // Compile the Handlebars template
                 var templateScript = $("#review-template").html();
                 var template = Handlebars.compile(templateScript);
-                    
+                var pageLinkHTML = response.page_link;
+                //var paginationContainer = document.getElementById('paginationContainer');
+               // paginationContainer.innerHTML = pageLinkHTML 
+                
+               // console.log(pageLinkHTML);
+               // document.getElementById('paginationContainer').innerHTML = pageLinkHTML;   
                 // Render the template with the response data
                 var html = template(response);
 
                 // Append the rendered HTML to the DOM
                 $('.reviews-wrapper').html(html);
+                $(".paging_simple_numbers").html(pageLinkHTML);
             }
             else{
                   // Compile the Handlebars template
