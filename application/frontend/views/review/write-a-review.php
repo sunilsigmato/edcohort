@@ -13,7 +13,8 @@
 
 <!--content start-->
 <div class="content">
-<?php 	  $course = $this->input->get('course'); 
+<?php 	
+        /*  $course = $this->input->get('course'); 
           $brandID = $this->input->get('brand');
           $product_type = $this->input->get('product_type');
           $board = $this->input->get('board');
@@ -21,13 +22,19 @@
           $batch = $this->input->get('batch');
           $customer_rating = $this->input->get('customer_rating');
           $date_posted = $this->input->get('date_posted');
-          $sort_by = $this->input->get('sort_by');
+          $sort_by = $this->input->get('sort_by');*/
           $segment = $this->input->get('segment');
+          $segment_temp = $segment;
+          $res_segment=get_segement_id($segment);
+          if($res_segment)
+          {
+            $segment = $res_segment;
+          }
           $res_filter_brand = getseg_brand_list($segment);
           $res_filter_segment = get_segement();
           $res_filter_class = getseg_class_list($segment);
           $res_filter_course = getseg_crse_list($segment);
-          $get_single_course_detail = get_single_coure_detail($course);
+        //  $get_single_course_detail = get_single_coure_detail($course);
   
     ?>
 
@@ -38,20 +45,21 @@
 <!--<form action="<?php echo base_url(); ?>review-submit" method="post" enctype="multipart/form-data">-->
    
     <?php echo csrf_field(); ?>
-    <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder="Your Name" value="<?php echo $course; ?>">
-    <input type="hidden" class="form-control" name="product_type" id="product_type" placeholder="Your Name" value="<?php echo $product_type; ?>">
+  <!--  <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder="Your Name" value="<?php echo $course; ?>">
+    <input type="hidden" class="form-control" name="product_type" id="product_type" placeholder="Your Name" value="<?php echo $product_type; ?>"> -->
     <input type="hidden" class="form-control" name="user_id" id="userid" placeholder="Your Name" value="<?php echo $this->session->userdata('user_id'); ?>">
     <input type="hidden" class="form-control" name="email" id="email"  value="<?php echo $this->session->userdata('user_email'); ?>">
     <input type="hidden" class="form-control" name="name" id="name"  value="<?php echo $this->session->userdata('user_fullname'); ?>">
     <input type="hidden" class="form-control" id="phone" name="phone" value="<?php echo $this->session->userdata('user_phone'); ?>">
 
+    <input type="hidden" value = "<?php echo $segment_temp?>" class = "segment_temp">
     <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-    <input type="hidden" value = "<?php echo $course ?>" class = "course">
-    <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
-    <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
-    <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
-    <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
-    <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+    <input type="hidden" value = "<?php //echo $course ?>" class = "course">
+    <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
+    <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
+    <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+    <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
+    <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
         <div class="row">
 
             <div class=" col-md-6">
@@ -67,8 +75,8 @@
                 <div class="select-box">
                     <select name="filter_segment" id="filter_segment" class="filter_segment">
                 <?php foreach($res_filter_segment as $segments){ ?>
-                        <option value="<?php echo $segments->id; ?>" <?php if($segments->id
-                         == $segment){ echo 'selected'; } ?>><?php echo $segments->segment_name; ?></option>
+                        <option value="<?php echo $segments->id; ?>" <?php //if($segments->id
+                       //  == $segment){ echo 'selected'; } ?>><?php echo $segments->segment_name; ?></option>
                     <?php } ?>
                     </select>
                 </div>
@@ -77,8 +85,9 @@
                 <label class="input-title">Brand name*</label>
                 <div class="select-box">
                     <select name="brand" id="brand" class = "brand">
+                    <option value = "">Select</option>
                         <?php foreach($brand_records as $brands){?>
-                        <option value="<?php echo $brands->brand_id; ?>" <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>><?php echo $brands->brand_name; ?></option>
+                        <option value="<?php echo $brands->brand_id; ?>" <?php //if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>><?php echo $brands->brand_name; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -101,7 +110,7 @@
              <label class="input-title">Board name</label>
              <div class="board-k12 select-box" style="display:none">
                             <div class="btn-group btn-toggle filter-toggle-box">
-                            <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                            <div class="input-toggle toggle_cbsc <?php //if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                 id="cbsc-toggle">
                                 <label><?php echo $filter_cbsc_name ?> </label>
 
@@ -109,7 +118,7 @@
                                     <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
                                     id="cbsc" value="2" >
                             </div>
-                            <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                            <div class="input-toggle toggle_icsc <?php //if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                 id="icsc-toggle">
                                 <label><?php echo $filter_icsc_name ?></label>
                                 <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -122,7 +131,7 @@
                         <div class="board-other select-box" style="display:none">
                                                    
                                                    <div class="btn-group btn-toggle filter-toggle-box">
-                                                       <div class="input-toggle toggle_online <?php if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                                       <div class="input-toggle toggle_online <?php //if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                                            id="online-toggle">
                                                            <label><?php echo $filter_online_name ?> </label>
                        
@@ -130,7 +139,7 @@
                                                                <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
                                                                id="online" value="1" >
                                                        </div>
-                                                       <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                                       <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                                            id="offline-toggle">
                                                            <label><?php echo $filter_offline_name ?></label>
                                                            <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -147,8 +156,9 @@
                 <label class="input-title cal-h3">Class</label>
                 <div class="select-box">
                 <select name="filter_class_dropdown" id="filter_class_dropdown">
+                <option value = "">Select</option>
                 <?php foreach($res_filter_class as $classes){?>
-                <option value="<?php echo $classes->class_id; ?>" <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>><?php echo $classes->title; ?></option>
+                <option value="<?php echo $classes->class_id; ?>" <?php //if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>><?php echo $classes->title; ?></option>
                 <?php } ?>
                         </select>
         </div>
@@ -160,8 +170,9 @@
                 <label class="input-title">Select Course</label>
                 <div class="select-box">
                 <select name="filter_course_dropdown" id="filter_course_dropdown">
+                <option value = "">Select</option>
                 <?php foreach($res_filter_course as $classes){?>
-                <option value="<?php echo $classes->id; ?>" <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>><?php echo $classes->course_name; ?></option>
+                <option value="<?php echo $classes->id; ?>" <?php //if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>><?php echo $classes->course_name; ?></option>
                 <?php } ?>
                         </select>
         </div>
@@ -173,8 +184,9 @@
                 <label class="input-title">Batch (Cohort) <span>Please select year that you will be appearing exam</span></label>
                 <div class="select-box">
                 <select name="batch" id="batch">
+                <option value = "">Select</option>
                         <?php foreach($batch_records as $batchs){?>
-                        <option value="<?php echo $batchs->batch_id; ?>" <?php if($batchs->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>><?php echo $batchs->batch_name; ?></option>
+                        <option value="<?php echo $batchs->batch_id; ?>" <?php //if($batchs->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>><?php echo $batchs->batch_name; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -197,13 +209,13 @@
             <div class="review-col">
                 <label class="input-title">Ratings (Optional)</label>
                 <div class="review-checkbox rating-style">
-                <input type="hidden" id="rating" name="rating" value="<?php echo $customer_rating; ?>">
+                <input type="hidden" id="rating" name="rating" value="<?php// echo $customer_rating; ?>">
                     <div class="rating">
-                    <i class="ratings_stars fa fa-star <?php if($customer_rating >= 1){ echo 'selected'; } ?>" data-rating="1"></i>
-                    <i class="ratings_stars fa fa-star <?php if($customer_rating >= 2){ echo 'selected'; } ?>" data-rating="2"></i>
-                    <i class="ratings_stars fa fa-star <?php if($customer_rating >= 3){ echo 'selected'; } ?>" data-rating="3"></i>
-                    <i class="ratings_stars fa fa-star <?php if($customer_rating >= 4){ echo 'selected'; } ?>" data-rating="4"></i>
-                    <i class="ratings_stars fa fa-star <?php if($customer_rating >= 5){ echo 'selected'; } ?>" data-rating="5"></i>
+                    <i class="ratings_stars fa fa-star <?php //if($customer_rating >= 1){ echo 'selected'; } ?>" data-rating="1"></i>
+                    <i class="ratings_stars fa fa-star <?php //if($customer_rating >= 2){ echo 'selected'; } ?>" data-rating="2"></i>
+                    <i class="ratings_stars fa fa-star <?php //if($customer_rating >= 3){ echo 'selected'; } ?>" data-rating="3"></i>
+                    <i class="ratings_stars fa fa-star <?php //if($customer_rating >= 4){ echo 'selected'; } ?>" data-rating="4"></i>
+                    <i class="ratings_stars fa fa-star <?php //if($customer_rating >= 5){ echo 'selected'; } ?>" data-rating="5"></i>
                     </div>
                 </div>
             </div>
@@ -215,14 +227,14 @@
               <textarea class="write_review_notes" name="comment" rows="4" style= "width:100%" ></textarea>
             </div>
             <div class="reply-footer d-flex flex-wrap justify-content-between align-items-center">
-                <div class="reply-footer-left">
+                <!--<div class="reply-footer-left">
                     <div class="checkbox-col">
                         <div class="checkbox">
                             <input type="checkbox" name="review_discussion" value="1" id="checkbox-2"><label for="checkbox-2"></label>
                         </div>
                         Get updates on this discussion
                     </div>
-                </div>
+                </div>  -->
                 <!--<?php if($this->session->userdata('user_id')){ ?>
                  <div class="reply-footer-right">
                     <button type="submit"  data-bs-effect="effect-scale"  class="reply-footer-btn">Post</button>
@@ -345,12 +357,12 @@
                         </div>
                     </div>
 
-                    <div class="rate-checkbox checkbox-col">
+                    <!--<div class="rate-checkbox checkbox-col">
                         <div class="checkbox">
                             <input type="checkbox" value="" id="checkbox-2"><label for="checkbox-2"></label>
                         </div>
                         Get updates on this discussion
-                    </div>
+                    </div>-->
 
                     <div>
                         <button type="button" class="rate-submit-btn">Submit</button>
@@ -402,6 +414,7 @@ height: 300,
         var name = $('#name').val();
         var product_id = $('#product_id').val();
         var filter_online_offline = $('.filter_online_offline').val();
+        var segment_temp = $('.segment_temp').val();
         
         if(filter_segment_id == 1)
         {
@@ -447,6 +460,7 @@ height: 300,
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
+            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
 
         });
         $('.toggle_icsc').click(function() {
@@ -454,18 +468,21 @@ height: 300,
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
 
         });
         $('.toggle_online').click(function() { 
             filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
+            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
 
         });
         $('.toggle_offline').click(function() {
             filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
+            filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
         });
    
         $("#brand").change(function()
@@ -646,6 +663,11 @@ height: 300,
                    alert("Select Segement");    
                    return false;
                 }
+                if(!filter_brand_id)
+                {   
+                    alert("Select Brand");        
+                    return false;       
+                }
                 if(!filter_board_id)
                 {
                    alert("Select Board");          
@@ -661,14 +683,16 @@ height: 300,
                     alert("Select Course");        
                     return false;       
                 }
-                if(!filter_brand_id)
-                {   
-                    alert("Select Brand");        
-                    return false;       
-                }
+                
                 if(!filter_batch_id)
                 {
                     alert("Select Batch");
+                    return false;
+                }
+                if(review_title == '')
+                {
+                    alert("review title  should not be empty.");
+                    $('.review_title').focus();
                     return false;
                 }
                 if(ratingValue == '')
@@ -683,12 +707,7 @@ height: 300,
                     $('.write_review_notes').focus();
                     return false;
                 }
-                if(review_title == '')
-                {
-                    alert("review title  should not be empty.");
-                    $('.review_title').focus();
-                    return false;
-                }
+                
                 
                 /*else{*/
                     
@@ -717,7 +736,7 @@ height: 300,
                             if(response.status == '1')
                             {
                                 alert(response.data);
-                                window.location="<?php echo base_url();?>review/?course="+product_id+"&segment="+filter_segment_id;
+                                window.location="<?php echo base_url();?>review/?segment="+segment_temp;
                             }
                         }
                     });

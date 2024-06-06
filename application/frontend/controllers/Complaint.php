@@ -11,7 +11,7 @@ class Complaint extends CI_Controller {
   }
   function index($id = '')
   {
-    $course = $this->input->get('course');
+   // $course = $this->input->get('course');
   ////Filter data ////////
     $where_brand = 'brand_status = 1';
     $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
@@ -25,7 +25,7 @@ class Complaint extends CI_Controller {
   //print_pre($_POST);
     $where = "product_status = 'active'";
 
-    $brandID = $this->input->get('brand');
+    /*$brandID = $this->input->get('brand');
     $product_type = $this->input->get('product_type');
     $board = $this->input->get('board');
     $class = $this->input->get('class');
@@ -96,7 +96,7 @@ class Complaint extends CI_Controller {
       $orderby = " pr.product_rating " . $sort_by . " ";
     }*/
 
-    if (!empty($sort_by)) {
+    /*if (!empty($sort_by)) {
       
       //$orderby = " pr.product_rating " . $sort_by . " ";
       if($sort_by == 'most_critical')
@@ -141,7 +141,7 @@ class Complaint extends CI_Controller {
     $complaintCount = $this->complaint_model->getProductComplaintCount($wherecomplaint);
     $n = @$complaintCount['0']->complaint_count;
 
-    $data['complaint_count'] = $this->number_format_short($n);
+    $data['complaint_count'] = $this->number_format_short($n);*/
 
 	//print_ex($data);
     $this->load->view('common/header',$data);
@@ -313,8 +313,8 @@ class Complaint extends CI_Controller {
   function my_complaint()
   {
 
-    $course = $this->input->get('course');
-    $user_id = $this->session->userdata('user_id');
+   /* $course = $this->input->get('course');
+    $user_id = $this->session->userdata('user_id');*/
   ////Filter data ////////
     $where_brand = 'brand_status = 1';
     $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
@@ -326,7 +326,7 @@ class Complaint extends CI_Controller {
     $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
   ////Filter////////
   //print_pre($_POST);
-    $where = "product_status = 'active'";
+   /* $where = "product_status = 'active'";
 
     $brandID = $this->input->get('brand');
     $product_type = $this->input->get('product_type');
@@ -400,7 +400,7 @@ class Complaint extends CI_Controller {
       $orderby = " pr.product_rating " . $sort_by . " ";
     }*/
 
-    if (!empty($sort_by)) {
+   /* if (!empty($sort_by)) {
       
       //$orderby = " pr.product_rating " . $sort_by . " ";
       if($sort_by == 'most_critical')
@@ -448,7 +448,7 @@ class Complaint extends CI_Controller {
     $data['complaint_count'] = $this->number_format_short($n);
 
 
-  //print_ex($data);
+  //print_ex($data);*/
 
     $this->load->view('common/header', $data);
     $this->load->view('complaint/my_complaint', $data);

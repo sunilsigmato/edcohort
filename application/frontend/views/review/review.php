@@ -11,6 +11,8 @@ $customer_rating = $this->input->get('customer_rating');
 $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $segment = $this->input->get('segment');
+$segment_temp = $segment;
+$page = $this->input->get('page');
 $user_id = '';
 if($this->session->userdata('user_id'))
 {
@@ -64,7 +66,7 @@ $breadcrumb_name2 = '';*/
         <div class="tab-menu">
             <ul>
                 <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
+                        href="<?php echo base_url(); ?>complaint?&segment=<?php echo $segment_temp; ?>">Complaint
                     </a></li>
                 <li><a
                         href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
@@ -218,7 +220,7 @@ $breadcrumb_name2 = '';*/
             <div class="col-md-4 pt-3 write-review-icon">
             <?php if ($this->session->userdata('user_id')) { ?>
             
-                <a href="<?php echo base_url();?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
+                <a href="<?php echo base_url();?>write-a-review?segment=<?php echo $segment_temp;?>"
                     class="review-btns text-decoration-none">
                     <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
                         for="rating2"> </label>
@@ -528,12 +530,12 @@ $breadcrumb_name2 = '';*/
                         <div class="tab-link">
                             <ul>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>review?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
+                                    <a href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>"
                                         class="active">All</a>
                                 </li>
                                 <?php if($this->session->userdata('user_id')){ ?>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>my-review?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">My
+                                    <a href="<?php echo base_url(); ?>my-review?segment=<?php echo $segment_temp; ?>">My
                                         Review</a>
                                 </li>
                                 <?php } else {  ?>
@@ -608,14 +610,14 @@ $breadcrumb_name2 = '';*/
         <!-- Start Like Section -->
         {{#xif like "<" "0"}}     
             <a href="javascript:void(0)"
-            onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1'))">
+            onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">
             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
             width="24" height="24">
             <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
             </svg> {{like}} </a>
         {{/xif}}
         {{#xif like "<" "1"}} 
-        <a href="javascript:void(0)" onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1'))">
+        <a href="javascript:void(0)" onclick="productReviewLike({{product_review_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">
         <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
         width="24" height="24">
         <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
@@ -870,7 +872,7 @@ $breadcrumb_name2 = '';*/
         </div> </div>
     {{/each}}
     <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
-                               <!-- <?php echo $page_link; ?> --></div>
+    </div>
     {{else}}
     <div class="review-row-reply">
                                 <h4>No result found..!!</h4>
@@ -973,6 +975,7 @@ $breadcrumb_name2 = '';*/
     <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
     <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
     <input type="hidden" value = "<?php //echo $user_id ?>" class = "user_id">
+    <input type="hidden" value = "<?php echo $page ?>" class = "page">
     <!--content end-->
     <!-- <script src="<?php echo base_url(); ?>assets/js/ajax/manage_review_ajax.js"></script> -->
     
@@ -1002,6 +1005,8 @@ $breadcrumb_name2 = '';*/
         var product_id = '';
         var ratings = '';
         var sort_by ='';
+        var page = '';
+        page = $('.page').val();
         /** Ajax Cal Variable declare  */
         var isClickedBrand = false;
         var FilterBrandText = '';
@@ -1037,7 +1042,7 @@ $breadcrumb_name2 = '';*/
             requestData.batch = '';
             requestData.rating = '';
             requestData.sortby = '';
-            requestData.page = '';
+            requestData.page = page;
             requestData.user_id = '';
             ajax_cal_data();
 
@@ -1516,12 +1521,14 @@ $breadcrumb_name2 = '';*/
                 // Compile the Handlebars template
                 var templateScript = $("#review-template").html();
                 var template = Handlebars.compile(templateScript);
+                var pageLinkHTML = response.page_link;
                     
                 // Render the template with the response data
                 var html = template(response);
 
                 // Append the rendered HTML to the DOM
                 $('.reviews-wrapper').html(html);
+                $(".paging_simple_numbers").html(pageLinkHTML);
             }
             else{
                   // Compile the Handlebars template

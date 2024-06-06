@@ -140,11 +140,11 @@ class Review_model extends CI_Model {
 	   return $output;
   }
 
-  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user,$page=0)
+  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user,$page)
   {
     // if its all display all id ids 
       $where = "";
-      $limit = 20;
+      //$limit = 20;
       if(!empty($segment))
       {
           $where .="pr.segment_id = $segment";
@@ -175,7 +175,7 @@ class Review_model extends CI_Model {
       }
       if(!empty($user))
       {
-          $where .= "and pr.user_id = $user";
+          $where .= " and pr.user_id = $user";
       }
       $orderby = '';
       if (!empty($sortby)) {
@@ -195,18 +195,25 @@ class Review_model extends CI_Model {
         $sortby = 1;
       }
 
-      // sort by pending 
+      $res_seg =  $this->get_segment_name($segment);
+      $seg_temp = $res_seg;
 
 
     //$page = $this->input->get('page');
     $this->load->library('pagination');
-    $per_page = 10;
+    $per_page = 3;
+    if(!$page)
+    {
+      $page = 0;
+    }
+    $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
+    $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
+
     $records_count = $this->review_model->getProductReviewCount($where);
-    //echo $this->db->last_query(); die;
     $datas['records_count'] = @$records_count['0']->review_count;
     //print_ex($data['records_count']);  
     $per_page = ($per_page) ? $per_page : 10;
-    //$config['base_url'] = base_url() . 'review?course=' .$course. '&segment='.$segment.'&brand='.$brandID.'&product_type='.$product_type.'&board='.$board.'&class='.$class.'&customer_rating='.$customer_rating.'&date='.$date_posted.'&sort_by='.$sort_by.'';
+    $config['base_url'] = $request_uri_without_query_string.'?segment='.$seg_temp;
     $config['total_rows'] = $datas['records_count'];
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
@@ -216,24 +223,19 @@ class Review_model extends CI_Model {
     $config['next_link'] = '>';
     $config['prev_link'] = '<';
     $config['num_links'] = 2;
-    $config['first_link'] = false;
-    $config['last_link'] = false;
-    $page = ($page) ? $page : 0;
-  
+    //$config['first_link'] = false;
+    //$config['last_link'] = false;
+    
     $resss =$this->pagination->initialize($config);
-    /*$datas['page_link'] = $this->pagination->create_links($resss);
-    print$datas['page_link']);*/
+    $datas['page_link'] = $this->pagination->create_links();
     $get_product_list = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
-
     $data = new stdClass;
-    /*$data->per_page=$limit;
-    $data->next_page=$next;*/
-    $data->total_items=$records_count['0']->review_count;
-    //$data->page_link = $datas['page_link'];
+    $data->page_link = $datas['page_link'];
     $items='';
     $data->items = array();
    if(count($get_product_list)!=0)
    {  
+    $data->total_items=count($get_product_list);
       foreach($get_product_list as $r)
       {
         //print_R($r);
@@ -378,6 +380,15 @@ class Review_model extends CI_Model {
     }
         
       //return $query->result();  
+  }
+  function get_segment_name($segment_id)
+  {
+    $query=$this->db->query("SELECT segment_name from tbl_segment where id=$segment_id");
+    $res = $query->result();
+    if($res)
+    {
+      return $res[0]->segment_name;
+    }
   }
   function review_like_count_new($product_review_id)
   {

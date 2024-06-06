@@ -96,11 +96,11 @@ class Complaint_model extends CI_Model {
    
   }
 
-  function get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user,$page=0)
+  function get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user,$page)
   {
     // if its all display all id ids 
       $where = "";
-      $limit = 20;
+    //  $limit = 20;
       if(!empty($segment))
       {
           $where .="pr.segment_id = $segment";
@@ -131,7 +131,7 @@ class Complaint_model extends CI_Model {
       }
       if(!empty($user))
       {
-          $where .= "and pr.user_id = $user";
+          $where .= " and pr.user_id = $user";
       }
       $orderby = '';
       if (!empty($sortby)) {
@@ -163,62 +163,48 @@ class Complaint_model extends CI_Model {
         
       }
       
-
-      // sort by pending 
-
-
-    $page = $this->input->get('page');
-    $this->load->library('pagination');
       
-    
-    $per_page = 1;
-    $per_page = ($per_page) ? $per_page : 10;
-    $page = ($page) ? $page : 0;
-   
+
+    $res_seg =  $this->get_segment_name($segment);
+    $seg_temp = $res_seg;
+    $this->load->library('pagination');
+    $per_page = 7;
+    if(!$page)
+    {
+      $page = 0;
+    }
+    $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
+    $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
     $records_count = $this->getProductComplaintCount($where);
-    $total_pages = ceil($records_count['0']->complaint_count / $per_page); 
-    
-    //print_R($total_pages);
-    //echo $this->db->last_query(); die;
+   // $total_pages = ceil($records_count['0']->complaint_count / $per_page); 
     $datas['records_count'] = @$records_count['0']->complaint_count;
-    
-    //print_ex($data['records_count']);  
-    
-    $config['base_url'] = base_url() . '/review';
+    $config['base_url'] = $request_uri_without_query_string.'?segment='.$seg_temp;
     $config['total_rows'] = $records_count['0']->complaint_count;
-    $config['uri_segment'] = '';
+    //$config['uri_segment'] = '';
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
     $config['query_string_segment'] = 'page';
-    //$config['cur_tag_open'] = '<a class="active paginate_button current">';
-    $config['cur_tag_close'] = '</a>';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+   // $config['cur_tag_close'] = '</a>';
     $config['next_link'] = '>';
     $config['prev_link'] = '<';
-    $config['num_links'] = 2;
-    $config['first_link'] = false;
-    $config['last_link'] = false;
+    $config['num_links'] = 3;
+   // $config['first_link'] = false;
+    //$config['last_link'] = false;
 
-  
     $resss =$this->pagination->initialize($config);
     $datas['link'] = $this->pagination->create_links();
-    //print$datas['page_link']);*/
     $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page,$sortby);
 
     $data = new stdClass;
-    /*$data->per_page=$limit;
-    $data->next_page=$next;*/
-    $data->total_items=$records_count['0']->complaint_count;
-    $data->total_pages=$total_pages;
-   // $data->page_link=$pagLink;
     $data->page_link= $datas['link'];
-    //$data->page_link = $datas['page_link'];
     $items='';
     $data->items = array();
    if(count($get_product_list)!=0)
    {  
+      $data->total_items=count($get_product_list);
       foreach($get_product_list as $r)
       {
-       // print_R($r);
         $item = new stdClass;
         $item->product_complaint_id = $r->product_complaint_id;
         $item->product_id = $r->product_id;
@@ -250,7 +236,26 @@ class Complaint_model extends CI_Model {
         $item->product_complaint_resloved_date = $r->product_complaint_resloved_date;
         $item->sub_review = $this->get_subreview($r->product_complaint_id);
         $item->like = $this->complaint_like_count_new($r->product_complaint_id);
+        $today = '';
+        $difference_resloved ='';
+        $current = strtotime(date("Y-m-d"));
+        $db_date = strtotime($r->product_complaint_added);
+        $datediff = $current - $db_date;
+        $difference = floor($datediff / (60 * 60 * 24));
+        if ($difference == 0) 
+        {
+          $today = 'today';
+        }
+        if($r->product_complaint_resloved_date)
+        {
+          $issue_resloved_date    = strtotime($r->product_complaint_resloved_date);  
+          $datediff_resloved = $current - $issue_resloved_date;
+          $difference_resloved = floor($datediff_resloved / (60 * 60 * 24));
+        } 
+        $item->not_resloved_diff = $difference;
+        $item->difference_resloved = $difference_resloved;
         array_push($data->items,$item);
+        
       }
      
    }
@@ -261,8 +266,6 @@ class Complaint_model extends CI_Model {
    $code =200;
    $this->output->set_status_header($code)->set_content_type('application/json')->
             set_output(json_encode($data));
-  
-    //$data->items=$items;
       
   }
 
@@ -349,7 +352,7 @@ class Complaint_model extends CI_Model {
 
   }
 
-  function getProductComplaintLimit($where,$order,$limit='',$offset=0,$sort_by=1)
+  function getProductComplaintLimit($where,$order,$limit,$offset,$sort_by=1)
   {
       if($where!=""){        
         $where="WHERE ".$where;
@@ -367,6 +370,8 @@ class Complaint_model extends CI_Model {
         $query=$this->db->query("SELECT pr.*,c.firstname,c.lastname,p.product_name,p.product_slug FROM tbl_product_complaint as pr 
           join tbl_product as p ON pr.product_id=p.product_id 
           join tbl_customer as c ON pr.user_id=c.customer_id  ".$where." ".$order_query." limit ".$limit." offset ".$offset);
+    /* $res = $this->db->last_query();
+     print_r($res);*/
         return $query->result(); 
       }
       if($sort_by == 2)
@@ -378,6 +383,15 @@ class Complaint_model extends CI_Model {
           return $query->result();
       }
 
+  }
+  function get_segment_name($segment_id)
+  {
+    $query=$this->db->query("SELECT segment_name from tbl_segment where id=$segment_id");
+    $res = $query->result();
+    if($res)
+    {
+      return $res[0]->segment_name;
+    }
   }
 
   

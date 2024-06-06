@@ -1807,11 +1807,11 @@ ul.footer-menu-sub li {
 
 .review-content {
   padding: 10px 0;
-  color: #505050 !important;
-  font-size: 14px !important;
+  color: #292828 !important;
+  font-size: 16px !important;
   line-height: 28px !important;
   margin-bottom: 0;
-  font-family: "DM Sans";
+  font-weight: 400;
   padding-right: 20px;
 }
 .review-content p,
@@ -1820,12 +1820,12 @@ ul.footer-menu-sub li {
   font-size: 16px !important;
   line-height: 28px;
   margin-bottom: 0;
-  font-family: "Merriweather", serif;
+  
 }
 h2.review-cmt-title {
-  font-size: 15px;
-  font-weight: bold;
-  color: #505050;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
   text-transform: capitalize;
 }
 .review-read {

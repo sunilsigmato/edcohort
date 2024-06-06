@@ -95,7 +95,7 @@ public function __construct()
     $sortby = $this->input->post('sortby');
     $page = $this->input->post('page');
     $user_id = $this->input->post('user_id');
-    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page=0);
+    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page);
 
   }
 
@@ -113,7 +113,7 @@ public function __construct()
     $page = $this->input->post('page');
     $user_id = $this->input->post('user_id');
     
-    $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page=0);
+    $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page);
 
   }
 
