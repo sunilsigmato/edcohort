@@ -1,3 +1,6 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/handlebar-custom.min.js" type="text/javascript"></script>
 <?php $course = $this->input->get('course'); 
 $brandID = $this->input->get('brand');
 $product_type = $this->input->get('product_type');
@@ -9,24 +12,40 @@ $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $date_picker = $this->input->get('date_picker');
 $segment = $this->input->get('segment');
-
-   // print_ex($_GET);
+$segment_temp = $segment;
+$page = $this->input->get('page');
+$user_id = '';
+if($this->session->userdata('user_id'))
+{
+    $user_id = $this->session->userdata('user_id');
+}
+$res_segment=get_segement_id($segment);
+if($res_segment)
+{
+   $segment = $res_segment;
+}
+else
+{
+    header("Location: " . base_url());
+    exit;
+}
 ?>
 <?php 
 
-$get_breadcrumb = get_breadcrumb_value();
+/*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
 $get_single_course_detail = get_single_coure_detail($course);
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 $get_review_average_rating = get_review_average_rating($course);
+$get_course_detail = get_course_detail($get_single_course_detail->course_id);
 
 if($get_breadcrumb)
 {   
     $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
     $breadcrumb_name2 = $get_breadcrumb->breadcrumb2_name;
-}
+}*/
 ?>
 <!--banner start-->
 <div class="inner-banner ">
@@ -34,8 +53,8 @@ if($get_breadcrumb)
         <div class="breadcrumb">
             <ul>
                 <li>Home</li>
-                <li><?php echo @$breadcrumb_name1; ?> </li>
-                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
+                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -51,7 +70,6 @@ if($get_breadcrumb)
                     </a></li>
                 <li class="active"><a
                         href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
-                        <?php echo $counselling_count; ?></a></li>
                 <li><a
                         href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
                 </li>
@@ -77,24 +95,25 @@ if($get_breadcrumb)
     <div class="container-fluid review-top-section">
 
         <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard">
+            <div class="col-md-1 course-img p-3 text-center brandCard crd-image">
 
             <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
 
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-            <h1 class="mb-3"><?php echo  $get_single_course_detail->product_name; ?></h1>
-                <div>  
-                <span class="rating-btn-display"><?php echo $get_review_average_rating ?> / 5</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                <!--<?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?>/5</span>
+            <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
+                <div>
+                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> / 5</span>
+              <!--  <?php if($get_brand_compare) { ?>
+                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?>/5</span>
                     <?php } ?>  -->
+                 
                     <label for="rating2" class="rating-display">
                     <div class="dropdown">
-  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
+ <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  -->
   <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> --> </label>
-  <!-- </button>-->
+ <!-- </button>  -->
 
   
 
@@ -216,12 +235,12 @@ if($get_breadcrumb)
                         <?php } else { ?>
                         <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
                             data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
-                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt="">--> </label></a>
+                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>--></a>
                         <?php } ?>
 
                 </a>
 
-            </div>
+            </div>  
 
         </div>
     </div>
@@ -260,9 +279,9 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="brand" class="brand">
+                                    <option value="all">All</option>
                                     <?php foreach($res_filter_brand as $brands){?>
-                                    <option value="<?php echo $brands->brand_id; ?>"
-                                        <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>>
+                                    <option value="<?php echo $brands->brand_id; ?>">
                                         <?php echo $brands->brand_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -287,7 +306,7 @@ if($get_breadcrumb)
                         <div class="board-k12" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_cbsc <?php //if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                     id="cbsc-toggle">
                                     <label><?php echo $filter_cbsc_name ?> </label>
 
@@ -295,7 +314,7 @@ if($get_breadcrumb)
                                         <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
                                         id="cbsc" value="2" >
                                 </div>
-                                <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_icsc <?php //if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                     id="icsc-toggle">
                                     <label><?php echo $filter_icsc_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -308,7 +327,7 @@ if($get_breadcrumb)
                         <div class="board-other" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_online <?php if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_online <?php //if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="online-toggle">
                                     <label><?php echo $filter_online_name ?> </label>
 
@@ -316,7 +335,7 @@ if($get_breadcrumb)
                                         <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
                                         id="online" value="1" >
                                 </div>
-                                <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="offline-toggle">
                                     <label><?php echo $filter_offline_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -334,9 +353,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
+                                    <option value="all">All</option>
                                     <?php foreach($res_filter_class as $classes){?>
                                     <option value="<?php echo $classes->class_id; ?>"
-                                        <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->title; ?></option>
                                     <?php } ?>
                                 </select>
@@ -347,9 +367,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">COURSE</h3>
                             <div class="select-box">
                                 <select name="filter_course_dropdown" id="filter_course_dropdown">
+                                    <option value="all">All</option>
                                     <?php foreach($res_filter_course as $classes){?>
                                     <option value="<?php echo $classes->id; ?>"
-                                        <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->course_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -360,9 +381,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
                             <div class="select-box">
                                 <select name="batch" id="batch">
+                                    <option value="all">All</option>
                                     <?php foreach($batch_records as $batches){?>
                                     <option value="<?php echo $batches->batch_id; ?>"
-                                        <?php if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
+                                        <?php //if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
                                         <?php echo $batches->batch_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -403,21 +425,19 @@ if($get_breadcrumb)
                     <div class="review-center">
 
                     <div class="review-inner-center">
+                    <div id="selectedValues"></div>  <!-- for filter values display -->
                         <div class="tab-link">
 
-                        <ul>
+                            <ul>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
-                                        >Events</a>
+                                    <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment_temp; ?>">Events</a>
+                                </li>
+                                        
+                                <li>
+                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment_temp; ?>" class="active">UpComing  Event</a>
                                 </li>
                                 
-                                <li>
-                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>" class="active">UpComing  Event</a>
-                                </li>
-                                
-
                             </ul>
-
                         </div>
                                 </div>
                                 
@@ -543,165 +563,71 @@ if($get_breadcrumb)
                                 }
                                 }
                                 </style>
-                <div class="container">
-                <div class="row">
-                    <?php
-                           $tomorrow = date("Y-m-d", strtotime("+1 day"));
-                           $type = 'upcoming';
-                           $res_counselling = get_counselling_detail($tomorrow,$type,$course);
-                               
-                  if($res_counselling)
-                   {
-                    foreach ($res_counselling as $r) 
-                     {    
-                        
-                        $preview_image = '';
-                        $currentUrl = base_url(); 
-                        $newUrl = dirname($currentUrl);
-                        $preview_image = $currentUrl.'/uploads/event/'.$r->image_path;
-                   ?>
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="card-list-con">
-                            <article class="card-con">
-                                <figure class="card-image-con">
-                                    <img src="<?php echo $preview_image; ?>" style="width:100%" alt="Full-size Image">    
-                                </figure>
-                                <div class="card-header event-title">
-                                    <?php echo $r->event_title ?>
-                                    <!--<button class="icon-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
-                                        <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
-                                    </svg>
-                                    </button> --> 
-                                </div>
-                                <div class="card-footer-con">
-                                    <div class="card-meta-con card-meta--views">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
-                                            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
-                                            <circle cx="12" cy="12" r="3" />
-                                        </svg>
-                                        <?php echo $r->event_start_time ?>
+                <script id="review-template" type="text/x-handlebars-template">
+                    <div class="container">
+                    <div class="total-review">{{total_items}} Events</div>
+                    <div class="row">
+                        {{#if items}}
+                            {{#each items}}
+                            <div class="col-md-4 col-sm-6 mb-4">
+                                <div class="card-list-con">
+                                    <article class="card-con">
+                                    <figure class="card-image-con">
+                                    <img src="{{image_path}}" style="width:100%" alt="Full-size Image">    
+                                    </figure>
+                                    <div class="card-header event-title">
+                                        {{event_title}}
                                     </div>
-                                    <div class="card-meta-con card-meta--date">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
-                                            <rect x="2" y="4" width="20" height="18" rx="4" />
-                                            <path d="M8 2v4" />
-                                            <path d="M16 2v4" />
-                                            <path d="M2 10h20" />
-                                        </svg>
-                                        <?php echo $r->event_date ?>
+                                    <div class="card-footer-con">
+                                        <div class="card-meta-con card-meta--views">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
+                                                <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            {{event_start_time}}
+                                        </div>
+                                        <div class="card-meta-con card-meta--date">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
+                                                <rect x="2" y="4" width="20" height="18" rx="4" />
+                                                <path d="M8 2v4" />
+                                                <path d="M16 2v4" />
+                                                <path d="M2 10h20" />
+                                            </svg>
+                                        {{event_date}}
+                                        </div>
+                                        <div class="card-meta-con card-meta--views">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
+                                                <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            {{interest_count}}
+                                        </div> 
                                     </div>
-                                    <div class="card-meta-con card-meta--views">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
-                                            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
-                                            <circle cx="12" cy="12" r="3" />
-                                        </svg>
-                                        <?php echo $r->interest_count ?>
-                                    </div> 
+                                    <?php if($this->session->userdata('user_id')){ ?>
+                                    <div class="book-event">
+                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit({{event_id}} ,'<?php echo $this->session->userdata('user_id') ?>')">Book Event</a>
+                                    </div>
+                                    <?php }else{ ?>
+                                    <div class="book-event">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#login-button">Book Event </a>
+                                    </div>
+                                    <?php } ?>
                                 </div>
-
-                                <?php if($this->session->userdata('user_id')){ ?>
-                                      <div class="book-event">
-                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit('<?php echo $r->event_id ?>' ,'<?php echo $this->session->userdata('user_id') ?>')">Reply</a>
-                                        </div>
-                                        <?php }else{ ?>
-                                            <div class="book-event">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary"
-                                            data-bs-target="#login-button">Book Event
-                                        </a>
-                                        </div>
-                                        <?php } ?>
                             </div>
-                        </div>
-               
-               
-                    <?php } } 
-                   else{?>
-                    <div class="review-row-reply">
-                        <h4>No result found..!!</h4>
+
+                            {{/each}}
+                            <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">    
+                            </div>
+                            {{else}}
+                            <div class="review-row-reply">
+                            <h4>No result found..!!</h4>
+                            </div>
+                        {{/if}}
                     </div>
-                    <?php } ?>
-                    
-                    
-                    
-                    
-
-                           <!-- <?php if($this->session->userdata('user_id')){ ?>
-                            <a href="<?php echo base_url(); ?>create-a-counselling?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&pickupdate=<?php echo $c_date; ?>&sort_by=<?php echo $sort_by; ?>"
-                                class="review-btn"> Get counselling
-                            </a>
-                            <?php } else{ ?>
-                            <a href="javascript:void(0)" class="review-btn" data-bs-effect="effect-scale"
-                                data-bs-toggle="modal" data-bs-target="#login-button">Get counselling
-                            </a>
-                            <?php } ?> -->
-                        </div>
-                            </div>
-                        <!-- <div class="select-filter-box">
-                <ul class="select-filter">
-                    <li>ICSE <a href="#"><img src="images/close.png" alt=""></a></li>
-                    <li>10th Standard <a href="#"><img src="images/close.png" alt=""></a></li>
-                    <li>Exam 2022-23 SEPT <a href="#"><img src="images/close.png" alt=""></a></li>
-                </ul>
-                <a href="#" class="clear-btn">Clear filter selection</a>
-            </div> -->
-                        <?php //print_pre($counselling_list); ?>
-                        <?php if(!empty($cdate)){ ?>
-                        <div class="availability-col"><a
-                                href="javascript:void(0)"><?php echo date('d-M-Y',strtotime($cdate)); ?>
-                                You are Selected </a>
-                        </div>
-                        <?php } ?>
-                        <div class="counselling-col-box d-flex flex-wrap p-3">
-                       
-
-                            <!--    <?php if($this->session->userdata('user_id')){ ?>
-                                <div>
-                                    <a href="<?php echo base_url(); ?>create-a-counselling"><button type="button" class="book-btn">I am a YouTuber </button></a> 
-                                </div>
-                            <?php }else{ ?>
-                                <button type="button" class="book-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Book Now</button>
-                            <?php } ?> -->
-                            <!--col-->
-
-                            <!--col-->
-                            <!--     <div class="counselling-col">
-                        <div class="counselling-col-img">
-                            <img src="images/counselling-img.jpg" alt="">
-                            <span class="rating-number"><img src="images/Star.png" alt=""> 3.2</span>
-                        </div>
-                        <div class="counselling-col-content">
-                            <div class="content-top-row d-flex justify-content-between align-items-start">
-                                <div class="top-left"><h3>John Doe</h3> <p>Profession</p></div>
-                                <div class="top-right">Free/hr</div>
-                            </div>
-                            <div class="content-bottom-row d-flex justify-content-between align-items-center">
-                                <div class="bottom-left">No. Of Counselling <b>150+</b></div>
-                                <div class="bottom-right"><a href="#">Check availability</a></div>
-                            </div>
-                            <a href="#" class="book-btn">Book now</a>
-                        </div>          
-                    </div> -->
-                            <!--col-->
-                            <!-- <div class="counselling-col">
-                        <div class="counselling-col-img">
-                            <img src="images/counselling-img.jpg" alt="">
-                            <span class="rating-number"><img src="images/Star.png" alt=""> 3.2</span>
-                        </div>
-                        <div class="counselling-col-content">
-                            <div class="content-top-row d-flex justify-content-between align-items-start">
-                                <div class="top-left"><h3>John Doe</h3> <p>Profession</p></div>
-                                <div class="top-right">Free/hr</div>
-                            </div>
-                            <div class="content-bottom-row d-flex justify-content-between align-items-center">
-                                <div class="bottom-left">No. Of Counselling <b>150+</b></div>
-                                <div class="bottom-right"><a href="#">Check availability</a></div>
-                            </div>
-                            <a href="#" class="book-btn">Book now</a>
-                        </div>
-                    </div> -->
-                        </div>
                     </div>
+                </script>
+                <div class="reviews-wrapper"></div>        
+                </div>
                 </div>
                 <!--center end-->
 
@@ -863,17 +789,18 @@ if($get_breadcrumb)
                 </div>
             </div>
             <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+            <input type="hidden" value = "<?php echo $course ?>" class = "course">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+            <input type="hidden" value = "<?php echo $page ?>" class = "page">
 
             <script>
             $(document).ready(function() {
                 
-                  /** Start Filter Section */
+            /** Start Filter Section */
             /** Apply Select 2 */
             $('.filter_segment').select2();
             $('.brand').select2();
@@ -893,6 +820,56 @@ if($get_breadcrumb)
             var filter_online_offline = $('.filter_online_offline').val();
             var product_id = '';
             var date_picker ='';
+            var page = '';
+            page = $('.page').val();
+
+            if(date_picker == '')
+        {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today =  yyyy + '-' + mm + '-' +dd ;
+            FilterDatePickerText = today;
+            isClickedDatePicker =true;
+            date_picker = today;
+
+        }
+
+                       /** Ajax Cal Variable declare  */
+        var isClickedBrand = false;
+        var FilterBrandText = '';
+        var BrandParamKey ='brand';
+        var isClickedSegment = true;
+        var drop_down_text =$('#filter_segment :selected').text().trim(); // for segment text
+        var SegmentParamKey ='segment';
+        var isClickedClass = false;
+        var FilterClassText = '';
+        var ClassParamKey ='class';
+        var isClickedCourse = false;
+        var FilterCourseText = '';
+        var CourseParamKey ='course';
+        var isClickedBatch = false;
+        var FilterBatchText = '';
+        var BatchParamKey ='batch';
+        var isClickedBoard = false;
+        var FilterBoardText = '';
+        var BoardParamKey ='board';
+        var isClickedDatePicker = false;
+        var FilterDatePickerText = '';
+        var DatePickerParamKey ='date_picker';
+        var requestData = {};
+            requestData.segment = filter_segment_id;
+            requestData.brand = '';
+            requestData.board = '';
+            requestData.class = '';
+            requestData.course = '';
+            requestData.batch = '';
+            requestData.page = page;
+            requestData.user_id = '';
+            requestData.datepicker = date_picker;
+            requestData.type = 'upcoming';
+            ajax_cal_data();
 
              /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -933,6 +910,7 @@ if($get_breadcrumb)
                 $('.board-k12').css('display', 'none');  
             }
             filter_brand(filter_segment_id);
+            get_all_data();
         });
 
  
@@ -940,6 +918,9 @@ if($get_breadcrumb)
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'cbsc';
+            get_all_data();
 
         });
         $('.toggle_icsc').click(function() {
@@ -947,48 +928,96 @@ if($get_breadcrumb)
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'icsc';
+            get_all_data();
 
         });
         $('.toggle_online').click(function() { 
             filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'online';
+            get_all_data();
 
         });
         $('.toggle_offline').click(function() {
             filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'offline';
+            get_all_data();
         });
    
         $("#brand").change(function()
         {
             filter_brand_id = $(this).val();
+            FilterBrandText = $('#brand :selected').text().trim();
             filter_class(filter_brand_id,filter_segment_id);
+            isClickedBrand =true;
+            get_all_data();
         });
 
 
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
+            FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
+            isClickedClass =true;
+            get_all_data();
         });
 
         $("#filter_course_dropdown").change(function()
         {
             filter_course_id = $(this).val();
+            FilterCourseText = $('#filter_course_dropdown :selected').text().trim();
             filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
-
+            isClickedCourse =true;
+            get_all_data();
+            
         });
 
         $("#batch").change(function()
         {
              filter_batch_id = $(this).val();
+             FilterBatchText = $('#batch :selected').text().trim();
+             isClickedBatch =true;
+             get_all_data();
         });
+
+        $("#datepicker").change(function()
+        {
+            date_picker = $(this).val();
+            var parts = date_picker.split('-'); // Splitting the date string by '-'
+            // Rearranging the parts
+            var year = parts[2];
+            var month = parts[1];
+            var day = parts[0];
+            var formattedDate = year + '-' + month + '-' + day;
+             FilterDatePickerText = formattedDate;
+             isClickedDatePicker =true;
+             get_all_data();
+        });
+       /* if(date_picker == '')
+        {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today =  yyyy + '-' + mm + '-' +dd ;
+            FilterDatePickerText = today;
+            isClickedDatePicker =true;
+            date_picker = today;
+
+        }*/
+        
         $(".apply_filter").click(function()
         {
             
-           var date_picker = $('.datepicker').val();
+            date_picker = $('.datepicker').val();
             $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/get_filter_result_detail",
@@ -1145,7 +1174,191 @@ if($get_breadcrumb)
               }
            });
         }
+
         
+        function get_all_data()
+        {
+              const selectedValuesDiv = document.getElementById("selectedValues");
+            var urlParams = new URLSearchParams(window.location.search);
+            if(isClickedSegment)
+            {
+                urlParams.set(SegmentParamKey, drop_down_text);  
+                requestData.segment = filter_segment_id;
+            }
+            if (isClickedBrand) {
+                urlParams.set(BrandParamKey, FilterBrandText);
+                requestData.brand = filter_brand_id;
+                add_filter_values(BrandParamKey,FilterBrandText);
+            }
+            if (isClickedBoard) {
+                urlParams.set(BoardParamKey, FilterBoardText);
+                requestData.board = filter_board_id;
+                add_filter_values(BoardParamKey,FilterBoardText);
+            }
+            if (isClickedClass) {
+                urlParams.set(ClassParamKey, FilterClassText);
+                requestData.class = filter_class_id;
+                add_filter_values(ClassParamKey,FilterClassText);
+            }
+            if (isClickedCourse) {
+                urlParams.set(CourseParamKey, FilterCourseText);
+                requestData.course = filter_course_id;
+                add_filter_values(CourseParamKey,FilterCourseText);
+            }
+            if (isClickedBatch) {
+                urlParams.set(BatchParamKey, FilterBatchText);
+                requestData.batch = filter_batch_id;
+                add_filter_values(BatchParamKey,FilterBatchText);
+            }
+            if (isClickedDatePicker) {
+                urlParams.set(DatePickerParamKey, FilterDatePickerText);
+                requestData.datepicker = FilterDatePickerText;
+                requestData.type = 'today';
+                add_filter_values(DatePickerParamKey,FilterDatePickerText);
+            }
+            
+           var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+            window.history.pushState({ path: newURL }, '', newURL);
+            ajax_cal_data();
+        }
+
+        function add_filter_values(val1,val2)
+        {
+            
+            //console.log(requestData);
+            var urlParams = new URLSearchParams(window.location.search);
+            var brn_value = val1 + '=' + val2 ;
+            var span = document.createElement("span");
+            span.classList.add("value-span");
+            //console.log(brn_value);
+             // Set text content
+            span.textContent = val2;
+            // Set display value
+            span.style.display = "block"; 
+            var div = document.getElementById("selectedValues");
+            var closeButton = document.createElement("button");
+            closeButton.textContent = "X";
+            closeButton.setAttribute("data-value", brn_value);
+
+            var selectedValuesDiv = document.getElementById("selectedValues");
+            
+            // Get all the span elements within the selectedValuesDiv
+            var spans = selectedValuesDiv.getElementsByTagName("span");
+           // Loop through the spans and retrieve their values
+           for (var i = 0; i < spans.length; i++) 
+           {
+               var value = spans[i].innerHTML;
+               // Create a temporary div element
+               var tempDiv = document.createElement('div');
+               // Set the innerHTML of the div
+               tempDiv.innerHTML = value;
+               // Get the button element from the div
+               var buttonElement = tempDiv.querySelector('button');
+               // Retrieve the value of the data-value attribute
+               var dataValue = buttonElement.getAttribute('data-value');
+               var parts = dataValue.split("="); // Split = before values ex: brand=Buyjs
+                var split_val = parts[0]; // output : brand
+                if(val1 == split_val) // check param key Duplicate exist or not 
+                {
+                    spans[i].remove(); // remove if duplicate exist
+                }
+               
+           }
+
+            closeButton.onclick = function() // close button for remove filters
+            {
+                var valueToRemove = this.getAttribute("data-value"); 
+                var spans = document.getElementsByClassName("value-span");
+                var parts = valueToRemove.split("=");
+                var split_val = parts[0];
+                    if(split_val == BrandParamKey)
+                    {
+                        isClickedBrand = false;
+                        requestData.brand = '';
+                    }
+                    if(split_val == BoardParamKey)
+                    {
+                        isClickedBoard = false;
+                        requestData.board = '';
+                    }
+                    if(split_val == ClassParamKey)
+                    {
+                        isClickedClass = false;
+                        requestData.class = '';
+                    }
+                    if(split_val == CourseParamKey)
+                    {
+                        isClickedCourse = false;
+                        requestData.course = '';
+                    }
+                    if(split_val == BatchParamKey)
+                    {
+                        isClickedBatch = false;
+                        requestData.batch = '';
+                    }
+                    if(split_val == DatePickerParamKey)
+                    {
+                        isClickedDatePicker = false;
+                        requestData.datepicker = today;
+                    }
+             //   if (urlParams.has(split_val)) {
+                    urlParams.delete(split_val);
+             //   }
+                var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+                
+                window.history.pushState({ path: newURL }, '', newURL);
+                span.remove();
+                ajax_cal_data();
+                
+            };
+            span.appendChild(closeButton);
+            // Append the span to the div
+            div.appendChild(span);
+            document.getElementById("selectedValues").appendChild(span);
+           
+        }
+        
+        function ajax_cal_data()
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_all_data_counselling",
+              data: requestData, 
+              dataType: "json",   
+              success: function (response) {
+                   
+                if (response && response.items.length > 0) {
+                    
+                // Compile the Handlebars template
+                var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                var pageLinkHTML = response.page_link;
+        
+               // paginationContainer.innerHTML = pageLinkHTML 
+                
+               // console.log(pageLinkHTML);
+               // document.getElementById('paginationContainer').innerHTML = pageLinkHTML;   
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+                $(".paging_simple_numbers").html(pageLinkHTML);
+            }
+            else{
+                  // Compile the Handlebars template
+                  var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                    
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+            }
+              }
+           });
+        }
         /** End Filter Section */
 
 

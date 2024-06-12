@@ -12,6 +12,7 @@ $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $date_picker = $this->input->get('date_picker');
 $segment = $this->input->get('segment');
+$segment_temp = $segment;
 $page = $this->input->get('page');
 $user_id = '';
 if($this->session->userdata('user_id'))
@@ -429,12 +430,12 @@ if($get_breadcrumb)
 
                             <ul>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>"
+                                    <a href="<?php echo base_url(); ?>counselling?course=<?php echo $course; ?>&segment=<?php echo $segment_temp; ?>"
                                         class="active">Events</a>
                                 </li>
                                         
                                 <li>
-                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment; ?>">UpComing  Event</a>
+                                    <a href="<?php echo base_url(); ?>upcoming-counselling?course=<?php echo $course; ?>&segment=<?php echo $segment_temp; ?>">UpComing  Event</a>
                                 </li>
                                 
                             </ul>

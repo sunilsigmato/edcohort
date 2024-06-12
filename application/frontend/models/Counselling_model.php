@@ -77,7 +77,7 @@ class Counselling_model extends CI_Model {
       }
       if($type == 'upcoming')
       {
-        $where .=" and Date(pr.event_date) >='$datepicker' ";
+        $where .=" and Date(pr.event_date) >'$datepicker' ";
       }
 
     $res_seg =  $this->get_segment_name($segment);
@@ -112,17 +112,11 @@ class Counselling_model extends CI_Model {
     $data->page_link= $datas['link'];
     $items='';
     $data->items = array();
+
     date_default_timezone_set('Asia/Kolkata');  // Set time Zone
-
-    $currentTime = new DateTime();
-
-// Display the current time
-
-$currentTime->modify("+1 hour");
-//echo "Current time: " .$currentTime->format("H:i:s") . "\n";
-    $current_modify_time =$currentTime->format("H:i:s");
-   // $currentTime = date("H:i:s"); // Retrive Current timings
-
+    $currentTime = new DateTime(); // date time formate
+    $currentTime->modify("+1 hour"); // modify time +1 hour
+    $current_modify_time =$currentTime->format("H:i:s"); 
     if(count($get_product_list)!=0)
     {  
         $i=0;
@@ -164,7 +158,6 @@ $currentTime->modify("+1 hour");
          
        }
        $data->total_items=$i;
-      
     }
     else
     {
