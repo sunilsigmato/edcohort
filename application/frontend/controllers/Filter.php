@@ -11,6 +11,7 @@ public function __construct()
     $this->load->model('coupon_model');
     $this->load->model('review_model');
     $this->load->model('complaint_model');
+    $this->load->model('counselling_model');
 }
 
 
@@ -114,6 +115,22 @@ public function __construct()
     $user_id = $this->input->post('user_id');
     
     $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page);
+
+  }
+  
+  function get_all_data_counselling()
+  {
+    $segment= $this->input->post('segment');
+    $brand= $this->input->post('brand');
+    $board= $this->input->post('board');
+    $class= $this->input->post('class');
+    $course= $this->input->post('course');
+    $batch= $this->input->post('batch');
+    $page = $this->input->post('page');
+    $user_id = $this->input->post('user_id');
+    $datepicker = $this->input->post('datepicker'); 
+    $type = $this->input->post('type'); 
+    $get_filter_result_detail = $this->counselling_model->get_all_data_counselling($segment,$board,$brand,$class,$course,$batch,$user_id,$page,$datepicker,$type);
 
   }
 

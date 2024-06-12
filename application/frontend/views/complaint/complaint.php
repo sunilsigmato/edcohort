@@ -443,7 +443,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                </ul>
                </div>
             </div> -->
-                        <?php print_R($customer_rating);?>
+                        <?php //print_R($customer_rating);?>
                         <div class="filter-col">
                             <h3 class="filter-col-title">CUSTOMER RATING</h3>
                             <div class="filter-list-box">
@@ -1195,7 +1195,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         page = $('.page').val();
 
             /** Ajax Cal Variable declare  */
-            var isClickedBrand = false;
+        var isClickedBrand = false;
         var FilterBrandText = '';
         var BrandParamKey ='brand';
         var isClickedSegment = true;
@@ -1749,12 +1749,6 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 // Append the rendered HTML to the DOM
                 $('.reviews-wrapper').html(html);
                 $(".paging_simple_numbers").html(pageLinkHTML);
-
-                   // Send the response data to a PHP script for further processing
-    /*var xhr = new XMLHttpRequest();
-    xhr.open("POST", "views/complaint/complaint.php", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(response));*/
             }
             else{
                   // Compile the Handlebars template

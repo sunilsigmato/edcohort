@@ -376,10 +376,14 @@ echo json_encode(array("status"=>"1","data"=>"Product Data Added Successfully"))
         'link' =>$link,
         'image_path'=>$brand_image,
         'interest_count'=>$interest_count,
+        'segment_id'=>$segment,
+        'brand_id'=>$brand_id,
+        'board_id'=>$board_id,
+        'class_id'=>$class_id,
+        'course_id'=>$course_id,
+        'batch_id'=>$batch_id,
         //'image_path'=>$brand_image
-
       );
-    // print_R($data);
       $user_id = $this->common_model->insertData('tbl_event', $data);
       http_response_code(200);
       echo json_encode(array("status"=>"1","data"=>"Event Data Added Successfully")); 
@@ -470,15 +474,18 @@ echo json_encode(array("status"=>"1","data"=>"Product Data Added Successfully"))
         'event_type' => $event_type,
         'link' =>$link,
         'interest_count'=>$interest_count,
+        'segment_id'=>$segment,
+        'brand_id'=>$brand_id,
+        'board_id'=>$board_id,
+        'class_id'=>$class_id,
+        'course_id'=>$course_id,
+        'batch_id'=>$batch_id,
       );
       if($brand_image !='')
       {
         $data['image_path'] = $brand_image;
       }
-   
- 
-    
-     
+      
      // $user_id = $this->common_model->insertData('tbl_event', $data);
      $where=array('event_id'=>$event_id);
      /*print_R($event_id);

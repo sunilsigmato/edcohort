@@ -733,8 +733,7 @@
                         form_data.append('event_type', event_type);
                         form_data.append('link', link);
                         form_data.append('interested', interested);
-           
-            
+                        
             $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/add_event_detail",

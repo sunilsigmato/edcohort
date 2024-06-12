@@ -41,6 +41,182 @@ class Counselling_model extends CI_Model {
    return $query->result();
  }
 
+ function get_all_data_counselling($segment,$board,$brand,$class,$course,$batch,$user_id,$page,$datepicker,$type)
+ {
+
+   // if its all display all id ids 
+   $where = "";
+   //  $limit = 20;
+     if(!empty($segment))
+     {
+         $where .="pr.segment_id = $segment";
+     }
+     if(!empty($board) && ($board != 'all'))
+     {
+         $where .= " and pr.board_id = $board";
+     }
+     if(!empty($brand) && ($brand != 'all'))
+     {
+         $where .= " and pr.brand_id = $brand";
+     }
+     if(!empty($class) && ($class != 'all'))
+     {
+         $where .= " and pr.class_id = $class";
+     }
+     if(!empty($course) && ($course != 'all'))
+     {
+         $where .= " and pr.course_id = $course";
+     }
+     if(!empty($batch) && ($batch != 'all'))
+     {
+         $where .= " and pr.batch_id = $batch";
+     }
+     if($type == 'today')
+      {
+        $where .=" and Date(pr.event_date) ='$datepicker'";
+      }
+      if($type == 'upcoming')
+      {
+        $where .=" and Date(pr.event_date) >='$datepicker' ";
+      }
+
+    $res_seg =  $this->get_segment_name($segment);
+    $seg_temp = $res_seg;
+    $per_page = 7;
+    if(!$page)
+    {
+      $page = 0;
+    }
+    $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
+    $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
+    $records_count = $this->getProductcounsellingCountNew($where);
+    $datas['records_count'] = @$records_count['0']->counselling_count;
+    $config['base_url'] = $request_uri_without_query_string.'?segment='.$seg_temp;
+    $config['total_rows'] = $records_count['0']->counselling_count;
+    //$config['uri_segment'] = '';
+    $config['per_page'] = $per_page;
+    $config['page_query_string'] = true;
+    $config['query_string_segment'] = 'page';
+    $config['cur_tag_open'] = '<a class="active paginate_button current">';
+   // $config['cur_tag_close'] = '</a>';
+    $config['next_link'] = '>';
+    $config['prev_link'] = '<';
+    $config['num_links'] = 3;
+   // $config['first_link'] = false;
+    //$config['last_link'] = false;
+    $resss =$this->pagination->initialize($config);
+    $datas['link'] = $this->pagination->create_links();
+    $orderby = '';
+    $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page);
+    $data = new stdClass;
+    $data->page_link= $datas['link'];
+    $items='';
+    $data->items = array();
+    if(count($get_product_list)!=0)
+    {  
+       $data->total_items=count($get_product_list);
+       foreach($get_product_list as $r)
+       {
+         $item = new stdClass;
+         $item->event_code = $r->event_code;
+         $item->event_title = $r->event_title;
+         $item->event_date = $r->event_date;
+         $item->event_start_time = $r->event_start_time;
+         $item->event_end_time = $r->event_end_time;
+         $item->total_duration = $r->total_duration;
+         $item->event_type = $r->event_type;
+         $item->taken_by = $r->taken_by;
+         $item->event_description = $r->event_description;
+         $item->status  =$r->status;
+         $item->product_id = $r->product_id;
+         $item->link =  $r->link;
+         $item->image_path = $r->image_path;
+         $item->interest_count = $r->interest_count;
+         $item->segment_id = $r->segment_id;
+         $item->brand_id = $r->brand_id;
+         $item->board_id = $r->board_id;
+         $item->class_id = $r->class_id;
+         $item->course_id = $r->course_id;
+         $item->segment_id = $r->segment_id;
+         $item->class_id = $r->class_id;
+         $item->product_name = $r->product_name;
+         $item->product_slug = $r->product_slug;
+         array_push($data->items,$item);
+         
+       }
+      
+    }
+    else
+    {
+     
+    }
+    $code =200;
+    $this->output->set_status_header($code)->set_content_type('application/json')->
+             set_output(json_encode($data));
+       
+   
+     /*if(!empty($datepicker))
+     {
+
+     }*/
+    
+    /*$where= '';
+    $query = '';
+   // $current = strtotime(date("Y-m-d"));
+   //$current = date('Y-m-d');
+   
+   
+    if($type == 'today')
+    {
+      $where ="Date(event_date) ='$date_picker' and product_id ='$course' ";
+    }
+    if($type == 'upcoming')
+    {
+      $where ="Date(event_date) >='$date_picker' and product_id ='$course' ";
+    }
+    $order_by=' ORDER BY event_date DESC';
+    
+    $this->db->select('*');
+    $this->db->from('tbl_event c');
+    $this->db->where($where);
+    $query=$this->db->get();
+    if($query)
+    {
+      return $query->result();
+    }*/
+ }
+ function getProductcounsellingCountNew($where)
+ {
+   if($where!=""){        
+     $where="WHERE ".$where;
+   }
+ 
+   $query=$this->db->query("SELECT count(product_id) as counselling_count FROM tbl_event as pr ".$where."");
+   return $query->result();  
+ }
+ function getProductComplaintLimit($where,$order,$limit,$offset)
+ {
+     if($where!=""){        
+       $where="WHERE ".$where;
+     }
+     $order_query="ORDER BY event_id DESC "; 
+       $query=$this->db->query("SELECT pr.*,p.product_name,p.product_slug FROM tbl_event as pr 
+         join tbl_product as p ON pr.product_id=p.product_id  ".$where." ".$order_query." limit ".$limit." offset ".$offset);
+   /* $res = $this->db->last_query();
+    print_r($res);*/
+       return $query->result(); 
+
+ }
+ function get_segment_name($segment_id)
+ {
+   $query=$this->db->query("SELECT segment_name from tbl_segment where id=$segment_id");
+   $res = $query->result();
+   if($res)
+   {
+     return $res[0]->segment_name;
+   }
+ }
+ 
 
  function getProductcounsellingLimit($where,$order='',$limit='',$offset=0)
   {
@@ -81,6 +257,7 @@ function getProductcounsellingCount($where)
   if($where!=""){        
     $where="WHERE ".$where;
   }
+
   $query=$this->db->query("SELECT count(product_id) as counselling_count FROM tbl_product_counselling as PC ".$where."");
   return $query->result();  
 }
