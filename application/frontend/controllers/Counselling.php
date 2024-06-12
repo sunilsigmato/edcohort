@@ -15,7 +15,7 @@ class Counselling extends CI_Controller {
   function index($id = '')
   {
 
-    $course = $this->input->get('course');
+    //$course = $this->input->get('course');
 
   ////Filter data ////////
 
@@ -38,7 +38,7 @@ class Counselling extends CI_Controller {
 
   //print_pre($_GET);
 
-  $where =" c_status = 1  and c_date >= CURDATE()";
+  /*$where =" c_status = 1  and c_date >= CURDATE()";
     //$where = "product_status = 'active'";
 
   $brandID = $this->input->get('brand');
@@ -175,7 +175,7 @@ class Counselling extends CI_Controller {
     $counsellingCount = $this->counselling_model->getProductcounsellingCount($wherecounselling);
     $n = @$counsellingCount['0']->counselling_count;
 
-    $data['counselling_count'] = $this->number_format_short($n);
+    $data['counselling_count'] = $this->number_format_short($n);*/
 
     $this->load->view('common/header',$data);
     $this->load->view('counselling/counselling',$data);

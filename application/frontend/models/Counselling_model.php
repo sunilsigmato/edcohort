@@ -112,38 +112,58 @@ class Counselling_model extends CI_Model {
     $data->page_link= $datas['link'];
     $items='';
     $data->items = array();
+    date_default_timezone_set('Asia/Kolkata');  // Set time Zone
+
+    $currentTime = new DateTime();
+
+// Display the current time
+
+$currentTime->modify("+1 hour");
+//echo "Current time: " .$currentTime->format("H:i:s") . "\n";
+    $current_modify_time =$currentTime->format("H:i:s");
+   // $currentTime = date("H:i:s"); // Retrive Current timings
+
     if(count($get_product_list)!=0)
     {  
-       $data->total_items=count($get_product_list);
+        $i=0;
        foreach($get_product_list as $r)
        {
          $item = new stdClass;
-         $item->event_code = $r->event_code;
-         $item->event_title = $r->event_title;
-         $item->event_date = $r->event_date;
-         $item->event_start_time = $r->event_start_time;
-         $item->event_end_time = $r->event_end_time;
-         $item->total_duration = $r->total_duration;
-         $item->event_type = $r->event_type;
-         $item->taken_by = $r->taken_by;
-         $item->event_description = $r->event_description;
-         $item->status  =$r->status;
-         $item->product_id = $r->product_id;
-         $item->link =  $r->link;
-         $item->image_path = $r->image_path;
-         $item->interest_count = $r->interest_count;
-         $item->segment_id = $r->segment_id;
-         $item->brand_id = $r->brand_id;
-         $item->board_id = $r->board_id;
-         $item->class_id = $r->class_id;
-         $item->course_id = $r->course_id;
-         $item->segment_id = $r->segment_id;
-         $item->class_id = $r->class_id;
-         $item->product_name = $r->product_name;
-         $item->product_slug = $r->product_slug;
-         array_push($data->items,$item);
+         if($r->event_start_time > $current_modify_time)
+         {
+            $i++;
+            $item->event_id = $r->event_id;
+            $item->event_code = $r->event_code;
+            $item->event_title = $r->event_title;
+            $item->event_date = $r->event_date;
+            $item->event_start_time = $r->event_start_time;
+            $item->event_end_time = $r->event_end_time;
+            $item->total_duration = $r->total_duration;
+            $item->event_type = $r->event_type;
+            $item->taken_by = $r->taken_by;
+            $item->event_description = $r->event_description;
+            $item->status  =$r->status;
+            $item->product_id = $r->product_id;
+            $item->link =  $r->link;
+            $preview_image = '';
+            $currentUrl = base_url(); 
+            $newUrl = dirname($currentUrl);
+            $item->image_path = $currentUrl.'uploads/event/'.$r->image_path;
+            $item->interest_count = $r->interest_count;
+            $item->segment_id = $r->segment_id;
+            $item->brand_id = $r->brand_id;
+            $item->board_id = $r->board_id;
+            $item->class_id = $r->class_id;
+            $item->course_id = $r->course_id;
+            $item->segment_id = $r->segment_id;
+            $item->class_id = $r->class_id;
+            $item->product_name = $r->product_name;
+            $item->product_slug = $r->product_slug;
+            array_push($data->items,$item);
+        }
          
        }
+       $data->total_items=$i;
       
     }
     else
@@ -152,38 +172,7 @@ class Counselling_model extends CI_Model {
     }
     $code =200;
     $this->output->set_status_header($code)->set_content_type('application/json')->
-             set_output(json_encode($data));
-       
-   
-     /*if(!empty($datepicker))
-     {
-
-     }*/
-    
-    /*$where= '';
-    $query = '';
-   // $current = strtotime(date("Y-m-d"));
-   //$current = date('Y-m-d');
-   
-   
-    if($type == 'today')
-    {
-      $where ="Date(event_date) ='$date_picker' and product_id ='$course' ";
-    }
-    if($type == 'upcoming')
-    {
-      $where ="Date(event_date) >='$date_picker' and product_id ='$course' ";
-    }
-    $order_by=' ORDER BY event_date DESC';
-    
-    $this->db->select('*');
-    $this->db->from('tbl_event c');
-    $this->db->where($where);
-    $query=$this->db->get();
-    if($query)
-    {
-      return $query->result();
-    }*/
+             set_output(json_encode($data));     
  }
  function getProductcounsellingCountNew($where)
  {

@@ -19,6 +19,15 @@ if($this->session->userdata('user_id'))
     $user_id = $this->session->userdata('user_id');
 }
 $res_segment=get_segement_id($segment);
+if($res_segment)
+{
+   $segment = $res_segment;
+}
+else
+{
+    header("Location: " . base_url());
+    exit;
+}
 ?>
 <?php 
 
@@ -60,7 +69,6 @@ if($get_breadcrumb)
                     </a></li>
                 <li class="active"><a
                         href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
-                        <?php echo $counselling_count; ?></a></li>
                 <li><a
                         href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
                 </li>
@@ -555,182 +563,71 @@ if($get_breadcrumb)
                                 }
                                 }
                                 </style>
-
                 <script id="review-template" type="text/x-handlebars-template">
-
-                </script>
-                </script>
-                <div class="reviews-wrapper"></div>
-
-                <div class="container">
-                <div class="row">
-                    <?php
-                        $type = 'today';
-                        if($date_picker)
-                        {
-                            $res_counselling = get_counselling_detail($date_picker,$type,$course);
-                        }
-                        else
-                        {
-                            $current = date('Y-m-d');
-                            $res_counselling = get_counselling_detail($current,$type,$course);
-                        }
-                        //$type = 'today';
-                        
-                       // print_R($res_counselling);
-                               
-                  if($res_counselling)
-                   {
-                    foreach ($res_counselling as $r) 
-                     {    
-                        
-                        $preview_image = '';
-                        $currentUrl = base_url(); 
-                        $newUrl = dirname($currentUrl);
-                        $preview_image = $currentUrl.'/uploads/event/'.$r->image_path;
-                   ?>
-                    <div class="col-md-4 col-sm-6 mb-4">
-                        <div class="card-list-con">
-                            <article class="card-con">
-                                <figure class="card-image-con">
-                                    <img src="<?php echo $preview_image; ?>" style="width:100%" alt="Full-size Image">    
-                                </figure>
-                                <div class="card-header event-title">
-                                    <?php echo $r->event_title ?>
-                                    <!--<button class="icon-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Heart">
-                                        <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z" />
-                                    </svg>
-                                    </button> --> 
-                                </div>
-                                <div class="card-footer-con">
-                                    <div class="card-meta-con card-meta--views">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
-                                            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
-                                            <circle cx="12" cy="12" r="3" />
-                                        </svg>
-                                        <?php echo $r->event_start_time ?>
+                    <div class="container">
+                    <div class="total-review">{{total_items}} Events</div>
+                    <div class="row">
+                        {{#if items}}
+                            {{#each items}}
+                            <div class="col-md-4 col-sm-6 mb-4">
+                                <div class="card-list-con">
+                                    <article class="card-con">
+                                    <figure class="card-image-con">
+                                    <img src="{{image_path}}" style="width:100%" alt="Full-size Image">    
+                                    </figure>
+                                    <div class="card-header event-title">
+                                        {{event_title}}
                                     </div>
-                                    <div class="card-meta-con card-meta--date">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
-                                            <rect x="2" y="4" width="20" height="18" rx="4" />
-                                            <path d="M8 2v4" />
-                                            <path d="M16 2v4" />
-                                            <path d="M2 10h20" />
-                                        </svg>
-                                        <?php echo $r->event_date ?>
+                                    <div class="card-footer-con">
+                                        <div class="card-meta-con card-meta--views">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
+                                                <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            {{event_start_time}}
+                                        </div>
+                                        <div class="card-meta-con card-meta--date">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
+                                                <rect x="2" y="4" width="20" height="18" rx="4" />
+                                                <path d="M8 2v4" />
+                                                <path d="M16 2v4" />
+                                                <path d="M2 10h20" />
+                                            </svg>
+                                        {{event_date}}
+                                        </div>
+                                        <div class="card-meta-con card-meta--views">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
+                                                <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            {{interest_count}}
+                                        </div> 
                                     </div>
-                                    <div class="card-meta-con card-meta--views">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
-                                            <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
-                                            <circle cx="12" cy="12" r="3" />
-                                        </svg>
-                                        <?php echo $r->interest_count ?>
-                                    </div> 
+                                    <?php if($this->session->userdata('user_id')){ ?>
+                                    <div class="book-event">
+                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit({{event_id}} ,'<?php echo $this->session->userdata('user_id') ?>')">Book Event</a>
+                                    </div>
+                                    <?php }else{ ?>
+                                    <div class="book-event">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary" data-bs-target="#login-button">Book Event </a>
+                                    </div>
+                                    <?php } ?>
                                 </div>
-
-                                <?php if($this->session->userdata('user_id')){ ?>
-                                      <div class="book-event">
-                                        <a href="javascript:void(0)" class="btn btn-primary counselling_reply_submit" id="counselling_reply_submit" onclick="counselling_submit('<?php echo $r->event_id ?>' ,'<?php echo $this->session->userdata('user_id') ?>')">Reply</a>
-                                        </div>
-                                        <?php }else{ ?>
-                                            <div class="book-event">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" class="btn btn-primary"
-                                            data-bs-target="#login-button">Book Event
-                                        </a>
-                                        </div>
-                                        <?php } ?>
                             </div>
-                        </div>
-               
-               
-                    <?php } } 
-                   else{?>
-                    <div class="review-row-reply">
-                        <h4>No result found..!!</h4>
+
+                            {{/each}}
+                            <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">    
+                            </div>
+                            {{else}}
+                            <div class="review-row-reply">
+                            <h4>No result found..!!</h4>
+                            </div>
+                        {{/if}}
                     </div>
-                    <?php } ?>
-                    
-                    
-                    
-                    
-
-                           <!-- <?php if($this->session->userdata('user_id')){ ?>
-                            <a href="<?php echo base_url(); ?>create-a-counselling?course=<?php echo @$course; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&pickupdate=<?php echo $c_date; ?>&sort_by=<?php echo $sort_by; ?>"
-                                class="review-btn"> Get counselling
-                            </a>
-                            <?php } else{ ?>
-                            <a href="javascript:void(0)" class="review-btn" data-bs-effect="effect-scale"
-                                data-bs-toggle="modal" data-bs-target="#login-button">Get counselling
-                            </a>
-                            <?php } ?> -->
-                        </div>
-                            </div>
-                        <!-- <div class="select-filter-box">
-                <ul class="select-filter">
-                    <li>ICSE <a href="#"><img src="images/close.png" alt=""></a></li>
-                    <li>10th Standard <a href="#"><img src="images/close.png" alt=""></a></li>
-                    <li>Exam 2022-23 SEPT <a href="#"><img src="images/close.png" alt=""></a></li>
-                </ul>
-                <a href="#" class="clear-btn">Clear filter selection</a>
-            </div> -->
-                        <?php //print_pre($counselling_list); ?>
-                        <?php if(!empty($cdate)){ ?>
-                        <div class="availability-col"><a
-                                href="javascript:void(0)"><?php echo date('d-M-Y',strtotime($cdate)); ?>
-                                You are Selected </a>
-                        </div>
-                        <?php } ?>
-                        <div class="counselling-col-box d-flex flex-wrap p-3">
-                       
-
-                            <!--    <?php if($this->session->userdata('user_id')){ ?>
-                                <div>
-                                    <a href="<?php echo base_url(); ?>create-a-counselling"><button type="button" class="book-btn">I am a YouTuber </button></a> 
-                                </div>
-                            <?php }else{ ?>
-                                <button type="button" class="book-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Book Now</button>
-                            <?php } ?> -->
-                            <!--col-->
-
-                            <!--col-->
-                            <!--     <div class="counselling-col">
-                        <div class="counselling-col-img">
-                            <img src="images/counselling-img.jpg" alt="">
-                            <span class="rating-number"><img src="images/Star.png" alt=""> 3.2</span>
-                        </div>
-                        <div class="counselling-col-content">
-                            <div class="content-top-row d-flex justify-content-between align-items-start">
-                                <div class="top-left"><h3>John Doe</h3> <p>Profession</p></div>
-                                <div class="top-right">Free/hr</div>
-                            </div>
-                            <div class="content-bottom-row d-flex justify-content-between align-items-center">
-                                <div class="bottom-left">No. Of Counselling <b>150+</b></div>
-                                <div class="bottom-right"><a href="#">Check availability</a></div>
-                            </div>
-                            <a href="#" class="book-btn">Book now</a>
-                        </div>          
-                    </div> -->
-                            <!--col-->
-                            <!-- <div class="counselling-col">
-                        <div class="counselling-col-img">
-                            <img src="images/counselling-img.jpg" alt="">
-                            <span class="rating-number"><img src="images/Star.png" alt=""> 3.2</span>
-                        </div>
-                        <div class="counselling-col-content">
-                            <div class="content-top-row d-flex justify-content-between align-items-start">
-                                <div class="top-left"><h3>John Doe</h3> <p>Profession</p></div>
-                                <div class="top-right">Free/hr</div>
-                            </div>
-                            <div class="content-bottom-row d-flex justify-content-between align-items-center">
-                                <div class="bottom-left">No. Of Counselling <b>150+</b></div>
-                                <div class="bottom-right"><a href="#">Check availability</a></div>
-                            </div>
-                            <a href="#" class="book-btn">Book now</a>
-                        </div>
-                    </div> -->
-                        </div>
                     </div>
+                </script>
+                <div class="reviews-wrapper"></div>        
+                </div>
                 </div>
                 <!--center end-->
 
@@ -960,7 +857,7 @@ if($get_breadcrumb)
         var BoardParamKey ='board';
         var isClickedDatePicker = false;
         var FilterDatePickerText = '';
-        var DatePickerParamKey ='board';
+        var DatePickerParamKey ='date_picker';
         var requestData = {};
             requestData.segment = filter_segment_id;
             requestData.brand = '';
@@ -1094,11 +991,17 @@ if($get_breadcrumb)
         $("#datepicker").change(function()
         {
             date_picker = $(this).val();
-             FilterDatePickerText = date_picker;
+            var parts = date_picker.split('-'); // Splitting the date string by '-'
+            // Rearranging the parts
+            var year = parts[2];
+            var month = parts[1];
+            var day = parts[0];
+            var formattedDate = year + '-' + month + '-' + day;
+             FilterDatePickerText = formattedDate;
              isClickedDatePicker =true;
              get_all_data();
         });
-        if(date_picker == '')
+       /* if(date_picker == '')
         {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
@@ -1109,7 +1012,7 @@ if($get_breadcrumb)
             isClickedDatePicker =true;
             date_picker = today;
 
-        }
+        }*/
         
         $(".apply_filter").click(function()
         {
@@ -1307,6 +1210,11 @@ if($get_breadcrumb)
                 requestData.batch = filter_batch_id;
                 add_filter_values(BatchParamKey,FilterBatchText);
             }
+            if (isClickedDatePicker) {
+                urlParams.set(DatePickerParamKey, FilterDatePickerText);
+                requestData.datepicker = FilterDatePickerText;
+                add_filter_values(DatePickerParamKey,FilterDatePickerText);
+            }
             
            var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
             window.history.pushState({ path: newURL }, '', newURL);
@@ -1386,6 +1294,11 @@ if($get_breadcrumb)
                     {
                         isClickedBatch = false;
                         requestData.batch = '';
+                    }
+                    if(split_val == DatePickerParamKey)
+                    {
+                        isClickedDatePicker = false;
+                        requestData.datepicker = today;
                     }
              //   if (urlParams.has(split_val)) {
                     urlParams.delete(split_val);
