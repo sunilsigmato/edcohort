@@ -8,6 +8,22 @@ $customer_rating = $this->input->get('customer_rating');
 $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $segment = $this->input->get('segment');
+$segment_temp = $segment;
+if($this->session->userdata('user_id'))
+{
+    $user_id = $this->session->userdata('user_id');
+}
+
+$res_segment=get_segement_id($segment);
+if($res_segment)
+{
+   $segment = $res_segment;
+}
+else
+{
+    header("Location: " . base_url());
+    exit;
+}
 
   //  print_ex($product_list);
 ?>
@@ -16,7 +32,7 @@ $segment = $this->input->get('segment');
 
 <?php 
 
-$get_breadcrumb = get_breadcrumb_value();
+/*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
@@ -31,7 +47,7 @@ if($get_breadcrumb)
 {   
     $breadcrumb_name1 = $get_breadcrumb->breadcrumb1_name;
     $breadcrumb_name2 = $get_breadcrumb->breadcrumb2_name;
-}
+}*/
 ?>
 <!--banner start-->
 <div class="inner-banner ">
@@ -40,8 +56,8 @@ if($get_breadcrumb)
         <div class="breadcrumb">
             <ul>
                 <li>Home</li>
-                <li><?php echo @$breadcrumb_name1; ?> </li>
-                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
+                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -50,22 +66,22 @@ if($get_breadcrumb)
         <div class="tab-menu">
             <ul>
                 <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
+                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Complaint
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Compare
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
+                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort
+                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Cohort
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
+                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Reviews
                     </a></li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons
+                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Coupons
                     </a></li>
             </ul>
         </div>
@@ -85,13 +101,13 @@ if($get_breadcrumb)
         <div class="row">
             <div class="col-md-1 course-img p-3 text-center brandCard">
 
-            <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
+         <!--   <img class="card-img-top" style="height: 150px;"
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>"> -->
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-            <h1 class="mb-3"><?php echo  $get_course_detail; ?></h1>
+            <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
                 <div>
-                <span class="rating-btn-display"><?php echo $get_review_average_rating ?> / 5</span>
+                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> </span>
                   <!-- <?php if($get_brand_compare) { ?>
                     <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
                   <?php } ?> -->
@@ -254,6 +270,7 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="brand" class="brand">
+                                <option value="all">All</option>
                                     <?php foreach($res_filter_brand as $brands){?>
                                     <option value="<?php echo $brands->brand_id; ?>"
                                         <?php if($brands->brand_id == @$get_single_course_detail->brand_id){ echo 'selected'; } ?>>
@@ -301,7 +318,7 @@ if($get_breadcrumb)
                         <div class="board-k12" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_cbsc <?php //if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                     id="cbsc-toggle">
                                     <label><?php echo $filter_cbsc_name ?> </label>
 
@@ -309,7 +326,7 @@ if($get_breadcrumb)
                                         <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
                                         id="cbsc" value="2" >
                                 </div>
-                                <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_icsc <?php //if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                     id="icsc-toggle">
                                     <label><?php echo $filter_icsc_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -322,7 +339,7 @@ if($get_breadcrumb)
                         <div class="board-other" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_online <?php if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_online <?php //if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="online-toggle">
                                     <label><?php echo $filter_online_name ?> </label>
 
@@ -330,7 +347,7 @@ if($get_breadcrumb)
                                         <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
                                         id="online" value="1" >
                                 </div>
-                                <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="offline-toggle">
                                     <label><?php echo $filter_offline_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -365,9 +382,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
+                                <option value="all">All</option>
                                     <?php foreach($res_filter_class as $classes){?>
                                     <option value="<?php echo $classes->class_id; ?>"
-                                        <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->title; ?></option>
                                     <?php } ?>
                                 </select>
@@ -378,9 +396,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">COURSE</h3>
                             <div class="select-box">
                                 <select name="filter_course_dropdown" id="filter_course_dropdown">
+                                <option value="all">All</option>
                                     <?php foreach($res_filter_course as $classes){?>
                                     <option value="<?php echo $classes->id; ?>"
-                                        <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->course_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -392,9 +411,10 @@ if($get_breadcrumb)
                             <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
                             <div class="select-box">
                                 <select name="batch" id="batch">
+                                <option value="all">All</option>
                                     <?php foreach($batch_records as $batches){?>
                                     <option value="<?php echo $batches->batch_id; ?>"
-                                        <?php if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
+                                        <?php //if($batches->batch_id == @$get_single_course_detail->batch_id){ echo 'selected'; } ?>>
                                         <?php echo $batches->batch_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -619,9 +639,8 @@ if($get_breadcrumb)
                                             <?php } ?>
                                             
                                             <?php
-                                                $res_coupon_count_today = get_coupon_count_today($segment,$course,$this->session->userdata('user_id'));
-                                                $res_coupon_count_tommorow = get_coupon_count_tommorow($segment,$course,$this->session->userdata('user_id'));
-                                              //  $res_coupon_count_tommorow = get_coupon_count_now($segment,$course,$this->session->userdata('user_id'));
+                                             //   $res_coupon_count_today = get_coupon_count_today($segment,$course,$this->session->userdata('user_id'));
+                                              //  $res_coupon_count_tommorow = get_coupon_count_tommorow($segment,$course,$this->session->userdata('user_id'));
                                                 
                                                
                                             ?>
@@ -637,9 +656,9 @@ if($get_breadcrumb)
                                             </thead>
                                             <tbody>
                                                 <tr class="danger text-center">
-                                                    <td class="today"><?php echo $res_coupon_count_today ?></td>
-                                                    <td class="tommorow"><?php echo $res_coupon_count_tommorow ?></td>
-                                                    <td class="day_after_tmr_data"><?php echo $res_coupon_count_tommorow ?></td>
+                                                    <td class="today"><?php //echo $res_coupon_count_today ?></td>
+                                                    <td class="tommorow"><?php //echo $res_coupon_count_tommorow ?></td>
+                                                    <td class="day_after_tmr_data"><?php //echo $res_coupon_count_tommorow ?></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -670,12 +689,12 @@ if($get_breadcrumb)
                                         
                                         <div class="d-flex align-items-center justify-content-center">
                                         <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
-                                            <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+                                            <input type="hidden" value = "<?php //echo $course ?>" class = "course">
+                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
+                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
+                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
+                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
                                            
                   
                                         <?php if($this->session->userdata('user_id')){ ?>
@@ -845,7 +864,6 @@ function prodcutType(val) {
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
-
           /** Start Filter Section */
         if(filter_segment_id == 1)
         {
@@ -918,8 +936,7 @@ function prodcutType(val) {
             filter_brand_id = $(this).val();
             filter_class(filter_brand_id,filter_segment_id);
         });
-
-
+        
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
@@ -1183,6 +1200,32 @@ function prodcutType(val) {
         });
 
         $('.cnfrmcpn').click(function() {
+            if(filter_segment_id == '')
+            {
+                alert("Please Select Segment");
+                return
+            }
+            if(filter_brand_id == '' && filter_brand_id == 'all')
+            {
+                alert("Please Select Brand");
+                return  
+            }
+            console.log(filter_brand_id);
+            if(filter_board_id == '')
+            {
+                alert("Please Select Board");
+                return  
+            }
+            if(filter_class_id == '')
+            {
+                alert("Please Select Class");
+                return  
+            }
+            if(filter_course_id == '')
+            {
+                alert("Please Select Course");
+                return  
+            }
             if(radio_btn_val == ''){
                // alert('Please select date range');
                 alert('Please select date range'); 
