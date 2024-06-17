@@ -20,6 +20,12 @@ public function __construct()
       $date = $this->input->post('date');
       $user_id = $this->input->post('user_id');
       $radio_btn_val = $this->input->post('radio_btn_val');
+      $filter_brand_id = $this->input->post('filter_brand_id');
+      $filter_board_id = $this->input->post('filter_board_id');
+      $filter_class_id = $this->input->post('filter_class_id');
+      $filter_course_id = $this->input->post('filter_course_id');
+      $filter_batch_id = $this->input->post('filter_batch_id');
+
       date_default_timezone_set('Asia/Kolkata');
       $currentDateTime = new DateTime();
       $formattedTime = $currentDateTime->format('H:i:s');
@@ -32,11 +38,16 @@ public function __construct()
         'course' => $course, 
         'user_id' => $user_id,
         'radio_btn_selection' => $radio_btn_val,
-        'created_on' => date('Y-m-d H:i:s')
+        'created_on' => date('Y-m-d H:i:s'),
+        'filter_brand_id' => $filter_brand_id,
+        'filter_board_id' => $filter_board_id,
+        'filter_class_id' => $filter_class_id,
+        'filter_course_id' => $filter_course_id,
+        'filter_batch_id' => $filter_batch_id,
     );
     if($radio_btn_val == 'now')
     {
-      $res_now = $this->coupon_model->coupon_exit_check_now($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val);
+      $res_now = $this->coupon_model->coupon_exit_check_now($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
       /*print_R($res_now);
       exit;*/
       if($res_now)
@@ -54,7 +65,7 @@ public function __construct()
     }
     else
     {
-      $res = $this->coupon_model->coupon_exit_check_user($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val);
+      $res = $this->coupon_model->coupon_exit_check_user($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
 
       if($res)
       {

@@ -171,13 +171,13 @@ exit;
        exit;
   }
 
-  function coupon_exit_check_user($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val)
+  function coupon_exit_check_user($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id)
   {
       $res = 0;
       
-      $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and radio_btn_selection != 'now' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
-     // $query_coupon_exist = ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
-     
+      //$query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and radio_btn_selection != 'now' and course = '$course' and user_id = '$user_id' and DATE(date) = '$date'");
+      $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and radio_btn_selection != 'now' and filter_brand_id = '$filter_brand_id' and filter_board_id ='$filter_board_id' and filter_class_id ='$filter_class_id' and filter_course_id='$filter_course_id' and filter_batch_id='$filter_batch_id' and user_id = '$user_id' and DATE(date) = '$date'");
+      $rs = $this->db->last_query();
       $res_coupon_exist = $query_coupon_exist->result();
       if($res_coupon_exist)
       {
@@ -191,20 +191,17 @@ exit;
       
   }
 
-  function coupon_exit_check_now($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val)
+  function coupon_exit_check_now($segment,$course,$user_id,$date_time,$formattedTime,$date,$radio_btn_val,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id)
   {
     $dateTimeString = $date_time;
     $db_time = '';
     
 
       $res = 0;
-      //$date->modify('+10 hours');
-      $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by time DESC LIMIT 1");
-     
-     // $query_coupon_exist = ("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by desc time");
-     
-      $res_coupon_exist = $query_coupon_exist->result();
-      if($res_coupon_exist)
+    //  $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and course = '$course' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by time DESC LIMIT 1");
+    $query_coupon_exist =  $this->db->query("select * from tbl_coupon_buyer_list where segment = '$segment' and filter_brand_id = '$filter_brand_id' and filter_board_id ='$filter_board_id' and filter_class_id ='$filter_class_id' and filter_course_id='$filter_course_id' and filter_batch_id='$filter_batch_id' and radio_btn_selection = '$radio_btn_val' and user_id = '$user_id' and DATE(date) = '$date' order by time DESC LIMIT 1"); 
+    $res_coupon_exist = $query_coupon_exist->result();
+    if($res_coupon_exist)
       {
           $res = 1;
           $db_time = $res_coupon_exist[0]->time;

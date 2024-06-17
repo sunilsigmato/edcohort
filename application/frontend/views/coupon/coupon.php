@@ -1108,6 +1108,10 @@ function prodcutType(val) {
                 }
                 //console.log(options);
                 $('#batch').empty().append(options); 
+                if(options == '')
+                {
+                    filter_batch_id = '';
+                }
               }
            });
         }
@@ -1119,6 +1123,43 @@ function prodcutType(val) {
              user_id = $('.user_id').val();
              segment = $('.segment').val();
              course = $('.course').val();
+             
+             console.log(radio_btn_val);
+             if(filter_segment_id == '')
+            {
+                alert("Please Select Segment");
+                return
+            }
+            if(filter_brand_id ==='' || filter_brand_id == 'all')
+            {
+                $(this).prop('checked', false);
+                alert("Please Select Brand");
+                return  
+            }
+            console.log(filter_brand_id);
+            if(filter_board_id == '' || filter_board_id =='all')
+            {
+                $(this).prop('checked', false);
+                alert("Please Select Board");
+                return  
+            }
+            if(filter_class_id == '' || filter_class_id =='all')
+            {
+                alert("Please Select Class");
+                return  
+            }
+            if(filter_course_id == '' || filter_course_id =='all')
+            {
+                $(this).prop('checked', false);
+                alert("Please Select Course");
+                return  
+            }
+            if(filter_batch_id == '' || filter_batch_id =='all')
+            {
+                $(this).prop('checked', false);
+                alert("Please Select Course");
+                return  
+            }
 
              $.ajax({
               type : 'POST',    
@@ -1200,30 +1241,41 @@ function prodcutType(val) {
         });
 
         $('.cnfrmcpn').click(function() {
+            //alert(filter_brand_id);
+            /*if(!empty(filter_brand_id))
+            {
+                alert("byeee");
+            }*/
             if(filter_segment_id == '')
             {
                 alert("Please Select Segment");
                 return
             }
-            if(filter_brand_id == '' && filter_brand_id == 'all')
+            if(filter_brand_id ==='' || filter_brand_id == 'all')
             {
                 alert("Please Select Brand");
                 return  
             }
             console.log(filter_brand_id);
-            if(filter_board_id == '')
+            if(filter_board_id == '' || filter_board_id =='all')
             {
                 alert("Please Select Board");
                 return  
             }
-            if(filter_class_id == '')
+            if(filter_class_id == '' || filter_class_id =='all')
             {
                 alert("Please Select Class");
                 return  
             }
-            if(filter_course_id == '')
+            if(filter_course_id == '' || filter_course_id =='all')
             {
                 alert("Please Select Course");
+                return  
+            }
+            if(filter_batch_id == '' || filter_batch_id =='all')
+            {
+                alert("Please Select Course");
+                console.log(filter_course_id);
                 return  
             }
             if(radio_btn_val == ''){
@@ -1231,6 +1283,7 @@ function prodcutType(val) {
                 alert('Please select date range'); 
                 return 
             }else{
+            
               var user_id = $('.user_id').val();
               var date_sel = $('#date_sel').val();
               var segment = $('.segment').val();
@@ -1257,7 +1310,7 @@ function prodcutType(val) {
                 }
                 if(radio_btn_val == 'day_after_tmr')
                 {
-                    day = (date.getDate()).toString().padStart(2, "0");
+                     day = (date.getDate()).toString().padStart(2, "0");
                      month = (date.getMonth() + 1).toString().padStart(2, "0");
                      year = date.getFullYear();
                      DateCmpr = `${year}-${month}-${day}`;
@@ -1269,7 +1322,6 @@ function prodcutType(val) {
                      else{
                         currentDate = date_sel;
                      }
-                   
                 }
                 
             
@@ -1283,6 +1335,11 @@ function prodcutType(val) {
                 date:currentDate,
                 segment:segment,
                 course:course,
+                filter_brand_id : filter_brand_id,
+                filter_board_id : filter_board_id,
+                filter_class_id : filter_class_id,
+                filter_course_id : filter_course_id,
+                filter_batch_id : filter_batch_id,
               }, 
               dataType: "json",   
               success: function (response) {
