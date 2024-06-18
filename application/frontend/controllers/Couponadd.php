@@ -89,10 +89,15 @@ public function __construct()
       $course = $this->input->post('course');
       $selected_date = $this->input->post('selected_date');
       $user_id = $this->input->post('user_id');
+      $filter_brand_id = $this->input->post('filter_brand_id');
+      $filter_board_id = $this->input->post('filter_board_id');
+      $filter_class_id = $this->input->post('filter_class_id');
+      $filter_course_id = $this->input->post('filter_course_id');
+      $filter_batch_id = $this->input->post('filter_batch_id');
 
-      $res_today = $this->coupon_model->get_coupon_count_today($segment,$course,$user_id);
-      $res_tommorow = $this->coupon_model->get_coupon_count_tommorow($segment,$course,$user_id);
-      $res_selected_date = $this->coupon_model->get_coupon_count_selected_date($segment,$course,$user_id,$selected_date);
+      $res_today = $this->coupon_model->get_coupon_count_today($segment,$course,$user_id,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
+      $res_tommorow = $this->coupon_model->get_coupon_count_tommorow($segment,$course,$user_id,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
+      $res_selected_date = $this->coupon_model->get_coupon_count_selected_date($segment,$course,$user_id,$selected_date,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
       http_response_code(200);
       echo json_encode(array("status"=>"1","today"=>$res_today,"tommorow"=>$res_tommorow,"selected_date"=>$res_selected_date)); 
       //print_R($res_today);
@@ -104,9 +109,15 @@ public function __construct()
     $segment= $this->input->post('segment');
       $course = $this->input->post('course');
       $user_id = $this->input->post('user_id');
+      $filter_brand_id = $this->input->post('filter_brand_id');
+      $filter_board_id = $this->input->post('filter_board_id');
+      $filter_class_id = $this->input->post('filter_class_id');
+      $filter_course_id = $this->input->post('filter_course_id');
+      $filter_batch_id = $this->input->post('filter_batch_id');
+      
 
-      $res_today = $this->coupon_model->get_coupon_count_today($segment,$course,$user_id);
-      $res_tommorow = $this->coupon_model->get_coupon_count_tommorow($segment,$course,$user_id);
+      $res_today = $this->coupon_model->get_coupon_count_today($segment,$course,$user_id,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
+      $res_tommorow = $this->coupon_model->get_coupon_count_tommorow($segment,$course,$user_id,$filter_brand_id,$filter_board_id,$filter_class_id,$filter_course_id,$filter_batch_id);
       http_response_code(200);
       echo json_encode(array("status"=>"1","today"=>$res_today,"tommorow"=>$res_tommorow)); 
   }

@@ -910,6 +910,7 @@ function prodcutType(val) {
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
+            filter_class(filter_brand_id,filter_segment_id);
 
         });
         $('.toggle_icsc').click(function() {
@@ -917,18 +918,21 @@ function prodcutType(val) {
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+            filter_class(filter_brand_id,filter_segment_id);
 
         });
         $('.toggle_online').click(function() { 
             filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
+            filter_class(filter_brand_id,filter_segment_id);
 
         });
         $('.toggle_offline').click(function() {
             filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
+            filter_class(filter_brand_id,filter_segment_id);
         });
    
         $("#brand").change(function()
@@ -1168,6 +1172,11 @@ function prodcutType(val) {
                 user_id : user_id,
                 segment:segment,
                 course:course,
+                filter_brand_id : filter_brand_id,
+                filter_board_id : filter_board_id,
+                filter_class_id : filter_class_id,
+                filter_course_id : filter_course_id,
+                filter_batch_id : filter_batch_id,
               }, 
               dataType: "json",   
               success: function (response) {
@@ -1215,6 +1224,11 @@ function prodcutType(val) {
                 selected_date:date_sel,
                 segment:segment,
                 course:course,
+                filter_brand_id : filter_brand_id,
+                filter_board_id : filter_board_id,
+                filter_class_id : filter_class_id,
+                filter_course_id : filter_course_id,
+                filter_batch_id : filter_batch_id,
               }, 
               dataType: "json",   
               success: function (response) {
