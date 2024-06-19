@@ -401,6 +401,49 @@ class Common_model extends CI_Model {
         }
        
     }
+
+	function get_filter_class_detail_comparison($segment,$filter_board_id)
+    {
+        $where= '';
+        $query = '';
+        $where.=" c.segment_id = ".$segment." and c.board_id = ".$filter_board_id." and b.class_id = c.class_id";
+        $this->db->select('b.title,b.class_id,c.product_id');
+        $this->db->from('tbl_product c, tbl_class b');
+         $this->db->where($where);
+        $this->db->group_by('c.class_id');
+        //$sql = $this->db->get_compiled_select();
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return $query;
+        }
+       
+    }
+	function get_filter_course_detail_comparison($segment,$board_id,$class_id)
+    {
+        $where= '';
+        $query = '';
+        $where.=" c.segment_id = ".$segment." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
+        $this->db->select('b.course_name,b.id,c.product_id');
+        $this->db->from('tbl_product c, tbl_course b');
+         $this->db->where($where);
+        $this->db->group_by('c.course_id');
+        //$sql = $this->db->get_compiled_select();
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return $query;
+        }
+       
+    }
 	function get_filter_course_detail($segment,$board_id,$brand_id,$class_id)
     {
         $where= '';
@@ -422,6 +465,7 @@ class Common_model extends CI_Model {
         }
        
     }
+	
 	
 	function get_filter_batch_detail($segment,$board_id,$brand_id,$class_id,$course_id)
     {

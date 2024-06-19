@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/handlebar-custom.min.js" type="text/javascript"></script>
 <?php $course = $this->input->get('course');
 $brandID = $this->input->get('brand');
 $product_type = $this->input->get('product_type');
@@ -9,10 +11,16 @@ $date_posted = $this->input->get('date_posted');
 $sort_by = $this->input->get('sort_by');
 $comparison_id = count(explode(',', $this->input->get('brandID') ?? ''));
 $segment = $this->input->get('segment');
+$segment_temp = $segment;
+if($this->session->userdata('user_id'))
+{
+    $user_id = $this->session->userdata('user_id');
+}
+$res_segment=get_segement_id($segment);
 // print_ex($_GET);
 ?>
 <?php 
-$get_breadcrumb = get_breadcrumb_value();
+/*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
 $breadcrumb_name2 = '';
 
@@ -24,7 +32,7 @@ if($get_breadcrumb)
 $get_single_course_detail = get_single_coure_detail($course);
 $get_brand_compare = get_brand_compare_detail($course,$segment);
 $get_review_average_rating = get_review_average_rating($course);
-$get_course_detail = get_course_detail($get_single_course_detail->course_id);
+$get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 ?>
 <!--banner start-->
 <div class="inner-banner">
@@ -32,8 +40,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
         <div class="breadcrumb">
             <ul>
                 <li>Home </li>
-                <li><?php echo @$breadcrumb_name1; ?> </li>
-                <li><a href="#"><?php echo @$breadcrumb_name2; ?></a></li>
+                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
     </div>
@@ -79,14 +87,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
             <div class="col-md-1 course-img p-3 text-center brandCard">
 
             <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>">
+                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
-                <h1 class="mb-3"><?php echo  $get_course_detail; ?></h1>
+                <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
                 <div>
-                <span class="rating-btn-display"><?php echo $get_review_average_rating ?> / 5</span>
+                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> / 5</span>
                 <!--<?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
+                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?> / 10</span>
                     <?php } ?>  -->
                     <?php ?>
                      
@@ -205,7 +213,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                             </div>
                         </div>
 
-                        <div class="filter-col">
+                        <!--<div class="filter-col">
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
                                 <select name="brand" id="brand" class="brand">
@@ -216,7 +224,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
                       <!--  <div class="filter-col">
                             <div class="btn-group btn-toggle filter-toggle-box">
@@ -256,7 +264,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                         <div class="board-k12" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_cbsc <?php if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_cbsc <?php //if(@$filter_cbsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
                                     id="cbsc-toggle">
                                     <label><?php echo $filter_cbsc_name ?> </label>
 
@@ -264,12 +272,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                         <?php if(@$filter_cbsc_id == 2){ echo 'checked';} ?>
                                         id="cbsc" value="2" >
                                 </div>
-                                <div class="input-toggle toggle_icsc <?php if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
-                                    id="icsc-toggle">
+                                <div class="input-toggle toggle_icsc active<?php //if(@$filter_icsc_id == $get_single_course_detail->board_id){ echo 'active';} ?>"
+                                    id="icsc-toggle" >
                                     <label><?php echo $filter_icsc_name ?></label>
-                                    <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                        <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
-                                        id="icsc" value="1" >
+                                    <input class="btn btn-lg btn-primary active" type="radio" name="product_type" id="icsc" value="1">
                                 </div>
                             </div>
                         </div>
@@ -277,7 +283,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                         <div class="board-other" style="display:none">
                                                    
                             <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle toggle_online <?php if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_online <?php //if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="online-toggle">
                                     <label><?php echo $filter_online_name ?> </label>
 
@@ -285,7 +291,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                         <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
                                         id="online" value="1" >
                                 </div>
-                                <div class="input-toggle toggle_offline <?php if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                     id="offline-toggle">
                                     <label><?php echo $filter_offline_name ?></label>
                                     <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
@@ -309,7 +315,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                        
                                         ?>
                                     <option value="<?php echo $boards->board_id; ?>"
-                                        <?php if($boards->board_id == @$product_list['0']->board_id){ echo 'selected'; } ?>>
+                                        <?php //if($boards->board_id == @$product_list['0']->board_id){ echo 'selected'; } ?>>
                                         <?php echo $boards->board_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -317,12 +323,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                         </div> -->
 
                         <div class="filter-col">
-                            <h3 class="filter-col-title cal-h3">CLASS</h3>
+                            <h3 class="filter-col-title cal-h3">CLASSss</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
-                                    <?php foreach($res_filter_class as $classes){?>
+                                    <?php 
+                                     $cr=1;
+                                     $fclass_id ='';
+                                    foreach($res_filter_class as $classes){
+                                        if($cr==1)
+                                        {
+                                            $fclass_id = $classes->class_id;
+                                        }    
+                                        $cr++;
+                                        ?>
                                     <option value="<?php echo $classes->class_id; ?>"
-                                        <?php if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->class_id == @$get_single_course_detail->class_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->title; ?></option>
                                     <?php } ?>
                                 </select>
@@ -333,9 +348,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                             <h3 class="filter-col-title">COURSE</h3>
                             <div class="select-box">
                                 <select name="filter_course_dropdown" id="filter_course_dropdown">
-                                    <?php foreach($res_filter_course as $classes){?>
+                                    <?php 
+                                    $cl=1;
+                                    $fcourse_id ='';
+                                    foreach($res_filter_course as $classes){
+                                    if($cl==1)
+                                    {
+                                        $fcourse_id = $classes->id;
+                                    }    
+                                    $cl++;
+                                    ?>
                                     <option value="<?php echo $classes->id; ?>"
-                                        <?php if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
+                                        <?php //if($classes->id == @$get_single_course_detail->course_id){ echo 'selected'; } ?>>
                                         <?php echo $classes->course_name; ?></option>
                                     <?php } ?>
                                 </select>
@@ -343,7 +367,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                         </div>
 
 
-                        <div class="filter-col">
+                      <!--  <div class="filter-col">
                             <h3 class="filter-col-title">BATCH (Cohort) <span>Running Year</span></h3>
                             <div class="select-box">
                                 <select name="batch" id="batch">
@@ -354,18 +378,23 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class=" filter-col ">
+                        </div> -->
+                       <!-- <div class=" filter-col ">
                             <div class="filter-list-box">
                                 <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div>-->
                     </form>
 
                 </div>
             <!-- Left End -->
+
             <!--center start-->
             <div class="col-md-8">
+            <div id="selectedValues"></div>  <!-- for filter values display -->
+            <script id="review-template" type="text/x-handlebars-template">
+            </script>
+            <div class="reviews-wrapper"> </div>
 
                 <div class="review-center">
                     <!-- <div class="review-btn-box">
@@ -776,12 +805,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                             value="<?php echo $segment; ?>">
 
                             <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                            <input type="hidden" value = "<?php echo $course ?>" class = "course">
-                            <input type="hidden" value = "<?php echo $get_single_course_detail->class_id ?>" class = "filter_class">
-                            <input type="hidden" value = "<?php echo $get_single_course_detail->course_id ?>" class = "filter_course">
-                            <input type="hidden" value = "<?php echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
-                            <input type="hidden" value = "<?php echo $get_single_course_detail->board_id ?>" class = "filter_board">
-                            <input type="hidden" value = "<?php echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+                            <input type="hidden" value = "<?php //echo $course ?>" class = "course">
+                            <input type="hidden" value = "<?php echo $fclass_id ?>" class = "filter_class">
+                            <input type="hidden" value = "<?php echo $fcourse_id ?>" class = "filter_course">
+                            <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+                            <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
+                            <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
 
                         <!-- <div class="brand-search-box">
                 <div class="search-result-col" id="search-1" style="display: none;"><a href="#"><img src="<?php echo base_url(); ?>assets/images/close3.png" alt=""></a></div>
@@ -794,7 +823,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                             <?php 
                             $res_brand_list = getseg_brand_list($segment);
                             ?>
-                            <?php foreach ($res_brand_list as $brand) { ?>
+                            <?php foreach ($res_brand_list as $brand) {
+                              ////  print_R($brand); 
+                                ?>
                             <div class="popular-col">
                                 <a href="javascript:void(0)"
                                     onclick="compare_brand('<?php echo $brand->brand_name; ?>','<?php echo $brand->brand_id; ?>')">
@@ -887,6 +918,33 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var product_id = '';
+        if(filter_board_id == '')
+        {
+            filter_board_id = 1;
+        }
+
+        var isClickedSegment = true;
+        var drop_down_text =$('#filter_segment :selected').text().trim(); // for segment text
+        var SegmentParamKey ='segment';
+        var isClickedClass = false;
+        var FilterClassText = '';
+        var ClassParamKey ='class';
+        var isClickedCourse = false;
+        var FilterCourseText = '';
+        var CourseParamKey ='course';
+        var isClickedBoard = false;
+        var FilterBoardText = '';
+        var BoardParamKey ='board';
+       
+
+        var requestData = {};
+            requestData.segment = filter_segment_id;
+            requestData.board = filter_board_id;
+            requestData.class = filter_class_id;
+            requestData.course = filter_course_id;
+            ajax_cal_data();
+
+      
 
           /** Start Filter Section */
         if(filter_segment_id == 1)
@@ -901,7 +959,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
             filter_board_id = filter_online_offline;
             
         }
-
+       
         $("#filter_segment").change(function()
         { 
             
@@ -926,7 +984,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                 $('.board-other').css('display', 'block');
                 $('.board-k12').css('display', 'none');  
             }
-            filter_brand(filter_segment_id);
+            filter_class(filter_segment_id);
+            get_all_data();
         });
 
  
@@ -934,6 +993,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
             filter_board_id = $('#cbsc').val();
             $("#icsc-toggle").removeClass('active');
             $("#cbsc-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'cbsc';
+            get_all_data();
+            filter_class(filter_segment_id);
 
         });
         $('.toggle_icsc').click(function() {
@@ -941,18 +1004,30 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
             
             $("#icsc-toggle").addClass('active');
             $("#cbsc-toggle").removeClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'icsc';
+            get_all_data();
+            filter_class(filter_segment_id);
 
         });
         $('.toggle_online').click(function() { 
             filter_board_id = $('#online').val();
             $("#offline-toggle").removeClass('active');
             $("#online-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'online';
+            get_all_data();
+            filter_class(filter_segment_id);
 
         });
         $('.toggle_offline').click(function() {
             filter_board_id = $('#offline').val();
             $("#online-toggle").removeClass('active');
             $("#offline-toggle").addClass('active');
+            isClickedBoard = true;
+            FilterBoardText = 'offline';
+            get_all_data();
+            filter_class(filter_segment_id);
         });
    
         $("#brand").change(function()
@@ -965,14 +1040,19 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
+            FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
+            isClickedClass =true;
+            get_all_data();
         });
 
         $("#filter_course_dropdown").change(function()
         {
             filter_course_id = $(this).val();
-            filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
-
+            FilterCourseText = $('#filter_course_dropdown :selected').text().trim();
+           // filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
+            isClickedCourse =true;
+            get_all_data();
         });
 
         $("#batch").change(function()
@@ -1041,14 +1121,16 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                 });
         }
 
-        function filter_class(brand_id,segment_id)
+        function filter_class(segment_id)
         {
+            
             $.ajax({
                 type : 'POST',    
-                url: "<?php echo base_url(); ?>filter/get_filter_class_detail",
+                url: "<?php echo base_url(); ?>filter/get_filter_class_detail_comparison",
                 data:{
-                    brand_id : brand_id,
+                  // brand_id : brand_id,
                     segment:segment_id,
+                    filter_board_id:filter_board_id,
                 }, 
                 dataType: "json",   
                 success: function (response) {
@@ -1074,14 +1156,15 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
         }
         function filter_course(brand_id,segment_id,board_id,class_id)
         {
+            
         $.ajax({
               type : 'POST',    
-               url: "<?php echo base_url(); ?>filter/get_filter_course_detail",
+               url: "<?php echo base_url(); ?>filter/get_filter_course_detail_comparison",
               data:{
                 segment:segment_id,
                 board: board_id,
                 class: class_id,
-                brand_id : brand_id,
+              //  brand_id : brand_id,
                // batch: filter_batch_id,
               }, 
               dataType: "json",   
@@ -1101,7 +1184,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
                 $('#filter_course_dropdown').empty().append(options); 
                 if(filter_course_id_temp)
                 {
-                    filter_batch(brand_id,segment_id,board_id,class_id,filter_course_id_temp)
+                    //filter_batch(brand_id,segment_id,board_id,class_id,filter_course_id_temp)
                 }
               }
            });
@@ -1136,6 +1219,160 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);
               }
            });
         }
+
+        function get_all_data()
+        {
+              const selectedValuesDiv = document.getElementById("selectedValues");
+            var urlParams = new URLSearchParams(window.location.search);
+            if(isClickedSegment)
+            {
+                urlParams.set(SegmentParamKey, drop_down_text);  
+                requestData.segment = filter_segment_id;
+            }
+            if (isClickedBoard) {
+                urlParams.set(BoardParamKey, FilterBoardText);
+                requestData.board = filter_board_id;
+                add_filter_values(BoardParamKey,FilterBoardText);
+            }
+            if (isClickedClass) {
+                urlParams.set(ClassParamKey, FilterClassText);
+                requestData.class = filter_class_id;
+                add_filter_values(ClassParamKey,FilterClassText);
+            }
+            if (isClickedCourse) {
+                urlParams.set(CourseParamKey, FilterCourseText);
+                requestData.course = filter_course_id;
+                add_filter_values(CourseParamKey,FilterCourseText);
+            }
+           var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+            window.history.pushState({ path: newURL }, '', newURL);
+            ajax_cal_data();
+        }
+
+        function add_filter_values(val1,val2)
+        {
+            
+            //console.log(requestData);
+            var urlParams = new URLSearchParams(window.location.search);
+            var brn_value = val1 + '=' + val2 ;
+            var span = document.createElement("span");
+            span.classList.add("value-span");
+            //console.log(brn_value);
+             // Set text content
+            span.textContent = val2;
+            // Set display value
+            span.style.display = "block"; 
+            var div = document.getElementById("selectedValues");
+            var closeButton = document.createElement("button");
+            closeButton.textContent = "X";
+            closeButton.setAttribute("data-value", brn_value);
+
+            var selectedValuesDiv = document.getElementById("selectedValues");
+            
+            // Get all the span elements within the selectedValuesDiv
+            var spans = selectedValuesDiv.getElementsByTagName("span");
+           // Loop through the spans and retrieve their values
+           for (var i = 0; i < spans.length; i++) 
+           {
+               var value = spans[i].innerHTML;
+               // Create a temporary div element
+               var tempDiv = document.createElement('div');
+               // Set the innerHTML of the div
+               tempDiv.innerHTML = value;
+               // Get the button element from the div
+               var buttonElement = tempDiv.querySelector('button');
+               // Retrieve the value of the data-value attribute
+               var dataValue = buttonElement.getAttribute('data-value');
+               var parts = dataValue.split("="); // Split = before values ex: brand=Buyjs
+                var split_val = parts[0]; // output : brand
+                if(val1 == split_val) // check param key Duplicate exist or not 
+                {
+                    spans[i].remove(); // remove if duplicate exist
+                }
+               
+           }
+
+            closeButton.onclick = function() // close button for remove filters
+            {
+                var valueToRemove = this.getAttribute("data-value"); 
+                var spans = document.getElementsByClassName("value-span");
+                var parts = valueToRemove.split("=");
+                var split_val = parts[0];
+
+                    if(split_val == BoardParamKey)
+                    {
+                        isClickedBoard = false;
+                        requestData.board = '';
+                    }
+                    if(split_val == ClassParamKey)
+                    {
+                        isClickedClass = false;
+                        requestData.class = '';
+                    }
+                    if(split_val == CourseParamKey)
+                    {
+                        isClickedCourse = false;
+                        requestData.course = '';
+                    }
+             //   if (urlParams.has(split_val)) {
+                    urlParams.delete(split_val);
+             //   }
+                var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + urlParams.toString();
+                
+                window.history.pushState({ path: newURL }, '', newURL);
+                span.remove();
+                ajax_cal_data();
+                
+            };
+            span.appendChild(closeButton);
+            // Append the span to the div
+            div.appendChild(span);
+            document.getElementById("selectedValues").appendChild(span);
+           
+        }
+        
+        function ajax_cal_data()
+        {
+            $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/get_all_data_comparison",
+              data: requestData, 
+              dataType: "json",   
+              success: function (response) {
+                   
+                if (response && response.items.length > 0) {
+                    
+                // Compile the Handlebars template
+                var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                var pageLinkHTML = response.page_link;
+        
+               // paginationContainer.innerHTML = pageLinkHTML 
+                
+               // console.log(pageLinkHTML);
+               // document.getElementById('paginationContainer').innerHTML = pageLinkHTML;   
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+                $(".paging_simple_numbers").html(pageLinkHTML);
+            }
+            else{
+                  // Compile the Handlebars template
+                var templateScript = $("#review-template").html();
+                var template = Handlebars.compile(templateScript);
+                    
+                // Render the template with the response data
+                var html = template(response);
+
+                // Append the rendered HTML to the DOM
+                $('.reviews-wrapper').html(html);
+            }
+              }
+           });
+        }
+
     });
         /** End Filter Section */                                       
 

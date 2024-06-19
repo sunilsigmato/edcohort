@@ -12,6 +12,7 @@ public function __construct()
     $this->load->model('review_model');
     $this->load->model('complaint_model');
     $this->load->model('counselling_model');
+    $this->load->model('Comparison_model');
 }
 
 
@@ -30,6 +31,27 @@ public function __construct()
     $res_filter_brand_list = $this->common_model->get_filter_class_detail($segment,$brand_id);
     http_response_code(200);
     echo json_encode(array("status"=>"1","data"=>$res_filter_brand_list)); 
+
+  }
+
+  function get_filter_class_detail_comparison()
+  {
+    $segment= $this->input->post('segment');
+    $filter_board_id= $this->input->post('filter_board_id');
+    $res_filter_brand_list = $this->common_model->get_filter_class_detail_comparison($segment,$filter_board_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$res_filter_brand_list)); 
+
+  }
+
+  function get_filter_course_detail_comparison()
+  {
+    $segment= $this->input->post('segment');
+    $board_id= $this->input->post('board');
+    $class_id= $this->input->post('class');
+    $get_filter_course_detail = $this->common_model->get_filter_course_detail_comparison($segment,$board_id,$class_id);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$get_filter_course_detail)); 
 
   }
 
@@ -115,6 +137,15 @@ public function __construct()
     $user_id = $this->input->post('user_id');
     
     $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page);
+
+  }
+  function get_all_data_comparison()
+  {
+    $segment= $this->input->post('segment');
+    $board= $this->input->post('board');
+    $class= $this->input->post('class');
+    $course= $this->input->post('course');    
+    $get_filter_result_detail = $this->Comparison_model->get_all_data_comparison($segment,$board,$class,$course);
 
   }
   

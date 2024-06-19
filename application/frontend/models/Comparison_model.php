@@ -65,6 +65,81 @@ class Comparison_model extends CI_Model {
           ".$where." ");
       return $query->result();
   }
+  function get_all_data_comparison($segment,$board,$class,$course)
+  {
+    $where = "";
+    //  $limit = 20;
+      if(!empty($segment))
+      {
+          $where .="c.segment_id = $segment";
+      }
+      if(!empty($board) && ($board != 'all'))
+      {
+          $where .= " and c.board_id = $board";
+      }
+      if(!empty($class) && ($class != 'all'))
+      {
+          $where .= " and c.class_id = $class";
+      }
+      if(!empty($course) && ($course != 'all'))
+      {
+          $where .= " and c.course_id = $course";
+      }
+      $data = new stdClass;
+      $items='';
+      $data->items = array();
+     $get_product_list = $this->getProductComparsionLimit($where);
+     if($get_product_list)
+     {
+        $i=0;
+        foreach($get_product_list as $r)
+        {
+          $item = new stdClass;
+          $i++;
+          $item->product_brand = $r->product_brand;
+          $item->brand_name = $r->brand_name;
+          $item->brand_name = $r->brand_name;
+          $item->brand_image = $r->brand_image;
+          $item->brand_id = $r->brand_id;
+          $item->product_id = $r->product_id; 
+
+        /*  $currentUrl = base_url(); 
+            $newUrl = dirname($currentUrl);
+            $item->image_path = $currentUrl.'uploads/event/'.$r->image_path;*/
+
+          array_push($data->items,$item);
+
+        }
+        $data->total_items=$i;
+
+     }
+     $code =200;
+     $this->output->set_status_header($code)->set_content_type('application/json')->
+              set_output(json_encode($data));     
+     
+     
+  }
+
+  function getProductComparsionLimit($where)
+  {
+        $query = '';
+      //  $where.=" c.segment_id = ".$segment." and c.board_id = ".$board."  b.brand_id = c.product_brand";
+        $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id,c.product_id');
+        $this->db->from('tbl_product c, tbl_brand b');
+         $this->db->where($where);
+        $this->db->group_by('b.brand_id');
+        //$sql = $this->db->get_compiled_select();
+        $query=$this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return $query;
+        }
+  }
+
   function comparison_option($where)
   { 
       if($where!=""){

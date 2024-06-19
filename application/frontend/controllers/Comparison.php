@@ -15,22 +15,38 @@ class comparison extends CI_Controller {
   }
   function index($id = '')
   {
-    $course = $this->input->get('course');
+    //$course = $this->input->get('course');
     $segment = $this->input->get('segment');
     //print_R($segment);
     //exit;
     ////Filter data ////////
-    $where_category = 'status = 1 and parent_id = 0';
-    $data['category_records'] = $this->common_model->selectWhereorderby('tbl_class',$where_category,'title','ASC');
+   /* $where_category = 'status = 1 and parent_id = 0';
+    $data['category_records'] = $this->common_model->selectWhereorderby('tbl_class',$where_category,'title','ASC');*/
+    /*$class_query='';
+    $where= '';
+    $where.=" c.segment_id = ".$segment;
+    $this->db->select('b.title,b.class_id,c.product_id');
+    $this->db->from('tbl_product c, tbl_class b');
+     $this->db->where($where);
+    $this->db->group_by('c.class_id');
+    $class_query=$this->db->get();
+    if($class_query)
+      {
+        $data['category_records'] = $class_query->result();
+      }
+      else
+      {
+        $data['category_records'] = $class_query;
+      }
     
     $where_brand = 'brand_status = 1';
-    $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');
+    $data['brand_records'] = $this->common_model->selectWhereorderby('tbl_brand', $where_brand, 'brand_sort_order', 'ASC');*/
 
     $where_board = 'status = 1';
     $data['board_records'] = $this->common_model->selectWhereorderby('tbl_board', $where_board, 'board_name', 'ASC');
 
-    $where_batch = 'status = 1 and batch_end >= NOW()';
-    $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
+   /* $where_batch = 'status = 1 and batch_end >= NOW()';
+    $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');*/
 
     $where_class = "status = 1 ";
     $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
