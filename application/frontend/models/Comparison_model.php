@@ -99,14 +99,12 @@ class Comparison_model extends CI_Model {
           $item->product_brand = $r->product_brand;
           $item->brand_name = $r->brand_name;
           $item->brand_name = $r->brand_name;
-          $item->brand_image = $r->brand_image;
+         // $item->brand_image = $r->brand_image;
           $item->brand_id = $r->brand_id;
           $item->product_id = $r->product_id; 
-
-        /*  $currentUrl = base_url(); 
-            $newUrl = dirname($currentUrl);
-            $item->image_path = $currentUrl.'uploads/event/'.$r->image_path;*/
-
+          $currentUrl = base_url(); 
+          $newUrl = dirname($currentUrl);
+          $item->brand_image = $currentUrl.'uploads/brand/'.$r->brand_image;
           array_push($data->items,$item);
 
         }
