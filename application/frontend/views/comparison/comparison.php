@@ -391,11 +391,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
             <!--center start-->
             <div class="col-md-8">
-            <div id="selectedValues"></div>  <!-- for filter values display -->
-            <script id="review-template" type="text/x-handlebars-template">
-            </script>
-            <div class="reviews-wrapper"> </div>
-
+            <div id="selectedValues" style="display:none"></div>  <!-- for filter values display -->
+            <div id="test_id"></div>
                 <div class="review-center">
                     <!-- <div class="review-btn-box">
 
@@ -405,50 +402,29 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         src="<?php echo base_url(); ?>assets/images/review-icon2.png" alt=""> Add a brand to
                     compare</button>
             </div> -->
+
                     <div class="brand-add-box d-flex justify-content-center align-items-center">
                         <?php //print_ex($compare_list1); 
                 ?>
                         <!--col-->
                         <?php if (!empty($compare_list1)) {
                     foreach ($compare_list1 as $comp_list1) {
-                       //print_R($comp_list1);
+                       
                         $resp_brand_details1 =  get_brand_details($comp_list1->brand_id);
                        if($resp_brand_details1)
                        {
+                       
                         ?>
                         <div class="popular-col">
+                        <div class="close-button">
+                        <button type="button" class="close-button">X</button>
+                        </div>
                             <a href="<?php echo $resp_brand_details1->brand_slug; ?>">
                                 <div class="popular-col-image"><img
                                         src="<?php echo base_url(); ?>uploads/brand/<?php echo $resp_brand_details1->brand_image; ?>"
                                         alt="" /></div>
                                 <h3><?php echo $resp_brand_details1->brand_name; ?></h3>
                                 <div>
-                                    <!--
-                                    <?php if ($comp_list1->overall_ranking == 1) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list1->overall_ranking == 2) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list1->overall_ranking == 3) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list1->overall_ranking == 4) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list1->overall_ranking >= 5) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i>
-                                    <?php } ?> 
-                                    -->
                                 </div>
                             </a>
                         </div>
@@ -463,38 +439,16 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                        {
                         ?>
                         <div class="popular-col">
+                        <div class="close-button">
+                        <button type="button" class="close-button">X</button>
+                        </div>
                             <a href="<?php echo $resp_brand_details2->brand_slug; ?>">
                                 <div class="popular-col-image"><img
                                         src="<?php echo base_url(); ?>uploads/brand/<?php echo $resp_brand_details2->brand_image; ?>"
                                         alt="" /></div>
                                 <h3><?php echo $resp_brand_details2->brand_name; ?></h3>
                                 <div>
-                                    <!--
-                                    <?php if ($comp_list2->overall_ranking == 1) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list2->overall_ranking == 2) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list2->overall_ranking == 3) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list2->overall_ranking == 4) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list2->overall_ranking >= 5) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i>
-                                    <?php } ?>
-                                    -->
+                                   
                                 </div>
                             </a>
                         </div>
@@ -507,39 +461,15 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         {
                         ?>
                         <div class="popular-col">
+                        <div class="close-button">
+                        <button type="button" class="close-button">X</button>
+                        </div>
                             <a href="<?php echo $resp_brand_details3->brand_slug; ?>">
                                 <div class="popular-col-image"><img
                                         src="<?php echo base_url(); ?>uploads/brand/<?php echo $resp_brand_details3->brand_image; ?>"
                                         alt="" /></div>
                                 <h3><?php echo $resp_brand_details3->brand_name; ?></h3>
                                 <div>
-                                    <!--
-                                    <?php if ($comp_list3->overall_ranking == 1) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list3->overall_ranking == 2) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list3->overall_ranking == 3) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star"></i> <i
-                                        class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list3->overall_ranking == 4) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star"></i>
-                                    <?php } ?>
-                                    <?php if ($comp_list3->overall_ranking >= 5) { ?>
-                                    <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                    <i class="fa fa-star text-yellow"></i>
-                                    <?php } ?>
-
-                                    -->
                                 </div>
                             </a>
                         </div>
@@ -818,12 +748,30 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 <div class="search-result-col" id="search-3" style="display: none;"> <a href="#"><img src="<?php echo base_url(); ?>assets/images/close3.png" alt=""></a></div>
                 <input class="brand-search-input" type="text" placeholder="Ex.Vedantu, unacademy ">
             </div> -->
+            <script id="review-template" type="text/x-handlebars-template">
                         <div class="popular-row">
                             <!--col-->
+                           
+                            {{#if items}}
+                                {{#each items}}
+                                <div class="popular-col">
+                                    <a href="javascript:void(0)"
+                                        onclick="compare_brand({{brand_name}},{{brand_id}})">
+                                        <input type="checkbox" name="brand_select[]" id="brand_select"
+                                            value="{{brand_id}}"  >
+                                        <div class="popular-col-image"><img
+                                                src="{{brand_image}}">
+                                        </div>
+                                        <h3>{{brand_name}}</h3>
+                                    </a>
+                                </div>
+                                {{/each}}
+                            {{/if}}
+                           
                             <?php 
-                            $res_brand_list = getseg_brand_list($segment);
+                          //  $res_brand_list = getseg_brand_list($segment);
                             ?>
-                            <?php foreach ($res_brand_list as $brand) {
+                          <!--  <?php foreach ($res_brand_list as $brand) {
                               ////  print_R($brand); 
                                 ?>
                             <div class="popular-col">
@@ -836,44 +784,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                             src="<?php echo base_url(); ?>uploads/brand/<?php echo $brand->brand_image; ?>">
                                     </div>
                                     <h3><?php echo $brand->brand_name; ?></h3>
-                                    <!--<div class="popular-col-rating">
-                                        <div class="popular-star-rating">
-                                            <?php if ($brand->overall_ranking == 1) { ?>
-                                            <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i>
-                                            <?php } ?>
-                                            <?php if ($brand->overall_ranking == 2) { ?>
-                                            <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i>
-                                            <?php } ?>
-                                            <?php if ($brand->overall_ranking == 3) { ?>
-                                            <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star text-yellow"></i> <i class="fa fa-star"></i> <i
-                                                class="fa fa-star"></i>
-                                            <?php } ?>
-                                            <?php if ($brand->overall_ranking == 4) { ?>
-                                            <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star text-yellow"></i> <i
-                                                class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star"></i>
-                                            <?php } ?>
-                                            <?php if ($brand->overall_ranking >= 5) { ?>
-                                            <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star text-yellow"></i> <i
-                                                class="fa fa-star text-yellow"></i>
-                                            <i class="fa fa-star text-yellow"></i>
-                                            <?php } ?>
-                                        </div>
-                                        <span class="rating-number">
-                                            <img src="<?php echo base_url(); ?>assets/images/Star.png" alt="">
-                                            <?php echo $brand->overall_ranking; ?></span>
-                                    </div> -->
                                 </a>
                             </div>
-                            <?php } ?>
+                            <?php } ?>  -->
                         </div>
+
+                        </script>
+                        <div class="reviews-wrapper"> </div>
+                        
                         <div class="compare-info">
                             <div class="compare-info-left">You can compare maximum 3 brands</div>
                             <div class="compare-info-right"><span id="selectCount">0</span> of 3 selected</div>
@@ -883,8 +801,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         </div>
                         <a href="javascript:void(0)" class="confirm-btn" id="compareBtn">Compare</a>
                     </div>
+                    
                 </div>
             </div>
+          
             <!--libs-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
             <!--plugin js-->
@@ -922,7 +842,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         {
             filter_board_id = 1;
         }
-
+        console.log(filter_course_id);
         var isClickedSegment = true;
         var drop_down_text =$('#filter_segment :selected').text().trim(); // for segment text
         var SegmentParamKey ='segment';
@@ -1040,15 +960,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         $("#filter_class_dropdown").change(function()
         {
             filter_class_id = $(this).val();
+           
             FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
             isClickedClass =true;
-            get_all_data();
+            
+           
         });
 
         $("#filter_course_dropdown").change(function()
         {
             filter_course_id = $(this).val();
+           
             FilterCourseText = $('#filter_course_dropdown :selected').text().trim();
            // filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
             isClickedCourse =true;
@@ -1074,7 +997,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               }, 
               dataType: "json",   
               success: function (response) {
-                   console.log(response.data[0]);
+                   //console.log(response.data[0]);
                    if(response.data == "")
                    {
                         alert("No data found");
@@ -1145,6 +1068,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     }
                         options += '<option value="' + response.data[i].class_id + '">' + response.data[i].title + '</option>';
                     }
+                    requestData.class = filter_class_id;
                     //console.log(options);
                         $('#filter_class_dropdown').empty().append(options); 
                     if(filter_class_id_temp)
@@ -1169,7 +1093,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               }, 
               dataType: "json",   
               success: function (response) {
-                   console.log(response.data);
+                  // console.log(response.data);
                   var options = '';
                   var filter_course_id_temp = '';
                 for (var i = 0; i < response.data.length; i++) {
@@ -1177,10 +1101,13 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     {
                         filter_course_id = response.data[i].id;
                         filter_course_id_temp = filter_course_id
+                        
                     }
                     options += '<option value="' + response.data[i].id + '">' + response.data[i].course_name + '</option>';
                 }
-                //console.log(options);
+                requestData.course = filter_course_id;
+                get_all_data();
+                
                 $('#filter_course_dropdown').empty().append(options); 
                 if(filter_course_id_temp)
                 {
@@ -1341,6 +1268,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               success: function (response) {
                    
                 if (response && response.items.length > 0) {
+                    //console.log(response.total_items);
                     
                 // Compile the Handlebars template
                 var templateScript = $("#review-template").html();
@@ -1356,7 +1284,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
                 // Append the rendered HTML to the DOM
                 $('.reviews-wrapper').html(html);
-                $(".paging_simple_numbers").html(pageLinkHTML);
+                $("#test_id").html(response.total_items +' Brand Available');
+
             }
             else{
                   // Compile the Handlebars template
@@ -1368,6 +1297,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
                 // Append the rendered HTML to the DOM
                 $('.reviews-wrapper').html(html);
+              
+                $("#test_id").html('0 Brand Available');
             }
               }
            });

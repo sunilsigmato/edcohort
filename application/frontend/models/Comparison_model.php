@@ -85,6 +85,10 @@ class Comparison_model extends CI_Model {
       {
           $where .= " and c.course_id = $course";
       }
+      if(!empty($where))
+      {
+        $where .= " and b.brand_id=c.brand_id ";
+      }
       $data = new stdClass;
       $items='';
       $data->items = array();
@@ -123,11 +127,13 @@ class Comparison_model extends CI_Model {
         $query = '';
       //  $where.=" c.segment_id = ".$segment." and c.board_id = ".$board."  b.brand_id = c.product_brand";
         $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id,c.product_id');
-        $this->db->from('tbl_product c, tbl_brand b');
+        $this->db->from('tbl_product  AS c, tbl_brand AS b');
          $this->db->where($where);
         $this->db->group_by('b.brand_id');
         //$sql = $this->db->get_compiled_select();
         $query=$this->db->get();
+       /* $res = $this->db->last_query();
+        print_r($res);*/
         if($query)
         {
             return $query->result();
