@@ -16,6 +16,7 @@ if($this->session->userdata('user_id'))
 {
     $user_id = $this->session->userdata('user_id');
 }
+$brandID_header = $this->input->get('brandID');
 $res_segment=get_segement_id($segment);
 // print_ex($_GET);
 ?>
@@ -323,7 +324,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         </div> -->
 
                         <div class="filter-col">
-                            <h3 class="filter-col-title cal-h3">CLASSss</h3>
+                            <h3 class="filter-col-title cal-h3">CLASS</h3>
                             <div class="select-box">
                                 <select name="filter_class_dropdown" id="filter_class_dropdown">
                                     <?php 
@@ -417,8 +418,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                        <button type="button" class="close-button">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list1->brand_id; ?>" class="close-button btn_close">X</button>
                         </div>
+                        
                             <a href="<?php echo $resp_brand_details1->brand_slug; ?>">
                                 <div class="popular-col-image"><img
                                         src="<?php echo base_url(); ?>uploads/brand/<?php echo $resp_brand_details1->brand_image; ?>"
@@ -440,7 +442,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                        <button type="button" class="close-button">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list2->brand_id; ?>" class="close-button btn_close">X</button>
                         </div>
                             <a href="<?php echo $resp_brand_details2->brand_slug; ?>">
                                 <div class="popular-col-image"><img
@@ -462,7 +464,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                        <button type="button" class="close-button">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list3->brand_id; ?>" class="close-button btn_close">X</button>
                         </div>
                             <a href="<?php echo $resp_brand_details3->brand_slug; ?>">
                                 <div class="popular-col-image"><img
@@ -475,7 +477,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         </div>
                         <?php } }
                 } ?>
-                        <?php if ($comparison_id >= 3) { ?>
+                        <?php 
+                        
+                        if ($comparison_id >= 3) { ?>
                         <?php } else { ?>
                         <button type="button" class="add-brand-icon" data-bs-toggle="modal"
                             data-bs-target="#compareModal">
@@ -741,6 +745,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+                            <input type="hidden" value = "<?php echo $brandID_header ?>" class = "brandID_header">
+                            
 
                         <!-- <div class="brand-search-box">
                 <div class="search-result-col" id="search-1" style="display: none;"><a href="#"><img src="<?php echo base_url(); ?>assets/images/close3.png" alt=""></a></div>
@@ -751,10 +757,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             <script id="review-template" type="text/x-handlebars-template">
                         <div class="popular-row">
                             <!--col-->
-                           
+                            <input type="text" id="brandSearchInput" placeholder="Search brand..." onkeyup="filterBrands()">
                             {{#if items}}
                                 {{#each items}}
-                                <div class="popular-col">
+                                <div class="popular-col brand-item">
                                     <a href="javascript:void(0)"
                                         onclick="compare_brand({{brand_name}},{{brand_id}})">
                                         <input type="checkbox" name="brand_select[]" id="brand_select"
@@ -837,6 +843,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         var filter_batch_id = $('.filter_batch').val();
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
+        var brandID_header = $('.brandID_header').val();
         var product_id = '';
         if(filter_board_id == '')
         {
@@ -1303,10 +1310,95 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               }
            });
         }
+        var brandID='';
+        var numberChecked = '';
+        $('#compareBtn').click(function() {
+                 numberChecked = $("input[name='brand_select[]']:checked").length;
+                //alert(numberChecked);
+                if (numberChecked > 3) {
+                    //alert(numberChecked);
+                    $("#compare-info-left-error").show();
+                } else {
+                    $("#compare-info-left-error").hide();
+                    var srs = [];
+                    $("input[name='brand_select[]']:checked").each(function() {
+                        //alert( $(this).val() );
+                        srs.push($(this).val());
+                    });
+                    brandID = srs.toString();
+                    compare_click();
+                    // alert(srs);
+                   
+                    //    $.ajax({
+                    //         url:"<?php echo base_url(); ?>comparison-search",
+                    //         method:"POST",
+                    //         data:{brandID:brandID},
+                    //         success:function(data)
+                    //         {
+                    //             $('#batch').html(data);
+                    //         }
+                    //     });
+                }
+            });
+            $('.btn_close').click(function() {
+                var btn_value = $(this).val()
+               console.log(brandID_header); 
+                //  let valuesArray = brandID_header.split(',');
+               if (brandID_header.includes(btn_value)) {
+                // Remove value from string
+                brandID_header = brandID_header.split(',')
+                               .filter(value => value !== btn_value)
+                               .join(',');
+                               brandID = brandID_header;
+            } 
+            compare_click();   
+            });
+
+            function compare_click()
+            {
+                
+                var course = $('#course').val();
+                var brand = $('#brand').val();
+                var product_type = $('#product_type').val();
+                var board = $('#board').val();
+                var classid = $('#class').val();
+                var batch = $('#batch').val();
+                var customer_rating = $('#customer_rating').val();
+                var date_posted = $('#date_posted').val();
+                var sort_by = $('#sort_by').val();
+                var segment = $('#segment').val();
+                window.location = base_url + 'comparison?brandID=' + brandID + '&course=' + course +
+                    '&brand=' +
+                    brand + '&product_type=' + product_type + '&board=' + board + '&classid=' +
+                    classid +
+                    '&batch=' + batch + '&customer_rating=' + customer_rating + '&date_posted=' +
+                    date_posted + '&segment=' + segment;
+            }
+
+       
 
     });
         /** End Filter Section */                                       
 
+        function filterBrands() 
+        {
+            // Get input value and convert to lowercase for case-insensitive search
+            var input = document.getElementById('brandSearchInput').value.toLowerCase();
+            // Get all brand items
+            var brandItems = document.getElementsByClassName('brand-item');
+            // Loop through each brand item
+            for (var i = 0; i < brandItems.length; i++) {
+                var brandName = brandItems[i].getElementsByTagName('h3')[0];
+                var brandCheckbox = brandItems[i].getElementsByClassName('brand-checkbox')[0];
+
+                // Check if the brand name matches the search input
+                if (brandName.innerHTML.toLowerCase().indexOf(input) > -1) {
+                    brandItems[i].style.display = "";  // Show matching brand item
+                } else {
+                    brandItems[i].style.display = "none";  // Hide non-matching brand item
+                }
+            }
+        }
 
         
 
@@ -1487,55 +1579,19 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             //     header.classList.remove("sticky");
             //   }
             // }
+            
+       
 
-            $('#compareBtn').click(function() {
-                var numberChecked = $("input[name='brand_select[]']:checked").length;
-                //alert(numberChecked);
-                if (numberChecked > 3) {
-                    //alert(numberChecked);
-                    $("#compare-info-left-error").show();
-                } else {
-                    $("#compare-info-left-error").hide();
-                    var srs = [];
-                    $("input[name='brand_select[]']:checked").each(function() {
-                        //alert( $(this).val() );
-                        srs.push($(this).val());
-                    });
-                    // alert(srs);
-                    var brandID = srs.toString();
-                    var course = $('#course').val();
-                    var brand = $('#brand').val();
-                    var product_type = $('#product_type').val();
-                    var board = $('#board').val();
-                    var classid = $('#class').val();
-                    var batch = $('#batch').val();
-                    var customer_rating = $('#customer_rating').val();
-                    var date_posted = $('#date_posted').val();
-                    var sort_by = $('#sort_by').val();
-                    var segment = $('#segment').val();
-                    window.location = base_url + 'comparison?brandID=' + brandID + '&course=' + course +
-                        '&brand=' +
-                        brand + '&product_type=' + product_type + '&board=' + board + '&classid=' +
-                        classid +
-                        '&batch=' + batch + '&customer_rating=' + customer_rating + '&date_posted=' +
-                        date_posted + '&segment=' + segment;
-                    //    $.ajax({
-                    //         url:"<?php echo base_url(); ?>comparison-search",
-                    //         method:"POST",
-                    //         data:{brandID:brandID},
-                    //         success:function(data)
-                    //         {
-                    //             $('#batch').html(data);
-                    //         }
-                    //     });
-                }
-            });
+            /*function compare_brand_remove(id)
+        {
+                console.log(numberChecked);
+        }*/
             </script>
 
 
             <script type="text/javascript">
             var count = 0;
-
+            
             function compare_brand(name, id) {
                 //count++;
                 // alert(count);

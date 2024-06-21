@@ -48,8 +48,8 @@ class comparison extends CI_Controller {
    /* $where_batch = 'status = 1 and batch_end >= NOW()';
     $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');*/
 
-    $where_class = "status = 1 ";
-    $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+    /*$where_class = "status = 1 ";
+    $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');*/
     ////Filter////////
 
     //print_pre($_POST);
@@ -95,7 +95,7 @@ class comparison extends CI_Controller {
 
 
 
-    $where = "product_status = 'active'";
+    /*$where = "product_status = 'active'";
 
     $brandID = $this->input->get('brand');
     $product_type = $this->input->get('product_type');
@@ -131,9 +131,9 @@ class comparison extends CI_Controller {
         $where .= " and product_id = " . $course . " ";
       }
 
-    }
+    }*/
 
-    $order = "product_name ASC";
+   // $order = "product_name ASC";
 
     //$data['product_list'] = $this->comparison_model->comparison_list($where, $order);
 
@@ -144,7 +144,7 @@ class comparison extends CI_Controller {
 
     //print_ex($_POST);
 
-    $wherereview = "pr.status = 'active'";
+    /*$wherereview = "pr.status = 'active'";
 
     if (!empty($course)) {
       $wherereview .= " and pr.product_id = " . $course . " ";
@@ -171,7 +171,7 @@ class comparison extends CI_Controller {
 
     $data['selected_brand_list'] = $this->comparison_model->getProductcomparison($wherereview);
 
-    $data['review_count'] = $this->number_format_short($n);
+    $data['review_count'] = $this->number_format_short($n);*/
     //print_R($data);
     
     //print_ex($data['comparison_list']);      
