@@ -65,23 +65,23 @@ $breadcrumb_name2 = '';*/
     <div class="col-md-9">
         <div class="tab-menu">
             <ul>
-                <li><a
-                        href="<?php echo base_url(); ?>complaint?&segment=<?php echo $segment_temp; ?>">Complaint
+            <li><a
+                        href="<?php echo base_url(); ?>complaint?segment=<?php echo $segment_temp; ?>">Complaint
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
+                        href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
+                        href="<?php echo base_url(); ?>cohort?segment=<?php echo $segment_temp; ?>">Cohort</a>
                 </li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
+                        href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
                        <!-- <?php echo $review_count; ?> --></a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons</a>
+                        href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupons</a>
                 </li>
             </ul>
         </div>
@@ -341,7 +341,7 @@ $breadcrumb_name2 = '';*/
                                 <label><?php echo $filter_icsc_name ?></label>
                                 <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
                                     <?php if(@$filter_icsc_id == 1){ echo 'checked';} ?>
-                                    id="icsc" value="1" >
+                                    id="icsc" value="1" > 
                             </div>
                         </div>
                         </div> 
@@ -350,7 +350,7 @@ $breadcrumb_name2 = '';*/
                          <div class="board-other" style="display:none">
                                                    
                                                    <div class="btn-group btn-toggle filter-toggle-box">
-                                                       <div class="input-toggle toggle_online <?php// if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                                       <div class="input-toggle toggle_online <?php // if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                                            id="online-toggle">
                                                            <label><?php echo $filter_online_name ?> </label>
                        

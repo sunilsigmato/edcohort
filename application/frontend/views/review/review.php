@@ -66,19 +66,19 @@ $breadcrumb_name2 = '';*/
         <div class="tab-menu">
             <ul>
                 <li><a
-                        href="<?php echo base_url(); ?>complaint?&segment=<?php echo $segment_temp; ?>">Complaint
+                        href="<?php echo base_url(); ?>complaint?segment=<?php echo $segment_temp; ?>">Complaint
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare
                     </a></li>
                 <li><a
                         href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
+                        href="<?php echo base_url(); ?>cohort?segment=<?php echo $segment_temp; ?>">Cohort</a>
                 </li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
+                        href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
                        <!-- <?php echo $review_count; ?> --></a></li>
                 <li><a
                         href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupons</a>
@@ -98,7 +98,7 @@ $breadcrumb_name2 = '';*/
         <div class="row">
             <div class="col-md-1 course-img p-3 text-center brandCard">
                 <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
+                                    src="">
             </div>
             <div class="col-md-6 pt-3 course-name-display">
                 <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
@@ -279,37 +279,7 @@ $breadcrumb_name2 = '';*/
                             </div>
                         </div>
 
-                        <!--<div class="filter-col">
-                            <div class="btn-group btn-toggle filter-toggle-box">
-                                <div class="input-toggle <?php if(@$product_list['0']->product_type == 1){ echo 'active';} ?>"
-                                    id="online-toggle">
-                                    <label>Online</label>
-                                    <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                        <?php if(@$product_list['0']->product_type == 1){ echo 'checked';} ?>
-                                        id="online" value="1" onClick="prodcutType(1)">
-                                </div>
-                                <div class="input-toggle <?php if(@$product_list['0']->product_type == 2){ echo 'active';} ?>"
-                                    id="offline-toggle">
-                                    <label>Offline</label>
-                                    <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                        <?php if(@$product_list['0']->product_type == 2){ echo 'checked';} ?>
-                                        id="offline" value="2" onClick="prodcutType(2)">
-                                </div>
-                            </div>
-                        </div> -->
-
-                       <!-- <div class="filter-col">
-                            <h3 class="filter-col-title">BOARD</h3>
-                            <div class="select-box">
-                                <select name="board" id="board">
-                                    <?php foreach($board_records as $boards){?>
-                                    <option value="<?php echo $boards->board_id; ?>"
-                                        <?php if($boards->board_id == @$product_list['0']->board_id){ echo 'selected'; } ?>>
-                                        <?php echo $boards->board_name; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div> -->
+                      
 
                         <div class="filter-col">
                         <h3 class="filter-col-title">BOARD</h3>
@@ -350,7 +320,7 @@ $breadcrumb_name2 = '';*/
                          <div class="board-other" style="display:none">
                                                    
                                                    <div class="btn-group btn-toggle filter-toggle-box">
-                                                       <div class="input-toggle toggle_online <?php// if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                                       <div class="input-toggle toggle_online <?php // if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
                                                            id="online-toggle">
                                                            <label><?php echo $filter_online_name ?> </label>
                        

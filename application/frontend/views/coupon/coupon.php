@@ -65,24 +65,23 @@ if($get_breadcrumb)
 
         <div class="tab-menu">
             <ul>
-                <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Complaint
+            <li ><a href="<?php echo base_url(); ?>complaint?segment=<?php echo $segment_temp; ?>">Complaint
+                    </a></li>
+                <li ><a
+                        href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare
+                    </a></li>
+                <li ><a
+                        href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Compare
-                    </a></li>
+                        href="<?php echo base_url(); ?>cohort?segment=<?php echo $segment_temp; ?>">Cohort</a>
+                </li>
                 <li><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Counselling
-                    </a></li>
-                <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Cohort
-                    </a></li>
-                <li><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Reviews
-                    </a></li>
+                        href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
+                       <!-- <?php echo $review_count; ?> --></a></li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>">Coupons
-                    </a></li>
+                        href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupons</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -17,6 +17,14 @@ class comparison extends CI_Controller {
   {
     //$course = $this->input->get('course');
     $segment = $this->input->get('segment');
+    if($segment)
+    {
+      $res_segment=get_segement_id($segment);
+      if($res_segment)
+      {
+        $segment = $res_segment;
+      }
+    }
     //print_R($segment);
     //exit;
     ////Filter data ////////

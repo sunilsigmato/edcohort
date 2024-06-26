@@ -15,7 +15,8 @@
     <!-- Back to top -->
     <a href="#top" id="back-to-top" ><i class="fa fa-long-arrow-up"></i></a>
 
-   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
      <!-- JQuery js-->
         <script src="<?php echo base_url(); ?>assets/js/jquery-3.2.1.min.js"></script>
         
@@ -84,6 +85,7 @@
     <!-- file uploads js -->
     <script src="<?php echo base_url(); ?>assets/plugins/fileuploads/js/fileupload.js"></script>
     
+    <script src="<?php echo $main_url; ?>assets/js/excel_upload.min.js" type="text/javascript"></script>
     
     
      <script>

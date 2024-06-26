@@ -17,8 +17,18 @@ if($this->session->userdata('user_id'))
     $user_id = $this->session->userdata('user_id');
 }
 $brandID_header = $this->input->get('brandID');
+//$brandIDs = explode(',', $brandID_header); // Split $brandID string into an array of IDs
 $res_segment=get_segement_id($segment);
-// print_ex($_GET);
+if($res_segment)
+{
+   $segment = $res_segment;
+}
+else
+{
+    header("Location: " . base_url());
+    exit;
+}
+
 ?>
 <?php 
 /*$get_breadcrumb = get_breadcrumb_value();
@@ -50,25 +60,23 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
         <div class="tab-menu">
             <ul>
-                <li><a
-                        href="<?php echo base_url(); ?>complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Complaint
+                <li ><a
+                        href="<?php echo base_url(); ?>complaint?segment=<?php echo $segment_temp; ?>">Complaint
                     </a></li>
                 <li class="active"><a
-                        href="<?php echo base_url(); ?>comparison?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Compare
+                        href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>counselling?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Counselling
+                        href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
                     </a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>cohort?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Cohort</a>
+                        href="<?php echo base_url(); ?>cohort?segment=<?php echo $segment_temp; ?>">Cohort</a>
                 </li>
                 <li><a
-                        href="<?php echo base_url(); ?>review?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Reviews
-                        <?php //echo $review_count; 
-                                                                                                                                                                                                                                                                                                                                                                                ?></a>
-                </li>
+                        href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
+                       <!-- <?php echo $review_count; ?> --></a></li>
                 <li><a
-                        href="<?php echo base_url(); ?>coupon?course=<?php echo @$course; ?>&segment=<?php echo $segment; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>">Coupons</a>
+                        href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupons</a>
                 </li>
             </ul>
         </div>
@@ -746,6 +754,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
                             <input type="hidden" value = "<?php echo $brandID_header ?>" class = "brandID_header">
+                            <input type="hidden" value = "<?php echo $segment_temp ?>" class = "segment_temp">
                             
 
                         <!-- <div class="brand-search-box">
@@ -758,13 +767,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         <div class="popular-row">
                             <!--col-->
                             <input type="text" id="brandSearchInput" placeholder="Search brand..." onkeyup="filterBrands()">
+                            
                             {{#if items}}
                                 {{#each items}}
+
+                                
+                             
+                                    
                                 <div class="popular-col brand-item">
                                     <a href="javascript:void(0)"
                                         onclick="compare_brand({{brand_name}},{{brand_id}})">
                                         <input type="checkbox" name="brand_select[]" id="brand_select"
-                                            value="{{brand_id}}"  >
+                                            value="{{brand_id}}" >
                                         <div class="popular-col-image"><img
                                                 src="{{brand_image}}">
                                         </div>
@@ -844,6 +858,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var brandID_header = $('.brandID_header').val();
+        var segment_temp = $('.segment_temp').val();
         var product_id = '';
         if(filter_board_id == '')
         {
@@ -1367,12 +1382,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 var date_posted = $('#date_posted').val();
                 var sort_by = $('#sort_by').val();
                 var segment = $('#segment').val();
-                window.location = base_url + 'comparison?brandID=' + brandID + '&course=' + course +
-                    '&brand=' +
-                    brand + '&product_type=' + product_type + '&board=' + board + '&classid=' +
-                    classid +
-                    '&batch=' + batch + '&customer_rating=' + customer_rating + '&date_posted=' +
-                    date_posted + '&segment=' + segment;
+                window.location = base_url + 'comparison?brandID=' + brandID + '&segment=' + segment_temp;
             }
 
        
@@ -1380,7 +1390,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     });
         /** End Filter Section */                                       
 
-        function filterBrands() 
+        function filterBrands() // Search Brand 
         {
             // Get input value and convert to lowercase for case-insensitive search
             var input = document.getElementById('brandSearchInput').value.toLowerCase();
