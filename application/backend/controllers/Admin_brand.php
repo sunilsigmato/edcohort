@@ -279,6 +279,14 @@ class admin_brand extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($out));
     }
 }
+function push_excel_values_db(){
+    if($this->input->post('ajax')){
+        
+        $out=$this->brand_model->push_excel_values_db(); 
+        $this->output->set_content_type('application/json')->set_output(json_encode($out));   
+    }
+}
+
 }
 
 ?>
