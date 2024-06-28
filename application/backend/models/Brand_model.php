@@ -182,7 +182,7 @@ class brand_model extends CI_Model
                     "brand_duplicates" => array("total" => 0, "data" => array()),
                    // "present_duplicates" => array("total" => 0, "data" => array()),
                     "updated" => array("total" => 0),
-                    "imported" => array("total" => 0),
+                    "imported" => array("total" => 0, "data" => array()),
                     "processed" => 0,
                     );
                 $i = 0;
@@ -238,29 +238,40 @@ class brand_model extends CI_Model
         
         function excel_stage2_service_insert($stage2, $result)
         { 
-           
+            
      
             $data=array();
             
             $array = array("error" => 0, "msg" => "");
             $temp = "";
             $idcheck = "";
-           // print_R($stage2[0]->{0});
             foreach($stage2 as $s)
             {
+               $brand_name= '';
+               $data=array();
                $brand_name = '"'.$s->{0}.'"';
                $sql_brand_check = 'select brand_name from tbl_brand where brand_name = '."$brand_name";
                $sql_brannd_check_query = $this->db->query($sql_brand_check);
                $res = $sql_brannd_check_query->result();
                if($res)
                {        
-                        print_r($res);
                         $result["brand_duplicates"]["total"]=$result["brand_duplicates"]["total"]+1;
+                        $result["brand_duplicates"]["data"][] = $s->{0};
                         
+               }else{
+                $slug=$this->admin_model->url_slug($s->{0});
+                $data=array(          
+                    'brand_name'=>$s->{0},
+                    'brand_slug'=>$slug,
+                    'date_added'=>date('Y-m-d H:i:s'),
+                  );
+                $this->admin_model->insertData('tbl_brand',$data);
+                $result["imported"]["total"]=$result["imported"]["total"]+1;
+                $result["imported"]["data"][] = $s->{0};
                }
             }
-            print_R($result);
-            exit;   
+            
+            return $result;
         }
 }
 ?>
