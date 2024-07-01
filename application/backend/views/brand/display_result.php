@@ -36,7 +36,20 @@
         </table>
     </div>
      
-    <div class="e-b-im-area">
-        <h4 class="e-b-im">Total Imported to DB : <span>0</span> / <em></em></h4>
+    <div class="e-b-im-area excel-area">
+        <h4 class="e-b-im">Total Imported to DB : <span>0</span> / <em></em> <a  class="e-b-opener-imported btn btn-warning btn-xs" href="#">Show / Hide</a> </h4>
+        <table class="e-b-p-i excel-style-tble table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Brand</th>
+                    <th>ERROR</th>
+                </tr>
+            
+            </thead>
+             <tbody>
+                 
+             </tbody>
+        </table>
     </div>
 </div>
