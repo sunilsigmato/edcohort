@@ -85,7 +85,8 @@
     <!-- file uploads js -->
     <script src="<?php echo base_url(); ?>assets/plugins/fileuploads/js/fileupload.js"></script>
     
-    <script src="<?php echo $main_url; ?>assets/js/excel_upload.min.js" type="text/javascript"></script>
+   <!-- <script src="<?php echo $main_url; ?>assets/js/excel_upload.min.js" type="text/javascript"></script> -->
+
     
     
      <script>

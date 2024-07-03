@@ -216,9 +216,9 @@ class brand_model extends CI_Model
             $array = array("error" => 0, "msg" => "");
             $dt = count((array )$f);
  
-            if(count($stage2) >= 1000 ) {
+            if(count($stage2) >= 10000 ) {
                 $array["error"] = 1;
-                $array["msg"] = "Only 1000 lines of excel can be bulk inserted at a time";
+                $array["msg"] = "Only 10000 lines of excel can be bulk inserted at a time";
                 return $array;
             }    
     
@@ -238,8 +238,6 @@ class brand_model extends CI_Model
         
         function excel_stage2_service_insert($stage2, $result)
         { 
-            
-     
             $data=array();
             
             $array = array("error" => 0, "msg" => "");
@@ -263,6 +261,7 @@ class brand_model extends CI_Model
                 $data=array(          
                     'brand_name'=>$s->{0},
                     'brand_slug'=>$slug,
+                    'brand_image'=>'no_image.jpg',  // Image  already stored in upload/brand
                     'date_added'=>date('Y-m-d H:i:s'),
                   );
                 $this->admin_model->insertData('tbl_brand',$data);

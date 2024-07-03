@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th>SL No</th>
-                    <th>Brand</th>
+                    <th>Class</th>
                 </tr>
             
             </thead>
@@ -24,7 +24,7 @@
             <thead>
                 <tr>
                     <th>SL No</th>
-                    <th>Brand</th>
+                    <th>class</th>
                 </tr>
             
             </thead>
@@ -40,7 +40,7 @@
             <thead>
                 <tr>
                     <th>Sl No</th>
-                    <th>Brand</th>
+                    <th>Class</th>
                 </tr>
             
             </thead>
