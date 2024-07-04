@@ -220,7 +220,7 @@ class admin_class extends CI_Controller
       {
           $data['active']="brand";
           $data['main_url'] = $this->config->item('main_url');
-          
+          $data['script'] = array('../assets/js/class_upload.min.js');
           $this->load->view('common/header');
           $this->load->view('common/sidebar',$data);
           $this->load->view('class/import_excel_add_view');

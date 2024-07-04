@@ -86,8 +86,23 @@
     <script src="<?php echo base_url(); ?>assets/plugins/fileuploads/js/fileupload.js"></script>
     
    <!-- <script src="<?php echo $main_url; ?>assets/js/excel_upload.min.js" type="text/javascript"></script> -->
+   <!--<script src="<?php echo $main_url; ?>assets/js/class_upload.min.js" type="text/javascript"></script> -->
 
-    
+   <?php if(isset($script))
+      {
+         foreach($script as $r)
+        {
+                $resp_parse_val = parse_url($r);
+                    if (empty($resp_parse_val['scheme'])) {
+                        $urlval = base_url($r);
+                    }else{
+                        $urlval =$r;
+                    }
+                    
+                ?>
+                <script src="<?php echo $urlval;?>"></script>
+        <?php } } ?>
+
     
      <script>
       function alert_boot(message) {

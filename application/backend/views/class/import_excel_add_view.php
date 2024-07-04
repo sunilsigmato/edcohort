@@ -1,4 +1,4 @@
-<script src="<?php echo $main_url; ?>assets/js/class_upload.min.js" type="text/javascript"></script>
+
 <div class="app-content  my-3 my-md-5">
                     <div class="side-app">
                         <div class="page-header">

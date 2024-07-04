@@ -260,6 +260,7 @@ class admin_brand extends CI_Controller
     {
         $data['active']="brand";
         $data['main_url'] = $this->config->item('main_url');
+        $data['script'] = array('../assets/js/excel_upload.min.js');
         $this->load->view('common/header');
         $this->load->view('common/sidebar',$data);
         $this->load->view('brand/import_excel_add_view');
