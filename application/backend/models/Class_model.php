@@ -129,24 +129,9 @@ class class_model extends CI_Model
                      $result["validation_failed"]["total"] = $result["validation_failed"]["total"] +
                          $total;
                  }
-                 /*if ($this->input->post("employee_duplicates_total")) {
-                     $total = $this->input->post("employee_duplicates_total");
-                     $result["employee_duplicates"]["total"] = $result["employee_duplicates"]["total"] +
-                         $total;
-                 }
-                 if ($this->input->post("salelement_duplicates_total")) {
-                     $total = $this->input->post("salelement_duplicates_total");
-                     $result["salelement_duplicates"]["total"] = $result["salelement_duplicates"]["total"] +
-                         $total;
-                 }
-                 if ($this->input->post("present_duplicates_total")) {
-                     $total = $this->input->post("present_duplicates_total");
-                     $result["present_duplicates"]["total"] = $result["present_duplicates"]["total"] +
-                         $total;
-                 }*/
+                 
                  if ($this->input->post("imported_total")) {
                      $total = $this->input->post("imported_total");
-                     //$result["imported"]["total"] = $result["imported"]["total"] + $total;
                  }
  
                  if ($this->input->post("processed")) {

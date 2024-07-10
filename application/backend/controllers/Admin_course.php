@@ -140,6 +140,40 @@ class admin_course extends CI_Controller
         echo json_encode(array('slug_name'=>$slug));
     }
     
+     /*** Import Course  */
+
+     function import_add()
+     {
+         $data['active']="brand";
+         $data['main_url'] = $this->config->item('main_url');
+         $data['script'] = array('../assets/js/course_upload.min.js');
+         $this->load->view('common/header');
+         $this->load->view('common/sidebar',$data);
+         $this->load->view('course/import_excel_add_view');
+         $this->load->view('common/footer');
+ 
+     }
+     function import_ajax_save(){
+       $data=$this->course_model->upload_files();
+       $this->output->set_content_type('application/json')->set_output(json_encode($data));
+   }
+   function read_excel_values(){
+     if($this->input->post('ajax')){
+         $this->load->library('spout');
+         $file_path=$this->input->post('file_path');
+         $data=array("file"=>$file_path,"dir"=>"../uploads/brand_course/");
+         $out=$this->spout->create_reader($data);
+         $this->output->set_content_type('application/json')->set_output(json_encode($out));
+     }
+ }
+ function push_excel_values_db(){
+     if($this->input->post('ajax')){
+         
+         $out=$this->course_model->push_excel_values_db(); 
+         $this->output->set_content_type('application/json')->set_output(json_encode($out));   
+     }
+ }
+
 }
 
 ?>
