@@ -8,7 +8,7 @@ class comparison extends CI_Controller {
 
       $this->load->library('pagination');
       $this->load->helper('form');
-      $this->load->model('comparison_model');
+      $this->load->model('comparison_model'); 
     $this->load->model('comparison_model');
     $this->load->model('review_model');
     $this->load->model('Common_model');
@@ -66,9 +66,16 @@ class comparison extends CI_Controller {
       $compare_id = $this->input->get('brand');
     }else{
       $compare_id = $this->input->get('brandID');
-    }    
+    } 
+    $boardId = $this->input->get('boardId');
+    $classId = $this->input->get('classId');
+    $courseId = $this->input->get('courseId');
     $compare_id = explode(',',$compare_id ?? '');
+    $board_id = explode(',',$boardId ?? '');
+    $class_id = explode(',',$classId ?? '');
+    $course_id = explode(',',$courseId ?? '');
     
+ 
     /*$where = 'brand_id = '."'".$compare_id['0']."'";
     $data['compare_list1'] = $this->common_model->selectWhere('tbl_brand',$where);
     if(!empty($compare_id['1'])){
@@ -79,17 +86,27 @@ class comparison extends CI_Controller {
   //}
   if(!empty($compare_id['0'])){
     $cmp0 = $compare_id['0'];
-    $where = "segment_id = $segment and brand_id= $cmp0";
+    $board_id0 = $board_id['0'];
+    $class_id0 = $class_id['0'];
+    $course_id0 = $course_id['0'];
+    $where = "segment_id = $segment and brand_id= $cmp0 and board_id= $board_id0 and class_id= $class_id0 and course_id= $course_id0";
     $data['compare_list1'] = $this->common_model->selectWhere('tbl_brand_compare',$where);
+   
   }
   if(!empty($compare_id['1'])){
     $cmp1 = $compare_id['1'];
-    $where = "segment_id = $segment and brand_id= $cmp1";
+    $board_id1 = $board_id['1'];
+    $class_id1 = $class_id['1'];
+    $course_id1 = $course_id['1'];
+    $where = "segment_id = $segment and brand_id= $cmp1 and board_id= $board_id1 and class_id= $class_id1 and course_id= $course_id1";
     $data['compare_list2'] = $this->common_model->selectWhere('tbl_brand_compare',$where);
   }
   if(!empty($compare_id['2'])){
     $cmp2 = $compare_id['2'];
-    $where = "segment_id = $segment and brand_id= $cmp2";
+    $board_id2 = $board_id['2'];
+    $class_id2 = $class_id['2'];
+    $course_id2 = $course_id['2'];
+    $where = "segment_id = $segment and brand_id= $cmp2 and board_id= $board_id2 and class_id= $class_id2 and course_id= $course_id2";
     $data['compare_list3'] = $this->common_model->selectWhere('tbl_brand_compare',$where);
   }
   //print_R( $data['compare_list3'] );

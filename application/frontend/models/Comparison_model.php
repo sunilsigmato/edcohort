@@ -106,6 +106,9 @@ class Comparison_model extends CI_Model {
          // $item->brand_image = $r->brand_image;
           $item->brand_id = $r->brand_id;
           $item->product_id = $r->product_id; 
+          $item->board_id = $r->board_id; 
+          $item->class_id = $r->class_id; 
+          $item->course_id = $r->course_id; 
           $currentUrl = base_url(); 
           $newUrl = dirname($currentUrl);
           $item->brand_image = $currentUrl.'uploads/brand/'.$r->brand_image;
@@ -126,7 +129,7 @@ class Comparison_model extends CI_Model {
   {
         $query = '';
       //  $where.=" c.segment_id = ".$segment." and c.board_id = ".$board."  b.brand_id = c.product_brand";
-        $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id,c.product_id');
+        $this->db->select('c.product_brand,b.brand_name,b.brand_image,b.brand_id,c.product_id,c.board_id,c.class_id,c.course_id');
         $this->db->from('tbl_product  AS c, tbl_brand AS b');
          $this->db->where($where);
         $this->db->group_by('b.brand_id');

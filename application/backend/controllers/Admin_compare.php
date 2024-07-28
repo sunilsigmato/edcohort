@@ -127,6 +127,41 @@ class admin_compare extends CI_Controller
         redirect(base_url().'admin_compare');
 
     }
+
+     /*** Import Compare  */
+
+     function import_add()
+     {
+         $data['active']="Complaint";
+         $data['main_url'] = $this->config->item('main_url');
+         $data['script'] = array('../assets/js/compare_upload.min.js');
+         $this->load->view('common/header');
+         $this->load->view('common/sidebar',$data);
+         $this->load->view('compare/import_excel_add_view');
+         $this->load->view('common/footer');
+ 
+     }
+     function import_ajax_save(){
+       $data=$this->compare_model->upload_files();
+       $this->output->set_content_type('application/json')->set_output(json_encode($data));
+   }
+   function read_excel_values(){
+     if($this->input->post('ajax')){
+         $this->load->library('spout');
+         $file_path=$this->input->post('file_path');
+         $data=array("file"=>$file_path,"dir"=>"../uploads/brand_compare/");
+         $out=$this->spout->create_reader($data);
+         $this->output->set_content_type('application/json')->set_output(json_encode($out));
+     }
+ }
+ function push_excel_values_db(){
+     if($this->input->post('ajax')){
+         
+         $out=$this->compare_model->push_excel_values_db(); 
+         $this->output->set_content_type('application/json')->set_output(json_encode($out));   
+     }
+ }
+
    
 }
 ?>

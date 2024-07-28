@@ -275,5 +275,40 @@ class admin_complaint extends CI_Controller
         $this->session->set_flashdata('success','Product complaint Reply Updated Successfully!');
         redirect(base_url()."admin_complaint/product_complaint_reply/".$complaint_id."");
     }
+
+      /*** Import Course  */
+
+      function import_add()
+      {
+          $data['active']="Complaint";
+          $data['main_url'] = $this->config->item('main_url');
+          $data['script'] = array('../assets/js/complaint_upload.min.js');
+          $this->load->view('common/header');
+          $this->load->view('common/sidebar',$data);
+          $this->load->view('complaint/import_excel_add_view');
+          $this->load->view('common/footer');
+  
+      }
+      function import_ajax_save(){
+        $data=$this->complaint_model->upload_files();
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    function read_excel_values(){
+      if($this->input->post('ajax')){
+          $this->load->library('spout');
+          $file_path=$this->input->post('file_path');
+          $data=array("file"=>$file_path,"dir"=>"../uploads/brand_complaint/");
+          $out=$this->spout->create_reader($data);
+          $this->output->set_content_type('application/json')->set_output(json_encode($out));
+      }
+  }
+  function push_excel_values_db(){
+      if($this->input->post('ajax')){
+          
+          $out=$this->complaint_model->push_excel_values_db(); 
+          $this->output->set_content_type('application/json')->set_output(json_encode($out));   
+      }
+  }
+ 
 }
 ?>

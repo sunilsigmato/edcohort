@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th>SL No</th>
-                    <th>Review</th>
+                    <th>Complaint</th>
                 </tr>
             
             </thead>
@@ -19,7 +19,7 @@
     
 
       <div class="e-b-p-area excel-area">
-        <h4 class="e-b-p">Review Duplicate List : <span>0</span> <a  class="e-b-opener btn btn-warning btn-xs" href="#">Show / Hide</a></h4>
+        <h4 class="e-b-p">Complaint Duplicate List : <span>0</span> <a  class="e-b-opener btn btn-warning btn-xs" href="#">Show / Hide</a></h4>
         <table class="e-b-p-t excel-style-tble table">
             <thead>
                 <tr>

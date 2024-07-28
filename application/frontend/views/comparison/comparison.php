@@ -17,6 +17,9 @@ if($this->session->userdata('user_id'))
     $user_id = $this->session->userdata('user_id');
 }
 $brandID_header = $this->input->get('brandID');
+$boardId_header = $this->input->get('boardId');
+$classId_header = $this->input->get('classId');
+$courseId_header = $this->input->get('courseId');
 //$brandIDs = explode(',', $brandID_header); // Split $brandID string into an array of IDs
 $res_segment=get_segement_id($segment);
 if($res_segment)
@@ -418,15 +421,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         <!--col-->
                         <?php if (!empty($compare_list1)) {
                     foreach ($compare_list1 as $comp_list1) {
-                       
+                      // print_R($comp_list1);
                         $resp_brand_details1 =  get_brand_details($comp_list1->brand_id);
                        if($resp_brand_details1)
                        {
-                       
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                            <button type="button" id="btn_close" value="<?php echo $comp_list1->brand_id; ?>" class="close-button btn_close">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list1->brand_id; ?>" class="close-button btn_close" data-board-id="<?php echo $comp_list1->board_id; ?>" data-class-id="<?php echo $comp_list1->class_id; ?>" data-course-id="<?php echo $comp_list1->course_id; ?>" >X</button>
                         </div>
                         
                             <a href="<?php echo $resp_brand_details1->brand_slug; ?>">
@@ -450,7 +452,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                            <button type="button" id="btn_close" value="<?php echo $comp_list2->brand_id; ?>" class="close-button btn_close">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list2->brand_id; ?>" class="close-button btn_close" data-board-id="<?php echo $comp_list2->board_id; ?>" data-class-id="<?php echo $comp_list2->class_id; ?>" data-course-id="<?php echo $comp_list2->course_id; ?>">X</button>
                         </div>
                             <a href="<?php echo $resp_brand_details2->brand_slug; ?>">
                                 <div class="popular-col-image"><img
@@ -472,7 +474,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         ?>
                         <div class="popular-col">
                         <div class="close-button">
-                            <button type="button" id="btn_close" value="<?php echo $comp_list3->brand_id; ?>" class="close-button btn_close">X</button>
+                            <button type="button" id="btn_close" value="<?php echo $comp_list3->brand_id; ?>" class="close-button btn_close" data-board-id="<?php echo $comp_list3->board_id; ?>" data-class-id="<?php echo $comp_list3->class_id; ?>" data-course-id="<?php echo $comp_list3->course_id; ?>" >X</button>
                         </div>
                             <a href="<?php echo $resp_brand_details3->brand_slug; ?>">
                                 <div class="popular-col-image"><img
@@ -502,28 +504,20 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 <th style="background:#ebf6ff" colspan=" 4">Overview</th>
                             </tr>
                             <tr>
-                                <?php
-                                ////print_R($compare_list1);
-                                ?>
-                                <td class="compare-table"> Overall ratings</td>
+                                <td class="compare-table"> Pararmeter 1</td>
                                 <?php if (!empty($compare_list1)) { ?>
                                 <td class="first-column"><span
-                                        class="rating-number"><?php echo @$compare_list1[0]->overall_brand; ?> /
-                                        10
-                                    </span>
+                                        class="rating-number"><?php echo @$compare_list1[0]->parameter1; ?></span>
                                 </td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
                                 <td class="second-column"><span
-                                        class="rating-number"><?php echo @$compare_list2[0]->overall_brand; ?>
-                                        /
-                                        10</span>
+                                        class="rating-number"><?php echo @$compare_list2[0]->parameter1; ?></span>
                                 </td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
                                 <td class="thrid-column"><span
-                                        class="rating-number"><?php echo @$compare_list3[0]->overall_brand; ?> /
-                                        10</span>
+                                        class="rating-number"><?php echo @$compare_list3[0]->parameter1; ?> </span>
                                 </td>
                                 <?php } ?>
                             </tr>
@@ -532,15 +526,15 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 <th colspan="4">Faculty</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Faculty</td>
+                                <td class="compare-table">Parameter 2</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->faculty_quality; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter2; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->faculty_quality; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter2; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->faculty_quality; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter2; ?></td>
                                 <?php } ?>
                             </tr>
 
@@ -548,92 +542,117 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 <th colspan="4">Aging of Co.</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Aging of Co.</td>
+                                <td class="compare-table">Parameter 3</td>
                                 <?php if (!empty($compare_list1)) {
                             //print_R($compare_list1);
                             ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->aging; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter3; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->aging; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter3; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->aging; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter3; ?></td>
                                 <?php } ?>
                             </tr>
                             <!-- <tr>
                                 <th colspan="4">Academic Results</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Academic Results</td>
+                                <td class="compare-table">Parameter 4</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->acadmic_quality; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter4; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->acadmic_quality; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter4; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->acadmic_quality; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter4; ?></td>
                                 <?php } ?>
                             </tr>
                             <!-- <tr>
                                 <th colspan="4">Referral Score</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Referral Score</td>
+                                <td class="compare-table">Parameter 5</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->referal_score; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter5; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->referal_score; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter5; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->referal_score; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter5; ?></td>
                                 <?php } ?>
                             </tr>
                             <!-- <tr>
                                 <th colspan="4">Complaint Score</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Complaint Score</td>
+                                <td class="compare-table">Parameter 6</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->complaint_score; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter6; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->complaint_score; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter6; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->complaint_score; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter6; ?></td>
                                 <?php } ?>
                             </tr>
                             <!-- <tr>
                                 <th colspan="4">Market Reputation</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Market Reputation</td>
+                                <td class="compare-table">Parameter 7</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->market_reputation; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter7; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->market_reputation; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter7; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->market_reputation; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter7; ?></td>
                                 <?php } ?>
                             </tr>
                             <!-- <tr>
                                 <th colspan="4">Edcohort Rating</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Edcohort Rating</td>
+                                <td class="compare-table">Parameter 8</td>
                                 <?php if (!empty($compare_list1)) { ?>
-                                <td class="first-column"><?php echo @$compare_list1[0]->edcohort_rating; ?></td>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter8; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list2)) { ?>
-                                <td class="second-column"><?php echo @$compare_list2[0]->edcohort_rating; ?></td>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter8; ?></td>
                                 <?php } ?>
                                 <?php if (!empty($compare_list3)) { ?>
-                                <td class="thrid-column"><?php echo @$compare_list3[0]->edcohort_rating; ?></td>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter8; ?></td>
+                                <?php } ?>
+                            </tr>
+
+                            <tr>
+                                <td class="compare-table">Parameter 9</td>
+                                <?php if (!empty($compare_list1)) { ?>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter9; ?></td>
+                                <?php } ?>
+                                <?php if (!empty($compare_list2)) { ?>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter9; ?></td>
+                                <?php } ?>
+                                <?php if (!empty($compare_list3)) { ?>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter9; ?></td>
+                                <?php } ?>
+                            </tr>
+                            <tr>
+                                <td class="compare-table">Parameter 10</td>
+                                <?php if (!empty($compare_list1)) { ?>
+                                <td class="first-column"><?php echo @$compare_list1[0]->parameter10; ?></td>
+                                <?php } ?>
+                                <?php if (!empty($compare_list2)) { ?>
+                                <td class="second-column"><?php echo @$compare_list2[0]->parameter10; ?></td>
+                                <?php } ?>
+                                <?php if (!empty($compare_list3)) { ?>
+                                <td class="thrid-column"><?php echo @$compare_list3[0]->parameter10; ?></td>
                                 <?php } ?>
                             </tr>
 
@@ -754,8 +773,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
                             <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
                             <input type="hidden" value = "<?php echo $brandID_header ?>" class = "brandID_header">
-                            <input type="hidden" value = "<?php echo $segment_temp ?>" class = "segment_temp">
-                            
+                            <input type="hidden" value = "<?php echo $courseId_header ?>" class = "courseId_header">
+                            <input type="hidden" value = "<?php echo $boardId_header ?>" class = "boardId_header">
+                            <input type="hidden" value = "<?php echo $classId_header ?>" class = "classId_header">
+                            <input type="hidden" value = "<?php echo $segment_temp ?>" class = "segment_temp">                            
 
                         <!-- <div class="brand-search-box">
                 <div class="search-result-col" id="search-1" style="display: none;"><a href="#"><img src="<?php echo base_url(); ?>assets/images/close3.png" alt=""></a></div>
@@ -778,7 +799,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                     <a href="javascript:void(0)"
                                         onclick="compare_brand({{brand_name}},{{brand_id}})">
                                         <input type="checkbox" name="brand_select[]" id="brand_select"
-                                            value="{{brand_id}}" >
+                                            value="{{brand_id}}" data-board-id="{{board_id}}" data-class-id="{{class_id}}" data-course-id="{{course_id}}">
                                         <div class="popular-col-image"><img
                                                 src="{{brand_image}}">
                                         </div>
@@ -858,6 +879,10 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         var filter_board_id = $('.filter_board').val();
         var filter_online_offline = $('.filter_online_offline').val();
         var brandID_header = $('.brandID_header').val();
+        var courseId_header = $('.courseId_header').val();
+        var boardId_header = $('.boardId_header').val();
+        var classId_header = $('.classId_header').val();
+
         var segment_temp = $('.segment_temp').val();
         var product_id = '';
         if(filter_board_id == '')
@@ -1327,6 +1352,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         }
         var brandID='';
         var numberChecked = '';
+        var boardIds = [];
+        var classIds = [];
+        var courseIds =[];
         $('#compareBtn').click(function() {
                  numberChecked = $("input[name='brand_select[]']:checked").length;
                 //alert(numberChecked);
@@ -1341,6 +1369,13 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         srs.push($(this).val());
                     });
                     brandID = srs.toString();
+                    const checkboxes = document.querySelectorAll('input[name="brand_select[]"]:checked');
+    
+    checkboxes.forEach(cb => {
+        boardIds.push(cb.getAttribute('data-board-id'));
+        classIds.push(cb.getAttribute('data-class-id'));
+        courseIds.push(cb.getAttribute('data-course-id'));
+    });
                     compare_click();
                     // alert(srs);
                    
@@ -1357,7 +1392,13 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             });
             $('.btn_close').click(function() {
                 var btn_value = $(this).val()
-               console.log(brandID_header); 
+                var get_board_id = this.getAttribute('data-board-id');
+                var get_class_id = this.getAttribute('data-class-id');
+                var get_course_id = this.getAttribute('data-course-id');
+                
+           
+        
+               console.log(get_course_id); 
                 //  let valuesArray = brandID_header.split(',');
                if (brandID_header.includes(btn_value)) {
                 // Remove value from string
@@ -1365,13 +1406,15 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                .filter(value => value !== btn_value)
                                .join(',');
                                brandID = brandID_header;
-            } 
+            }
+            boardIds = boardId_header;
+            classIds = classId_header; 
+            courseIds = courseId_header;
             compare_click();   
             });
 
             function compare_click()
-            {
-                
+            {   
                 var course = $('#course').val();
                 var brand = $('#brand').val();
                 var product_type = $('#product_type').val();
@@ -1382,11 +1425,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 var date_posted = $('#date_posted').val();
                 var sort_by = $('#sort_by').val();
                 var segment = $('#segment').val();
-                window.location = base_url + 'comparison?brandID=' + brandID + '&segment=' + segment_temp;
+                window.location = base_url + 'comparison?brandID=' + brandID + '&segment=' + segment_temp + '&boardId='+ boardIds + '&classId='+ classIds + '&courseId=' +courseIds;
             }
-
-       
-
     });
         /** End Filter Section */                                       
 

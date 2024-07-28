@@ -175,7 +175,7 @@ class Review_model extends CI_Model
               $stage2 = array();
               $result = array(
                   "validation_failed" => array("total" => 0, "data" => array()),
-                  "brand_duplicates" => array("total" => 0, "data" => array()),
+                  "review_duplicates" => array("total" => 0, "data" => array()),
                  // "present_duplicates" => array("total" => 0, "data" => array()),
                   "updated" => array("total" => 0),
                   "imported" => array("total" => 0, "data" => array()),
@@ -278,6 +278,9 @@ class Review_model extends CI_Model
           $array = array("error" => 0, "msg" => "");
           $temp = "";
           $idcheck = "";
+          $i=0;
+          $k=0;
+          $j=0;
           foreach($stage2 as $s)
           {
              $course_name= '';
@@ -289,14 +292,26 @@ class Review_model extends CI_Model
              $course = '"'.$s->{4}.'"';
              $cohort = '"'.$s->{5}.'"';
              $rating = '"'.$s->{6}.'"';
-             $review = '"'.$s->{7}.'"';
-             $customer_email = '"'.$s->{8}.'"';
-             $customer_name = '"'.$s->{9}.'"';
+             $customer_email = '"'.$s->{7}.'"';
+             $customer_name = '"'.$s->{8}.'"';
+             $review_title = '"'.$s->{9}.'"';
+             $review = '"'.$s->{10}.'"';
+             $review_date = date("Y-m-d", strtotime($s->{11}->date));
+           
+            //echo gettype($s->{11});
+           
              $password = '12345';
              $db_email = '';
              $db_firstname = '';
-             $db_customer_id ='';
              $user_id = '';
+             $segment_id ='';
+             $brand_id = '';
+             $board_id = '';
+             $class_id ='';
+             $course_id  ='';
+             $batch_id = '';
+             $product_id  = '';
+             $review_id ='';
 
              /** Customer Check start */
              $sql_customer_check = 'select email,customer_id,firstname from tbl_customer where email = '."$customer_email";
@@ -307,45 +322,233 @@ class Review_model extends CI_Model
                 //print_R($res_customer_email);
                 $db_email = $res_customer_email[0]->email;
                 $db_firstname = $res_customer_email[0]->firstname;
-                $db_customer_id = $res_customer_email[0]->customer_id;
+                $user_id = $res_customer_email[0]->customer_id;
              }
              else
              {
-              $data = array(
-                'email' => $s->{8}, 
-                'fistname'=>$s->{9},
-                'customer_type' => '1',
-                'password' => getHash($password), 
-                'date_added' => date('Y-m-d H:i:s'),
-                'brand_id'=>'', 
-                'status' => 1, 
-            );
-            $user_id = $this->admin_model->insertData('tbl_customer', $data);
+                $data_customer = array(
+                  'email' => $s->{7}, 
+                  'firstname'=>$s->{8},
+                  'customer_type' => '1',
+                  'password' => getHash($password), 
+                  'date_added' => date('Y-m-d H:i:s'),
+                  'brand_id'=>'', 
+                  'status' => 1, 
+                );
+                $user_id = $this->admin_model->insertData('tbl_customer', $data_customer);
              }
                 /** Customer Check End */
 
-             print_R($db_firstname);
-             exit;
+                /** Segment Check Start */
+            $sql_segment_check = 'select id from tbl_segment where segment_name = '."$segment";
+            $sql_segment_check_query = $this->db->query($sql_segment_check);
+            $res_segment = $sql_segment_check_query->result();
+            if($res_segment)
+            {
+              $segment_id = $res_segment[0]->id;
+            }
+            else
+            {
+              $segment_slug=$this->admin_model->url_slug($s->{0});
+                $segemnt=array(
+                  'segment_name'=>$s->{0},
+                  'slug_name' =>$segment_slug,
+                  'status'=>'1',
+                  'created_by' =>'1',
+                  'created_on'=>date('Y-m-d H:i:s'),
+                );
+                $segment_id = $this->admin_model->insertData('tbl_segment', $segemnt);
+            }
+                /** Segment Check End */
 
-             $sql_check = 'select course_name from tbl_course where course_name = '."$course_name";
-             $sql_check_query = $this->db->query($sql_check);
-             $res = $sql_check_query->result();
-             if($res)
-             {        
-                      $result["brand_duplicates"]["total"]=$result["brand_duplicates"]["total"]+1;
-                      $result["brand_duplicates"]["data"][] = $s->{0};
-                      
-             }else{
-              $slug=$this->admin_model->url_slug($s->{0});
-              $data=array(          
-                  'course_name'=>$s->{0},
-                  'slug_name'=>$slug,
+                /**Brand check Start*/
+            $sql_brand_check = 'select brand_id  from tbl_brand where brand_name = '."$brand_name";
+            $sql_brand_check_query = $this->db->query($sql_brand_check);
+            $res_brand = $sql_brand_check_query->result();
+            if($res_brand)
+            {
+              $brand_id = $res_brand[0]->brand_id ;
+            }
+            else
+            {
+              $brand_slug=$this->admin_model->url_slug($s->{1});
+                $brand_array=array(
+                  'brand_name'=>$s->{1},
+                  'brand_slug' =>$brand_slug,
+                  'brand_status'=>'1',
+                  'brand_image'=>'no_image.jpg',
+                  'date_added'=>date('Y-m-d H:i:s'),
+                );
+                $brand_id = $this->admin_model->insertData('tbl_brand', $brand_array);
+            }
+                /** Brand Check Ends */
+               /** Board Check Start */
+            $sql_board_check = 'select board_id  from tbl_board where board_name = '."$board";
+            $sql_board_check_query = $this->db->query($sql_board_check);
+            $res_board = $sql_board_check_query->result();
+            if($res_board)
+            {
+              $board_id = $res_board[0]->board_id ;
+            }
+            else{
+              if($s->{2} == 'Online')
+              {
+                $board_id = 1;
+              }
+              if($s->{2} == 'Offline')
+              {
+                $board_id = 2;
+              }
+            }
+               /** Board Check Ends */
+               /** Class Check Start */
+          $sql_class_check = 'select class_id from tbl_class where title = '."$class";
+          $sql_class_check_query = $this->db->query($sql_class_check);
+          $res_class = $sql_class_check_query->result();
+          if($res_class)
+          {
+            $class_id = $res_class[0]->class_id  ;
+          }
+          else{
+                
+                $class_array=array(
+                  'title'=>$s->{3},
+                  'date_added'=>date('Y-m-d H:i:s'),
+                );
+                $class_id = $this->admin_model->insertData('tbl_class', $class_array); 
+          }
+               /** Class Check Ends */
+                /** Course Check Start */
+          $sql_course_check = 'select id from tbl_course where course_name = '."$course";
+          $sql_course_check_query = $this->db->query($sql_course_check);
+          $res_course = $sql_course_check_query->result();
+          if($res_course)
+          {
+            $course_id = $res_course[0]->id  ;
+          }
+          else{
+                $course_slug=$this->admin_model->url_slug($s->{4});
+                $course_array=array(
+                  'course_name'=>$s->{4},
+                  'slug_name' =>$course_slug,
+                  'created_on'=>date('Y-m-d H:i:s'),
+                );
+                $course_id = $this->admin_model->insertData('tbl_course', $course_array); 
+          }
+               /** Course Check Ends */
+               /** Batch Check Starts */
+          $sql_batch_check = 'select batch_id from tbl_batch where batch_name = '."$cohort";
+          $sql_batch_check_query = $this->db->query($sql_batch_check);
+          $res_batch = $sql_batch_check_query->result();
+          if($res_batch)
+          {
+            $batch_id = $res_batch[0]->batch_id  ;
+          }
+          else{
+                $batch_array=array(
+                  'batch_name'=>$s->{5},
+                  'added_by' =>'1',
+                  'date_added'=>date('Y-m-d H:i:s'),
+                );
+                $batch_id = $this->admin_model->insertData('tbl_batch', $batch_array); 
+          }
+          /** Batch Check Ends */
+
+          /** Check Product Exist Check Start */
+          $sql_product_check = 'select product_id from tbl_product where segment_id = '.'"'.$segment_id.'" and brand_id = '.'"'.$brand_id.'" and board_id = '.'"'.$board_id.'" and class_id = '.'"'.$class_id.'" and course_id = '.'"'.$course_id.'" and batch_id = '.'"'.$batch_id.'"' ;
+          $sql_product_check_query = $this->db->query($sql_product_check);
+          $res_product = $sql_product_check_query->result();
+          if($res_product)
+          {
+            $product_id  = $res_product[0]->product_id   ;
+          }
+          else{
+                $product_array=array(
+                  'segment_id'=>$segment_id,
+                  'brand_id' =>$brand_id,
+                  'board_id' =>$board_id,
+                  'class_id' =>$class_id,
+                  'course_id' =>$course_id,
+                  'batch_id' =>$batch_id,
+                  'product_name' => 'Excel Upload',
+                  'product_brand'=>$brand_id,
+                );
+                $product_id = $this->admin_model->insertData('tbl_product', $product_array); 
+
+               /** For Dummy Insertion */
+                $data_category=array(
+                  'product_id'=>$product_id,
+                   'category_id'=>1,
+              );
+              $this->admin_model->insertData('tbl_product_category',$data_category);
+              $data_image=array(
+                'product_id'=>$product_id,
+                'product_image'=>'about_us.jpg',
+                'product_image_sort_order'=>'1',
+            );
+            $this->admin_model->insertData('tbl_product_image',$data_image);
+            $data_feature=array(
+              'product_id'=>$product_id,
+              'product_feature'=>''
+            );
+            $this->admin_model->insertData('tbl_product_feature',$data_feature);
+            $data_video=array(
+              'product_id' => $product_id,
+              'product_video' => '',
+              'video_type' => 'file',
+          );
+          $this->admin_model->insertData('tbl_product_video',$data_video);
+            /** For Dummy Insertion */
+          }
+           /** Check Product Exist Check Ends */
+
+           /** Check Review Start */
+          $sql_review_check = 'select product_review_id  from tbl_product_review where segment_id = '.'"'.$segment_id.'" and brand_id = '.'"'.$brand_id.'" and board_id = '.'"'.$board_id.'" and class_id = '.'"'.$class_id.'" and course_id = '.'"'.$course_id.'" and batch_id = '.'"'.$batch_id.'" and product_id = '.'"'.$product_id.'" and user_id = '.'"'.$user_id.'"';
+          $sql_review_check_query = $this->db->query($sql_review_check);
+          $res_review = $sql_review_check_query->result();
+       
+          if($res_review)
+          {
+            if (!isset($result["review_duplicates"]["data"][$j]) || !is_array($result["review_duplicates"]["data"][$j])) {
+              $result["review_duplicates"]["data"][$j] = array();
+          }
+            $review_id  = $res_review[0]->product_review_id;
+            $result["review_duplicates"]["total"]=$result["review_duplicates"]["total"]+1;
+            
+            array_push($result["review_duplicates"]["data"][$j], $s->{0}, $s->{1}, $s->{2},$s->{3},$s->{4},$s->{5},$s->{6},$s->{7},$s->{8},$s->{9},$s->{10},$review_date);
+            $j++;
+          }
+          else{
+            if (!isset($result["imported"]["data"][$k]) || !is_array($result["imported"]["data"][$k])) {
+              $result["imported"]["data"][$k] = array();
+          }
+                $review_array=array(
+                  'segment_id'=>$segment_id,
+                  'brand_id' =>$brand_id,
+                  'board_id' =>$board_id,
+                  'class_id' =>$class_id,
+                  'course_id' =>$course_id,
+                  'batch_id' =>$batch_id,
+                  'product_id'=>$product_id,
+                  'user_id'=>$user_id,
+                  'user_name' =>$s->{8},
+                  'user_email'=>$s->{7},
+                  'product_review_added'=>$review_date,
+                  'product_review_title'=>$s->{9},
+                  'product_review'=>$s->{10},
+                  'product_rating'=>$s->{6},
                   //'date_added'=>date('Y-m-d H:i:s'),
                 );
-              $this->admin_model->insertData('tbl_course',$data);
-              $result["imported"]["total"]=$result["imported"]["total"]+1;
-              $result["imported"]["data"][] = $s->{0};
-             }
+
+                $review_id = $this->admin_model->insertData('tbl_product_review', $review_array);
+
+                $result["imported"]["total"]=$result["imported"]["total"]+1;
+                array_push($result["imported"]["data"][$k], $s->{0}, $s->{1}, $s->{2},$s->{3},$s->{4},$s->{5},$s->{6},$s->{7},$s->{8},$s->{9},$s->{10},$review_date);
+                $k++; 
+             
+          }
+           /** Check Review Ends */
+          $i++;
           }
           
           return $result;

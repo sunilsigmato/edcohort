@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th>SL No</th>
-                    <th>Review</th>
+                    <th>Complaint</th>
                 </tr>
             
             </thead>
@@ -19,7 +19,7 @@
     
 
       <div class="e-b-p-area excel-area">
-        <h4 class="e-b-p">Review Duplicate List : <span>0</span> <a  class="e-b-opener btn btn-warning btn-xs" href="#">Show / Hide</a></h4>
+        <h4 class="e-b-p">Complaint Duplicate List : <span>0</span> <a  class="e-b-opener btn btn-warning btn-xs" href="#">Show / Hide</a></h4>
         <table class="e-b-p-t excel-style-tble table">
             <thead>
                 <tr>
@@ -29,14 +29,16 @@
                     <th>Board</th>
                     <th>Class</th>
                     <th>Course</th>
-                    <th>Cohort</th>
-                    <th>Customer Rating</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Title</th>
-                    <th>Review</th>
-                    <th>Review Date(Y-M-D)</th>
-                    
+                    <th>Parameter 1</th>
+                    <th>Parameter 2</th>
+                    <th>Parameter 3</th>
+                    <th>Parameter 4</th>
+                    <th>Parameter 5</th>
+                    <th>Parameter 6</th>
+                    <th>Parameter 7</th>
+                    <th>Parameter 8</th>
+                    <th>Parameter 9</th>
+                    <th>Parameter 10</th>
                 </tr>
             
             </thead>
@@ -57,13 +59,16 @@
                     <th>Board</th>
                     <th>Class</th>
                     <th>Course</th>
-                    <th>Cohort</th>
-                    <th>Customer Rating</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Title</th>
-                    <th>Review</th>
-                    <th>Review Date(Y-M-D)</th>
+                    <th>Parameter 1</th>
+                    <th>Parameter 2</th>
+                    <th>Parameter 3</th>
+                    <th>Parameter 4</th>
+                    <th>Parameter 5</th>
+                    <th>Parameter 6</th>
+                    <th>Parameter 7</th>
+                    <th>Parameter 8</th>
+                    <th>Parameter 9</th>
+                    <th>Parameter 10</th>
                 </tr>
             
             </thead>
