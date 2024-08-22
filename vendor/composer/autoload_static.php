@@ -8,7 +8,6 @@ class ComposerStaticInit48947c5da480a7028085462e3d9a9d73
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -36,6 +35,10 @@ class ComposerStaticInit48947c5da480a7028085462e3d9a9d73
         array (
             'Complex\\' => 8,
         ),
+        'B' => 
+        array (
+            'Box\\Spout\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -53,8 +56,8 @@ class ComposerStaticInit48947c5da480a7028085462e3d9a9d73
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -76,15 +79,9 @@ class ComposerStaticInit48947c5da480a7028085462e3d9a9d73
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'H' => 
+        'Box\\Spout\\' => 
         array (
-            'HTMLPurifier' => 
-            array (
-                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
-            ),
+            0 => __DIR__ . '/..' . '/box/spout/src/Spout',
         ),
     );
 
@@ -98,7 +95,6 @@ class ComposerStaticInit48947c5da480a7028085462e3d9a9d73
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit48947c5da480a7028085462e3d9a9d73::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit48947c5da480a7028085462e3d9a9d73::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit48947c5da480a7028085462e3d9a9d73::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit48947c5da480a7028085462e3d9a9d73::$classMap;
 
         }, null, ClassLoader::class);

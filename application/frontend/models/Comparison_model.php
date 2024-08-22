@@ -108,7 +108,10 @@ class Comparison_model extends CI_Model {
           $item->product_id = $r->product_id; 
           $item->board_id = $r->board_id; 
           $item->class_id = $r->class_id; 
-          $item->course_id = $r->course_id; 
+          $item->course_id = $r->course_id;
+          /*$brand_image = $r->brand_image; 
+          if($brand_image == 'brand_image.jpg')*/
+          print_R($r->brand_image);
           $currentUrl = base_url(); 
           $newUrl = dirname($currentUrl);
           $item->brand_image = $currentUrl.'uploads/brand/'.$r->brand_image;

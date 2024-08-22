@@ -104,7 +104,8 @@ class complaint_model extends CI_Model
              $final_files_data = array(
                  "error" => 0,
                  "file_name" => $file["client_name"],
-                 "file_path" => $file["orig_name"]);
+                 "file_path" => $file["orig_name"],
+                "full_path" => $file["full_path"],);
              //$this->insert_file_values_to_db($final_files_data);
          }
          return $final_files_data;
@@ -121,7 +122,7 @@ class complaint_model extends CI_Model
                  $contents = (json_decode(fread($file, filesize($json))));
  
                  $page = !isset($_POST['page']) ? 1 : $_POST['page'];
-                 $limit = 1000; // five rows per page
+                 $limit = 10000; // five rows per page
                  $start = ($page * $limit) - $limit;
  
                  $total_items = count($contents); // total items
@@ -314,7 +315,7 @@ class complaint_model extends CI_Model
             $complaint = '"'.$s->{10}.'"';
             $complaint_date = date("Y-m-d", strtotime($s->{11}->date));
             $complaint_close_date = date("Y-m-d", strtotime($s->{12}->date));
-          
+
            //echo gettype($s->{11});
           
             $password = '12345';
@@ -493,7 +494,7 @@ class complaint_model extends CI_Model
                $product_id = $this->admin_model->insertData('tbl_product', $product_array); 
 
               /** For Dummy Insertion */
-               $data_category=array(
+          /*     $data_category=array(
                  'product_id'=>$product_id,
                   'category_id'=>1,
              );
@@ -514,7 +515,7 @@ class complaint_model extends CI_Model
              'product_video' => '',
              'video_type' => 'file',
          );
-         $this->admin_model->insertData('tbl_product_video',$data_video);
+         $this->admin_model->insertData('tbl_product_video',$data_video);*/
            /** For Dummy Insertion */
          }
           /** Check Product Exist Check Ends */
@@ -584,5 +585,5 @@ class complaint_model extends CI_Model
    
    
 
-}
+  }
 ?>

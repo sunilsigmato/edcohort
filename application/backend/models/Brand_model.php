@@ -114,7 +114,7 @@ class brand_model extends CI_Model
                     $contents = (json_decode(fread($file, filesize($json))));
     
                     $page = !isset($_POST['page']) ? 1 : $_POST['page'];
-                    $limit = 1000; // five rows per page
+                    $limit = 10000; // five rows per page
                     $start = ($page * $limit) - $limit;
     
                     $total_items = count($contents); // total items

@@ -532,17 +532,41 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     <div class="review-btn-box p-2">
                     <style>
                         .value-span {
-                                    display: inline-block;
-                                    margin-right: 10px;
-                                    padding: 5px;
-                                    background-color: lightblue;
+                            display: inline-block;
+                            margin-right: 10px;
+                            padding: 7px;
+                            background-color: lightblue;
+                            border-radius: 12px 14px 15px 15px;
+                            font-size: 12px;
+                            font-weight: 600;
+                            color: #5b5b5b;
+                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
                                 }
 
-                        .closeButton {
-                        cursor: pointer;
+                                .closeButton {
+                            cursor: pointer;
+                        border-radius: 8px; /* Rounds the corners of the border */
+                        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+                        }
+                        .btn-close-filter
+                        {
+                            margin-left: 5px;
+                            background: #00c0ff;
+                            border: 0px;
+                            font-weight: bolder;
+                            color: white;
+                            font-size: 10px;
+                            border-radius: 100px;
+                            padding: 0px;
+                            width: 16px;
+                            height: 19px;
+                        }
+                        .value-class
+                        {
+                            margin-left: 10px;
                         }
                             </style>
-                        <div id="selectedValues"></div>  <!-- for filter values display -->
+                        <div id="selectedValues"  class="value-class"></div>  <!-- for filter values display -->
                        <!-- <?php if ($this->session->userdata('user_id')) { ?>
                         <a href="<?php echo base_url(); ?>write-a-complaint?course=<?php echo @$course; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
                             class="review-btn"><img src="<?php echo base_url(); ?>assets/images/review-icon2.png"
@@ -1480,6 +1504,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     // console.log(response.data);
                     var options = '';
                     var filter_class_id_temp = '';
+                    options += '<option value="all">All</option>';
                     for (var i = 0; i < response.data.length; i++) {
                         if(i==0)
                     {
@@ -1514,6 +1539,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                    console.log(response.data);
                   var options = '';
                   var filter_course_id_temp = '';
+                  options += '<option value="all">All</option>';
                 for (var i = 0; i < response.data.length; i++) {
                     if(i==0)
                     {
@@ -1549,6 +1575,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               success: function (response) {
                    console.log(response.data);
                   var options = '';
+                  options += '<option value="all">All</option>';
                 for (var i = 0; i < response.data.length; i++) {
                     if(i==0)
                     {
@@ -1625,14 +1652,15 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             var brn_value = val1 + '=' + val2 ;
             var span = document.createElement("span");
             span.classList.add("value-span");
+            span.classList.add("mt-3");
             //console.log(brn_value);
              // Set text content
             span.textContent = val2;
             // Set display value
-            span.style.display = "block"; 
             var div = document.getElementById("selectedValues");
             var closeButton = document.createElement("button");
             closeButton.textContent = "X";
+            closeButton.classList.add("btn-close-filter");
             closeButton.setAttribute("data-value", brn_value);
 
             var selectedValuesDiv = document.getElementById("selectedValues");

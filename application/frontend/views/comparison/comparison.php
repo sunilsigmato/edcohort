@@ -526,7 +526,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 <th colspan="4">Faculty</th>
                             </tr> -->
                             <tr>
-                                <td class="compare-table">Parameter 2</td>
+                                <td class="compare-table">Parameter 2</td> 
                                 <?php if (!empty($compare_list1)) { ?>
                                 <td class="first-column"><?php echo @$compare_list1[0]->parameter2; ?></td>
                                 <?php } ?>
@@ -738,7 +738,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             <!--wrapper end-->
             <!-- Modal -->
             <div class="modal fade compare-modal-box" id="compareModal" tabindex="-1"
-                aria-labelledby="compareModalModalLabel" aria-hidden="true">
+                aria-labelledby="compareModalModalLabel" aria-hidden="true" >
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <h3 class="search-title">
@@ -756,6 +756,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             value="<?php echo $class; ?>">
                         <input type="hidden" class="form-control" name="batch" id="batch" placeholder="Your Name"
                             value="<?php echo $batch; ?>">
+                            
                         <input type="hidden" class="form-control" name="customer_rating" id="customer_rating"
                             placeholder="Your Name" value="<?php echo $customer_rating; ?>">
                         <input type="hidden" class="form-control" name="date_posted" id="date_posted"
@@ -787,7 +788,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             <script id="review-template" type="text/x-handlebars-template">
                         <div class="popular-row">
                             <!--col-->
-                            <input type="text" id="brandSearchInput" placeholder="Search brand..." onkeyup="filterBrands()">
+                            <input type="text" id="brandSearchInput"style="border:1px solid" placeholder="Search brand..." onkeyup="filterBrands()">
                             
                             {{#if items}}
                                 {{#each items}}

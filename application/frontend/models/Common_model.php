@@ -584,6 +584,7 @@ class Common_model extends CI_Model {
 	{
 		$query = '';
 		$this->db->select('*');
+		$this->db->where('display_frontend = 1');
         $this->db->from('tbl_brand b');
 		$query=$this->db->get();
 		if($query)

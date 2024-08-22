@@ -108,7 +108,8 @@ class Review_model extends CI_Model
               $final_files_data = array(
                   "error" => 0,
                   "file_name" => $file["client_name"],
-                  "file_path" => $file["orig_name"]);
+                  "file_path" => $file["orig_name"],
+                  "full_path" => $file["full_path"],);
               //$this->insert_file_values_to_db($final_files_data);
           }
           return $final_files_data;
@@ -476,7 +477,7 @@ class Review_model extends CI_Model
                 $product_id = $this->admin_model->insertData('tbl_product', $product_array); 
 
                /** For Dummy Insertion */
-                $data_category=array(
+             /*   $data_category=array(
                   'product_id'=>$product_id,
                    'category_id'=>1,
               );
@@ -497,7 +498,7 @@ class Review_model extends CI_Model
               'product_video' => '',
               'video_type' => 'file',
           );
-          $this->admin_model->insertData('tbl_product_video',$data_video);
+          $this->admin_model->insertData('tbl_product_video',$data_video);*/
             /** For Dummy Insertion */
           }
            /** Check Product Exist Check Ends */

@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once FCPATH . '../vendor/autoload.php'; // Ensure Composer's autoload is included
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class admin_product extends CI_Controller
 {
     function __construct()
@@ -1246,5 +1252,81 @@ class admin_product extends CI_Controller
         $this->load->view('product/product_review_list_view',$data);
         $this->load->view('common/footer');
     }
+
+          /*** Import Course  */
+
+          function import_add()
+          {
+              $data['active']="Product";
+              $data['main_url'] = $this->config->item('main_url');
+              $data['script'] = array('../assets/js/product_upload.min.js');
+              $this->load->view('common/header');
+              $this->load->view('common/sidebar',$data);
+              $this->load->view('product/import_excel_add_view');
+              $this->load->view('common/footer');
+      
+          }
+          function import_ajax_save(){
+            $data=$this->product_model->upload_files();
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        function read_excel_values(){
+          //  ini_set('memory_limit', '912M'); // Adjust this value as needed
+          if($this->input->post('ajax')){
+              $this->load->library('spout');
+              $file_path=$this->input->post('file_path');
+              $full_path=$this->input->post('full_path');
+             // $data=array("file"=>$file_path,"dir"=>"../uploads/brand_product/");
+              $reader = ReaderEntityFactory::createXLSXReader();
+              $reader->open($full_path);
+              $data = [];
+              $rowIndex = 1; // Initialize row index
+
+              // Iterate through sheets
+              foreach ($reader->getSheetIterator() as $sheet) {
+                  // Iterate through rows
+                  foreach ($sheet->getRowIterator() as $row) {
+                      if($rowIndex != 1)
+                      {
+                        $rowData = $row->toArray();
+                        $rowDataWithIndex = array_merge($rowData, ['row_index' => $rowIndex]); // Add row_index at the end
+                        $data[] = $rowDataWithIndex;
+                      }
+                      $rowIndex++; // Increment row index
+                  }
+              }
+              $reader->close();
+              // Convert the data array to JSON
+              $json_data = json_encode($data);
+              $json_file_path = '../uploads/brand_product/' . pathinfo($file_path, PATHINFO_FILENAME) . '.json';
+              if (file_put_contents($json_file_path, $json_data) !== false) {
+                
+                $response = [
+                    'error' => 0,
+                    'msg' => 'success',
+                    'json' => $json_file_path,
+                    'total' => $rowIndex,
+                ];
+              }
+              else
+              {
+                $response = [
+                    'error' => 1,
+                    'msg' => 'error',
+                    'json' => $json_file_path,
+                ];
+              }
+             // $out=$this->spout->create_reader($data);
+              $this->output->set_content_type('application/json')->set_output(json_encode($response));
+          }
+      }
+      function push_excel_values_db(){
+          if($this->input->post('ajax')){
+              
+              $out=$this->product_model->push_excel_values_db(); 
+              $this->output->set_content_type('application/json')->set_output(json_encode($out));   
+          }
+      }
+    
 }
 ?>

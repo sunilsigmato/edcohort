@@ -154,7 +154,15 @@
                                 <li><a class="slide-item" href="<?php echo base_url(); ?>admin_banner/add_banner">Add Banner</a></li>                              
                             </ul>
                         </li>
-
+                        <li class="slide">
+                            <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-bandcamp" aria-hidden="true"></i> Import Excel</span><i class="angle fa fa-angle-right"></i></a>
+                            <ul class="slide-menu">
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_product/import_add">Import Product</a></li>  
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_review/import_add">Import Review</a></li> 
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_complaint/import_add">Import Complaint</a></li>
+                                <li><a class="slide-item" href="<?php echo base_url(); ?>admin_compare/import_add">Import Compare</a></li>                                
+                            </ul>
+                        </li>
                         <!-- <li class="slide">
                             <a class="side-menu__item slide-show" href="javascript:void(0)"></i><span class="side-menu__label"> <i class="fa fa-adjust" aria-hidden="true"></i> Sponsors</span><i class="angle fa fa-angle-right"></i></a>
                             <ul class="slide-menu">

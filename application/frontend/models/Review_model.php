@@ -201,7 +201,7 @@ class Review_model extends CI_Model {
 
     //$page = $this->input->get('page');
     $this->load->library('pagination');
-    $per_page = 3;
+    $per_page = 10;
     if(!$page)
     {
       $page = 0;
