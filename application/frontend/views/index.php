@@ -648,8 +648,9 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading mb-2"> Find the Truth, Make the Right Choice</h3>
                 <h3 class="subheading1 "> Transparent Reviews, Tailored for You</h3>
                 <p class="text-muted img-sub-heading">Discover authentic insights from fellow learners. Select your filters and access precise reviews on brands, courses, schools, colleges, and more. With reviews in text, voice, or video formats, make informed decisions swiftly. Gauge ratings, see the number of reviewers, and find results in seconds. Join a community of learners, sharing experiences to empower your choices.</p>
-                <a href="#" class="img-btn-explore" data-bs-toggle="modal"
+                <a href="review" class="img-btn-explore" data-bs-toggle="modal"
                     data-bs-target="#segment-button">EXPLORE</a>
+                    <button class="img-btn-explore" value = "review">EXPLORE</button>
             </div>
         </div>
         <div class="row bg-color-complain mt-3">
@@ -658,8 +659,9 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading mb-2">Speak Up, Get Justice</h3>
                 <h3 class="subheading1">Your Voice, Your Justice</h3>
                 <p class="text-muted img-sub-heading">Feel deceived? Raise your voice against unfair practices. Lodge complaints against companies or brands that betray your trust. Your complaints are heard, ensuring justice and transparency. We amplify your voice across all channels, leveraging the power of networking to resolve your grievances effectively</p>
-                <a href="#" class="img-btn-explore" data-bs-toggle="modal"
-                    data-bs-target="#segment-button">EXPLORE</a>
+                <a href="complain" class="img-btn-explore" data-bs-toggle="modal"
+                    data-bs-target="#segment-button" >EXPLORE</a>
+                    <button class="img-btn-explore" value = "complaint">EXPLORE</button>
             </div>
             <div class="col-md-4 col-sm-3 col-lg-6 how-img">
                 <img src="<?php echo base_url(); ?>assets/images/cmp-img.jpg" class="rounded-circle img-fluid image-set" alt="" />
@@ -772,10 +774,9 @@ $sort_by = $this->input->get('sort_by');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
     integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-< script src = "https://code.jquery.com/jquery-3.2.1.slim.min.js"
-integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-crossorigin = "anonymous" >
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin = "anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -785,7 +786,11 @@ crossorigin = "anonymous" >
 </script>
 
 <script>
-$('.owl-carousel').owlCarousel({
+
+
+ $(document).ready(function() {
+
+    $('.owl-carousel').owlCarousel({
     loop: true,
     margin: 10,
     nav: true,
@@ -799,9 +804,7 @@ $('.owl-carousel').owlCarousel({
             items: 4
         }
     }
-})
-
- $(document).ready(function() {
+});
     $(".segment-link").on("click", function(event) {
         event.preventDefault(); // Prevent the default behavior of the anchor tag
         var href = $(this).attr("href"); // Get the value of the href attribute
@@ -831,7 +834,16 @@ $('.owl-carousel').owlCarousel({
            
         });*/
     });
+    $('.img-btn-explore').on("click", function(event) {
+        var info = $(this).val();
+        var newURL = window.location.protocol + '//' + window.location.host + window.location.pathname + info;
+        window.history.pushState({ path: newURL }, '', newURL); 
+        
+        var modal = new bootstrap.Modal(document.getElementById('segment-button'));
+        modal.show();
+    });
 }); 
+
 </script>
 
 

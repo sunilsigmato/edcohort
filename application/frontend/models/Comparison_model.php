@@ -102,23 +102,29 @@ class Comparison_model extends CI_Model {
           $i++;
           $item->product_brand = $r->product_brand;
           $item->brand_name = $r->brand_name;
-          $item->brand_name = $r->brand_name;
          // $item->brand_image = $r->brand_image;
           $item->brand_id = $r->brand_id;
           $item->product_id = $r->product_id; 
           $item->board_id = $r->board_id; 
           $item->class_id = $r->class_id; 
           $item->course_id = $r->course_id;
-          $brand_image = $r->brand_image; 
+          $currentUrl = base_url(); 
+          $newUrl = dirname($currentUrl);
           $withoutExt_brand_name = preg_replace('/\.\w+$/', '', $r->brand_image);
           if($withoutExt_brand_name == 'no_image')
           {
-            print_R("hi");
+            
+            $brand_firstLetter = substr($r->brand_name, 0, 1);
+            $item->brand_image = $currentUrl.'uploads/brand/'.$brand_firstLetter.'.png';
+
           }
-          print_R($withoutExt_brand_name.'<br>');
-          $currentUrl = base_url(); 
-          $newUrl = dirname($currentUrl);
-          $item->brand_image = $currentUrl.'uploads/brand/'.$r->brand_image;
+          else
+          {
+            $item->brand_image = $currentUrl.'uploads/brand/'.$r->brand_image;
+          }
+         // print_R($withoutExt_brand_name.'<br>');
+          
+         
           array_push($data->items,$item);
 
         }

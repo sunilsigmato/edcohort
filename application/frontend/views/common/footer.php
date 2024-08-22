@@ -422,17 +422,17 @@ $authUrl1 = $gClient->createAuthUrl();
             <?php
              $where_class = 'status = 1';
 	     	$segment_record = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
-
             $class_records_count = count($segment_record);
+
+            $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             if ($class_records_count > 0) {
                 foreach ($segment_record as $class) { 
-                  //  print_R($class);
+           
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
-            <a href="<?php echo base_url(); ?>/all-product?segment=<?php echo $class->id; ?>" class=" segment-link mt-auto">
+            <a href="<?php echo $actual_link ?>?segment=<?php echo $class->segment_name; ?>" class=" segment-link mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
-               
                     <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
                         style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
                         <?php //echo $class->segment_img; ?>
@@ -670,5 +670,4 @@ function myFunction() {
 
 
 </body>
-
 </html>

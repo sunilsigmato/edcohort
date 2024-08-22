@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <?php
 $segment1 = $this->uri->segment(1);
 $segs = $this->uri->segment_array();
@@ -42,9 +44,6 @@ if(empty($meta_description)){
 }
 ?>
 
-
-<!doctype html>
-<html lang="en">
 
 <head>
     <!-- Meta data -->
