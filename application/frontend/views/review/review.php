@@ -33,6 +33,40 @@ else
 
    // print_ex($_GET);
 ?>
+<style>
+
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 <!--banner start-->
 <?php 
 
@@ -95,156 +129,17 @@ $breadcrumb_name2 = '';*/
 ?>
 <div class="content">
     <div class="container-fluid review-top-section">
-        <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard">
-                <img class="card-img-top" style="height: 150px;"
-                                    src="">
-            </div>
-            <div class="col-md-6 pt-3 course-name-display">
-                <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
-                <div>
-                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> </span>
-                <!--<?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?>/5</span>
-                    <?php } ?>-->
-                    <label for="rating2" class="rating-display">
-                    <!--<img
-                            src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> </label>
-                         </label> -->
 
-
-                         <!---->
-                         <div class="dropdown">
-  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
-  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="">--> </label>
- <!-- </button>  -->
-
-  
-
-
-
-  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">
-                       
-            <!------> 
-    
-            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
-          
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item d-flex">
-    <div class="single-line" style="white-space: nowrap;">
-        <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="" style="display: inline-block; margin-right: 10px;"> -->
-        <div style="display: inline-block;">
-            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
-        </div>
-    </div>
-</li>
-
-            
-    <li class="list-group-item" style="font-weight:normal;">129 Global Ratings</li>
-    <li class="list-group-item">
-    <div class="row">
-        <div class = "col-md-2 pt-1">
-            <span> 5 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">100%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 100% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 4 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">75%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 75% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 3 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 50% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 2 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 25%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 25% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 1 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 15%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">15%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 15% </span>
-        </div>
-
-    </div>
-
-
-    </li>
-  </ul>
- 
-</div></a></li>
-             
-            <!------> 
-  </ul>
-</div>
-
-                         <!----->
-                </div>
-                <div class="pt-3 total-review-display">
-               <!-- <h4> Excellent   Review </h4> -->
-                </div>
-            </div>
-            <div class="col-md-4 pt-3 write-review-icon">
-            <?php if ($this->session->userdata('user_id')) { ?>
-            
-                <a href="<?php echo base_url();?>write-a-review?segment=<?php echo $segment_temp;?>"
-                    class="review-btns text-decoration-none">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label>
-                </a>
-
-                
-                <?php } else { ?>
-                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label></a>
-                        <?php } ?>
-            </div>
-        </div>
-    </div>
     <!-- New Design Start -->
     <button type="button" class="filter-btn">Filter</button>
 
 <!--left start-->
 <div class="container-fluid review-top-section">
     <div class="row review-top-next">
-        <!--- Filtr Starts  --->
-        <div class="col-md-2 review-left">
 
-            <h3 class="filter-title">Filter</h3>
+        <!--- Filtr Starts  --->
+        <div class="col-md-2 review-left mt-4">
+                
                     <form action="<?php echo base_url(); ?>review-search" method="post" name="form" id="form">
 
                         <?php echo csrf_field(); 
@@ -265,7 +160,7 @@ $breadcrumb_name2 = '';*/
                                 </select>
                             </div>
                         </div>
-
+                                    
                         <div class="filter-col">
                             <h3 class="filter-col-title">BRAND</h3>
                             <div class="select-box">                              
@@ -410,31 +305,31 @@ $breadcrumb_name2 = '';*/
                                         <input type="radio" name="customer_rating" id="rating1" value="5" 
                                             <?php if(@$customer_rating == 5){ echo 'checked';} ?>>
                                         <label for="rating1"><img
-                                                src="<?php echo base_url();?>assets/images/rating-5.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-5-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating2" value="4"
                                             <?php if(@$customer_rating == 4){ echo 'checked';} ?>>
                                         <label for="rating2"><img
-                                                src="<?php echo base_url();?>assets/images/rating-4.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-4-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating3" value="3"
                                             <?php if(@$customer_rating == 3){ echo 'checked';} ?>>
                                         <label for="rating3"><img
-                                                src="<?php echo base_url();?>assets/images/rating-3.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-3-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating4" value="2"
                                             <?php if(@$customer_rating == 2){ echo 'checked';} ?>>
                                         <label for="rating4"><img
-                                                src="<?php echo base_url();?>assets/images/rating-2.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-2-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating5" value="1"
                                             <?php if(@$customer_rating == 1){ echo 'checked';} ?>>
                                         <label for="rating5"><img
-                                                src="<?php echo base_url();?>assets/images/rating-1.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-1-1.png" alt=""></label>
                                     </li>
                                 </ul>
                             </div>
@@ -481,19 +376,20 @@ $breadcrumb_name2 = '';*/
             <!-- Review Starts  -->
             <div class="col-md-8">
                 <div class="review-center">
+                    
                     <div class="review-btn-box">
                     </div>
                     <style>
                         .value-span {
                             display: inline-block;
                             margin-right: 10px;
-                            padding: 7px;
-                            background-color: lightblue;
+                            padding: 7px 15px 7px 15px;
+                            background-color: #b8def3;
                             border-radius: 12px 14px 15px 15px;
-                            font-size: 12px;
-                            font-weight: 600;
-                            color: #5b5b5b;
-                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                            font-size: 13px;
+                            font-weight: 700;
+                            color: #000000;
+                           /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);*/
                                 }
 
                         .closeButton {
@@ -503,16 +399,17 @@ $breadcrumb_name2 = '';*/
                         }
                         .btn-close-filter
                         {
-                            margin-left: 5px;
-                            background: #00c0ff;
+                            margin: 0px 0px 0px 17px;
+                            background: #b8def3;
                             border: 0px;
-                            font-weight: bolder;
-                            color: white;
-                            font-size: 10px;
+                            /* font-weight: bolder; */
+                            color: #242424;
+                            font-size: 13px;
                             border-radius: 100px;
                             padding: 0px;
                             width: 16px;
                             height: 19px;
+                            /* position: relative;*/
                         }
                         .value-class
                         {
@@ -521,6 +418,7 @@ $breadcrumb_name2 = '';*/
                             </style>
                         <div id="selectedValues" class="value-class"></div>  <!-- for filter values display -->
                     <div class="review-inner-center">
+                        <div class=" d-flex flex-wrap justify-content-between ">
                         <div class="tab-link">
                             <ul>
                                 <li>
@@ -540,6 +438,21 @@ $breadcrumb_name2 = '';*/
                                 <?php } ?>
                             </ul>
                         </div>
+                        <div class="col-md-4 pt-3 write-review-icon">
+                            <?php if ($this->session->userdata('user_id')) { ?>
+                            <a href="<?php echo base_url();?>write-a-review?segment=<?php echo $segment_temp;?>"
+                            class="review-btns text-decoration-none">
+                            <i class="fa-solid fa-pen-to-square"></i> <span> Write a review </span> <label
+                                for="rating2"> </label>
+                            </a>
+                            <?php } else { ?>
+                                <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
+                                    data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-pen-to-square"></i> <span> Write a review </span> <label
+                                for="rating2"> </label></a>
+                                <?php } ?>
+                        </div>
+                    </div>
+                        
 
     <script id="review-template" type="text/x-handlebars-template">
     <div class="total-review">{{total_items}} Review</div>
@@ -547,36 +460,34 @@ $breadcrumb_name2 = '';*/
         {{#if items}}
     {{#each items}}
     <div class="review-row">
-        <div class="review-user-image"><span></span></div>
-            <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center"> 
-                    <h2 class="review-title"> {{firstname}} <span>
+        <div class=" d-flex flex-wrap justify-content-between align-items-center">
+        <div class="review-user-images d-flex align-items-center mt-4">
+            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">
+            <h2 class="review-title"> {{firstname}} 
+        </div>
+            <div class="review-title-row"> 
+                    
                     <img src="{{base_url}}assets/images/verifyicon.png" alt=""></span>
                     </h2>
                     <div class="review-rating">
                         {{#xif product_rating "==" "1"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-1-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "2"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-2-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "3"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-3-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "4"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                                            class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-4-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "5"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-5-1.png" alt="">
                         {{/xif}}
                     </div>
                 </div>
+                                </div>
             <div class="review-date "> {{product_review_added}} </div>
         <hr />
         <div>
@@ -868,9 +779,9 @@ $breadcrumb_name2 = '';*/
     <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
     </div>
     {{else}}
-    <div class="review-row-reply">
-                                <h4>No result found..!!</h4>
-                            </div>
+    <div class="not-found">
+        <img src="<?php echo base_url();?>assets/images/no_result.gif" alt="" >
+    </div>
     {{/if}}
 
   
@@ -959,7 +870,10 @@ $breadcrumb_name2 = '';*/
                 </div>
             </div>
         </div>
-
+<?php
+//  $rs = parse_url($_SERVER["REQUEST_URI"]
+                  //  print_R($rs);
+                  ?>
   
     <input type="hidden" value = "<?php echo $segment?>" class = "segment">
     <input type="hidden" value = "<?php //echo $course ?>" class = "course">
@@ -1553,7 +1467,6 @@ $breadcrumb_name2 = '';*/
         $("#reviewShort_" + val).hide();
         $("#review-read_" + val).hide();
         $("#reviewFull_" + val).show();
-
 
     }
 

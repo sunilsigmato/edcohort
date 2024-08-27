@@ -1060,9 +1060,9 @@ ul.footer-menu-sub li {
   padding-right: 9px;
 }
 .write-review-icon {
-  margin: auto;
+  /*margin: auto;*/
   font-size: 20px;
-  text-align: center;
+  text-align: end;
 }
 
 /*** End Footer New ***/
@@ -1240,10 +1240,11 @@ ul.footer-menu-sub li {
 }
 .select-box {
   width: 100%;
-  height: 64px;
+  /*height: 64px;*/
   background: #f0f3fa;
-  border-radius: 10px;
+  border-radius: 7px;
   position: relative;
+  border: 0.5px solid #cbcbcb;
 }
 .select-box:after {
   content: "";
@@ -1345,8 +1346,8 @@ ul.footer-menu-sub li {
   top: 0;
 }
 .filter-list-box ul li input:checked + label:after {
-  background: #3554fe;
-  border-color: #3554fe;
+  background: #5eabf4;
+  border-color: #5eabf4;
 }
 
 .filter-btn-col {
@@ -1362,13 +1363,14 @@ ul.footer-menu-sub li {
 .apply-btn {
   width: 100%;
   height: 64px;
-  background: #f0f3fa;
-  border: 1.5px solid #2256cd;
-  color: #3554fe;
+  background: #5eabf4;
+  border: 1.5px solid #5eabf4;
+  color: #ffffff;
   font-weight: 700;
   font-size: 20px;
   line-height: 23px;
   text-align: center;
+  border-radius: 15px;
 }
 .apply-btn:hover,
 .apply-btn:focus,
@@ -1673,14 +1675,21 @@ ul.footer-menu-sub li {
   border: 2px solid #fff;
 }
 
+.not-found
+{
+   margin-left: auto;
+   margin-right: auto;
+   width: 69%;
+}
+
 /*.review-title-row {  margin-bottom: 10px; }*/
 .review-title {
   color: #505050;
-  font-weight: 300;
-  font-size: 14px;  /*position: relative; */
+  font-weight: 600;
+  font-size: 15px;  /*position: relative; */
   cursor: pointer;
-  padding-top: 17px;
-  padding-left: 34px;
+  /*padding-top: 17px;*/
+  padding-left: 13px;
 }
 
 .review-title:hover .review-title-dropdown {
@@ -3930,22 +3939,24 @@ input[type="text"] {
   justify-content: end;
 }
 #pagination-div-id a.active.paginate_button.current {
-  background: #2256cd !important;
+  background: #5eabf4 !important;
   color: #fff !important;
+  border-radius: 6px;
 }
 #pagination-div-id.paging_simple_numbers a {
-  border: 1.5px solid #2256cd;
+  border: 1.5px solid #5eabf4;
   padding: 7px;
   margin: 7px !important;
-  color: #2256cd;
+  color: #5eabf4;
   text-decoration: none;
   font-size: 16px;
   width: 40px;
   height: 40px;
   text-align: center;
+  border-radius: 6px;
 }
 #pagination-div-id.paging_simple_numbers a:hover {
-  background: #2256cd !important;
+  background: #5eabf4 !important;
   color: #fff !important;
 }
 /*alert*/
