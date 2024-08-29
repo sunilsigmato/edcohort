@@ -214,26 +214,24 @@ $breadcrumb_name2 = '';*/
                          <!-- Online offline filter -->
                          <div class="board-other" style="display:none">
                                                    
-                                                   <div class="btn-group btn-toggle filter-toggle-box">
-                                                       <div class="input-toggle toggle_online <?php // if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
-                                                           id="online-toggle">
-                                                           <label><?php echo $filter_online_name ?> </label>
-                       
-                                                           <input class="btn btn-lg btn-default" type="radio" name="product_type"
-                                                               <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
-                                                               id="online" value="1" >
-                                                       </div>
-                                                       <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
-                                                           id="offline-toggle">
-                                                           <label><?php echo $filter_offline_name ?></label>
-                                                           <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
-                                                               <?php if(@$filter_offline_id == 2){ echo 'checked';} ?>
-                                                               id="offline" value="2" >
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <!-- End of Online offline filter -->
-                        <!-- <p class="online-results">Showing <span>(2677)</span> Online Cohort results for BYJU’s</p>-->
+                                <div class="btn-group btn-toggle filter-toggle-box">
+                                    <div class="input-toggle toggle_online <?php // if(@$filter_online_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                        id="online-toggle">
+                                        <label><?php echo $filter_online_name ?> </label>
+    
+                                        <input class="btn btn-lg btn-default" type="radio" name="product_type"
+                                            <?php if(@$filter_online_id == 1){ echo 'checked';} ?>
+                                            id="online" value="1" >
+                                    </div>
+                                    <div class="input-toggle toggle_offline <?php //if(@$filter_offline_id == $get_single_course_detail->product_type){ echo 'active';} ?>"
+                                        id="offline-toggle">
+                                        <label><?php echo $filter_offline_name ?></label>
+                                        <input class="btn btn-lg btn-primary active" type="radio" name="product_type"
+                                            <?php if(@$filter_offline_id == 2){ echo 'checked';} ?>
+                                            id="offline" value="2" >
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                        <div class="filter-col">
@@ -274,23 +272,7 @@ $breadcrumb_name2 = '';*/
                                 </select>
                             </div>
                         </div>
-                        <!-- <div class="filter-col">
-               <h3 class="filter-col-title">TYPE</h3>
-               <div class="filter-list-box">
-               <ul>
-               <li>
-               <input type="radio" name="type" id="type1">
-               <label for="type1">Unresolved <span>(112)</span></label>
-               </li>
-               
-               <li>
-               <input type="radio" name="type" id="type2">
-               <label for="type2">Resolved <span>(112)</span></label>
-               </li>
-               </ul>
-               </div>
-            </div> -->
-                        
+              
                         <div class="filter-col">
                             <h3 class="filter-col-title">CUSTOMER RATING</h3>
                             <div class="filter-list-box">
@@ -334,17 +316,7 @@ $breadcrumb_name2 = '';*/
                                 </ul>
                             </div>
                         </div>
-                        <!-- <div class="filter-col">
-               <h3 class="filter-col-title">DATE POSTED</h3>
-               <div class="filter-list-box">
-               <ul>
-               <li>
-               <input type="radio" name="date_posted" id="Custom1" value="21-11-2022">
-               <input type="text" id="datepicker" name="date_posted"></p> 
-               </li>
-               </ul>
-               </div>
-            </div> -->
+                        
                         <div class="filter-col">
                             <h3 class="filter-col-title">SORT BY</h3>
                             <div class="filter-list-box">
@@ -462,6 +434,7 @@ $breadcrumb_name2 = '';*/
     <div class="review-row">
         <div class=" d-flex flex-wrap justify-content-between align-items-center">
         <div class="review-user-images d-flex align-items-center mt-4">
+            <img src="{{profile_image}}" alt="">
             <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">
             <h2 class="review-title"> {{firstname}} 
         </div>
@@ -628,32 +601,34 @@ $breadcrumb_name2 = '';*/
             {{#each sub_review}}
             <div class="review-row-reply review_reply_{{review_id}} prr_id_{{prr_id}}"
                                         style="display:none">
-              <!--  <?php 
-                $temp_prr_id = $reply->prr_id;
-                $temp_review_id = $reply->review_id;  
-                ?> -->
-                 <div class="review-user-image"><span></span></div>
-                 <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                    <h2 class="review-title"> {{firstname}} </h2>
-                    <div class="review-date"> {{date_added}} </div>
-                 </div>
+          
+                <div class=" d-flex flex-wrap justify-content-between ">
+                    <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                        <h2 class="review-title"> {{firstname}} </h2>
+                    </div>
+                    <div class="review-date pt-3"> {{date_added}} </div>
+                </div>
+                
                  <div class="review-content">
+                 <hr />
                  <div id="reviewReplyShort_{{prr_id}}">
                     {{reply}}
                  </div>
+                 <hr />
                    <!-- Comment Section Start -->
                 <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
                 <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
-                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
+                    <textarea class="form-control" name="comment_sub_reply" rows="3" id = "commentid_{{prr_id}}"
                     placeholder="Comment" required="required"
                     maxlength="250"></textarea>
                 </div>
                 <?php if ($this->session->userdata('user_id')) { ?>
-                <a href="javascript:void(0)" class="btn btn-primary" id="review_reply_submit"
-                    onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submit</a>
+                <a href="javascript:void(0)" style="display:none" class="btn-review-submit" data-id="{{prr_id}}" id="review_reply_submit"
+                    onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submits</a>
                 <?php }else{ ?>
-                    <a href="javascript:void(0)" class="btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal"
-                    data-bs-target="#login-button">Submit</a>
+                    <a href="javascript:void(0)" style="display:none" class=" btn-review-submit" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                    data-bs-target="#login-button" data-id="{{prr_id}}">Submit</a>
                 <?php  } ?>
                 <!-- Comment Section Ends -->
                 <!-- Start Reply Section -->
@@ -670,7 +645,7 @@ $breadcrumb_name2 = '';*/
                     <a href="javascript:void(0)" data-bs-toggle="modal"
                         data-bs-target="#login-button">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                            viewBox="0 0 24 24" width="24" height="24">
+                            viewBox="0 0 20 20" width="20" height="20">
                             <path
                                 d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                         </svg> Reply
@@ -685,11 +660,14 @@ $breadcrumb_name2 = '';*/
                             class="view-all-replies">View all replies</a></div>
                             {{#each sub_review_lv1}}
                             <div class="review-row-reply review_reply_lev1_{{review_id}} prr_id_{{prr_id}}" style="display:none">
-                                <div class="review-user-image"><span></span></div>
-                                    <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                        <h2 class="review-title">{{firstname}} </h2>
-                                        <div class="review-date"> {{date_added}}</div>
+                            <div class=" d-flex flex-wrap justify-content-between ">
+                                        <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                            <h2 class="review-title"> {{firstname}} </h2>
+                                        </div>
+                                        <div class="review-date pt-3"> {{date_added}} </div>
                                     </div>
+                                    <hr />
                                     <div class="review-content">
                                     <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
                                      <!-- Comment Section Start -->
@@ -698,6 +676,7 @@ $breadcrumb_name2 = '';*/
                                         <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
                                         placeholder="Comment" required="required" maxlength="250"></textarea>
                                     </div>
+                                    <hr />
                                     <?php if ($this->session->userdata('user_id')) { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 id="review_reply_submit"
@@ -739,11 +718,14 @@ $breadcrumb_name2 = '';*/
                                             
                                                 {{#each sub_review_lv2}}
                                                 <div class="review-row-reply mt-3 review_reply_lev2_{{review_id}} prr_id_{{prr_id}}" style="display:none">
-                                                <div class="review-user-image"><span></span></div>
-                                                <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                                    <h2 class="review-title">{{firstname}} </h2>
-                                                    <div class="review-date"> {{date_added}} </div>
+                                                <div class=" d-flex flex-wrap justify-content-between ">
+                                                    <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                                        <h2 class="review-title"> {{firstname}} </h2>
+                                                    </div>
+                                                    <div class="review-date pt-3"> {{date_added}} </div>
                                                 </div>
+                                                <hr />
                                                 <div class="review-content">
                                                 <div id="reviewReplyShort_{{prr_id}}"> {{reply}} </div>
                                                   <!-- Comment Section Start -->
@@ -1682,17 +1664,4 @@ $breadcrumb_name2 = '';*/
         });
     }
 
-
-    //   window.onscroll = function() {myFunction()};
-
-    // var header = document.getElementById("sideleft-fix");
-    // var sticky = header.offsetTop;
-
-    // function myFunction() {
-    //   if (window.pageYOffset > sticky) {
-    //     header.classList.add("sticky");
-    //   } else {
-    //     header.classList.remove("sticky");
-    //   }
-    // }
     </script>

@@ -256,7 +256,9 @@ class Review_model extends CI_Model {
         $item->product_review_type = $r->product_review_type;
         $item->product_review_added = $r->product_review_added;
         $item->status = $r->status;
-        $item->firstname = $r->user_name;
+        $item->firstname = ucfirst($r->user_name);
+        $name_first_letter = substr($r->user_name,0,1);
+        $item->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
         $item->lastname = $r->lastname;
         $item->user_email = $r->user_email;
         $item->like_count = $r->like_count;
@@ -301,11 +303,14 @@ class Review_model extends CI_Model {
         $sub_review_lv1->reply = $r->reply;
         $sub_review_lv1->status = $r->status;
         $sub_review_lv1->date_added = $r->date_added;
-        $sub_review_lv1->firstname = $r->firstname;
+        $sub_review_lv1->firstname = ucfirst($r->firstname);
+        $name_first_letter = substr($r->firstname,0,1);
+        $sub_review_lv1->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
         $sub_review_lv1->lastname = $r->lastname;
         $sub_review_lv1->email = $r->email; 
         $sub_review_lv1->sub_review_lv1 = $this->get_subreview_lv1($r->prr_id,$r->review_id,$i=2);  
         array_push($data,$sub_review_lv1);
+
       }
       return $data;
     }
@@ -335,13 +340,15 @@ class Review_model extends CI_Model {
               $sub_review_lv2->reply = $r->reply;
               $sub_review_lv2->status = $r->status;
               $sub_review_lv2->date_added = $r->date_added;
-              $sub_review_lv2->firstname = $r->firstname;
+              $sub_review_lv2->firstname = ucfirst($r->firstname);
+              $name_first_letter = substr($r->firstname,0,1);
+              $sub_review_lv2->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
               $sub_review_lv2->lastname = $r->lastname;
               $sub_review_lv2->email = $r->email; 
               $sublist = 'sub_review_lv'.$i;
               $sub_review_lv2->$sublist = $this->get_subreview_lv1($r->prr_id,$r->review_id,$i+1);  
               array_push($data,$sub_review_lv2);
-             // $i++;
+
             }
             return $data;
         }

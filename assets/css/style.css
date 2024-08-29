@@ -1791,6 +1791,18 @@ ul.footer-menu-sub li {
   padding-left: 0px;
   padding-right: 24px; /*line-height: 16px; display: inline-block; vertical-align: middle;*/
   margin-top: 4px;
+  font-weight: 600;
+}
+.btn-review-submit {
+  /* display: inline-block; */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 .review-date.today {
   /*background: #3554fe;
@@ -1876,10 +1888,11 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
   color: #db3b21;
 }
 .review-footer-left {
-  color: #505050;
+  color: #242424;
   font-size: 16px;
   line-height: 21px;
   padding-bottom: 20px;
+  font-weight: 600;
 }
 .review-footer-left a {
   color: #3554fe;
