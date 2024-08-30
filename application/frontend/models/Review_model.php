@@ -254,7 +254,8 @@ class Review_model extends CI_Model {
         $item->product_review_title =  $r->product_review_title;
         $item->product_review = $r->product_review;
         $item->product_review_type = $r->product_review_type;
-        $item->product_review_added = $r->product_review_added;
+        $date = date('d-m-Y', strtotime($r->product_review_added));
+        $item->product_review_added = $date;
         $item->status = $r->status;
         $item->firstname = ucfirst($r->user_name);
         $name_first_letter = substr($r->user_name,0,1);
@@ -302,7 +303,8 @@ class Review_model extends CI_Model {
         $sub_review_lv1->user_id = $r->user_id;
         $sub_review_lv1->reply = $r->reply;
         $sub_review_lv1->status = $r->status;
-        $sub_review_lv1->date_added = $r->date_added;
+        $date = date('d-m-Y', strtotime($r->date_added));
+        $sub_review_lv1->date_added = $date;
         $sub_review_lv1->firstname = ucfirst($r->firstname);
         $name_first_letter = substr($r->firstname,0,1);
         $sub_review_lv1->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
@@ -339,7 +341,8 @@ class Review_model extends CI_Model {
               $sub_review_lv2->user_id = $r->user_id;
               $sub_review_lv2->reply = $r->reply;
               $sub_review_lv2->status = $r->status;
-              $sub_review_lv2->date_added = $r->date_added;
+              $date = date('d-m-Y', strtotime($r->date_added));
+              $sub_review_lv2->date_added = $date;
               $sub_review_lv2->firstname = ucfirst($r->firstname);
               $name_first_letter = substr($r->firstname,0,1);
               $sub_review_lv2->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';

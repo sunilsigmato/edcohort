@@ -232,8 +232,8 @@
   }
   .review-date,
   .review-title-row .badge {
-    padding: 3px 7px;
-    font-size: 12px;
+    padding: 1px 5px;
+    font-size: 11px;
     line-height: normal;
   }
   .review-content p,
@@ -504,10 +504,14 @@
   .room-list-box,
   .review-title-row,
   .calendar-main-box {
-    display: block !important;
+    display: block ;
   }
   .review-rating {
-    padding-top: 15px;
+    width: 77px;
+}
+.review-row-reply {
+  padding-left: 14px;
+  padding-right: 14px;
 }
   .review-center {
     width: 100%;
@@ -856,5 +860,8 @@
     padding: 0px;
   
   }
+  .review-btns {
+    font-size: 16px;
+}
 
 }

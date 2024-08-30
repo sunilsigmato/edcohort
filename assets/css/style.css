@@ -1387,6 +1387,8 @@ ul.footer-menu-sub li {
 }
 .review-right {
   padding-top: 24px;
+  position: sticky;
+  top: 0px;
 }
 .community-side-col {
   margin-bottom: 17px;
@@ -1894,6 +1896,11 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
   padding-bottom: 20px;
   font-weight: 600;
 }
+.reply-class {
+  
+  color: rgb(41, 41, 41);
+  text-decoration: none;
+}
 .review-footer-left a {
   color: #3554fe;
   font-size: 16px;
@@ -2023,6 +2030,45 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
 }
 .review-footer-right.d-flex svg {
   width: 20px;
+  width: 16px;
+  padding-bottom: 3px;
+  padding-right: 2px;
+
+}
+.value-span {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 7px 15px 7px 15px;
+  background-color: #b8def3;
+  border-radius: 12px 14px 15px 15px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+ /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);*/
+      }
+
+.closeButton {
+cursor: pointer;
+border-radius: 8px; /* Rounds the corners of the border */
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+}
+.btn-close-filter
+{
+  margin: 0px 0px 0px 17px;
+  background: #b8def3;
+  border: 0px;
+  /* font-weight: bolder; */
+  color: #242424;
+  font-size: 13px;
+  border-radius: 100px;
+  padding: 0px;
+  width: 16px;
+  height: 19px;
+  /* position: relative;*/
+}
+.value-class
+{
+  margin-left: 10px;
 }
 .review-footer-right svg path {
   fill: #a0a0a0;

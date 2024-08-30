@@ -34,6 +34,40 @@ else
    // print_ex($_GET);
 ?>
 <!--banner start-->
+<style>
+
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 <?php 
 
 /*$get_breadcrumb = get_breadcrumb_value();
@@ -431,40 +465,35 @@ $breadcrumb_name2 = '';*/
                             <div class="filter-list-box">
                                 <ul>
                                     
-                                    <li>
-                                            <input type="radio" name="customer_rating" id="ratingall" value="all">
-                                            <label for="ratingall">All</label>
-                                            
-                                    </li>
-                                    <li>
+                                <li>
                                         <input type="radio" name="customer_rating" id="rating1" value="5" 
                                             <?php if(@$customer_rating == 5){ echo 'checked';} ?>>
                                         <label for="rating1"><img
-                                                src="<?php echo base_url();?>assets/images/rating-5.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-5-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating2" value="4"
                                             <?php if(@$customer_rating == 4){ echo 'checked';} ?>>
                                         <label for="rating2"><img
-                                                src="<?php echo base_url();?>assets/images/rating-4.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-4-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating3" value="3"
                                             <?php if(@$customer_rating == 3){ echo 'checked';} ?>>
                                         <label for="rating3"><img
-                                                src="<?php echo base_url();?>assets/images/rating-3.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-3-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating4" value="2"
                                             <?php if(@$customer_rating == 2){ echo 'checked';} ?>>
                                         <label for="rating4"><img
-                                                src="<?php echo base_url();?>assets/images/rating-2.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-2-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating5" value="1"
                                             <?php if(@$customer_rating == 1){ echo 'checked';} ?>>
                                         <label for="rating5"><img
-                                                src="<?php echo base_url();?>assets/images/rating-1.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-1-1.png" alt=""></label>
                                     </li>
                                 </ul>
                             </div>
@@ -513,42 +542,7 @@ $breadcrumb_name2 = '';*/
                 <div class="review-center">
                     <div class="review-btn-box">
                     </div>
-                    <style>
-                        .value-span {
-                            display: inline-block;
-                            margin-right: 10px;
-                            padding: 7px;
-                            background-color: lightblue;
-                            border-radius: 12px 14px 15px 15px;
-                            font-size: 12px;
-                            font-weight: 600;
-                            color: #5b5b5b;
-                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-                                }
-
-                        .closeButton {
-                            cursor: pointer;
-                        border-radius: 8px; /* Rounds the corners of the border */
-                        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-                        }
-                        .btn-close-filter
-                        {
-                            margin-left: 5px;
-                            background: #00c0ff;
-                            border: 0px;
-                            font-weight: bolder;
-                            color: white;
-                            font-size: 10px;
-                            border-radius: 100px;
-                            padding: 0px;
-                            width: 16px;
-                            height: 19px;
-                        }
-                        .value-class
-                        {
-                            margin-left: 10px;
-                        }
-                            </style>
+                    
                         <div id="selectedValues" class="value-class"></div>  <!-- for filter values display -->
                     <div class="review-inner-center">
                         <div class="tab-link">
@@ -577,36 +571,35 @@ $breadcrumb_name2 = '';*/
         {{#if items}}
     {{#each items}}
     <div class="review-row">
-        <div class="review-user-image"><span></span></div>
-            <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center"> 
-                    <h2 class="review-title"> {{firstname}} <span>
-                    <img src="{{base_url}}assets/images/verifyicon.png" alt=""></span>
+    <div class=" d-flex flex-wrap justify-content-between align-items-center">
+        <div class="review-user-images d-flex align-items-center mt-4">
+            <img src="{{profile_image}}" alt="">
+            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">
+            <h2 class="review-title"> {{firstname}} 
+        </div>
+            <div class="review-title-row"> 
+                    
+                    
                     </h2>
                     <div class="review-rating">
                         {{#xif product_rating "==" "1"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-1-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "2"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-2-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "3"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-3-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "4"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                                            class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-4-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "5"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-5-1.png" alt="">
                         {{/xif}}
                     </div>
                 </div>
+            </div>
             <div class="review-date "> {{product_review_added}} </div>
         <hr />
         <div>
@@ -751,45 +744,49 @@ $breadcrumb_name2 = '';*/
                 $temp_prr_id = $reply->prr_id;
                 $temp_review_id = $reply->review_id;  
                 ?> -->
-                 <div class="review-user-image"><span></span></div>
-                 <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                    <h2 class="review-title"> {{firstname}} </h2>
-                    <div class="review-date"> {{date_added}} </div>
-                 </div>
+                <div class=" d-flex flex-wrap align-items-center justify-content-between ">
+                    <div class="review-user-images review-title-row d-flex  justify-content-between align-items-center pt-3">
+                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                        <h2 class="review-title"> {{firstname}} </h2>
+                    </div>
+                    <div class="review-date pt-3"> {{date_added}} </div>
+                </div>
+                <hr />
                  <div class="review-content">
                  <div id="reviewReplyShort_{{prr_id}}">
                     {{reply}}
                  </div>
+                 <hr />
                    <!-- Comment Section Start -->
                 <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
                 <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
-                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
+                    <textarea class="form-control" name="comment_sub_reply" rows="3" id = "commentid_{{prr_id}}"
                     placeholder="Comment" required="required"
                     maxlength="250"></textarea>
                 </div>
                 <?php if ($this->session->userdata('user_id')) { ?>
-                <a href="javascript:void(0)" class="btn btn-primary" id="review_reply_submit"
+                <a href="javascript:void(0)" style="display:none" class="btn btn-primary" id="review_reply_submit_{{prr_id}}"
                     onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submit</a>
                 <?php }else{ ?>
-                    <a href="javascript:void(0)" class="btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal"
+                    <a href="javascript:void(0)" style="display:none" class="btn btn-primary" id="review_reply_submit_{{prr_id}}" data-bs-effect="effect-scale" data-bs-toggle="modal"
                     data-bs-target="#login-button">Submit</a>
                 <?php  } ?>
                 <!-- Comment Section Ends -->
                 <!-- Start Reply Section -->
                 <?php if($this->session->userdata('user_id')){ ?>
                     <a href="javascript:void(0)" id="reply-"
-                        onclick="ed_comment({{prr_id}});">
+                        onclick="ed_comment({{prr_id}});" class="reply-class">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                            viewBox="0 0 24 24" width="24" height="24">
+                            viewBox="0 0 24 24" width="16" height="16">
                             <path
                                 d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
                         </svg> Reply
                     </a>
                     <?php }else{ ?>
                     <a href="javascript:void(0)" data-bs-toggle="modal"
-                        data-bs-target="#login-button">
+                        data-bs-target="#login-button" class="reply-class">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                            viewBox="0 0 24 24" width="24" height="24">
+                            viewBox="0 0 24 24" width="16" height="16">
                             <path
                                 d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                         </svg> Reply
@@ -804,43 +801,47 @@ $breadcrumb_name2 = '';*/
                             class="view-all-replies">View all replies</a></div>
                             {{#each sub_review_lv1}}
                             <div class="review-row-reply review_reply_lev1_{{review_id}} prr_id_{{prr_id}}" style="display:none">
-                                <div class="review-user-image"><span></span></div>
-                                    <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                        <h2 class="review-title">{{firstname}} </h2>
-                                        <div class="review-date"> {{date_added}}</div>
+                            <div class=" d-flex flex-wrap justify-content-between ">
+                                        <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                            <h2 class="review-title"> {{firstname}} </h2>
+                                        </div>
+                                        <div class="review-date pt-3"> {{date_added}} </div>
                                     </div>
+                                    <hr />
                                     <div class="review-content">
                                     <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
+                                    <hr />
                                      <!-- Comment Section Start -->
                                      <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
                                      <?php $form_name = 'comment_sub_reply_{{prr_id}}'; ?>
-                                        <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
+                                        <textarea class="form-control" name="comment_sub_reply" rows="3" id = "commentid_{{prr_id}}"
                                         placeholder="Comment" required="required" maxlength="250"></textarea>
                                     </div>
                                     <?php if ($this->session->userdata('user_id')) { ?>
-                                            <a href="javascript:void(0)" class="btn btn-primary"
-                                                id="review_reply_submit"
+                                            <a href="javascript:void(0)" style="display:none" class="btn btn-primary" 
+                                                id="review_reply_submit_{{prr_id}}" 
                                                 onclick="divSubReply({{review_id}} ,{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>')">Submit</a>
                                             <?php }else{ ?>
-                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                            <a href="javascript:void(0)" style="display:none" class="btn btn-primary" id="review_reply_submit_{{prr_id}}"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#login-button">Submit</a>
                                     <?php } ?>
                                      <!-- Comment Section Ends -->
                                       <!-- Start Reply Section -->
                                       <?php if($this->session->userdata('user_id')){ ?>
                                         <a href="javascript:void(0)" id="reply-"
-                                            onclick="ed_comment({{prr_id}});">
+                                            onclick="ed_comment({{prr_id}});" class="reply-class">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
                                                     d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
                                             </svg> Reply
                                         </a>
                                         <?php }else{ ?>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#login-button">
+                                            data-bs-target="#login-button" class="reply-class">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
                                                     d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                                             </svg> Reply
@@ -858,11 +859,14 @@ $breadcrumb_name2 = '';*/
                                             
                                                 {{#each sub_review_lv2}}
                                                 <div class="review-row-reply mt-3 review_reply_lev2_{{review_id}} prr_id_{{prr_id}}" style="display:none">
-                                                <div class="review-user-image"><span></span></div>
-                                                <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                                    <h2 class="review-title">{{firstname}} </h2>
-                                                    <div class="review-date"> {{date_added}} </div>
+                                                <div class=" d-flex flex-wrap justify-content-between ">
+                                                    <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                                        <h2 class="review-title"> {{firstname}} </h2>
+                                                    </div>
+                                                    <div class="review-date pt-3"> {{date_added}} </div>
                                                 </div>
+                                                <hr />
                                                 <div class="review-content">
                                                 <div id="reviewReplyShort_{{prr_id}}"> {{reply}} </div>
                                                   <!-- Comment Section Start -->
@@ -898,8 +902,8 @@ $breadcrumb_name2 = '';*/
     <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">
     </div>
     {{else}}
-    <div class="review-row-reply">
-                                <h4>No result found..!!</h4>
+    <div class="not-found">
+    <img src="<?php echo base_url();?>assets/images/no_result.gif" alt="" >
                             </div>
     {{/if}}
 
@@ -1658,6 +1662,11 @@ $breadcrumb_name2 = '';*/
             $('#subcommentDiv_' + val).css('display', 'block');
         } else {
             $('#subcommentDiv_' + val).css('display', 'none');
+        }
+        if ($('#review_reply_submit_' + val).css('display') == 'none') {
+            $('#review_reply_submit_' + val).css('display', '');
+        } else {
+            $('#review_reply_submit_' + val).css('display', 'none');
         }
     }
 
