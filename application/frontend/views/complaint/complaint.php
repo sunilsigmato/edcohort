@@ -29,6 +29,40 @@ else
     exit;
 }
 ?>
+<style>
+
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 <?php 
 /*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
@@ -455,34 +489,39 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                             
                                     </li>
                                     <li>
+                                            <input type="radio" name="customer_rating" id="ratingall" value="all">
+                                            <label for="ratingall">All</label>
+                                            
+                                    </li>
+                                    <li>
                                         <input type="radio" name="customer_rating" id="rating1" value="5" 
                                             <?php if(@$customer_rating == 5){ echo 'checked';} ?>>
                                         <label for="rating1"><img
-                                                src="<?php echo base_url();?>assets/images/rating-5.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-5-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating2" value="4"
                                             <?php if(@$customer_rating == 4){ echo 'checked';} ?>>
                                         <label for="rating2"><img
-                                                src="<?php echo base_url();?>assets/images/rating-4.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-4-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating3" value="3"
                                             <?php if(@$customer_rating == 3){ echo 'checked';} ?>>
                                         <label for="rating3"><img
-                                                src="<?php echo base_url();?>assets/images/rating-3.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-3-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating4" value="2"
                                             <?php if(@$customer_rating == 2){ echo 'checked';} ?>>
                                         <label for="rating4"><img
-                                                src="<?php echo base_url();?>assets/images/rating-2.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-2-1.png" alt=""></label>
                                     </li>
                                     <li>
                                         <input type="radio" name="customer_rating" id="rating5" value="1"
                                             <?php if(@$customer_rating == 1){ echo 'checked';} ?>>
                                         <label for="rating5"><img
-                                                src="<?php echo base_url();?>assets/images/rating-1.png" alt=""></label>
+                                                src="<?php echo base_url();?>assets/images/rating-1-1.png" alt=""></label>
                                     </li>
                                 </ul>
                             </div>
@@ -530,42 +569,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             <div class="col-md-8">
                 <div class="review-center">
                     <div class="review-btn-box p-2">
-                    <style>
-                        .value-span {
-                            display: inline-block;
-                            margin-right: 10px;
-                            padding: 7px;
-                            background-color: lightblue;
-                            border-radius: 12px 14px 15px 15px;
-                            font-size: 12px;
-                            font-weight: 600;
-                            color: #5b5b5b;
-                            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-                                }
-
-                                .closeButton {
-                            cursor: pointer;
-                        border-radius: 8px; /* Rounds the corners of the border */
-                        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
-                        }
-                        .btn-close-filter
-                        {
-                            margin-left: 5px;
-                            background: #00c0ff;
-                            border: 0px;
-                            font-weight: bolder;
-                            color: white;
-                            font-size: 10px;
-                            border-radius: 100px;
-                            padding: 0px;
-                            width: 16px;
-                            height: 19px;
-                        }
-                        .value-class
-                        {
-                            margin-left: 10px;
-                        }
-                            </style>
+                  
                         <div id="selectedValues"  class="value-class"></div>  <!-- for filter values display -->
                        <!-- <?php if ($this->session->userdata('user_id')) { ?>
                         <a href="<?php echo base_url(); ?>write-a-complaint?course=<?php echo @$course; ?>&brand=<?php echo $brandID; ?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board; ?>&class=<?php echo $class; ?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
@@ -579,6 +583,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         <?php } ?>  -->
                     </div>
                     <div class="review-inner-center">
+                    <div class=" d-flex flex-wrap justify-content-between ">
                         <div class="tab-link">
                             <ul>
                                 <li>
@@ -599,6 +604,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 <?php } ?>
                             </ul>
                         </div>
+
+                        <div class="col-md-4 pt-3 write-review-icon">
+                            <?php if ($this->session->userdata('user_id')) { ?>
+                            <a href="<?php echo base_url();?>write-a-complaint?segment=<?php echo $segment_temp;?>"
+                            class="review-btns text-decoration-none">
+                            <i class="fa-solid fa-pen-to-square"></i> <span> Write a Complaint </span> <label
+                                for="rating2"> </label>
+                            </a>
+                            <?php } else { ?>
+                                <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
+                                    data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-pen-to-square"></i> <span> Write a Complaint </span> <label
+                                for="rating2"> </label></a>
+                                <?php } ?>
+                        </div>
+                    </div>
 
     <script id="review-template" type="text/x-handlebars-template">
     <div class="total-review">{{total_items}} Complaints</div>
@@ -639,30 +659,34 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     ?>
  
     <div class="review-row">
-        <div class="review-user-image"><span></span></div>
-            <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center"> 
-                    <h2 class="review-title"> {{firstname}} <span>
-                    <img src="{{base_url}}assets/images/verifyicon.png" alt=""></span>
-                    </h2>
-                        {{#xif complaint_resolved "==" "0"}}
-                            {{#xif not_resloved_diff "!=" "0"}}
-                                <span>Issue not resloved from past {{not_resloved_diff}} Days</span>
-                                {{else}}
-                                <span>Issue Added Toady</span>
-                            {{/xif}}
+    <div class=" d-flex flex-wrap justify-content-between align-items-center">
+        <div class="review-user-images d-flex align-items-center mt-4">
+            <img src="{{profile_image}}" alt="">
+            
+            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">
+            <h2 class="review-title"> {{firstname}} 
+        </div>
+            <div class="review-title-row review-title-row_complaint d-flex flex-wrap justify-content-between align-items-center"> 
+                  
+                </h2>
+                    {{#xif complaint_resolved "==" "0"}}
+                        {{#xif not_resloved_diff "!=" "0"}}
+                            <span>Issue not resloved from past {{not_resloved_diff}} Days</span>
+                            {{else}}
+                            <span>Issue Added Toady</span>
                         {{/xif}}
+                    {{/xif}}
 
-                        {{#xif complaint_resolved "==" "1"}}
-                            {{#xif difference_resloved "==" "0"}}
-                                <span>Issue resloved Today</span>
-                                {{else}}
-                                <span>The Issue was resloved  {{difference_resloved}} Days ago</span>
-                            {{/xif}}
+                    {{#xif complaint_resolved "==" "1"}}
+                        {{#xif difference_resloved "==" "0"}}
+                            <span>Issue resloved Today</span>
+                            {{else}}
+                            <span>The Issue was resloved  {{difference_resloved}} Days ago</span>
                         {{/xif}}
-    
-                    
+                    {{/xif}}
 
-                        <div class=" d-flex align-items-center resolve-button">  
+                </div>
+                    <div class=" review-title-row review-title-row_complaint resolve-button">  
                         {{#xif user_id "==" "<?php echo $this->session->userdata('user_id') ?>"}}
                             {{#xif complaint_resolved "==" "1"}}
                                 <span class="badge bg-resolved">Resolved</span>
@@ -678,35 +702,28 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 {{else}}
                                     <span class="badge bg-unresolved">Unresolved</span>
                                 {{/xif}}
-                        {{/xif}}
-                                       
-                                                                                    
-                                    </div>
+                        {{/xif}}          
+                    </div>
+            
                     <div class="review-rating">
                         {{#xif product_rating "==" "1"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-1-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "2"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-2-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "3"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i><i class="fa fa-star"></i>
+                        <img src="<?php echo base_url();?>assets/images/rating-3-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "4"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                                            class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                                        <i class="fa fa-star"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-4-1.png" alt="">
                         {{/xif}}
                         {{#xif product_rating "==" "5"}}
-                        <i class="fa fa-star text-yellow"></i><i class="fa fa-star text-yellow"></i> <i
-                        class="fa fa-star text-yellow"></i> <i class="fa fa-star text-yellow"></i>
-                        <i class="fa fa-star text-yellow"></i>
+                            <img src="<?php echo base_url();?>assets/images/rating-5-1.png" alt="">
                         {{/xif}}
                     </div>
-                </div>
+                
+    </div>
             <div class="review-date "> {{product_complaint_added}} </div>
         <hr />
         <div>
@@ -735,21 +752,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
          <a href="javascript:void(0)"
             onclick="productComplaintLike({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">
             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
-            width="24" height="24">
+            width="16" height="16">
             <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
             </svg> {{like}} </a>
         {{/xif}}
         {{#xif like "<" "1"}} 
             <a href="javascript:void(0)" onclick="productComplaintLike({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">
             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
-            width="24" height="24">
+            width="16" height="16">
             <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
             </svg> {{like}}</a>  
         {{else}}
             <a href="javascript:void(0)" data-bs-effect="effect-scale"
             data-bs-toggle="modal" data-bs-target="#login-button">
             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
-            width="24" height="24">
+            width="16" height="16">
             <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z" />
                 </svg> {{like}} </a>
         {{/xif}}  
@@ -759,7 +776,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 <a href="javascript:void(0)" id="reply-"
                     onclick="divShow({{product_complaint_id}});">
                     <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                        viewBox="0 0 24 24" width="24" height="24">
+                        viewBox="0 0 24 24" width="16" height="16">
                         <path
                             d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
                     </svg> Reply
@@ -768,7 +785,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 <a href="javascript:void(0)" data-bs-toggle="modal"
                     data-bs-target="#login-button">
                     <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                        viewBox="0 0 24 24" width="24" height="24">
+                        viewBox="0 0 24 24" width="16" height="16">
                         <path
                             d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                     </svg> Reply
@@ -847,15 +864,19 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 $temp_prr_id = $reply->prr_id;
                 $temp_review_id = $reply->review_id;  
                 ?> -->
-                 <div class="review-user-image"><span></span></div>
-                 <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                    <h2 class="review-title"> {{firstname}} </h2>
-                    <div class="review-date"> {{date_added}} </div>
+                <div class=" d-flex flex-wrap align-items-center justify-content-between ">
+                    <div class="review-user-images  d-flex  justify-content-between align-items-center pt-3">
+                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                        <h2 class="review-title"> {{firstname}} </h2>
+                    </div>
+                    <div class="review-date pt-3"> {{date_added}} </div>
                 </div>
+                <hr />
                 <div class="review-content">
                  <div id="complaintReplyShort_{{prr_id}}">
                     {{reply}}
                  </div>
+                 <hr />
                         <!-- Relpy and like Box -->
                                     
 
@@ -912,18 +933,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
                                 <?php if ($this->session->userdata('user_id')) { ?>
                                         <a href="javascript:void(0)" id="reply-"
-                                            onclick="ed_comment({{prr_id}});">
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                            onclick="ed_comment({{prr_id}});" class="reply-class">
+                                            <svg xmlns="http://www.w3.org/2000/svg"  id="Layer_1" data-name="Layer 1"
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
-                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                                             </svg> Reply
                                         </a>
                                         <?php } else { ?>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#login-button">
+                                            data-bs-target="#login-button" class="reply-class">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
                                                     d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                                             </svg> Reply
@@ -938,14 +959,17 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             class="view-all-replies">View all replies</a></div>
                             {{#each sub_review_lv1}}
                             <div class="review-row-reply complaint_reply_lev1_{{complaint_id}} prr_id_{{prr_id}}" style="display:none">
-                                <div class="review-user-image"><span></span></div>
-                                    <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                        <h2 class="review-title">{{firstname}} </h2>
-                                        <div class="review-date"> {{date_added}}</div>
+                            <div class=" d-flex flex-wrap justify-content-between ">
+                                        <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                            <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                            <h2 class="review-title"> {{firstname}} </h2>
+                                        </div>
+                                        <div class="review-date pt-3"> {{date_added}} </div>
                                     </div>
+                                    <hr />
                                     <div class="review-content">
                                     <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
-
+                                    <hr />
                                            <!-- Relpy and like Box -->
                                     
 
@@ -1002,18 +1026,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
                                 <?php if ($this->session->userdata('user_id')) { ?>
                                         <a href="javascript:void(0)" id="reply-"
-                                            onclick="ed_comment({{prr_id}});">
+                                            onclick="ed_comment({{prr_id}});" class="reply-class">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
-                                                    d="M11,9.5v3.5c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5Zm5.5-1.5h-1.5c-1.105,0-2,.895-2,2v1.5c0,.828,.672,1.5,1.5,1.5h1.5c0,1.103-.897,2-2,2-.553,0-1,.447-1,1s.447,1,1,1c2.206,0,4-1.794,4-4v-3.5c0-.828-.672-1.5-1.5-1.5Zm7.5,4.34v6.66c0,2.757-2.243,5-5,5h-5.917C6.082,24,.47,19.208,.03,12.854-.211,9.378,1.057,5.977,3.509,3.521,5.96,1.066,9.364-.202,12.836,.028c6.26,.426,11.164,5.833,11.164,12.312Zm-2,0c0-5.431-4.085-9.962-9.299-10.315-.229-.016-.458-.023-.685-.023-2.657,0-5.209,1.049-7.092,2.934-2.043,2.046-3.1,4.882-2.899,7.781,.373,5.38,5.023,9.284,11.058,9.284h5.917c1.654,0,3-1.346,3-3v-6.66Z" />
+                                                    d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                                             </svg> Reply
                                         </a>
                                         <?php } else { ?>
                                         <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#login-button">
+                                            data-bs-target="#login-button" class="reply-class">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"
-                                                viewBox="0 0 24 24" width="24" height="24">
+                                                viewBox="0 0 24 24" width="16" height="16">
                                                 <path
                                                     d="M12.836,.028C9.364-.202,5.96,1.066,3.509,3.521,1.057,5.977-.211,9.378,.03,12.854c.44,6.354,6.052,11.146,13.053,11.146h5.917c2.757,0,5-2.243,5-5v-6.66C24,5.861,19.097,.454,12.836,.028Zm-1.836,12.972c0,2.206-1.794,4-4,4-.552,0-1-.447-1-1s.448-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Zm7,0c0,2.206-1.794,4-4,4-.553,0-1-.447-1-1s.447-1,1-1c1.103,0,2-.897,2-2h-1.5c-.828,0-1.5-.672-1.5-1.5v-1.5c0-1.105,.895-2,2-2h1.5c.828,0,1.5,.672,1.5,1.5v3.5Z" />
                                             </svg> Reply
@@ -1030,11 +1054,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                             {{/xif}}
                                             {{#each sub_review_lv2}}
                                                 <div class="review-row-reply mt-3 complaint_reply_lev2_{{complaint_id}} prr_id_{{prr_id}}" style="display:none">
-                                                <div class="review-user-image"><span></span></div>
-                                                <div class="review-title-row d-flex flex-wrap justify-content-between align-items-center">
-                                                    <h2 class="review-title">{{firstname}} </h2>
-                                                    <div class="review-date"> {{date_added}} </div>
+                                                <div class=" d-flex flex-wrap justify-content-between ">
+                                                    <div class="review-user-images review-title-row d-flex flex-wrap justify-content-between align-items-center pt-3">
+                                                        <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">   
+                                                        <h2 class="review-title"> {{firstname}} </h2>
+                                                    </div>
+                                                    <div class="review-date pt-3"> {{date_added}} </div>
                                                 </div>
+                                                <hr />
                                                 <div class="review-content">
                                                 <div id="complaintReplyShortRM_{{prr_id}}"> {{reply}} </div>
                                                   <!-- Comment Section Start -->
@@ -1456,7 +1483,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
               }
            });
 
-        })
+        });
 
         function filter_brand(segment_id)
         {
@@ -1812,7 +1839,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         status_val: status_val,
                     },
                     success: function(data) {
-                       console.log(data)
+                   
                        if(data)
                        {
                             if(data.status === '1')

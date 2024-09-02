@@ -506,9 +506,13 @@
   .calendar-main-box {
     display: block ;
   }
+  .review-title-row_complaint{
+    margin-top: 14px;
+  }
   .review-rating {
     width: 77px;
 }
+
 .review-row-reply {
   padding-left: 14px;
   padding-right: 14px;
