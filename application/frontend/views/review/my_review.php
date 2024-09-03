@@ -276,9 +276,9 @@ $breadcrumb_name2 = '';*/
 <div class="container-fluid review-top-section">
     <div class="row review-top-next">
         <!--- Filtr Starts  --->
-        <div class="col-md-2 review-left">
+        <div class="col-md-2 review-left mt-4">
 
-            <h3 class="filter-title">Filter</h3>
+           <!-- <h3 class="filter-title">Filter</h3> -->
                     <form action="<?php echo base_url(); ?>review-search" method="post" name="form" id="form">
 
                         <?php echo csrf_field(); 
