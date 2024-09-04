@@ -467,20 +467,7 @@ if($get_breadcrumb)
                         <div class="across-row">
                             <div class="across-col-box d-flex justify-content-between">
                                 <!--left-->
-                                <div class="across">
-                                    <div class="standard-box">
-                                        <div class="standard-content">
-                                            <div class="standard-header">Course Details </div>
-                                            <div>
-                                                <h4 class="text-center mb-3">
-                                                    <?php echo @$product_list['0']->product_name; ?>
-                                                </h4>
-                                                <p><?php echo @$product_list['0']->product_short_description; ?></p>
-                                                <p><?php echo @$product_list['0']->product_description; ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <!--right-->
                                 <!-- <div class="across-right">                        
@@ -619,7 +606,7 @@ if($get_breadcrumb)
     }
     .option-input.radio {
     border-radius: 50%;
-    background: #00aaff;
+    background: #bfb2b2;
     }
     .option-input.radio::after {
     border-radius: 50%;
@@ -634,7 +621,7 @@ if($get_breadcrumb)
 
      </style>
 
-    <div class="container">
+    <div class="container pt-3">
     <div class="voucher-container d-flex flex-column flex-md-row">
         <div class="voucher-body col-md-8">
             <div class="voucher-title">VOUCHER</div>
@@ -654,7 +641,7 @@ if($get_breadcrumb)
         
     </div>
     </div>
-   <div class="hr-coupon"> </div>
+   <!--<div class="hr-coupon"> </div>-->
 
 <div class="selection ">
     <?php if($this->session->userdata('user_id')){ ?>
@@ -713,7 +700,7 @@ if($get_breadcrumb)
 
                                            
                                            <table  class="table">
-                                            <hr>
+                                            
                                             <thead>
                                                 <tr class="text-center">
                                                       <td class = "today_header">Today</td>
@@ -738,7 +725,7 @@ if($get_breadcrumb)
                                                 style="width:300px ">
                                                 
                                         </div>
-                                            <hr>
+                                            
                                         <?php if($this->session->userdata('user_id')){ ?>
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
                                             <div class="submit-div pb-3">
