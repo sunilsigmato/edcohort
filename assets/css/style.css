@@ -1097,6 +1097,8 @@ ul.footer-menu-sub li {
   top: 0;
 }
 
+
+
 .inner-banner {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 6px 13px 0;
@@ -1368,6 +1370,18 @@ ul.footer-menu-sub li {
   color: #ffffff;
   font-weight: 700;
   font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  border-radius: 15px;
+}
+.coupon-submit {
+  width: 111px;
+  height: 52px;
+  background: #5eabf4;
+  border: 1.5px solid #5eabf4;
+  color: #ffffff;
+  /* font-weight: 700; */
+  font-size: 18px;
   line-height: 23px;
   text-align: center;
   border-radius: 15px;

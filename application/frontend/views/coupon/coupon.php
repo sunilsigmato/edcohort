@@ -28,7 +28,40 @@ else
   //  print_ex($product_list);
 ?>
 
+<style>
 
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 
 <?php 
 
@@ -228,8 +261,8 @@ if($get_breadcrumb)
 
         </div>
     </div>
+    
 
- 
 
     <!--start-->
     <div class="review-main-box d-flex">
@@ -242,7 +275,7 @@ if($get_breadcrumb)
                 <!--- Filtr Starts  --->
                 <div class="col-md-2 review-left">
 
-                    <h3 class="filter-title">Filter</h3>
+                    <!--<h3 class="filter-title">Filter</h3> -->
                     <form action="<?php echo base_url(); ?>coupon-search" method="post" name="form" id="form">
                         <?php echo csrf_field(); 
                         $res_filter_brand = getseg_brand_list($segment);
@@ -465,186 +498,221 @@ if($get_breadcrumb)
 								</form>
 							</div>
 						</div> -->
+
                             </div>
-                        
-                                    <!-- Coupon New code -->
-                        <div class="card">
-            
-                        <!-- Vinay Latest Code -->
-                        <div>
-                                <div class="row coupon-style ">
-                                    <div class="col-md-12">
-                                        <div class=" row coupon-card">
-                                            <div class="col-md-10">
-                                                <div class="d-flex align-items-center">
-                                                    <p>
-                                                        <i class="fa-solid fa-check verify-icon"></i>
-                                                        Verified Today
-                                                    </p>
-                                                    <p class="ps-5"> <i class="fa-solid fa-users"></i> 218 People Used
-                                                        Today
-                                                    </p>
-                                                </div>
-                                                <div>
-                                                    <h4>Republic Day Sale:85% Off</h4>
-                                                    <h6>Republic Day Sale: Upto 85% Off Sitewide + Extra 10% Off Via
-                                                        ICICI B
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2 d-flex align-items-center">
-                                               <!-- <div class=" coupon-card-button">Get Deal</div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12  coupon-card-input ">
-                                    <div class="d-flex align-items-center justify-content-center">  
-                                    <div class="dropdown ">
-                                    <!--<label for="coupons">
-                                                <h5>Enter
-                                                    the number of
-                                                    coupons</h5>
-                                            </label>
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Select                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Now</a></li>
-                                            <li><a class="dropdown-item" href="#">Today</a></li>
-                                            <li><a class="dropdown-item" href="#">Tommorow</a></li>
-                                            <li><a class="dropdown-item" href="#">Select Date</a></li>
-                                        </ul>  -->                               
-                                    </div>
-                                        </div>
-                                        <div>
-                                            
-                                        <style>
-                                                
-                                                .option-input {
-                                                -webkit-appearance: none;
-                                                -moz-appearance: none;
-                                                -ms-appearance: none;
-                                                -o-appearance: none;
-                                                appearance: none;
-                                                position: relative;
-                                                top: 13.33333px;
-                                                right: 0;
-                                                bottom: 0;
-                                                left: 0;
-                                                height: 40px;
-                                                width: 40px;
-                                                transition: all 0.15s ease-out 0s;
-                                                background: #cbd1d8;
-                                                border: none;
-                                                color: #fff;
-                                                cursor: pointer;
-                                                display: inline-block;
-                                                margin-right: 0.1rem;
-                                                outline: none;
-                                                position: relative;
-                                                /* z-index: 1000; */
-                                                }
-                                                .option-input:hover {
-                                                background: #9faab7;
-                                                }
-                                                .option-input:checked {
-                                                background: #40e0d0;
-                                                }
-                                                .option-input:checked::before {
-                                                /* width: 40px;
-                                                height: 40px; */
-                                                /* display:flex; */
-                                                content: '\f00c';
-                                                font-size: 20px;
-                                                font-weight:bold;
-                                                position: absolute;
-                                                /* align-items:center; */
-                                                /* justify-content:center; */
-                                                font-family:'Font Awesome 5 Free';
-                                                padding: 7px 0px 0px 9px;
-                                                }
-                                                .option-input:checked::after {
-                                                -webkit-animation: click-wave 0.65s;
-                                                -moz-animation: click-wave 0.65s;
-                                                animation: click-wave 0.65s;
-                                                background: #40e0d0;
-                                                content: '';
-                                                display: block;
-                                                position: relative;
-                                                z-index: 100;
-                                                }
-                                                .option-input.radio {
-                                                border-radius: 50%;
-                                                }
-                                                .option-input.radio::after {
-                                                border-radius: 50%;
-                                                }
-                                                .card {
-                                                    height : unset;
-                                                }
+                        <style>
+        .voucher-container {
+            background-color: #bfb2b2;
+            border-radius: 10px;
+            overflow: hidden;
+            /*max-width: 400px;*/
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .voucher-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .voucher-title {
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .voucher-validity {
+            font-size: 16px;
+            font-weight: bold;
+            color: #242424;
+            margin-bottom: 20px;
+        }
+
+        .voucher-footer {
+            background-color: #0d6efd;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .voucher-amount {
+            font-size: 53px;
+            font-weight: bold;
+        }
+        .selection {
+    background-color: #ededed;
+}
+.hr-coupon {
+    color: inherit;
+    background-color: #000000;
+    border: 1px solid;
+    opacity: .25;
+}
+.voucher-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 23px;
+    letter-spacing: 0.1em;
+    padding-top:2px;
+  
+}
+.voucher-label {
+    background-color: #00aaff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px 0 0 10px;
+}
+
+
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 13.33333px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s ease-out 0s;
+    background: #ffffff;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.1rem;
+    outline: none;
+    position: relative;
+    /* z-index: 1000; */
+    }
+    .option-input:hover {
+    background: #9faab7;
+    }
+    .option-input:checked {
+    background: #40e0d0;
+    }
+    .option-input:checked::before {
+    /* width: 40px;
+    height: 40px; */
+    /* display:flex; */
+    content: '\f00c';
+    font-size: 20px;
+    font-weight:bold;
+    position: absolute;
+    /* align-items:center; */
+    /* justify-content:center; */
+    font-family:'Font Awesome 5 Free';
+    padding: 7px 0px 0px 9px;
+    }
+    .option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: #40e0d0;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+    }
+    .option-input.radio {
+    border-radius: 50%;
+    background: #00aaff;
+    }
+    .option-input.radio::after {
+    border-radius: 50%;
+    }
+    .text-right {
+        text-decoration: none;
+        color: black;
+    }
+    .submit-div{
+        text-align: center;
+    }
+
+     </style>
+
+    <div class="container">
+    <div class="voucher-container d-flex flex-column flex-md-row">
+        <div class="voucher-body col-md-8">
+            <div class="voucher-title">VOUCHER</div>
+            <div class="voucher-validity">Valid Until <strong>23 June 2023</strong></div>
+            <div class="voucher-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus volutpat velit at magna vehicula luctus.
+            </div>
+        </div>
+         <div class="row voucher-label col-md-4">
+            <div class="col-md-5"> 
+                <span class="voucher-text col-md-2">VOUCHER</span>
+            </div>
+            <div class="col-md-5" style="align-content: space-around;"> 
+            <span class="voucher-amount">$25</span> 
+            </div>
         
-                                                        </style>
+        
+    </div>
+    </div>
+   <div class="hr-coupon"> </div>
 
-                                            <?php if($this->session->userdata('user_id')){ ?>
+<div class="selection ">
+    <?php if($this->session->userdata('user_id')){ ?>
                                         
-                                         <div class="coupon-option">
-                                         <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="today" class="option-input radio date_radio" name="group1" />
-                                                <div class = "coupon-label-type">  Today </div>
-                                            </label>
-                                        </div>
+                                        <div class="coupon-option">
                                         <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="tommorow" class="option-input radio date_radio" name="group1" />
-                                                <div class = "coupon-label-type"> Tommorow </div>
-                                            </label>
-                                        </div>
-                                        <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="day_after_tmr" class="option-input radio date_radio" name="group1" />
-                                                <div class = "coupon-label-type"> Day After Tomorrow   </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="today" class="option-input radio date_radio" name="group1" />
+                                               <div class = "coupon-label-type">  Today </div>
+                                           </label>
+                                       </div>
+                                       <div class = "coupon-label-radio">
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="tommorow" class="option-input radio date_radio" name="group1" />
+                                               <div class = "coupon-label-type"> Tommorow </div>
+                                           </label>
+                                       </div>
+                                       <div class = "coupon-label-radio">
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="day_after_tmr" class="option-input radio date_radio" name="group1" />
+                                               <div class = "coupon-label-type"> Day After Tomorrow   </div>
+                                           </label>
+                                       </div>
+                                   </div>
 
 
-                                            <?php }else{ ?>
-                                                <fieldset id="group1">
-                                                <a href="javascript:void(0)" class=" text-right btn-md mb-1"
-                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                                data-bs-target="#login-button">
-                                               
-                                         <div class="coupon-option">
-                                         <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="today" class="option-input radio date_radio_login" name="group1" />
-                                                <div class = "coupon-label-type">  Today </div>
-                                            </label>
-                                        </div>
+                                           <?php }else{ ?>
+                                               <fieldset id="group1">
+                                               <a href="javascript:void(0)" class=" text-right btn-md mb-1"
+                                               data-bs-effect="effect-scale" data-bs-toggle="modal"
+                                               data-bs-target="#login-button">
+                                              
+                                        <div class="coupon-option">
                                         <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="tommorow" class="option-input radio date_radio_login" name="group1" />
-                                                <div class = "coupon-label-type"> Tommorow </div>
-                                            </label>
-                                        </div>
-                                        <div class = "coupon-label-radio">
-                                            <label class="me-3 button-cls">
-                                                <input type="radio" value="day_after_tmr" class="option-input radio date_radio_login" name="group1" />
-                                                <div class = "coupon-label-type"> Day After Tomorrow   </div>
-                                            </label>
-                                        </div>
-                                    </div> 
-                                            </a>
-                                            </fieldset>
-                                            <?php } ?>
-                                            
-                                            <?php
-                                             //   $res_coupon_count_today = get_coupon_count_today($segment,$course,$this->session->userdata('user_id'));
-                                              //  $res_coupon_count_tommorow = get_coupon_count_tommorow($segment,$course,$this->session->userdata('user_id'));
-                                                
-                                               
-                                            ?>
-                                            
-                                            <table  class="table">
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="today" class="option-input radio date_radio_login" name="group1" />
+                                               <div class = "coupon-label-type">  Today </div>
+                                           </label>
+                                       </div>
+                                       <div class = "coupon-label-radio">
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="tommorow" class="option-input radio date_radio_login" name="group1" />
+                                               <div class = "coupon-label-type"> Tommorow </div>
+                                           </label>
+                                       </div>
+                                       <div class = "coupon-label-radio">
+                                           <label class="me-3 button-cls">
+                                               <input type="radio" value="day_after_tmr" class="option-input radio date_radio_login" name="group1" />
+                                               <div class = "coupon-label-type"> Day After Tomorrow   </div>
+                                           </label>
+                                       </div>
+                                   </div> 
+                                           </a>
+                                           </fieldset>
+                                           <?php } ?>
+
+                                           
+                                           <table  class="table">
                                             <hr>
                                             <thead>
                                                 <tr class="text-center">
@@ -661,7 +729,7 @@ if($get_breadcrumb)
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        </div>
+
                                         <div class="d-flex align-items-center justify-content-center date_div coupon-title">
                                             <label for="coupons">
                                                 <h3>Select  Date</h3>
@@ -670,54 +738,31 @@ if($get_breadcrumb)
                                                 style="width:300px ">
                                                 
                                         </div>
-
-                                        
-                                        
-                                        <hr>
-                                       <!-- <div class="d-flex align-items-center justify-content-center">
-                                            <label for="coupons">
-                                                <h5>Enter
-                                                    the number of
-                                                    coupons</h5>
-                                            </label>
-                                            <input type="text" class="form-control ms-3" id="exampleInputEmail1"
-                                                style="width:300px ">
-                                                
-                                        </div>
-                                        <hr>-->
-                                        
-                                        <div class="d-flex align-items-center justify-content-center">
-                                        <input type="hidden" value = "<?php echo $segment?>" class = "segment">
-                                            <input type="hidden" value = "<?php //echo $course ?>" class = "course">
-                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
-                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
-                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
-                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
-                                            <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
-                                           
-                  
+                                            <hr>
                                         <?php if($this->session->userdata('user_id')){ ?>
                                             <input type="hidden" value = "<?php echo $this->session->userdata('user_id')?>" class = "user_id">
-                                            
-                                            <button type=" button" 
-                                                class="btn btn-primary text-right btn-md mb-1 form-control cnfrmcpn">Submit </button>
+                                            <div class="submit-div pb-3">
+                                                <button type=" button" 
+                                                    class="coupon-submit cnfrmcpn">Submit </button>
+                                            </div>
                                             <?php }else{ ?>
-                                            <a href="javascript:void(0)" class="btn btn-primary text-right btn-md mb-1"
-                                                data-bs-effect="effect-scale" data-bs-toggle="modal"
-                                                data-bs-target="#login-button">Submit</a>
+                                                <div class="submit-div pb-3">
+                                                    <button type=" button" 
+                                                    class="coupon-submit" data-bs-target="#login-button"  data-bs-effect="effect-scale" data-bs-toggle="modal">Submit </button>
+                                                </div>
+                                          
                                             <!--     <button type="button" class="review-btn" data-bs-effect="effect-scale" data-bs-toggle="modal" data-bs-target="#exampleModal3">Get Your Coupon Here</button> -->
                                             <?php } ?>
-         
-                                                
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- Vinal Lates COde Ends -->
+
+    </div>
+    </div>
 
 
-</div>
-    
+
+                  
+                        
+
+
                         <!-- Coupond New code ends -->
 
 
@@ -811,6 +856,14 @@ if($get_breadcrumb)
     </div>
     <!--wrapper end-->
 
+            <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+            <input type="hidden" value = "<?php //echo $course ?>" class = "course">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->batch_id ?>" class = "filter_batch">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->board_id ?>" class = "filter_board">
+            <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
+
 
     <script>
 
@@ -837,7 +890,8 @@ function prodcutType(val) {
         $(".day_after_tmr_header").css("visibility", "hidden");
         $(".today_header").css("visibility", "hidden");
         $(".tmr_header").css("visibility", "hidden");
-        $(".table").css("visibility", "hidden");
+        $(".table").css("display", "none");
+        $(".submit-div").css("display","none");
 
         $(".day_after_tmr_data").css("visibility", "hidden");
         $(".today").css("visibility", "hidden");
@@ -1180,10 +1234,10 @@ function prodcutType(val) {
               dataType: "json",   
               success: function (response) {
                  console.log(response);
-                 $(".table").css("visibility", "visible");
+                 $(".table").css("display", "");
                  $(".today_header").css("visibility", "visible");
                  $(".tmr_header").css("visibility", "visible");
-
+                 $(".submit-div").css("display","");
                 
                  $(".today").css("visibility", "visible");
                  $(".tommorow").css("visibility", "visible");
@@ -1235,6 +1289,7 @@ function prodcutType(val) {
                  $(".day_after_tmr_header").css("visibility", "visible");
                  $(".today_header").css("visibility", "visible");
                  $(".tmr_header").css("visibility", "visible");
+                 $(".submit-div").css("display","");
 
                  $(".day_after_tmr_data").css("visibility", "visible");
                  $(".today").css("visibility", "visible");
