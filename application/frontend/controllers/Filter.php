@@ -165,6 +165,24 @@ public function __construct()
 
   }
 
+
+  function submit_get_in_touch()
+  {
+    $first_name= $this->input->post('first_name');
+    $email= $this->input->post('email');
+    $message= $this->input->post('message');
+    $data = array(
+      'name' => $first_name,
+      'email' => $email,
+      'message' => $message,
+      'added_on' => date('Y-m-d H:i:s'),
+    );
+  
+    $user_id = $this->common_model->insertData('tbl_get_in_touch', $data);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>"Get In Data Added Successfully"));
+    
+  }
   function submit_review()
   {
     $segment= $this->input->post('segment');

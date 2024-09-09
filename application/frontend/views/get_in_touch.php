@@ -80,31 +80,31 @@
             </div>
     
             <div class="col-lg-7 contact-form__wrapper p-5 order-lg-1">
-                <form action="#" class="contact-form form-validate" novalidate="novalidate">
+                <form action="" class="contact-form form-validate" novalidate="novalidate">
                     <div class="row">
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
-                                <label class="required-field" for="firstName">Name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Wendy">
+                                <label class="required-field " for="firstName">Name</label>
+                                <input type="text" class="form-control firstName" id="firstName" name="firstName" placeholder="Enter Name">
                             </div>
                         </div>
     
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="required-field" for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="wendy.apple@seed.com">
+                                <input type="text" class="form-control email" id="email" name="email" placeholder="Email" required>
                             </div>
                         </div>
     
                         <div class="col-sm-12 mb-3">
                             <div class="form-group">
                                 <label class="required-field" for="message">How can we help?</label>
-                                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Write your message"></textarea>
+                                <textarea class="form-control message" id="message" name="message" rows="4" placeholder="Write your message" require></textarea>
                             </div>
                         </div>
     
                         <div class="col-sm-12 mb-3">
-                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" name="submit" class="btn btn-primary get-in-touch-submit">Submit</button>
                         </div>
     
                     </div>
@@ -115,3 +115,29 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $(".get-in-touch-submit").click(function()
+        { 
+           var first_name = $('.firstName').val();
+           var email = $('.email').val();
+           var message = $('.message').val();
+           $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/submit_get_in_touch",
+              data:{
+                first_name:first_name,
+                email: email,
+                message: message,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+                   console.log(response.data);
+                   alert(response.data);
+                   location.reload();
+                 
+              }
+           });
+        });
+    });
+</script>

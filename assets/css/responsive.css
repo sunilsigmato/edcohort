@@ -380,6 +380,7 @@
     font-size: 14px;
   }
 
+
   .review-dropdown .btn {
     height: 45px;
     width: 80px;
@@ -716,6 +717,13 @@
   .review-dropdown .dropdown-menu {
     width: 190px;
   }
+
+  .voucher-text {
+    text-orientation: mixed;
+    font-size: 23px;
+    letter-spacing: 0.1em;
+    padding-top: 2px;
+}
 
   .calendar-modal .modal-dialog {
     padding: 10px;

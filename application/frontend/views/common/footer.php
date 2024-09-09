@@ -49,28 +49,26 @@ $authUrl1 = $gClient->createAuthUrl();
         <div class="row">
             <div class=" col-6 col-md-3 ">
                 <div class="footer-menu-head pb-3">
-                    <h2>Company </h2>
+                   <!-- <h2>Company </h2> -->
                 </div>
                 <ul class="footer-menu-sub">
-                    <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/about-us">About Us</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/get-in-touch">Get In Touch</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/privacy-policy">Privacy Policy</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/terms-conditions">Terms & Condition</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>about-us">About</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>/#">Our Team</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>/#">Research  Methodologies</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>/#">Careers</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>/#">Cookie Preferences</a> </li>
                 </ul>
 
             </div>
             <div class="col-6 col-md-3">
                 <div class="footer-menu-head pb-3">
-                    <h2>Menu 101 </h2>
+                    <!--<h2>Menu 101 </h2>-->
                 </div>
                 <ul class="footer-menu-sub">
-                    <li> <a href="<?php echo base_url(); ?>#review-section">Review</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#complain-section">Complain</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#comparision-section">Comparison</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#counselling-section">Counselling</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#cohort-section">Cohort</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#coupons-section">Coupons</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>get-in-touch">Contact Us</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>#complain-section">Help Center</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>#comparision-section">Share Your Story </a> </li>
+                    <li> <a href="<?php echo base_url(); ?>#counselling-section">Press</a> </li>
                 </ul>
 
 
@@ -87,13 +85,12 @@ $authUrl1 = $gClient->createAuthUrl();
             </div>
             <div class=" col-6 col-md-3">
                 <div class="footer-menu-head pb-3">
-                    <h2>Top Brands</h2>
+                    <!--<h2>Top Brands</h2>-->
                 </div>
                 <ul class="footer-menu-sub">
-                    <li> <a href="#" data-bs-toggle="modal"
-                    data-bs-target="#segment-button">Byjus</a> </li>
-                    <li> <a href="#">About Us</a> </li>
-                    <li> <a href="#">Contact Us</a> </li>
+                    <li> <a href="#">Terms of Use</a> </li>
+                    <li> <a href="#">Privacy Policy</a> </li>
+                    <li> <a href="#">Cookie Notice</a> </li>
                 </ul>
 
 
@@ -115,7 +112,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         <h6> Want to Know what we're up to </h6>
                     </div>
                     <div class="footer-menu-sub">
-                        <input type="text" placeholder=" Email Address">
+                        <input type="text" placeholder=" Email Address" class="input-text-get-in-touch">
                     </div>
                     <div class="footer-menu-sub pt-3">
                         <input type="button" value="Subscribe" class="img-btn-explore">

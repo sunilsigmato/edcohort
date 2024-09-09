@@ -2348,6 +2348,17 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 
 .search-input {
   padding-right: 35px; /* Space for the search icon */
+
+  height: 54px;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    outline: 0;
+    border-bottom: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    transition: border 0.3s;
+    margin-left: 2px;
 }
 
 .search-icon {
@@ -3876,7 +3887,7 @@ table {
   position: relative;
   margin-top: 30px;
 }
-
+/*
 input[type="text"] {
   height: 54px;
   width: 100%;
@@ -3886,8 +3897,20 @@ input[type="text"] {
   border-bottom: 0;
   padding: 0 10px;
   box-sizing: border-box;
-  transition: border 0.3s; /* Optional: Add a smooth transition effect */
+  transition: border 0.3s; 
   margin-left: 2px;
+}*/
+
+.input-text-get-in-touch
+{
+  height: 54px;
+  width: 100%;
+  border-radius: 8px;
+  outline: 0;
+  border-bottom: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+  transition: border 0.3s; /* Optional: Add a smooth transition effect */
 }
 
 .input-text span {
@@ -4182,3 +4205,138 @@ body
   text-transform: uppercase;
   letter-spacing: 1.2px;}
 
+
+  /** Coupon New Style*/
+  
+  .voucher-container {
+    background-color: #bfb2b2;
+    border-radius: 10px;
+    overflow: hidden;
+    /*max-width: 400px;*/
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.voucher-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.voucher-title {
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.voucher-validity {
+    font-size: 16px;
+    font-weight: bold;
+    color: #242424;
+    margin-bottom: 20px;
+}
+
+.voucher-footer {
+    background-color: #0d6efd;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.voucher-amount {
+    font-size: 53px;
+    font-weight: bold;
+}
+.selection {
+background-color: #ededed;
+}
+.hr-coupon {
+color: inherit;
+background-color: #000000;
+border: 1px solid;
+opacity: .25;
+}
+.voucher-text {
+writing-mode: vertical-rl;
+text-orientation: mixed;
+font-size: 23px;
+letter-spacing: 0.1em;
+padding-top:2px;
+
+}
+.voucher-label {
+background-color: #00aaff;
+color: white;
+padding: 20px;
+border-radius: 10px 0 0 10px;
+}
+
+
+.option-input {
+-webkit-appearance: none;
+-moz-appearance: none;
+-ms-appearance: none;
+-o-appearance: none;
+appearance: none;
+position: relative;
+top: 13.33333px;
+right: 0;
+bottom: 0;
+left: 0;
+height: 40px;
+width: 40px;
+transition: all 0.15s ease-out 0s;
+background: #ffffff;
+border: none;
+color: #fff;
+cursor: pointer;
+display: inline-block;
+margin-right: 0.1rem;
+outline: none;
+position: relative;
+/* z-index: 1000; */
+}
+.option-input:hover {
+background: #9faab7;
+}
+.option-input:checked {
+background: #40e0d0;
+}
+.option-input:checked::before {
+/* width: 40px;
+height: 40px; */
+/* display:flex; */
+content: '\f00c';
+font-size: 20px;
+font-weight:bold;
+position: absolute;
+/* align-items:center; */
+/* justify-content:center; */
+font-family:'Font Awesome 5 Free';
+padding: 7px 0px 0px 9px;
+}
+.option-input:checked::after {
+-webkit-animation: click-wave 0.65s;
+-moz-animation: click-wave 0.65s;
+animation: click-wave 0.65s;
+background: #40e0d0;
+content: '';
+display: block;
+position: relative;
+z-index: 100;
+}
+.option-input.radio {
+border-radius: 50%;
+background: #bfb2b2;
+}
+.option-input.radio::after {
+border-radius: 50%;
+}
+.text-right {
+text-decoration: none;
+color: black;
+}
+.submit-div{
+text-align: center;
+}
+
+  /** Coupon New Style Ends **/

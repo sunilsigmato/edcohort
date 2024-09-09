@@ -126,6 +126,8 @@ public function __construct()
     echo json_encode(array("status"=>"1","data"=>"Review Data Added Successfully")); 
   }
 
+ 
+
   function submit_compaint()
   {
     $segment= $this->input->post('segment');
