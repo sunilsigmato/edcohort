@@ -262,6 +262,7 @@ $sort_by = $this->input->get('sort_by');
         border: 1px solid #979797;
         background: none;
         transition: 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        border-radius:10px;
 
 
     }
@@ -697,7 +698,7 @@ $sort_by = $this->input->get('sort_by');
             </div>
         </div>
 
-        <div class="row bg-color-complain mt-3">
+        <!--<div class="row bg-color-complain mt-3">
             <div class="col-md-4 col-sm-3 col-lg-6 how-img">
                 <img src="<?php echo base_url(); ?>assets/images/cohort-study-img.jpeg" class="rounded-circle img-fluid image-set"
                     alt="" />
@@ -711,9 +712,9 @@ $sort_by = $this->input->get('sort_by');
                 <a href="#" class="img-btn-explore" data-bs-toggle="modal"
                     data-bs-target="#segment-button">EXPLORE</a>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row mt-3 d-flex flex-sm-row-reverse">
+        <div class="row mt-3 bg-color-complain  d-flex flex-sm-row-reverse">
             <div class="col-md-6 col-sm-9 col-lg-6 p-2" id="coupons-section">
                 <h2>Group Coupons</h2>
                 <h3 class="subheading mb-2">Save Together, Learn Together</h3>
@@ -741,15 +742,15 @@ $sort_by = $this->input->get('sort_by');
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12 col-lg-4 pb-3">
-                <img class="img-fluid" src="<?php //echo base_url(); 
+                <img class="img-fluid similar-img" src="<?php //echo base_url(); 
                                                         ?>assets/images/get-in-touch.jpg">
             </div>
             <div class="col-md-4 col-sm-12 col-lg-4 pb-3">
-                <img class="img-fluid" src="<?php //echo base_url(); 
+                <img class="img-fluid similar-img" src="<?php //echo base_url(); 
                                                         ?>assets/images/get-in-touch.jpg">
             </div>
             <div class="col-md-4 col-sm-12 col-lg-4 ">
-                <img class="img-fluid" src="<?php //echo base_url(); 
+                <img class="img-fluid similar-img" src="<?php //echo base_url(); 
                                                         ?>assets/images/get-in-touch.jpg">
             </div>
 
@@ -810,7 +811,7 @@ crossorigin = "anonymous">
         var href = $(this).attr("href"); // Get the value of the href attribute
         var segmentId = href.split('=')[1]; // Extract the value of segment from the href
         console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
-        window.location="<?php echo base_url();?>review/?segment="+segmentId;
+        window.location="<?php echo base_url();?>complaint/?segment="+segmentId;
        /* $.ajax({
             url: base_url + 'filter/get_product_id_table',
             dataType: 'json',

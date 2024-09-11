@@ -106,9 +106,7 @@ if($get_breadcrumb)
                 <li ><a
                         href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
                     </a></li>
-                <li><a
-                        href="<?php echo base_url(); ?>cohort?segment=<?php echo $segment_temp; ?>">Cohort</a>
-                </li>
+                
                 <li><a
                         href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
                        <!-- <?php echo $review_count; ?> --></a></li>
