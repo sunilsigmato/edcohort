@@ -20,7 +20,8 @@
 }
 body {
   background: #fff;
-  font-family: "Lato", sans-serif;
+ /* font-family: "Lato", sans-serif;*/
+ font-family:"Source Serif Pro", "Noto Serif', serif";
   font-size: 14px;
 }
 .container:after,
@@ -1439,10 +1440,21 @@ ul.footer-menu-sub li {
   color: #fff;
 }
 .star-box {
-  margin-bottom: 100px;
+  margin-bottom: 13px;
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
+}
+
+p.display-cohort-brand {
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+p.display-brand-brand {
+ 
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .star-title {
@@ -1475,12 +1487,12 @@ ul.footer-menu-sub li {
   line-height: 24px;
   margin: 0 0 5px;
 }
-.star-col p {
+/*.star-col p {
   color: #000000;
   font-size: 16px;
   font-weight: 400;
   margin: 0;
-}
+}*/
 
 .top-courses-list {
   margin: 0;
