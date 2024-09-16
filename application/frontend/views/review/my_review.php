@@ -603,9 +603,23 @@ $breadcrumb_name2 = '';*/
         <div>
             <h2 class="review-cmt-title">{{product_review_title}}</h2>
         </div>
-        <div class="review-content" id="reviewShort_{{product_review_id}}">
-               {{product_review}}
+      
+        <!-- Read More and Less New -->
+        {{#xif product_word_count ">=" 50}}
+            <div class="review-content " id="reviewShort_{{product_review_id}}">
+                {{truncateWords product_review 50}}
+            <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{product_review_id}});">Read More</a>
+            </div>   
+            <div class="review-content " id="reviewFull_{{product_review_id}}" style="display:none">
+                {{product_review}}
+                <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{product_review_id}});">Read Less</a>
+            </div> 
+        {{else}}
+        <div class="review-content " id="reviewShort_{{product_review_id}}">
+            {{product_review}}
         </div>
+        {{/xif}}
+        <!-- End Read More and Less -->
         <hr />
         
         <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
@@ -751,9 +765,22 @@ $breadcrumb_name2 = '';*/
                 </div>
                 <hr />
                  <div class="review-content">
-                 <div id="reviewReplyShort_{{prr_id}}">
+                <!-- ReadMore and Less New Code -->
+                {{#xif reply_count ">=" 50}}
+                    <div class="review-content " id="reviewShort_{{prr_id}}">
+                        {{truncateWords reply 50}}
+                    <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                    </div>   
+                    <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                        {{reply}}
+                        <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                    </div> 
+               {{else}}
+               <div class="review-content " id="reviewShort_{{prr_id}}">
                     {{reply}}
-                 </div>
+                </div>
+               {{/xif}}
+                  <!-- ReadMore and Less New Code Ends -->
                  <hr />
                    <!-- Comment Section Start -->
                 <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
@@ -808,7 +835,22 @@ $breadcrumb_name2 = '';*/
                                     </div>
                                     <hr />
                                     <div class="review-content">
-                                    <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
+                                    <!-- ReadMore and Less New Code -->
+                                    {{#xif reply_count ">=" 50}}
+                                        <div class="review-content " id="reviewShort_{{prr_id}}">
+                                            {{truncateWords reply 50}}
+                                        <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                                        </div>   
+                                        <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                                            {{reply}}
+                                            <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                                        </div> 
+                                {{else}}
+                                <div class="review-content " id="reviewShort_{{prr_id}}">
+                                        {{reply}}
+                                    </div>
+                                {{/xif}}
+                                <!-- ReadMore and Less New Code Ends --> 
                                     <hr />
                                      <!-- Comment Section Start -->
                                      <div class="form-group mb-3" style="display:none" id="subcommentDiv_{{prr_id}}">
@@ -866,7 +908,22 @@ $breadcrumb_name2 = '';*/
                                                 </div>
                                                 <hr />
                                                 <div class="review-content">
-                                                <div id="reviewReplyShort_{{prr_id}}"> {{reply}} </div>
+                                                 <!-- ReadMore and Less New Code -->
+                                                {{#xif reply_count ">=" 50}}
+                                                <div class="review-content " id="reviewShort_{{prr_id}}">
+                                                    {{truncateWords reply 50}}
+                                                <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                                                </div>   
+                                                <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                                                    {{reply}}
+                                                    <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                                                </div> 
+                                                {{else}}
+                                                <div class="review-content " id="reviewShort_{{prr_id}}">
+                                                        {{reply}}
+                                                    </div>
+                                                {{/xif}}
+                                            <!-- ReadMore and Less New Code Ends -->
                                                   <!-- Comment Section Start -->
                                                <div class="form-group" style="display:none" id="subcommentDiv_{{prr_id}}">
                                                     <?php $form_name = 'comment_sub_reply_{{prr_id}}' ?>
@@ -1620,6 +1677,27 @@ $breadcrumb_name2 = '';*/
         }
 
     }
+
+    function read_more_show(val) {
+                //Forward browser to new url
+                if ($('#reviewFull_' + val).css('display') == 'none') {
+                    $('#reviewFull_' + val).css('display', '');
+                    $('#reviewShort_' + val).css('display', 'none');
+                } else {
+                    $('#reviewFull_' + val).css('display', 'none');
+                }
+            }
+
+            function read_less_show(val) {
+                //Forward browser to new url
+                if ($('#reviewShort_' + val).css('display') == 'none') {
+                    $('#reviewShort_' + val).css('display', '');
+                    $('#reviewFull_' + val).css('display', 'none');
+                } else {
+                    $('#reviewShort_' + val).css('display', 'none');
+                }
+
+            }
 
     function divSubReply(reviewId,prrId,product_id,user_id) {
      

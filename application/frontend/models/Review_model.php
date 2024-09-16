@@ -251,6 +251,7 @@ class Review_model extends CI_Model {
         $item->write_review = $r->write_review;
         $item->review_associated_offline  =$r->review_associated_offline;
         $item->product_rating = $r->product_rating;
+        $item->product_word_count =  get_word_count($r->product_review);
         $item->product_review_title =  $r->product_review_title;
         $item->product_review = $r->product_review;
         $item->product_review_type = $r->product_review_type;
@@ -301,6 +302,7 @@ class Review_model extends CI_Model {
         $sub_review_lv1->review_id = $r->review_id;
         $sub_review_lv1->product_id = $r->product_id;
         $sub_review_lv1->user_id = $r->user_id;
+        $sub_review_lv1->reply_count =  get_word_count($r->reply);
         $sub_review_lv1->reply = $r->reply;
         $sub_review_lv1->status = $r->status;
         $date = date('d-m-Y', strtotime($r->date_added));
@@ -339,6 +341,7 @@ class Review_model extends CI_Model {
               $sub_review_lv2->review_id = $r->review_id;
               $sub_review_lv2->product_id = $r->product_id;
               $sub_review_lv2->user_id = $r->user_id;
+              $sub_review_lv2->reply_count =  get_word_count($r->reply);
               $sub_review_lv2->reply = $r->reply;
               $sub_review_lv2->status = $r->status;
               $date = date('d-m-Y', strtotime($r->date_added));

@@ -1,15 +1,14 @@
-
 <!--Section-->
-			<div class="cover-image bg-background-1" data-bs-image-src="assets/images/banners/banner1.jpg">
+<div class="cover-image bg-background-1" data-bs-image-src="assets/images/banners/banner1.jpg">
 
-				
 
-				<!--Section-->
-				<div>
-					<div class="sptb-1">
-						<div class="header-text1 mb-0">
-							<div class="container">
-								<!-- <div class="row">
+
+	<!--Section-->
+	<div>
+		<div class="sptb-1">
+			<div class="header-text1 mb-0">
+				<div class="container">
+					<!-- <div class="row">
 									<div class="col-xl-12 col-lg-12 col-md-12 d-block mx-auto">
 										<div class="text-center text-white text-property">
 											<h1 class=""><span class="font-weight-bold">2000+</span> Best  Courses Available Here!</h1>
@@ -57,7 +56,7 @@
 														</optgroup>
 													</select>
 												</div>-->
-												<!-- <div class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg mb-0 bg-white">
+					<!-- <div class="form-group col-xl-2 col-lg-2 col-md-12 select2-lg mb-0 bg-white">
 													<select class="form-control select2-show-search  border-bottom-0" data-placeholder="Select Category">
 														<optgroup>
 															<option>Class</option>
@@ -66,8 +65,8 @@
 														</optgroup>
 													</select>
 												</div>	 -->
-                                                
-                                                <!-- 											
+
+					<!-- 											
 												<div class="col-xl-2 col-lg-2 col-md-12 mb-0">
 													<input type="submit" value="Search Here" class="btn btn-xl btn-block btn-secondary br-ts-md-0 br-bs-md-0" />
                                                     <a href="javascript:void(0)" class="btn btn-xl btn-block btn-secondary br-ts-md-0 br-bs-md-0">Search Here</a>
@@ -79,47 +78,50 @@
 										</div>
 									</div>
 								</div> -->
-							</div>
-						</div><!-- /header-text -->
-					</div>
-				</div><!--/Section-->
-			</div>
-		</div>
-		<!--/Section-->
-		<!--Breadcrumb-->
-		<div class="bg-white border-bottom">
-			<div class="container">
-				<div class="page-header">
-					<h4 class="page-title">Counselling</h4>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Counselling</li>
-					</ol>
 				</div>
-			</div>
+			</div><!-- /header-text -->
 		</div>
-		<!--/Breadcrumb-->
+	</div>
+	<!--/Section-->
+</div>
+</div>
+<!--/Section-->
+<!--Breadcrumb-->
+<div class="bg-white border-bottom">
+	<div class="container">
+		<div class="page-header">
+			<h4 class="page-title">Counselling</h4>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Counselling</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<!--/Breadcrumb-->
 
-		<!--Section-->
-		<section class="sptb">
-			<div class="container">
-				<div class="row">
-					<!--Left Side Content-->
-					<div class="col-xl-4 col-lg-4 col-md-12">
-						<div class="card stick-section">
-							<div class="card-header">
-								<h3 class="card-title">Relevant Blog</h3>
-							</div>
-							<div class="card-body pt-3 list-catergory1">
-								<div class="item-list">
-									<ul class="">
-                                    	<?php foreach($blog_records as $blog){ ?>
-										<li class="item list-group-item d-flex p-2">
-											<img src="<?php echo base_url(); ?>uploads/blog/<?php echo $blog->blog_image; ?>" class="avatar br-7 avatar-lg me-3 my-auto" alt="avatar-img">
-											<div class="">
-												<small class="d-block"><?php $blog->category; ?></small>
-												<a href="<?php echo base_url(); ?>blog-detail/<?php echo $blog->blog_slug; ?>" class="text-default fs-16 font-weight-bold"><?php echo $blog->blog_title; ?></a>
-												<small class="d-block text-muted"><?php  $date = $blog->created_at;
+<!--Section-->
+<section class="sptb">
+	<div class="container">
+		<div class="row">
+			<!--Left Side Content-->
+			<div class="col-xl-4 col-lg-4 col-md-12">
+				<div class="card stick-section">
+					<div class="card-header">
+						<h3 class="card-title">Relevant Blog</h3>
+					</div>
+					<div class="card-body pt-3 list-catergory1">
+						<div class="item-list">
+							<ul class="">
+								<?php foreach($blog_records as $blog){ ?>
+								<li class="item list-group-item d-flex p-2">
+									<img src="<?php echo base_url(); ?>uploads/blog/<?php echo $blog->blog_image; ?>"
+										class="avatar br-7 avatar-lg me-3 my-auto" alt="avatar-img">
+									<div class="">
+										<small class="d-block"><?php $blog->category; ?></small>
+										<a href="<?php echo base_url(); ?>blog-detail/<?php echo $blog->blog_slug; ?>"
+											class="text-default fs-16 font-weight-bold"><?php echo $blog->blog_title; ?></a>
+										<small class="d-block text-muted"><?php  $date = $blog->created_at;
 											$start  = date_create($date);
 											$end    = date_create(); // Current time and date
 											$diff   = date_diff( $start, $end );
@@ -129,138 +131,149 @@
 											if($diff->d > 0){ echo  $diff->d . ' days '; }
 
 											?> day ago</small>
-											</div>
-										</li>
-                                        <?php } ?>
-									</ul>
-								</div>
-							</div>
-							<div class="card-header">
-								<h3 class="card-title">Filter</h3>
-							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
-								<div class="app-sidebar__user clearfix">
-									<ul class="side-menu">
-										<li class="slide">
-											<a class="side-menu__item slide-show" href="javascript:void(0)"><i class="side-menu__icon fe fe-folder"></i><span class="side-menu__label">Class</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>X</a></li>
-												<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>XI</a></li>
-												<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>XII</a></li>
-											</ul>
-										</li>
-										<li class="slide">
-											<a class="side-menu__item slide-show" href="javascript:void(0)"><i class="side-menu__icon fe fe-settings"></i><span class="side-menu__label">Subject</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>Maths</a></li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-							</aside>
+									</div>
+								</li>
+								<?php } ?>
+							</ul>
 						</div>
 					</div>
-					<!--/Left Side Content-->
-					<div class="col-xl-8 col-lg-8 col-md-12">
-						<!-- Value Button -->
-						<div class="mb-lg-0">
-							<div class="card mb-0 border-0 shadow-none p-5">
-								<div class="card-header">
-									<h3 class="card-title">Ranking</h3>
-								</div>
-								<div class="card-body p-0 pt-5">
-								<div class="table-responsive ranking-table">
-									<table class="table card-table table-bordered table-hover table-vcenter text-nowrap text-center">
-										<tr>
-											<thead class="bg-primary">
-												<td colspan="2" class="text-white">Ranking</td>
-												<td class="text-white"></td>
-												<td class="text-white"></td>
-											</thead>	
-										</tr>
-										<tr>
-											<td>Last Month</td>
-											<td>This Month</td>
-											<td>Faculty Name</td>
-											<td>Institution Name</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>1</td>
-											<td>Rajesh Nair</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>5</td>
-											<td>Praveen Path</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>8</td>
-											<td>Hari Kishan</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td>4</td>
-											<td>kamlesh Sahu</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>5</td>
-											<td>Harim Om</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>2</td>
-											<td>Gopal gupte</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td>6</td>
-											<td>Ravindra bal</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>5</td>
-											<td>krishna Nair</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td>9</td>
-											<td>Manoj Gupta</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>1</td>
-											<td>Rajesh Nair</td>
-											<td>Vedantu</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>4</td>
-											<td>Kabir Singh</td>
-											<td>Vedantu</td>
-										</tr>
-									</table>
-								</div>															
+					<div class="card-header">
+						<h3 class="card-title">Filter</h3>
+					</div>
+					<aside class="app-sidebar doc-sidebar my-dash">
+						<div class="app-sidebar__user clearfix">
+							<ul class="side-menu">
+								<li class="slide">
+									<a class="side-menu__item slide-show" href="javascript:void(0)"><i
+											class="side-menu__icon fe fe-folder"></i><span
+											class="side-menu__label">Class</span><i
+											class="angle fa fa-angle-right"></i></a>
+									<ul class="slide-menu">
+										<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>X</a>
+										</li>
+										<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>XI</a>
+										</li>
+										<li><a class="slide-item" href="#"><i class="fa fa-angle-right me-2"></i>XII</a>
+										</li>
+									</ul>
+								</li>
+								<li class="slide">
+									<a class="side-menu__item slide-show" href="javascript:void(0)"><i
+											class="side-menu__icon fe fe-settings"></i><span
+											class="side-menu__label">Subject</span><i
+											class="angle fa fa-angle-right"></i></a>
+									<ul class="slide-menu">
+										<li><a class="slide-item" href="#"><i
+													class="fa fa-angle-right me-2"></i>Maths</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</aside>
+				</div>
+			</div>
+			<!--/Left Side Content-->
+			<div class="col-xl-8 col-lg-8 col-md-12">
+				<!-- Value Button -->
+				<div class="mb-lg-0">
+					<div class="card mb-0 border-0 shadow-none p-5">
+						<div class="card-header">
+							<h3 class="card-title">Ranking</h3>
+						</div>
+						<div class="card-body p-0 pt-5">
+							<div class="table-responsive ranking-table">
+								<table
+									class="table card-table table-bordered table-hover table-vcenter text-nowrap text-center">
+									<tr>
+										<thead class="bg-primary">
+											<td colspan="2" class="text-white">Ranking</td>
+											<td class="text-white"></td>
+											<td class="text-white"></td>
+										</thead>
+									</tr>
+									<tr>
+										<td>Last Month</td>
+										<td>This Month</td>
+										<td>Faculty Name</td>
+										<td>Institution Name</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>1</td>
+										<td>Rajesh Nair</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>5</td>
+										<td>Praveen Path</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>8</td>
+										<td>Hari Kishan</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>4</td>
+										<td>kamlesh Sahu</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>5</td>
+										<td>Harim Om</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>2</td>
+										<td>Gopal gupte</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>6</td>
+										<td>Ravindra bal</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>5</td>
+										<td>krishna Nair</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>9</td>
+										<td>Manoj Gupta</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>1</td>
+										<td>Rajesh Nair</td>
+										<td>Vedantu</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>4</td>
+										<td>Kabir Singh</td>
+										<td>Vedantu</td>
+									</tr>
+								</table>
 							</div>
-				            </div>
-						</div>		
+						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</div>
+</section>
 
-		<!--/Coursed Listings-->
+<!--/Coursed Listings-->
 
 <script type="text/javascript"><!--
     function doAction(val){
@@ -325,4 +338,3 @@
 	
 
 </script>	
-

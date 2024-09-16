@@ -218,6 +218,7 @@ class Complaint_model extends CI_Model {
         $item->complaint_associated_offline  =$r->complaint_associated_offline;
         $item->product_rating = $r->product_rating;
         $item->product_complaint_title =  $r->product_complaint_title;
+        $item->product_word_count =  get_word_count($r->product_complaint);
         $item->product_complaint = $r->product_complaint;
         $item->product_complaint_type = $r->product_complaint_type;
         $item->status = $r->status;
@@ -286,6 +287,7 @@ class Complaint_model extends CI_Model {
         $sub_review_lv1->complaint_id = $r->complaint_id;
         $sub_review_lv1->product_id = $r->product_id;
         $sub_review_lv1->user_id = $r->user_id;
+        $sub_review_lv1->reply_count =  get_word_count($r->reply);
         $sub_review_lv1->reply = $r->reply;
         $sub_review_lv1->status = $r->status;
         $date = date('d-m-Y', strtotime($r->date_added));
@@ -324,6 +326,7 @@ class Complaint_model extends CI_Model {
               $sub_review_lv2->complaint_id = $r->complaint_id;
               $sub_review_lv2->product_id = $r->product_id;
               $sub_review_lv2->user_id = $r->user_id;
+              $sub_review_lv2->reply_count =  get_word_count($r->reply);
               $sub_review_lv2->reply = $r->reply;
               $sub_review_lv2->status = $r->status;
               $date = date('d-m-Y', strtotime($r->date_added));

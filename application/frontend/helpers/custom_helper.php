@@ -674,7 +674,16 @@ function getClassName($class_id)
             $data = '';
         }
     }
-    
+
+    function get_word_count($text)
+    {
+        //$text = "This is an example string, with punctuation.";
+        // Remove punctuation
+        $text = preg_replace('/[^\p{L}\s]/u', '', $text);
+        return $wordCount = str_word_count($text);
+
+       // echo "Word count: " . $wordCount;
+    }
 
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  
