@@ -581,9 +581,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         <div>
             <h2 class="review-cmt-title">{{product_complaint_title}}</h2>
         </div>
-        <div class="review-content" id="complaintShort_{{product_complaint_id}}">
-               {{product_complaint}}
-        </div>
+       
+        {{#xif product_word_count ">=" 50}}
+                    <div class="review-content " id="reviewShort_{{product_complaint_id}}">
+                        {{truncateWords product_complaint 50}}
+                    <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{product_complaint_id}});">Read More</a>
+                    </div>   
+                    <div class="review-content " id="reviewFull_{{product_complaint_id}}" style="display:none">
+                        {{product_complaint}}
+                        <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{product_complaint_id}});">Read Less</a>
+                    </div> 
+               {{else}}
+               <div class="review-content " id="reviewShort_{{product_complaint_id}}">
+                    {{product_complaint}}
+                </div>
+               {{/xif}}
         <hr />
         <div class="review-footer d-flex flex-wrap justify-content-between align-items-center">
         {{#xif sub_review.length ">" 0}} 
@@ -725,9 +737,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 </div>
                 <hr />
                 <div class="review-content">
-                 <div id="complaintReplyShort_{{prr_id}}">
+
+                 {{#xif reply_count ">=" 50}}
+                    <div class="review-content " id="reviewShort_{{prr_id}}">
+                        {{truncateWords reply 50}}
+                    <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                    </div>   
+                    <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                        {{reply}}
+                        <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                    </div> 
+               {{else}}
+               <div class="review-content " id="reviewShort_{{prr_id}}">
                     {{reply}}
-                 </div>
+                </div>
+               {{/xif}}
                  <hr />
                         <!-- Relpy and like Box -->
                                     
@@ -773,7 +797,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                             <?php if ($this->session->userdata('user_id')) { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 id="complaint_reply_submit"
-                                                onclick="divSubReply({{complaint_id}},{{prr_id}},{{product_id}},'<?php echo $this->session->userdata('user_id') ;?>);'">Submit</a>
+                                                onclick="divSubReply({{complaint_id}},{{prr_id}},{{product_id}},<?php echo $this->session->userdata('user_id') ?>)">Submit</a>
                                             <?php } else { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal"
@@ -820,7 +844,21 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                     </div>
                                     <hr />
                                     <div class="review-content">
-                                    <div id="reviewReplyShort_{{prr_id}}">{{reply}} </div>
+                                    
+                                    {{#xif reply_count ">=" 50}}
+                    <div class="review-content " id="reviewShort_{{prr_id}}">
+                        {{truncateWords reply 50}}
+                    <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                    </div>   
+                    <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                        {{reply}}
+                        <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                    </div> 
+               {{else}}
+               <div class="review-content " id="reviewShort_{{prr_id}}">
+                    {{reply}}
+                </div>
+               {{/xif}}
                                     <hr />
                                            <!-- Relpy and like Box -->
                                     
@@ -866,7 +904,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                             <?php if ($this->session->userdata('user_id')) { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 id="complaint_reply_submit"
-                                                onclick="divSubReply({{complaint_id}},{{prr_id}},{{$product_id}},'<?php echo $this->session->userdata('user_id') ;?>);'">Submit</a>
+                                                onclick="divSubReply({{complaint_id}},{{prr_id}},{{product_id}},<?php echo $this->session->userdata('user_id') ;?>);">Submit</a>
                                             <?php } else { ?>
                                             <a href="javascript:void(0)" class="btn btn-primary"
                                                 data-bs-effect="effect-scale" data-bs-toggle="modal"
@@ -915,7 +953,20 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                                 </div>
                                                 <hr />
                                                 <div class="review-content">
-                                                <div id="complaintReplyShortRM_{{prr_id}}"> {{reply}} </div>
+                                                {{#xif reply_count ">=" 50}}
+                                                    <div class="review-content " id="reviewShort_{{prr_id}}">
+                                                        {{truncateWords reply 50}}
+                                                    <a href="javascript:void(0)" class="read-more" onclick="read_more_show({{prr_id}});">Read More</a>
+                                                    </div>   
+                                                    <div class="review-content " id="reviewFull_{{prr_id}}" style="display:none">
+                                                        {{reply}}
+                                                        <a href="javascript:void(0)" class="read-more" onclick="read_less_show({{prr_id}});">Read Less</a>
+                                                    </div> 
+                                            {{else}}
+                                            <div class="review-content " id="reviewShort_{{prr_id}}">
+                                                    {{reply}}
+                                                </div>
+                                            {{/xif}}
                                                   <!-- Comment Section Start -->
                                                <div class="form-group" style="display:none" id="subcommentDiv_{{prr_id}}">
                                                    <textarea class="form-control" name="comment_sub_reply" rows="6" id = "commentid_{{prr_id}}"
@@ -1755,6 +1806,27 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         }
 
     }
+
+    function read_more_show(val) {
+                //Forward browser to new url
+                if ($('#reviewFull_' + val).css('display') == 'none') {
+                    $('#reviewFull_' + val).css('display', '');
+                    $('#reviewShort_' + val).css('display', 'none');
+                } else {
+                    $('#reviewFull_' + val).css('display', 'none');
+                }
+            }
+
+            function read_less_show(val) {
+                //Forward browser to new url
+                if ($('#reviewShort_' + val).css('display') == 'none') {
+                    $('#reviewShort_' + val).css('display', '');
+                    $('#reviewFull_' + val).css('display', 'none');
+                } else {
+                    $('#reviewShort_' + val).css('display', 'none');
+                }
+
+            }
 
     function ed_comment(val)
     {
