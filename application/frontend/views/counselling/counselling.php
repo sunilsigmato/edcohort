@@ -48,6 +48,36 @@ if($get_breadcrumb)
 }*/
 ?>
 <!--banner start-->
+<style>
+    .select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+</style>
 <div class="inner-banner ">
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
@@ -81,176 +111,16 @@ if($get_breadcrumb)
         </div>
     </div>
 </div>
-<!--banner end-->
-<div class="content">
 
-    <?php
-   /* print_R(get_breadcrumb_value());
-    exit;*/
-?>
-
-
-    <div class="container-fluid review-top-section">
-
-        <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard crd-image">
-
-            <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
-
-            </div>
-            <div class="col-md-6 pt-3 course-name-display">
-            <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
-                <div>
-                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> / 5</span>
-              <!--  <?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?>/5</span>
-                    <?php } ?>  -->
-                 
-                    <label for="rating2" class="rating-display">
-                    <div class="dropdown">
- <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  -->
-  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> --> </label>
- <!-- </button>  -->
-
-  
-
-
-
-  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">
-                       
-            <!------> 
-    
-            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
-          
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item d-flex">
-    <div class="single-line" style="white-space: nowrap;">
-        <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="" style="display: inline-block; margin-right: 10px;"> -->
-        <div style="display: inline-block;">
-            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
-        </div>
-    </div>
-</li>
-
-            
-    <li class="list-group-item" style="font-weight:normal;">129 Global Ratings</li>
-    <li class="list-group-item">
-    <div class="row">
-        <div class = "col-md-2 pt-1">
-            <span> 5 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">100%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 100% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 4 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">75%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 75% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 3 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 50% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 2 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 25%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 25% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 1 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 15%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">15%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 15% </span>
-        </div>
-
-    </div>
-
-
-    </li>
-  </ul>
- 
-</div></a></li>
-             
-            <!------> 
-  </ul>
-</div>        
-                </label>
-
-<!----->
-
-
-
-
-
-
-
-
-<!------>
-
-
-                </div>
-                <div class="pt-3 total-review-display">
-                    <h4> Excellent Review </h4>
-                </div>
-            </div>
-            <div class="col-md-4 pt-3 write-review-icon ">
-            <?php if ($this->session->userdata('user_id')) { ?>
-                            <a href="<?php echo base_url();?>write-a-complaint?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
-                    class=" text-decoration-none ">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
-                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt="">--> </label>
-                </a>
-                        <?php } else { ?>
-                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a Complaint </span> <label
-                        for="rating2"><!--<img src="<?php echo base_url();?>assets/images/rating-1.png" alt=""> </label>--></a>
-                        <?php } ?>
-
-                </a>
-
-            </div>  
-
-        </div>
-    </div>
     <!--start-->
-    <div class="review-main-box d-flex">
+    <div class="review-main-box d-flex">    
         <button type="button" class="filter-btn">Filter</button>
         <!--left start-->
         <div class="container-fluid review-top-section">
             <div class="row review-top-next">
                 <!--- Filtr Starts  --->
-                <div class="col-md-2 review-left">
-                <h3 class="filter-title">Filter</h3>
+                <div class="col-md-2 review-left mt-4">
+               
                         <form action="<?php echo base_url(); ?>counselling-search" id="form" name="form" method="post">
                         <?php echo csrf_field(); 
                         $res_filter_brand = getseg_brand_list($segment);
@@ -258,7 +128,6 @@ if($get_breadcrumb)
                         $res_filter_class = getseg_class_list($segment);
                         $res_filter_course = getseg_crse_list($segment);
                        // print_R($res_filter_course);
-                        
                         ?>
                             <?php echo csrf_field(); ?>
                             <div class="filter-col">
@@ -420,8 +289,7 @@ if($get_breadcrumb)
                 <!--end-->
                 <!--center start-->
                 <div class="col-md-8">
-                    <div class="review-center">
-
+                    <div class="review-center mt-4">
                     <div class="review-inner-center">
                     <div id="selectedValues"></div>  <!-- for filter values display -->
                         <div class="tab-link">
@@ -444,6 +312,7 @@ if($get_breadcrumb)
                             img {
                                     max-width: 100%;
                                     display: block;
+                                    border-radius: 12px;
                                 }
 
                                 .card-list-con {
@@ -454,9 +323,9 @@ if($get_breadcrumb)
                                 .card-con {
                                 background-color: #f1f1f1;
                                 box-shadow: 0 0 0 1px rgba(#000, .05), 0 20px 50px 0 rgba(#000, .1);
-                                /*border-radius: 15px;*/
+                                border-radius: 14px;
                                 overflow: hidden;
-                                /*padding: 1.25rem;*/
+                                padding: 5px;
                                 position: relative;
                                 transition: .15s ease-in;
                                 
@@ -469,7 +338,7 @@ if($get_breadcrumb)
                                 .card-image-con {
                                /* border-radius: 10px;*/
                                 overflow: hidden;
-                                height: 220px;
+                               /* height: 220px;*/
                                 position: relative;
                                 object-fit: cover;
 
@@ -543,16 +412,17 @@ if($get_breadcrumb)
                                 .card-meta-con {  
                                 display: flex;
                                 align-items: center;
-                                color: #787878;
-                                &:first-child:after {
-                                    display: block;
+                                color: #222222;
+                                font-size: 17px;
+                                &:first-child:afters {
+                                   /* display: block;
                                     content: "";
                                     width: 4px;
                                     height: 4px;
                                     border-radius: 50%;
                                     background-color: currentcolor;
                                     margin-left: .75rem;
-                                    margin-right: .75rem;
+                                    margin-right: .75rem;*/
                                 }
                                 svg {
                                     flex-shrink: 0;
@@ -571,9 +441,9 @@ if($get_breadcrumb)
                             <div class="col-md-4 col-sm-6 mb-4">
                                 <div class="card-list-con">
                                     <article class="card-con">
-                                    <figure class="card-image-con">
+                                    <div class="card-image-con">
                                     <img src="{{image_path}}" style="width:100%" alt="Full-size Image">    
-                                    </figure>
+                                    </div>
                                     <div class="card-header event-title">
                                         {{event_title}}
                                     </div>
@@ -583,16 +453,16 @@ if($get_breadcrumb)
                                                 <path d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962z" />
                                                 <circle cx="12" cy="12" r="3" />
                                             </svg>
-                                            {{event_start_time}}
+                                             {{event_start_time}}
                                         </div>
                                         <div class="card-meta-con card-meta--date">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="Calendar">
                                                 <rect x="2" y="4" width="20" height="18" rx="4" />
                                                 <path d="M8 2v4" />
                                                 <path d="M16 2v4" />
                                                 <path d="M2 10h20" />
                                             </svg>
-                                        {{event_date}}
+                                            {{event_date}}
                                         </div>
                                         <div class="card-meta-con card-meta--views">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" display="block" id="EyeOpen">
@@ -618,9 +488,10 @@ if($get_breadcrumb)
                             <div id="pagination-div-id" class="dataTables_paginate paging_simple_numbers">    
                             </div>
                             {{else}}
-                            <div class="review-row-reply">
-                            <h4>No result found..!!</h4>
+                            <div class="not-found">
+                                <img src="<?php echo base_url();?>assets/images/no_result.gif" alt="" >
                             </div>
+                            
                         {{/if}}
                     </div>
                     </div>

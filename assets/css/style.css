@@ -3250,6 +3250,7 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
     font-size: 20px;
     font-weight: 600;
     padding: 0px;
+    margin-top: 13px;
 
 }
 .book-event {

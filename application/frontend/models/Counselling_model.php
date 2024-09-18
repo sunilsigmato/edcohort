@@ -171,9 +171,12 @@ class Counselling_model extends CI_Model {
  {
    if($where!=""){        
      $where="WHERE ".$where;
+  
    }
  
    $query=$this->db->query("SELECT count(product_id) as counselling_count FROM tbl_event as pr ".$where."");
+   $ress = $this->db->last_query();
+
    return $query->result();  
  }
  function getProductComplaintLimit($where,$order,$limit,$offset)

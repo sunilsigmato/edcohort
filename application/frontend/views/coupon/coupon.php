@@ -118,148 +118,6 @@ if($get_breadcrumb)
     </div>
 </div>
 <!--banner end-->
-<div class="content">
-
-    <?php
-   /* print_R(get_breadcrumb_value());
-    exit;*/
-?>
-
-
-    <div class="container-fluid review-top-section">
-
-        <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard">
-
-         <!--   <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php echo  $get_single_course_detail->brand_image; ?>"> -->
-            </div>
-            <div class="col-md-6 pt-3 course-name-display">
-            <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
-                <div>
-                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> </span>
-                  <!-- <?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php echo $get_brand_compare->overall_brand ?> / 10</span>
-                  <?php } ?> -->
-                    <label for="rating2" class="rating-display">
-                        <!--<img
-                            src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="">-->
-                            <div class="dropdown">
-  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
-  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="">--> </label>
-  <!-- </button> -->
-
-
-  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">                     
-            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item d-flex">
-    <div class="single-line" style="white-space: nowrap;">
-        <div style="display: inline-block;">
-            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
-        </div>
-    </div>
-</li>
-
-            
-    <li class="list-group-item" style="font-weight:normal;">129 Global Ratings</li>
-    <li class="list-group-item">
-    <div class="row">
-        <div class = "col-md-2 pt-1">
-            <span> 5 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">100%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 100% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 4 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">75%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 75% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 3 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 50% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 2 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 25%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 25% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 1 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 15%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">15%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 15% </span>
-        </div>
-
-    </div>
-
-
-    </li>
-  </ul>
-
-</div></a></li>
-             
-            <!------> 
-  </ul>
-</div>
-
-                        </label>
-  
-                </div>
-                <div class="pt-3 total-review-display">
-                    <h4> Excellent Review </h4>
-                </div>
-            </div>
-            <div class="col-md-4 pt-3 write-review-icon">
-            <?php if ($this->session->userdata('user_id')) { ?>
-            
-                <a href="<?php echo base_url();?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
-                    class="review-btns text-decoration-none">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label>
-                </a>
-
-                
-                <?php } else { ?>
-                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label></a>
-                        <?php } ?>
-            </div>
-
-        </div>
-    </div>
-    
 
 
     <!--start-->
@@ -271,7 +129,7 @@ if($get_breadcrumb)
         <div class="container-fluid review-top-section">
             <div class="row review-top-next">
                 <!--- Filtr Starts  --->
-                <div class="col-md-2 review-left">
+                <div class="col-md-2 review-left mt-4">
 
                     <!--<h3 class="filter-title">Filter</h3> -->
                     <form action="<?php echo base_url(); ?>coupon-search" method="post" name="form" id="form">
@@ -456,12 +314,12 @@ if($get_breadcrumb)
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <!--left end-->
                 <div class="col-md-8">
                     <!--center start-->
-                    <div class="review-center coupon-center">
+                    <div class="review-center coupon-center mt-4">
+
                         <div class="across-row">
                             <div class="across-col-box d-flex justify-content-between">
                                 <!--left-->

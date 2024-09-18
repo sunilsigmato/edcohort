@@ -49,6 +49,51 @@ $sort_by = $this->input->get('sort_by');
     max-width: 100%;
     height: auto;
 }
+/** You Tube Embeded Link  */
+        .youtube-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+           
+        }
+
+        /* Modal content (video inside) */
+        .youtube-modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        /* Close button */
+        .youtube-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .youtube-close:hover,
+        .youtube-close:focus {
+            color: #000;
+        }
+
+        /* Responsive iframe */
+        .youtube-video-frame {
+            width: 100%;
+            height: 315px;
+        }
+/** YOuTube Embeded Link */
 
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
@@ -642,16 +687,14 @@ $sort_by = $this->input->get('sort_by');
         <div class="row bg-color-review">
             <div class="col-12 col-sm-3 col-lg-6 how-img">
                 <img src="<?php echo base_url(); ?>assets/images/review_v1.png" class="rounded-circle img-fluid image-set"
-                    alt="" style="width: 400px;" />
+                    alt="" style="width: 400px;" id="review-image" />
             </div>
             <div class="col-12 col-sm-9 col-lg-6 course-section-title" id="review-section">
                 <h2>Review</h2>
                 <h3 class="subheading mb-2"> Find the Truth, Make the Right Choice</h3>
                 <h3 class="subheading1 "> Transparent Reviews, Tailored for You</h3>
                 <p class="text-muted img-sub-heading">Discover authentic insights from fellow learners. Select your filters and access precise reviews on brands, courses, schools, colleges, and more. With reviews in text, voice, or video formats, make informed decisions swiftly. Gauge ratings, see the number of reviewers, and find results in seconds. Join a community of learners, sharing experiences to empower your choices.</p>
-                <a href="review" class="img-btn-explore" data-bs-toggle="modal"  data-id = "review"
-                    data-bs-target="#segment-button">EXPLORE</a>
-                 
+                <a href="#" class="img-btn-explore btn-explore" data-name="review">EXPLORE</a>
             </div>
         </div>
         <div class="row bg-color-complain mt-3">
@@ -660,17 +703,16 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading mb-2">Speak Up, Get Justice</h3>
                 <h3 class="subheading1">Your Voice, Your Justice</h3>
                 <p class="text-muted img-sub-heading">Feel deceived? Raise your voice against unfair practices. Lodge complaints against companies or brands that betray your trust. Your complaints are heard, ensuring justice and transparency. We amplify your voice across all channels, leveraging the power of networking to resolve your grievances effectively</p>
-                <a href="complain" class="img-btn-explore" data-bs-toggle="modal" data-id = "complain"
-                    data-bs-target="#segment-button" >EXPLORE</a>
+                <a href="#" class="img-btn-explore btn-explore" data-name="complaint" >EXPLORE</a>
                     
             </div>
             <div class="col-md-4 col-sm-3 col-lg-6 how-img">
-                <img src="<?php echo base_url(); ?>assets/images/cmp-img.jpg" class="rounded-circle img-fluid image-set" alt="" />
+                <img src="<?php echo base_url(); ?>assets/images/cmp-img.jpg" id="complain-image" class="rounded-circle img-fluid image-set" alt="" />
             </div>
         </div>
         <div class="row bg-color-comparison mt-3">
             <div class="col-md-4 col-sm-3 col-lg-6 how-img">
-                <img src="<?php echo base_url(); ?>assets/images/1ct.webp" class="rounded-circle img-fluid image-set"
+                <img src="<?php echo base_url(); ?>assets/images/1ct.webp" id="comparision-image" class="rounded-circle img-fluid image-set"
                     alt="" />
             </div>
             <div class="col-md-8 col-sm-9 col-lg-6" id="comparision-section">
@@ -679,8 +721,7 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading1">Informed Decision-Making through Detailed Comparisons</h3>
                 <p class="text-muted img-sub-heading">Struggling to decide between options? Our comparison tool simplifies the process. Compare brands, courses, products, and services across various parameters to make informed decisions. From pricing and features to user reviews and ratings, access comprehensive insights for confident choices. Make your comparisons with clarity and ease.
                 </p>
-                <a href="#" class="img-btn-explore" data-bs-toggle="modal"
-                    data-bs-target="#segment-button">EXPLORE</a>
+                <a href="#" class="img-btn-explore btn-explore" data-name="comparison">EXPLORE</a>
             </div>
         </div>
         <div class="row bg-color-review mt-3">
@@ -689,11 +730,11 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading mb-2">Navigate Uncertainty with Confidence</h3>
                 <h3 class="subheading1">Expert Guidance, Tailored to You</h3>
                 <p class="text-muted img-sub-heading">Feeling lost? Navigate through uncertainties with expert guidance. Receive unbiased counselling to make informed decisions about your educational journey. Tailored to your needs, our counselling services provide clarity and direction. Get advice from our renowned experts, influential YouTubers, bloggers, or even directly from the company or brand of your choice, ensuring comprehensive consideration before joining a course. Empower yourself with personalized support from seasoned professionals.</p>
-                <a href="#" class="img-btn-explore" data-bs-toggle="modal"
-                    data-bs-target="#segment-button">EXPLORE</a>
+                <a href="#" class="img-btn-explore btn-explore" 
+                data-name="counselling">EXPLORE</a>
             </div>
             <div class="col-md-4 how-img col-sm-3 col-lg-6">
-                <img src="<?php echo base_url(); ?>assets/images/cnslng-img.jpg" class="rounded-circle img-fluid image-set"
+                <img src="<?php echo base_url(); ?>assets/images/cnslng-img.jpg" id="counselling-image" class="rounded-circle img-fluid image-set"
                     alt="" />
             </div>
         </div>
@@ -721,18 +762,23 @@ $sort_by = $this->input->get('sort_by');
                 <h3 class="subheading1">Collective Buying Power, Maximum Discounts</h3>
                 <p class="text-muted img-sub-heading">Save big by joining forces with others interested in the same products or services. Our group coupon feature connects remote individuals to avail maximum discounts through collective buying power. Collaborate, negotiate, and unlock exclusive deals with ease. This revolutionary feature is the first of its kind, empowering learners to access the lowest possible fees or prices for any course, program, or product. Start saving together today!
 </p>
-                <a href="#" class="img-btn-explore" data-bs-toggle="modal"
-                    data-bs-target="#segment-button">EXPLORE</a>
+                <a href="#" class="img-btn-explore btn-explore" data-bs-toggle="modal"
+                data-name="coupon">EXPLORE</a>
             </div>
             <div class="col-md-6 col-sm-3 col-lg-6 how-img p-2">
-                <img src="<?php echo base_url(); ?>assets/images/coupons-img.jpg" class="rounded-circle img-fluid image-set                                                                                                                                                                                                         "
+                <img src="<?php echo base_url(); ?>assets/images/coupons-img.jpg" id="coupon-image" class="rounded-circle img-fluid image-set                                                                                                                                                                                                         "
                     alt="" />
             </div>
         </div>
 
     </div>
 </div>
-
+<div id="videoModal" class="youtube-modal">
+        <div class="youtube-modal-content">
+            <span class="youtube-close">&times;</span> <!-- Close button -->
+            <iframe id="youtubeVideo" class="youtube-video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
 
 <div class="course-section-title ">
     <h2><center>Similar Topics </center></h2>
@@ -790,6 +836,49 @@ crossorigin = "anonymous">
 
 
  $(document).ready(function() {
+
+            var btn_name = '';
+            /**YouTube Embede Link */
+            // When the image is clicked, show the modal and start the video
+            $("#review-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/q3EsYvIapPQ?si=qKZzcniVjYM5-D2x"); // Set video URL and autoplay
+            });
+
+            $("#complain-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/hOHKltAiKXQ?si=EnSWKLDvOGNlAMzW"); // Set video URL and autoplay
+            });
+
+            $("#comparision-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/HkvVaj_28C8?si=aU-U15KyWgojG-_y"); // Set video URL and autoplay
+            });
+
+            $("#counselling-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/LK7-_dgAVQE?si=CnzS-_BWnC0I8fc7"); // Set video URL and autoplay
+            });
+
+            $("#coupon-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/P1fIdFRnfqw?si=QDKvIgsgzk1PpEsd"); // Set video URL and autoplay
+            });
+            // When the close button is clicked, close the modal and stop the video
+            $(".youtube-close").click(function() {
+                $("#videoModal").hide(); // Hide the modal
+                $("#youtubeVideo").attr("src", ""); // Remove video URL to stop playback
+            });
+
+            // Close the modal if clicked outside the modal content
+            $(window).click(function(event) {
+                if ($(event.target).is("#videoModal")) {
+                    $("#videoModal").hide(); // Hide the modal
+                    $("#youtubeVideo").attr("src", ""); // Remove video URL to stop playback
+                }
+            });
+     
+            /**End YouTube EMbede Link */
 
     $('.owl-carousel').owlCarousel({
     loop: true,
@@ -852,6 +941,21 @@ crossorigin = "anonymous">
         var modal = new bootstrap.Modal(document.getElementById('segment-button'));
         modal.show();
     });*/
+
+    $(".pop-link").on("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of the anchor tag
+        var href = $(this).attr("href"); // Get the value of the href attribute
+        var segmentId = href.split('=')[1]; // Extract the value of segment from the href
+        console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
+        window.location="<?php echo base_url();?>"+btn_name+"/?segment="+segmentId;
+   
+    });
+    $(".btn-explore").on("click", function(event) {
+        $("#segment-button").modal('show'); // Open 
+        btn_name = $(this).data('name');  
+      
+    });
+    
 }); 
 
 </script>

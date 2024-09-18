@@ -427,7 +427,7 @@ $authUrl1 = $gClient->createAuthUrl();
            
                     ?>
             <div class="col-md-4 col-sm-6 mb-4">
-            <a href="<?php echo $actual_link ?>?segment=<?php echo $class->segment_name; ?>" class=" segment-link mt-auto">
+            <a href="<?php echo $actual_link ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link mt-auto">
                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                     <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
@@ -436,11 +436,7 @@ $authUrl1 = $gClient->createAuthUrl();
                     </div> 
                     <div class="card-body d-flex flex-column justify-content-center card-background">
                         <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
-
-                        
                             <div class="arrow-mark">&#8594;</div>
-                       
-
                     </div>
                 </div>
                 </a>

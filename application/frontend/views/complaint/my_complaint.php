@@ -975,8 +975,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     
 </div>
 {{else}}
-<div class="review-row-reply">
-<h4>No result found..!!</h4>
+<div class="not-found">
+    <img src="<?php echo base_url();?>assets/images/no_result.gif" alt="" >
 </div>
 {{/if}}
 
