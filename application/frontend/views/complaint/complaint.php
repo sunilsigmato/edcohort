@@ -1030,13 +1030,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         <div class="star-box">
                             <h3 class="star-title">Join the Cohort</h3>
                             <div class="after-cohort-select" style="display:none;">
-                                <p class="display-cohort-brand">Overall brand ranking by EdCohort</p>
+                                <p class="display-cohort-brand">Select Brand</p>
                             </div>
                             <div class="before-cohort-select">
                                 <p class="display-cohort-brand">Select Brand</p>
                             </div>
                         </div>
-                       
                     </div>
                 </div>
                 <!--right end-->
@@ -1261,16 +1260,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             FilterBrandText = $('#brand :selected').text().trim();
             filter_class(filter_brand_id,filter_segment_id);
             isClickedBrand =true;
-            console.log(FilterBrandText);
+            //console.log(FilterBrandText);
             if(FilterBrandText == 'All')
             {
                 /** Brand Ranking  */
                 $('.before-brand-select').css('display', '');
                 $('.after-brand-select').css('display', 'none');
                 /** End Brand Ranking */
+                
                 /** Join Cohort  */
                 $('.before-cohort-select').css('display', '');
                 $('.after-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text('Select Brand');
                 /** End Join Cohort */
             }
             else

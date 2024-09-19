@@ -319,8 +319,9 @@ if($get_breadcrumb)
                 <div class="col-md-8">
                     <!--center start-->
                     <div class="review-center coupon-center mt-4">
-
+                                        
                         <div class="across-row">
+                            
                             <div class="across-col-box d-flex justify-content-between">
                                 <!--left-->
                                 
@@ -345,7 +346,7 @@ if($get_breadcrumb)
                             </div>
                         <style>
      </style>
-
+<div class="total-review"> Coupon</div>
     <div class="container pt-3">
     <div class="voucher-container d-flex flex-column flex-md-row">
         <div class="voucher-body col-md-8">
@@ -369,6 +370,7 @@ if($get_breadcrumb)
    <!--<div class="hr-coupon"> </div>-->
 
 <div class="selection ">
+
     <?php if($this->session->userdata('user_id')){ ?>
                                         
                                         <div class="coupon-option">
@@ -486,45 +488,29 @@ if($get_breadcrumb)
 
                 <!-- Review right side content -->
                 <div class="col-md-2">
-                    <div class="review-right">
-                        <div class="stick-right">
-                            <div class="community-side-col">
-                                <h3>10th PCM Community</h3>
-                                <p>48 Students from your classdiscussing on your interested course</p>
-                                <button type="button" class="discussing-btn">Start discussing</button>
-                            </div>
-                            <div class="star-box">
-                                <h3 class="star-title">Star %</h3>
-                                <div class="star-col">
+                   
+                <div class="review-right">
+                    <div class="stick-right">
+                    <div class="star-box">
+                            <h3 class="star-title">Brand Ranking</h3>
+                            <div class="star-col">
+                                <div class="after-brand-select" style="display:none;">
                                     <div class="star-col-image"></div>
                                     <h4>41% </h4>
-                                    <p>Willing to refer at BYJU's</p>
+                                    <p>Overall brand ranking by EdCohort</p>
                                 </div>
-                                <div class="star-col">
-                                    <div class="star-col-image"></div>
-                                    <h4>Top 3 Courses</h4>
-                                    <ul class="top-courses-list">
-                                        <li>Cohort 1</li>
-                                        <li>Cohort 2</li>
-                                        <li>Cohort 3</li>
-                                    </ul>
-                                </div>
-                                <div class="star-col">
-                                    <div class="star-col-image"></div>
-                                    <h4>43%</h4>
-                                    <p>Willing to refer at BYJU's</p>
-                                </div>
-                                <div class="progress-bar-box">
-                                    <div class="d-flex progress-bar">
-                                        <div style="width: 75%;"><span>75%</span></div>
-                                        <div style="width: 25%;"><span>25%</span></div>
-                                    </div>
+                                <div class="before-brand-select">
+                                    <p class="display-brand-brand">Select Brand</p>
                                 </div>
                             </div>
-                            <div class="score-box">
-                                <h3>Brand score card</h3>
-                                <div class="score-content"></div>
-                                <button class="score-btn">View report</button>
+                        </div>
+                        <div class="star-box">
+                            <h3 class="star-title">Join the Cohort</h3>
+                            <div class="after-cohort-select" style="display:none;">
+                                <p class="display-cohort-brand">Select Brand</p>
+                            </div>
+                            <div class="before-cohort-select">
+                                <p class="display-cohort-brand">Select Brand</p>
                             </div>
                         </div>
                     </div>
@@ -533,7 +519,7 @@ if($get_breadcrumb)
 
 
             </div>
-
+            </div>                                      
             <!--end-->
 
 
@@ -704,6 +690,34 @@ function prodcutType(val) {
         {
             filter_brand_id = $(this).val();
             filter_class(filter_brand_id,filter_segment_id);
+            FilterBrandText = $('#brand :selected').text().trim();
+            
+            if(FilterBrandText == 'All')
+            {
+                /** Brand Ranking  */
+                $('.before-brand-select').css('display', '');
+                $('.after-brand-select').css('display', 'none');
+                /** End Brand Ranking */
+                
+                /** Join Cohort  */
+                $('.before-cohort-select').css('display', '');
+                $('.after-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text('Select Brand');
+                /** End Join Cohort */
+            }
+            else
+            {
+                /** Brand Ranking */
+                $('.after-brand-select').css('display', '');
+                $('.before-brand-select').css('display', 'none');
+                /**End Brand Ranking */
+
+                /**Join Cohort */
+                $('.after-cohort-select').css('display', '');
+                $('.before-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text(FilterBrandText);
+                /**End Join Cohort */
+            }
         });
         
         $("#filter_class_dropdown").change(function()

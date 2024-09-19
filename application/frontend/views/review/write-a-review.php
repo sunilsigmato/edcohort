@@ -1,7 +1,44 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<?php
+$segment = $this->input->get('segment');
+$segment_temp = $segment;
+?>
 <!--banner start-->
+<div class="inner-banner ">
+    <div class="col-md-3 breadcrumb-design">
+        <div class="breadcrumb">
+            <ul>
+                <li>Home </li>
+                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="tab-menu">
+            <ul>
+                <li><a
+                        href="<?php echo base_url(); ?>complaint?segment=<?php echo $segment_temp; ?>">Complaint
+                    </a></li>
+                <li><a
+                        href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare
+                    </a></li>
+                <li><a
+                        href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling
+                    </a></li>
+              
+                <li class="active"><a
+                        href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>">Reviews
+                       <!-- <?php echo $review_count; ?> --></a></li>
+                <li><a
+                        href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupons</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--banner end-->
 <div class="banner inner-banner-box">
 <div class="container">
 
@@ -10,6 +47,40 @@
 </div>
 </div>
 <!--banner end-->
+
+<style>
+
+/* Override the selection box styling */`
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 
 <!--content start-->
 <div class="content">
@@ -62,14 +133,7 @@
     <input type="hidden" value = "<?php //echo $get_single_course_detail->product_type ?>" class = "filter_online_offline">
         <div class="row">
 
-            <div class=" col-md-6">
-                <label class="input-title">Write a*</label>
-                <div class="select-box">
-                    <select name="write_review" id="write_review">
-                        <option selected>Review</option>
-                    </select>
-                </div>
-            </div>
+            
             <div class="col-md-6 mt-3">
                 <label class="input-title">Segment*</label>
                 <div class="select-box">
@@ -207,7 +271,7 @@
         </div>
         <div class="review-field-row ">
             <div class="review-col">
-                <label class="input-title">Ratings (Optional)</label>
+                <label class="input-title">Ratings </label>
                 <div class="review-checkbox rating-style">
                 <input type="hidden" id="rating" name="rating" value="<?php// echo $customer_rating; ?>">
                     <div class="rating">

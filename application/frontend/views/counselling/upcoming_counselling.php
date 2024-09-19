@@ -30,6 +30,40 @@ else
     exit;
 }
 ?>
+<style>
+
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 <?php 
 
 /*$get_breadcrumb = get_breadcrumb_value();
@@ -262,9 +296,11 @@ if($get_breadcrumb)
                 <!--center start-->
                 <div class="col-md-8">
                     <div class="review-center mt-4">
+                    <div class="review-btn-box mt-4">
+                    </div>
 
                     <div class="review-inner-center">
-                    <div id="selectedValues"></div>  <!-- for filter values display -->
+                    <div id="selectedValues" class="value-class"></div>  <!-- for filter values display -->
                         <div class="tab-link">
 
                             <ul>
@@ -475,51 +511,34 @@ if($get_breadcrumb)
 
                 <!-- Review right side content -->
                 <div class="col-md-2">
-                    <div class="review-right">
-                        <div class="stick-right">
-                            <div class="community-side-col">
-                                <h3>10th PCM Community</h3>
-                                <p>48 Students from your classdiscussing on your interested course</p>
-                                <button type="button" class="discussing-btn">Start discussing</button>
-                            </div>
-                            <div class="star-box">
-                                <h3 class="star-title">Star %</h3>
-                                <div class="star-col">
+                <div class="review-right">
+                    <div class="stick-right">
+                    <div class="star-box">
+                            <h3 class="star-title">Brand Ranking</h3>
+                            <div class="star-col">
+                                <div class="after-brand-select" style="display:none;">
                                     <div class="star-col-image"></div>
                                     <h4>41% </h4>
-                                    <p>Willing to refer at BYJU's</p>
+                                    <p>Overall brand ranking by EdCohort</p>
                                 </div>
-                                <div class="star-col">
-                                    <div class="star-col-image"></div>
-                                    <h4>Top 3 Courses</h4>
-                                    <ul class="top-courses-list">
-                                        <li>Cohort 1</li>
-                                        <li>Cohort 2</li>
-                                        <li>Cohort 3</li>
-                                    </ul>
-                                </div>
-                                <div class="star-col">
-                                    <div class="star-col-image"></div>
-                                    <h4>43%</h4>
-                                    <p>Willing to refer at BYJU's</p>
-                                </div>
-                                <div class="progress-bar-box">
-                                    <div class="d-flex progress-bar">
-                                        <div style="width: 75%;"><span>75%</span></div>
-                                        <div style="width: 25%;"><span>25%</span></div>
-                                    </div>
+                                <div class="before-brand-select">
+                                    <p class="display-brand-brand">Select Brand</p>
                                 </div>
                             </div>
-                            <div class="score-box">
-                                <h3>Brand score card</h3>
-                                <div class="score-content"></div>
-                                <button class="score-btn">View report</button>
+                        </div>
+                        <div class="star-box">
+                            <h3 class="star-title">Join the Cohort</h3>
+                            <div class="after-cohort-select" style="display:none;">
+                                <p class="display-cohort-brand">Select Brand</p>
+                            </div>
+                            <div class="before-cohort-select">
+                                <p class="display-cohort-brand">Select Brand</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Review right side content Ends-->
-
+            </div>
                 <div class="helpful-box">
                     <div class="container">
                         <!-- <div id="summernote"></div> -->
@@ -799,6 +818,32 @@ if($get_breadcrumb)
             FilterBrandText = $('#brand :selected').text().trim();
             filter_class(filter_brand_id,filter_segment_id);
             isClickedBrand =true;
+            if(FilterBrandText == 'All')
+            {
+                /** Brand Ranking  */
+                $('.before-brand-select').css('display', '');
+                $('.after-brand-select').css('display', 'none');
+                /** End Brand Ranking */
+                
+                /** Join Cohort  */
+                $('.before-cohort-select').css('display', '');
+                $('.after-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text('Select Brand');
+                /** End Join Cohort */
+            }
+            else
+            {
+                /** Brand Ranking */
+                $('.after-brand-select').css('display', '');
+                $('.before-brand-select').css('display', 'none');
+                /**End Brand Ranking */
+
+                /**Join Cohort */
+                $('.after-cohort-select').css('display', '');
+                $('.before-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text(FilterBrandText);
+                /**End Join Cohort */
+            }
             get_all_data();
         });
 
@@ -1072,14 +1117,16 @@ if($get_breadcrumb)
             var brn_value = val1 + '=' + val2 ;
             var span = document.createElement("span");
             span.classList.add("value-span");
+            span.classList.add("mt-3");
             //console.log(brn_value);
              // Set text content
             span.textContent = val2;
             // Set display value
-            span.style.display = "block"; 
+            /*span.style.display = "block"; */
             var div = document.getElementById("selectedValues");
             var closeButton = document.createElement("button");
             closeButton.textContent = "X";
+            closeButton.classList.add("btn-close-filter");
             closeButton.setAttribute("data-value", brn_value);
 
             var selectedValuesDiv = document.getElementById("selectedValues");
