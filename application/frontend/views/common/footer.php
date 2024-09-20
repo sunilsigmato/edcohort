@@ -476,6 +476,27 @@ $authUrl1 = $gClient->createAuthUrl();
     <script src="<?php echo base_url(); ?>assets/js/select2.js"></script>
     
 <script type="text/javascript">
+
+ $(document).ready(function() {
+    var search_input ='';
+    $(".search-input").on("keyup", function(event) {
+         search_input = $(this).val();
+
+         $.ajax({
+              type : 'POST',    
+               url: "<?php echo base_url(); ?>filter/search_input",
+              data:{
+                search_input:search_input,
+              }, 
+              dataType: "json",   
+              success: function (response) {
+             console.log(response);
+              }
+           });
+         
+
+    });
+ });
 function registration() {
 
     // alert();  

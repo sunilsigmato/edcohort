@@ -16,7 +16,13 @@ public function __construct()
 }
 
 
+  function search_input()
+  {
+    $search_input= $this->input->post('search_input');
+    $res_filter_brand_list = $this->common_model->search_input($search_input);
+    
 
+  }
   function get_brand_detail()
   {
       $segment= $this->input->post('segment');
