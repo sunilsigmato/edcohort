@@ -125,7 +125,66 @@ if(empty($meta_description)){
     });
     </script>
 
+<style>
+  /* Dropdown Menu Styling */
+.dropdown-search-input {
+   /* display: none; /* Hidden by default */
+    position: absolute;
+    /* top: 50px; Position relative to the search box */
+    width:810px !important;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+   /* overflow-y: auto; Enable scroll if too many items*/
+    
+}
 
+/* Dropdown Item Styling */
+.dropdown-item {
+    padding: 12px 20px;
+    display: block;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left:10px;
+    letter-spacing: 0.9px;
+    padding: 8px !important;
+}
+
+/* Hover Effect for Dropdown Items */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: #ff6347;
+}
+
+/* Horizontal Rule Style */
+.dropdown-content hr {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Show Dropdown when Focused */
+.dropdown-container.active .dropdown-content {
+    display: block;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 480px) {
+    .dropdown-container {
+        width: 100%;
+    }
+
+    .search-box {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+  </style>
     <!--Loader-->
     <div id="global-loader" style="display:none">
         <img src="<?php echo base_url(); ?>assets/images/loader.svg" class="loader-img" alt="img">
@@ -147,12 +206,14 @@ if(empty($meta_description)){
             <!--Search-box-->
             <div class="header-search">
                 <div class="search-box d-flex align-items-center">
+               
                     <input type="text" placeholder="Search for Brands, Exams" class="search-input">
-
                     <button class="search-button">
                         <i class="fas fa-search search-icon-color"></i>
                     </button>
                 </div>
+                <span class="dropdown-search-input" aria-labelledby="dropdownMenuButton" style="width: 100%;">         
+  </span>
             </div>
 
 

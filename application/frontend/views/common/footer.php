@@ -490,6 +490,42 @@ $authUrl1 = $gClient->createAuthUrl();
               }, 
               dataType: "json",   
               success: function (response) {
+                var dropdownMenu = $('.dropdown-search-input').empty();
+              //  dropdownMenu.empty(); // Clear previous results
+              let i = 0;
+              let  j=0;
+                response.data.forEach(function(response) {
+                    console.log(response);
+                    //var mob_no = ' - ( '+result.mobile_no+' )';
+                   
+                    if(response.brand_id!= null)
+                    {
+
+                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-brand-id="${response.brand_id}" data-brand-name="${response.brand_name}">${response.brand_name}</a>`);
+                    }
+                    if(response.class_id!= null)
+                    {
+                        if(j == 0)
+                        {
+                            dropdownMenu.append(`<hr>`);
+                        }
+                        
+                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-class-id="${response.class_id}" data-class-name="${response.title}" >${response.title}</a>`);
+                       j++;
+                    }
+                    if(response.id!= null)
+                    {
+                        if(i == 0)
+                        {
+                            dropdownMenu.append(`<hr>`);
+                        }
+                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-course-id="${response.id}" data-course-name="${response.course_name}" >${response.course_name}</a>`);
+                        console.log(i);
+                        i++;
+                    }
+                    
+                });
+
              console.log(response);
               }
            });

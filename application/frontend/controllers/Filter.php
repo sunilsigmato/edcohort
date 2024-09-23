@@ -19,8 +19,9 @@ public function __construct()
   function search_input()
   {
     $search_input= $this->input->post('search_input');
-    $res_filter_brand_list = $this->common_model->search_input($search_input);
-    
+    $res_filter_search_input = $this->common_model->search_input($search_input);
+    http_response_code(200);
+    echo json_encode(array("status"=>"1","data"=>$res_filter_search_input)); 
 
   }
   function get_brand_detail()

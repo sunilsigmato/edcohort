@@ -360,30 +360,37 @@ class Common_model extends CI_Model {
 		 print_R($rss);*/
 
 
-		$this->db->select('br.brand_id, br.brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS VARCHAR) AS title, CAST(NULL AS INT) AS id, CAST(NULL AS VARCHAR) AS course_name')
+		 $query1 = $this->db->select('br.brand_id, br.brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
 		->from('tbl_brand br')
-		->like('br.brand_name', $search_input);
+		->like('br.brand_name', $search_input)
+		//->limit('10')
+		->get_compiled_select();
 
-		$query1 = $this->db->get_compiled_select();
+		/*$query1 = $this->db->get();
+		/*$res = $this->db->last_query();*/
 
-		$this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS VARCHAR) AS brand_name, cl.class_id, cl.title, CAST(NULL AS INT) AS id, CAST(NULL AS VARCHAR) AS course_name')
+		$query2 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, cl.class_id, cl.title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
 				->from('tbl_class cl')
-				->like('cl.title', $search_input);
+				->like('cl.title', $search_input)
+				//->limit('10')
+				->get_compiled_select();
 
-		$query2 = $this->db->get_compiled_select();
+		/*$query2 = $this->db->get();*/
 
-		$this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS VARCHAR) AS brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS VARCHAR) AS title, cr.id, cr.course_name')
+		$query3 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, cr.id, cr.course_name')
 				->from('tbl_course cr')
-				->like('cr.course_name', $search_input);
+				->like('cr.course_name', $search_input)
+			//	->limit('10')
+				->get_compiled_select();
 
-		$query3 = $this->db->get_compiled_select();
+		/*$query3 = $this->db->get();*/
 
 		// Combine all queries with UNION ALL
-		$final_query = $query1 . ' UNION ALL ' . $query2 . ' UNION ALL ' . $query3;
+		$final_query = $query1 . ' UNION ALL ' . $query2 . ' UNION ALL ' . $query3 . 'limit 10';
 
 		$result = $this->db->query($final_query);
-		$rss = $query->result();
-		print_r($rss);
+		return $res_search_input = $result->result();
+		//print_r($final_query);
 
 
 
