@@ -324,28 +324,7 @@ $authUrl1 = $gClient->createAuthUrl();
 
 <!-- Segment -->
 
-<div class="modal fade login-popup" id="segment-button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered segment-dialog">
-        <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body">
-
-                <form id="loginPopup" action="javascript:void(0)" method="post">
-                    <div class="alert alert-outline alert-outline-success login-message-success"
-                        id="#login-message-success" role="alert" style="display:none;"><button type="button"
-                            class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
-                        <p id="text-message-login-success"></p>
-                    </div>
-                    <div class="alert alert-outline alert-outline-danger login-message-error" id="#login-message-error"
-                        role="alert" style="display:none"><button type="button" class="close" data-bs-dismiss="alert"
-                            aria-hidden="true">×</button>
-                        <p id="text-message-login-error"></p>
-                    </div>
-
-                    <div class="content content-bg pt-5 pb-5">
-
-                    <style>
+<style>
     .container {
         position: relative;
     }
@@ -413,37 +392,57 @@ $authUrl1 = $gClient->createAuthUrl();
     }
 }
     </style>
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <?php
-             $where_class = 'status = 1';
-	     	$segment_record = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
-            $class_records_count = count($segment_record);
 
-            $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-            if ($class_records_count > 0) {
-                foreach ($segment_record as $class) { 
-           
-                    ?>
-            <div class="col-md-4 col-sm-6 mb-4">
-            <a href="<?php echo $actual_link ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link mt-auto">
-                <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
+<div class="modal fade login-popup" id="segment-button" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered segment-dialog">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
 
-                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
-                        style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
-                        <?php //echo $class->segment_img; ?>
-                    </div> 
-                    <div class="card-body d-flex flex-column justify-content-center card-background">
-                        <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
-                            <div class="arrow-mark">&#8594;</div>
+                <form id="loginPopup" action="javascript:void(0)" method="post">
+                    <div class="alert alert-outline alert-outline-success login-message-success"
+                        id="#login-message-success" role="alert" style="display:none;"><button type="button"
+                            class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+                        <p id="text-message-login-success"></p>
                     </div>
-                </div>
-                </a>
-            </div>
-            <?php
+                    <div class="alert alert-outline alert-outline-danger login-message-error" id="#login-message-error"
+                        role="alert" style="display:none"><button type="button" class="close" data-bs-dismiss="alert"
+                            aria-hidden="true">×</button>
+                        <p id="text-message-login-error"></p>
+                    </div>
+
+                    <div class="content content-bg pt-5 pb-5">
+                        <div class="container">
+                        <div class="row justify-content-center">
+                            <?php
+                            $where_class = 'status = 1';
+                            $segment_record = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
+                            $class_records_count = count($segment_record);
+
+                            $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                            if ($class_records_count > 0) {
+                                foreach ($segment_record as $class) { 
+                        
+                                    ?>
+                            <div class="col-md-4 col-sm-6 mb-4">
+                            <a href="<?php echo $actual_link ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link mt-auto">
+                                <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
+
+                                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
+                                        style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
+                                        <?php //echo $class->segment_img; ?>
+                                    </div> 
+                                    <div class="card-body d-flex flex-column justify-content-center card-background">
+                                        <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
+                                            <div class="arrow-mark">&#8594;</div>
+                                    </div>
+                                </div>  
+                            </a>
+                        </div>
+                    <?php
+                    }
                 }
-            }
             ?>
         </div>
     </div>
@@ -456,6 +455,70 @@ $authUrl1 = $gClient->createAuthUrl();
 </div>
 
 <!-- End Segment -->
+ 
+<!--Search Segment -->
+<div class="modal fade login-popup" id="segment-button-search" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered segment-dialog">
+        <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+
+                <form id="loginPopup" action="javascript:void(0)" method="post">
+                    <div class="alert alert-outline alert-outline-success login-message-success"
+                        id="#login-message-success" role="alert" style="display:none;"><button type="button"
+                            class="close" data-bs-dismiss="alert" aria-hidden="true">×</button>
+                        <p id="text-message-login-success"></p>
+                    </div>
+                    <div class="alert alert-outline alert-outline-danger login-message-error" id="#login-message-error"
+                        role="alert" style="display:none"><button type="button" class="close" data-bs-dismiss="alert"
+                            aria-hidden="true">×</button>
+                        <p id="text-message-login-error"></p>
+                    </div>
+
+                    <div class="content content-bg pt-5 pb-5">
+                        <div class="container">
+                        <div class="row justify-content-center">
+                            <?php
+                            $where_class = 'status = 1';
+                            $segment_record = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
+                            $class_records_count = count($segment_record);
+
+                            $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                            if ($class_records_count > 0) {
+                                foreach ($segment_record as $class) { 
+                        
+                                    ?>
+                            <div class="col-md-4 col-sm-6 mb-4">
+                            <a href="<?php echo $actual_link ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link-search mt-auto">
+                                <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
+
+                                    <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
+                                        style="height: 50%; width: 100%; filter: invert(100%) sepia(100%) saturate(10000%) hue-rotate(20deg);">
+                                        <?php //echo $class->segment_img; ?>
+                                    </div> 
+                                    <div class="card-body d-flex flex-column justify-content-center card-background">
+                                        <h5 class="card-title "><?php echo $class->segment_name; ?></h5>
+                                            <div class="arrow-mark">&#8594;</div>
+                                    </div>
+                                </div>  
+                            </a>
+                        </div>
+                    <?php
+                    }
+                }
+            ?>
+        </div>
+    </div>
+</div>
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Search Segment -->
 
 
 <!--libs-->
@@ -478,10 +541,15 @@ $authUrl1 = $gClient->createAuthUrl();
 <script type="text/javascript">
 
  $(document).ready(function() {
+    /** Search Code Ends */
     var search_input ='';
+    var search_dropdown = '';
+    var search_id = '';
+    var search_name = '';
     $(".search-input").on("keyup", function(event) {
          search_input = $(this).val();
-
+        if(search_input != '')
+        {
          $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/search_input",
@@ -493,44 +561,161 @@ $authUrl1 = $gClient->createAuthUrl();
                 var dropdownMenu = $('.dropdown-search-input').empty();
               //  dropdownMenu.empty(); // Clear previous results
               let i = 0;
-              let  j=0;
+              let j=0;
+              let k=0;
+            
                 response.data.forEach(function(response) {
+                     
                     console.log(response);
                     //var mob_no = ' - ( '+result.mobile_no+' )';
                    
                     if(response.brand_id!= null)
                     {
-
-                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-brand-id="${response.brand_id}" data-brand-name="${response.brand_name}">${response.brand_name}</a>`);
+                       // $('.dropdown-search-input').css('display', '');
+                        if(k == 0)
+                        {
+                            dropdownMenu.append(`<h6 class="txt-content">Brand</h6>`);
+                        }
+                        dropdownMenu.append(`<a href="#" class="dropdown-item search-dropdown btn-search" data-value ="brand"   data-brand-id="${response.brand_id}" data-brand-name="${response.brand_name}"><img src="<?php echo base_url(); ?>assets/search.png" class="loader-img search-img" alt="img"> ${response.brand_name}</a>`);
+                        k++;
                     }
                     if(response.class_id!= null)
                     {
                         if(j == 0)
                         {
-                            dropdownMenu.append(`<hr>`);
+                            dropdownMenu.append(`<h6 class="txt-content">Class</h6>`);
                         }
                         
-                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-class-id="${response.class_id}" data-class-name="${response.title}" >${response.title}</a>`);
+                        dropdownMenu.append(`<a class="dropdown-item search-dropdown btn-search" href="#" data-value ="class"  data-class-id="${response.class_id}" data-class-name="${response.title}" ><img src="<?php echo base_url(); ?>assets/search.png" class="loader-img search-img" alt="img"> ${response.title}</a>`);
                        j++;
                     }
                     if(response.id!= null)
                     {
                         if(i == 0)
                         {
-                            dropdownMenu.append(`<hr>`);
+                            dropdownMenu.append(`<h6 class="txt-content">Course</h6>`);
                         }
-                        dropdownMenu.append(`<a class="dropdown-item search-dropdown" href="#"  data-course-id="${response.id}" data-course-name="${response.course_name}" >${response.course_name}</a>`);
+                        dropdownMenu.append(`<a class="dropdown-item search-dropdown btn-search" href="#"  data-course-id="${response.id}" data-value ="course" data-course-name="${response.course_name}" ><img src="<?php echo base_url(); ?>assets/search.png" class="loader-img search-img" alt="img"> ${response.course_name}</a>`);
                         console.log(i);
                         i++;
                     }
                     
                 });
+              
 
-             console.log(response);
+            // console.log(response);
               }
            });
-         
+        }
+        else
+        {
+            var dropdownMenu = $('.dropdown-search-input').empty();
+        }
 
+    });
+
+    $(document).on('click', '.btn-search', function() {
+        search_dropdown = $(this).data('value');
+        var expires = 7;
+        search_id = $(this).data(search_dropdown + '-id');
+        search_name = $(this).data(search_dropdown + '-name');
+        document.cookie = search_name + "=" + search_id + "; path=/";
+        console.log(search_id);
+        $("#segment-button-search").modal('show'); // Open 
+    });
+
+    $(".pop-link-search").on("click", function(event) {
+        var parameter = 'complaint';
+        event.preventDefault(); // Prevent the default behavior of the anchor tag
+        var href = $(this).attr("href"); // Get the value of the href attribute
+        var segmentId = href.split('=')[1]; // Extract the value of segment from the href
+        console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
+        window.location="<?php echo base_url();?>"+parameter+"/?segment="+segmentId+"&"+search_dropdown+"="+search_name;
+   
+    });
+    /** Search Code Ends */
+
+    var btn_name = '';
+            /**YouTube Embede Link */
+            // When the image is clicked, show the modal and start the video
+            $("#review-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/q3EsYvIapPQ?si=qKZzcniVjYM5-D2x"); // Set video URL and autoplay
+            });
+
+            $("#complain-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/hOHKltAiKXQ?si=EnSWKLDvOGNlAMzW"); // Set video URL and autoplay
+            });
+
+            $("#comparision-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/HkvVaj_28C8?si=aU-U15KyWgojG-_y"); // Set video URL and autoplay
+            });
+
+            $("#counselling-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/LK7-_dgAVQE?si=CnzS-_BWnC0I8fc7"); // Set video URL and autoplay
+            });
+
+            $("#coupon-image").click(function() {
+            $("#videoModal").show(); // Show the modal
+            $("#youtubeVideo").attr("src", "https://www.youtube.com/embed/P1fIdFRnfqw?si=QDKvIgsgzk1PpEsd"); // Set video URL and autoplay
+            });
+            // When the close button is clicked, close the modal and stop the video
+            $(".youtube-close").click(function() {
+                $("#videoModal").hide(); // Hide the modal
+                $("#youtubeVideo").attr("src", ""); // Remove video URL to stop playback
+            });
+
+            // Close the modal if clicked outside the modal content
+            $(window).click(function(event) {
+                if ($(event.target).is("#videoModal")) {
+                    $("#videoModal").hide(); // Hide the modal
+                    $("#youtubeVideo").attr("src", ""); // Remove video URL to stop playback
+                }
+            });
+     
+            /**End YouTube EMbede Link */
+
+    $('.owl-carousel').owlCarousel({
+    loop: true,
+    margin: 10,
+    nav: true,
+    /* here you can set the settings for responsive
+       items */
+    responsive: {
+        0: {
+            items: 2
+        },
+        768: {
+            items: 4
+        }
+    }
+});
+    $(".segment-link").on("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of the anchor tag
+        var href = $(this).attr("href"); // Get the value of the href attribute
+        var segmentId = href.split('=')[1]; // Extract the value of segment from the href
+        console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
+        window.location="<?php echo base_url();?>complaint/?segment="+segmentId;
+    
+    });
+
+    
+
+    $(".pop-link").on("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of the anchor tag
+        var href = $(this).attr("href"); // Get the value of the href attribute
+        var segmentId = href.split('=')[1]; // Extract the value of segment from the href
+        console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
+        window.location="<?php echo base_url();?>"+btn_name+"/?segment="+segmentId;
+   
+    });
+    $(".btn-explore").on("click", function(event) {
+        $("#segment-button").modal('show'); // Open 
+        btn_name = $(this).data('name');  
+      
     });
  });
 function registration() {

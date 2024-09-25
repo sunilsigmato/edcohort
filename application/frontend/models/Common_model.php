@@ -339,60 +339,36 @@ class Common_model extends CI_Model {
 
 	function search_input($search_input)
 	{
-		
 		$where= '';
         $query = '';
 		if(!empty($search_input))
       	{
-          $where .="br.brand_name LIKE  '%$search_input%'";
-		  $where .= " or cl.title LIKE '%$search_input%'";
-		  $where .= " or cr.course_name LIKE '%$search_input%'";
-		  $where .= " or bt.batch_name LIKE '%$search_input%'";
-      	}
-		/*$this->db->select('br.brand_id,br.brand_name,cl.class_id, cl.title,cr.id,cr.course_name,bt.batch_name,bt.batch_id,');
-        $this->db->from('tbl_brand br,tbl_class cl,tbl_course cr,tbl_batch bt');
-         $this->db->where($where);
-		 $this->db->limit(10); 
-		 $query=$this->db->get();
-		// $res = $this->db->last_query();
-		 $rss = ry();
-		 $rss = $query->result();
-		 print_R($rss);*/
+			$where .="br.brand_name LIKE  '%$search_input%'";
+			$where .= " or cl.title LIKE '%$search_input%'";
+			$where .= " or cr.course_name LIKE '%$search_input%'";
+			$where .= " or bt.batch_name LIKE '%$search_input%'";
+      	
+			$query1 = $this->db->select('br.brand_id, br.brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
+			->from('tbl_brand br')
+			->like('br.brand_name', $search_input)
+			->get_compiled_select();
 
+			$query2 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, cl.class_id, cl.title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
+					->from('tbl_class cl')
+					->like('cl.title', $search_input)
+					->get_compiled_select();
 
-		 $query1 = $this->db->select('br.brand_id, br.brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
-		->from('tbl_brand br')
-		->like('br.brand_name', $search_input)
-		//->limit('10')
-		->get_compiled_select();
+			$query3 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, cr.id, cr.course_name')
+					->from('tbl_course cr')
+					->like('cr.course_name', $search_input)
+					->get_compiled_select();
 
-		/*$query1 = $this->db->get();
-		/*$res = $this->db->last_query();*/
+			// Combine all queries with UNION ALL
+			$final_query = $query1 . ' UNION ALL ' . $query2 . ' UNION ALL ' . $query3 . 'limit 10';
 
-		$query2 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, cl.class_id, cl.title, CAST(NULL AS INT) AS id, CAST(NULL AS CHAR) AS course_name')
-				->from('tbl_class cl')
-				->like('cl.title', $search_input)
-				//->limit('10')
-				->get_compiled_select();
-
-		/*$query2 = $this->db->get();*/
-
-		$query3 = $this->db->select('CAST(NULL AS INT) AS brand_id, CAST(NULL AS CHAR) AS brand_name, CAST(NULL AS INT) AS class_id, CAST(NULL AS CHAR) AS title, cr.id, cr.course_name')
-				->from('tbl_course cr')
-				->like('cr.course_name', $search_input)
-			//	->limit('10')
-				->get_compiled_select();
-
-		/*$query3 = $this->db->get();*/
-
-		// Combine all queries with UNION ALL
-		$final_query = $query1 . ' UNION ALL ' . $query2 . ' UNION ALL ' . $query3 . 'limit 10';
-
-		$result = $this->db->query($final_query);
-		return $res_search_input = $result->result();
-		//print_r($final_query);
-
-
+			$result = $this->db->query($final_query);
+			return $res_search_input = $result->result();
+		}
 
 	}
 

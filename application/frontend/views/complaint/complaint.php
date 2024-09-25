@@ -120,7 +120,6 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 <!--banner end-->
 <!--content start-->
 
-
     <!--start-->
     <div class=" container-fluid review-top-section">
         <div class="row review-top-next">
@@ -133,10 +132,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     <form action="<?php echo base_url(); ?>complaint-search" method="get" name="form" id="form">
                       <!--  <h3 class="filter-title">Filter</h3> -->
                         <?php echo csrf_field(); 
-                         $res_filter_brand = getseg_brand_list($segment);
+                        
                          $res_filter_segment = get_segement();
                          $res_filter_class = getseg_class_list($segment);
                          $res_filter_course = getseg_crse_list($segment);
+                         $res_filter_brand = getseg_brand_list($segment);
+                      
                         ?>
                         <div class="filter-col">
                             <h3 class="filter-col-title">Segment</h3>
@@ -1103,7 +1104,6 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     <!-- <script src="<?php echo base_url(); ?>assets/js/ajax/manage_review_ajax.js"></script> -->
     <script>
     $(document).ready(function() {
-
          /** Start Filter Section */
             /** Apply Select 2 */
             $('.filter_segment').select2();
@@ -1111,6 +1111,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             $('#filter_class_dropdown').select2();
             $('#filter_course_dropdown').select2();
             $('#batch').select2();
+
+
 
             
                /**End   Apply Select 2 */
@@ -1174,6 +1176,46 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             requestData.user_id = '';
             ajax_cal_data();
 
+            /**Cookies Code */
+            var urlParams_search = new URLSearchParams(window.location.search);
+            var brandname_search = urlParams_search.get('brand');
+            var class_search = urlParams_search.get('class');
+            var course_search = urlParams_search.get('course');
+            let userCookie = getCookie(class_search); 
+            console.log(class_search);
+            if(brandname_search != null)
+            {
+                let userCookie = getCookie(brandname_search); 
+                isClickedBrand =true;
+                filter_brand_id = userCookie;
+                FilterBrandText = brandname_search;
+                filter_class(userCookie,filter_segment_id);
+                right_side();
+                get_all_data();
+            }
+            if(class_search != null)
+            {
+                let userCookie = getCookie(class_search);
+                isClickedClass =true;
+                filter_class_id = userCookie;
+                FilterClassText = class_search;
+                filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
+                get_all_data();
+
+            }
+            if(course_search != null)
+            {
+                let userCookie = getCookie(course_search);
+                isClickedCourse =true;
+                filter_course_id = userCookie;
+                FilterCourseText =course_search;
+                filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
+                get_all_data();
+
+            }
+
+            /**Cookies Code Ends*/
+            
           /** Start Filter Section */
         if(filter_segment_id == 1)
         {
@@ -1261,32 +1303,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             filter_class(filter_brand_id,filter_segment_id);
             isClickedBrand =true;
             //console.log(FilterBrandText);
-            if(FilterBrandText == 'All')
-            {
-                /** Brand Ranking  */
-                $('.before-brand-select').css('display', '');
-                $('.after-brand-select').css('display', 'none');
-                /** End Brand Ranking */
-                
-                /** Join Cohort  */
-                $('.before-cohort-select').css('display', '');
-                $('.after-cohort-select').css('display', 'none');
-                $('.display-cohort-brand').text('Select Brand');
-                /** End Join Cohort */
-            }
-            else
-            {
-                /** Brand Ranking */
-                $('.after-brand-select').css('display', '');
-                $('.before-brand-select').css('display', 'none');
-                /**End Brand Ranking */
-
-                /**Join Cohort */
-                $('.after-cohort-select').css('display', '');
-                $('.before-cohort-select').css('display', 'none');
-                $('.display-cohort-brand').text(FilterBrandText);
-                /**End Join Cohort */
-            }
+            right_side();
             get_all_data();
         });
 
@@ -1397,7 +1414,35 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
            });
 
         });
+        function right_side()
+        {
+            if(FilterBrandText == 'All')
+            {
+                /** Brand Ranking  */
+                $('.before-brand-select').css('display', '');
+                $('.after-brand-select').css('display', 'none');
+                /** End Brand Ranking */
+                
+                /** Join Cohort  */
+                $('.before-cohort-select').css('display', '');
+                $('.after-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text('Select Brand');
+                /** End Join Cohort */
+            }
+            else
+            {
+                /** Brand Ranking */
+                $('.after-brand-select').css('display', '');
+                $('.before-brand-select').css('display', 'none');
+                /**End Brand Ranking */
 
+                /**Join Cohort */
+                $('.after-cohort-select').css('display', '');
+                $('.before-cohort-select').css('display', 'none');
+                $('.display-cohort-brand').text(FilterBrandText);
+                /**End Join Cohort */
+            }
+        }
         function filter_brand(segment_id)
         {
             $.ajax({
@@ -2012,4 +2057,16 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             }
         });
     }
+
+    function getCookie(name) {
+    let nameEQ = name + "=";
+    let cookiesArray = document.cookie.split(';');
+    for (let i = 0; i < cookiesArray.length; i++) {
+        let cookie = cookiesArray[i].trim(); // Remove leading spaces
+        if (cookie.indexOf(nameEQ) == 0) {
+            return cookie.substring(nameEQ.length, cookie.length);
+        }
+    }
+    return null; // Return null if the cookie is not found
+}
     </script>

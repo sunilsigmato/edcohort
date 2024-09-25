@@ -32,6 +32,8 @@ else if($segment1==$this->url->slug(13))
   $meta_description = (@$category_seo['0']->category_meta_description) ?  : $cat_title;
   $canonical = (@$category_seo['0']->category_canonical) ?  : '';
 }
+$segment_top = $this->input->get('segment');
+
 $seg_title = @strtr($segment1, '-', ' ');
 if(empty($title)){
   $title = $seg_title;
@@ -134,9 +136,11 @@ if(empty($meta_description)){
     width:810px !important;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 11px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     z-index: 3;
+    padding: 11px;
+   /* display:none;
    /* overflow-y: auto; Enable scroll if too many items*/
     
 }
@@ -145,20 +149,26 @@ if(empty($meta_description)){
 .dropdown-item {
     padding: 12px 20px;
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     text-decoration: none;
-    color: #333;
+    color: #4a4a4a;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left:10px;
-    letter-spacing: 0.9px;
-    padding: 8px !important;
+    letter-spacing: 0.2px;
+    padding: 11px !important;
+    width: auto;
+    font-weight : 600;
 }
 
 /* Hover Effect for Dropdown Items */
 .dropdown-item:hover {
-    background-color: #f1f1f1;
-    color: #ff6347;
+  background-color: #ededed;
+  color: #000000;
+  border-radius: 6px;
+  width: auto;
+  border-left: 4px solid #e64040;
+  border-radius: 0px 25px 25px 0px;
 }
 
 /* Horizontal Rule Style */
@@ -171,6 +181,38 @@ if(empty($meta_description)){
 /* Show Dropdown when Focused */
 .dropdown-container.active .dropdown-content {
     display: block;
+}
+
+
+.txt-content {
+  overflow: hidden;
+  text-align: center;
+  color:#000000;
+}
+
+.txt-content::before,
+.txt-content::after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.txt-content::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.txt-content::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.search-img {
+    margin-right: 9px;
 }
 
 /* Mobile Responsive */
@@ -206,8 +248,7 @@ if(empty($meta_description)){
             <!--Search-box-->
             <div class="header-search">
                 <div class="search-box d-flex align-items-center">
-               
-                    <input type="text" placeholder="Search for Brands, Exams" class="search-input">
+                    <input type="text" placeholder="Search for Brands, Class, Course" class="search-input">
                     <button class="search-button">
                         <i class="fas fa-search search-icon-color"></i>
                     </button>
