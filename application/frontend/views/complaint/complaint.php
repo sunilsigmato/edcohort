@@ -1181,34 +1181,39 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             var brandname_search = urlParams_search.get('brand');
             var class_search = urlParams_search.get('class');
             var course_search = urlParams_search.get('course');
-            let userCookie = getCookie(class_search); 
+            //let userCookie = getCookie(class_search); 
             console.log(class_search);
             if(brandname_search != null)
             {
-                let userCookie = getCookie(brandname_search); 
+                let userCookie = getCookie('brand'); 
+             //console.log(userCookie);
                 isClickedBrand =true;
-                filter_brand_id = userCookie;
+                filter_brand_id = userCookie[1];
                 FilterBrandText = brandname_search;
-                filter_class(userCookie,filter_segment_id);
+                requestData.brand = filter_brand_id;
+                filter_class(userCookie[1],filter_segment_id);
+               //$('#brand').val(2);
                 right_side();
                 get_all_data();
             }
             if(class_search != null)
             {
-                let userCookie = getCookie(class_search);
+                let userCookie_class = getCookie('class');
                 isClickedClass =true;
-                filter_class_id = userCookie;
+                filter_class_id = userCookie_class[1];
                 FilterClassText = class_search;
+               requestData.class = filter_class_id;
                 filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
                 get_all_data();
 
             }
             if(course_search != null)
             {
-                let userCookie = getCookie(course_search);
+                let userCookie = getCookie('course');
                 isClickedCourse =true;
-                filter_course_id = userCookie;
+                filter_course_id = userCookie[1];
                 FilterCourseText =course_search;
+                requestData.course = filter_course_id;
                 filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
                 get_all_data();
 
@@ -2064,7 +2069,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     for (let i = 0; i < cookiesArray.length; i++) {
         let cookie = cookiesArray[i].trim(); // Remove leading spaces
         if (cookie.indexOf(nameEQ) == 0) {
-            return cookie.substring(nameEQ.length, cookie.length);
+           // return cookie.substring(nameEQ.length, cookie.length);
+           return cookie.substring(name.length + 1).split('|');
         }
     }
     return null; // Return null if the cookie is not found

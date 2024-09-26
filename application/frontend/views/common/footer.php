@@ -490,7 +490,7 @@ $authUrl1 = $gClient->createAuthUrl();
                         
                                     ?>
                             <div class="col-md-4 col-sm-6 mb-4">
-                            <a href="<?php echo $actual_link ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link-search mt-auto">
+                            <a href="<?php echo base_url(); ?>review?segment=<?php echo $class->segment_name; ?>" class="pop-link-search mt-auto">
                                 <div class="card text-center" style="background-image: url('<?php echo base_url(); ?>assets/images/<?php echo $class->segment_img; ?>'); background-size: cover;">
 
                                     <div class="card-img-top card-img-size img-size mt-5 d-flex justify-content-center align-items-center"
@@ -616,11 +616,12 @@ $authUrl1 = $gClient->createAuthUrl();
 
     $(document).on('click', '.btn-search', function() {
         search_dropdown = $(this).data('value');
-        var expires = 7;
+        var expires = 1;
         search_id = $(this).data(search_dropdown + '-id');
         search_name = $(this).data(search_dropdown + '-name');
-        document.cookie = search_name + "=" + search_id + "; path=/";
-        console.log(search_id);
+       // document.cookie = search_name + "=" + search_id + "; path=/";
+       setCookie(search_dropdown, [search_name, search_id], 1);
+        console.log(search_dropdown);
         $("#segment-button-search").modal('show'); // Open 
     });
 
@@ -631,6 +632,8 @@ $authUrl1 = $gClient->createAuthUrl();
         var segmentId = href.split('=')[1]; // Extract the value of segment from the href
         console.log(segmentId); // Output the segment ID to the console (you can do whatever you want with this value)
         window.location="<?php echo base_url();?>"+parameter+"/?segment="+segmentId+"&"+search_dropdown+"="+search_name;
+
+        
    
     });
     /** Search Code Ends */
@@ -718,6 +721,15 @@ $authUrl1 = $gClient->createAuthUrl();
       
     });
  });
+
+ function setCookie(name, values, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + d.toUTCString();
+    // Join multiple values into a single string
+    const valueString = values.join('|');
+    document.cookie = name + "=" + valueString + ";" + expires + ";path=/";
+}
 function registration() {
 
     // alert();  
