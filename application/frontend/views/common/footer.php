@@ -535,9 +535,18 @@ $authUrl1 = $gClient->createAuthUrl();
 <script src="<?php echo base_url(); ?>assets/js/owlcarousel/owl.carousel.min.js"></script>
 
   <!--Select2 js -->
-  <script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/select2.js"></script>
-    
+<script src="<?php echo base_url(); ?>assets/plugins/select2/select2.full.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/select2.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+    integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+
+
 <script type="text/javascript">
 
  $(document).ready(function() {

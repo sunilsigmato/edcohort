@@ -12,6 +12,7 @@ class Home extends CI_Controller {
 		  $this->load->model('diamond_model');
 		  $this->load->model('home_model');
 		  $this->load->model('review_model');
+		  $this->load->model('blog_model');
 		  
 		  //$this->load->library('curl');
 	  }
@@ -45,28 +46,12 @@ class Home extends CI_Controller {
 					$productwhare = ' and product_id IN ('.$productids.')';
 					
 					}
-				
-				
-				
-				
 			}
 			
 			$where_class = 'brand_status = 1'.$brandwhare;
 	     	$data['brand_records'] = $this->common_model->selectWhereOrderlimit('tbl_brand',$where_class,10,0,'order by brand_sort_order ASC'); 
 			
 			$where_product = 'product_status = "active"'.$productwhare;
-	     	//$data['courses_records'] = $this->common_model->selectWhereOrderlimit('v_product',$where_product,10,0,'order by product_sort ASC'); 
-			
-			/*foreach ($data['courses_records']  as $row) 
-	     	{
-				
-	     		$img=$this->list_image($row->NM_FOLDER_NAME,$row->product_id);
-	     		$row->image_show = @$img['0'];
-				$avg= $this->home_model->count_total_rating($row->product_id);
-				$row->avg = @$avg['0']->average;
-				
-				
-	     	}*/
 			
 			$where_type = 'status = 1';
 	     	$data['type_records'] = $this->common_model->selectWhereorderby('tbl_type',$where_type,'type_id','ASC');
@@ -75,8 +60,8 @@ class Home extends CI_Controller {
 	     	$data['class_records'] = $this->common_model->selectWhereorderby('tbl_class',$where_class,'title','ASC');
             $where_class = 'status = 1';
 	     	$data['segment_record'] = $this->common_model->selectWhereorderby('tbl_segment',$where_class,'id','ASC');
-			
-			//print_ex($data);
+			$data['posts_blog'] = $this->blog_model->get_index_posts();
+			//print_r($data['posts_blog']);
 	
 			$this->load->view('common/header',$data);
 			$this->load->view('index',$data);

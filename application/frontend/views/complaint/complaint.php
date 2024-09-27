@@ -1185,14 +1185,13 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             console.log(class_search);
             if(brandname_search != null)
             {
-                let userCookie = getCookie('brand'); 
-             //console.log(userCookie);
+                let userCookie = getCookie('brand');
                 isClickedBrand =true;
                 filter_brand_id = userCookie[1];
                 FilterBrandText = brandname_search;
                 requestData.brand = filter_brand_id;
                 filter_class(userCookie[1],filter_segment_id);
-               //$('#brand').val(2);
+                $('#brand').val(filter_brand_id).trigger('change');
                 right_side();
                 get_all_data();
             }
@@ -1204,6 +1203,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 FilterClassText = class_search;
                requestData.class = filter_class_id;
                 filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
+                $('#filter_class_dropdown').val(filter_class_id).trigger('change');
                 get_all_data();
 
             }
@@ -1215,6 +1215,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 FilterCourseText =course_search;
                 requestData.course = filter_course_id;
                 filter_batch(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id,filter_course_id);
+                $('#filter_course_dropdown').val(filter_course_id).trigger('change');
                 get_all_data();
 
             }
