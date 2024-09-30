@@ -685,6 +685,22 @@ function getClassName($class_id)
        // echo "Word count: " . $wordCount;
     }
 
+    function wp_api_call($parameter)
+    {
+        $CI =& get_instance();
+        $endpoint_url = 'https://edcohort.com/blog/wp-json/wp/v2/';
+        $url = $endpoint_url . $parameter;
+		$ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            return [];
+        }
+        curl_close($ch);
+        return $response;
+    }
+
     /*function get_coupon_count_now($segment,$course, $user_id=null) 
     {  
         $data = '';

@@ -789,7 +789,7 @@ $sort_by = $this->input->get('sort_by');
         .blog-card {
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 15px;
+           /* padding: 15px; */
             text-align: center;
             margin: 10px;
         }
@@ -800,26 +800,58 @@ $sort_by = $this->input->get('sort_by');
         }
         .blog-card h5 {
             margin-top: 10px;
+            color:#000000;
+            padding: 15px;
+
+        }
+        .blog-card p
+        {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+            margin-top: 10px;
+            color: #585353;
+            padding: 0px 10px 10px 10px;
+        }
+        .wp-img {
+            text-decoration: none;
+        }
+        .wp-view-more
+        {
+            text-align:center;
+        }
+        .wp-view-more a 
+        {
+            text-decoration: none;
         }
     </style>
    
 <div class="container">
-
+    <div class="brand-align">
+    <h2 class=""> Blog </h2>
+    </div>
 <div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <?php
         // Divide posts into chunks of 3 (for each slide)
         $chunks = array_chunk($posts_blog, 3);
         $isFirst = true; // To mark the first slide as active
-        foreach ($chunks as $chunk): ?>
+        foreach ($chunks as $chunk):
+         ?>
             <div class="carousel-item <?php if ($isFirst) { echo 'active'; $isFirst = false; } ?>">
                 <div class="row">
-                    <?php foreach ($chunk as $posts_blog): ?>
-                    <div class="col-md-4">
-                        <div class="blog-card">
-                            <img src="<?= $posts_blog['featured_media_url'] ?? 'https://via.placeholder.com/350x150'; ?>" alt="Blog Image">
-                        </div>
-                    </div>
+                    <?php foreach ($chunk as $posts_blog):  ?>
+                        <?php 
+                        $img_url = $this->blog_model->get_media_single_image($posts_blog['_links']["wp:featuredmedia"][0]['href']) ?>
+                            <div class="col-12 col-md-4">
+                                <a class="wp-img" href="<?php echo $posts_blog['link'] ?>">
+                                <div class="blog-card">
+                                    <img src="<?= $img_url ?? 'https://via.placeholder.com/350x150'; ?>" alt="Blog Image">
+                                    <h5><?php echo $posts_blog['title']['rendered']; ?></h5>
+                                    <?php echo $posts_blog['excerpt']['rendered']; ?>
+                                </div>
+                                </a>
+                            </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -827,18 +859,21 @@ $sort_by = $this->input->get('sort_by');
     </div>
 
     <!-- Carousel Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
-    </button>
+    </button> -->
+    <div class="wp-view-more mb-4">
+        <a href="<?php echo base_url(); ?>blog" class="img-btn-explore" >View More </a>
+    </div>
 </div>
     </div>
 
-<div class="course-section-title ">
+<!-- <div class="course-section-title ">
     <h2><center>Similar Topics </center></h2>
 </div>
 
@@ -861,7 +896,7 @@ $sort_by = $this->input->get('sort_by');
         </div>
 
     </div>
-</div>
+</div> -->
 
 </div>
 <!--right end-->

@@ -1,24 +1,17 @@
 <?php
 class blog_model extends CI_Model {
-
-	protected $baseUrlBlog = 'https://edcohort.com/blog/wp-json/wp/v2/';
 	public function get_index_posts()
     {
-        $url = $this->baseUrlBlog . 'posts?categories=1&per_page=10';
-		$ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // Execute cURL
-        $response = curl_exec($ch);
-        // Check for cURL errors
-        if (curl_errno($ch)) {
-            // Handle error
-            return [];
-        }
-        // Close cURL
-        curl_close($ch);
-
-        // Decode JSON response
-        return json_decode($response, true);
+        $res_api = wp_api_call('posts?categories=1&per_page=10');
+        return json_decode($res_api, true);
     }
+    public function get_media_single_image($parameter)
+    {
+        $url_parts = explode('/', $parameter);
+        $res_api = wp_api_call('media/'.end($url_parts));
+        $json_data = json_decode($res_api, true);
+        return $json_data['guid']['rendered'];
+    }
+
+
 }
