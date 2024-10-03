@@ -9,9 +9,10 @@ class comparison extends CI_Controller {
       $this->load->library('pagination');
       $this->load->helper('form');
       $this->load->model('comparison_model'); 
-    $this->load->model('comparison_model');
-    $this->load->model('review_model');
-    $this->load->model('Common_model');
+      $this->load->model('comparison_model');
+      $this->load->model('review_model');
+      $this->load->model('Common_model');
+      $this->load->model('blog_model');
   }
   function index($id = '')
   {
@@ -61,6 +62,7 @@ class comparison extends CI_Controller {
     ////Filter////////
 
     //print_pre($_POST);
+    $data['posts_blog'] = $this->blog_model->get_complaint_posts();
     if($segment){
     if(empty($this->input->get('brandID'))){
       $compare_id = $this->input->get('brand');

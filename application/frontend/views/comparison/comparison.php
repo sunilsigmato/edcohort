@@ -710,28 +710,104 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             <!-- Review right side content Ends-->
 
             <!--end-->
+            <style>
+        /* Custom CSS for carousel blog cards */
+        .carousel-item {
+            padding: 15px;
+        }
+        .blog-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+           /* padding: 15px; */
+            text-align: center;
+            margin: 16px;
+        }
+        .blog-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .blog-card h5 {
+            margin-top: 10px;
+            color:#000000;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+        .blog-card p
+        {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            margin-top: 10px;
+            color: #585353;
+            padding: 0px 10px 10px 10px;
+        }
+        .wp-img {
+            text-decoration: none;
+        }
+        .wp-view-more
+        {
+            text-align:center;
+        }
+        .wp-view-more a 
+        {
+            text-decoration: none;
+        }
+    </style>
             <div class="helpful-box">
-                <div class="container">
-                    <h2 class="helpful-title">You might find this helpful!</h2>
-                    <div class="helpful-inner-box d-flex">
-                        <div class="helpful-left">
-                        </div>
-                        <div class="helpful-center">
-                            <h3>Article topic title related to Search “Byju’s”</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum
-                                has
-                                been
-                                the indus.....</p>
-                        </div>
-                        <div class="helpful-right">
-                            <a href="#"
-                                class="d-flex flex-wrap justify-content-center align-items-center text-center">Quick
-                                Read<br /> 1 min</a>
-                        </div>
-                    </div>
+            <div class="brand-align">
+    <h2 class=""> Blog </h2>
+    </div>
+<div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <?php
+        // Divide posts into chunks of 3 (for each slide)
+        $chunks = array_chunk($posts_blog, 4);
+        $isFirst = true; // To mark the first slide as active
+        foreach ($chunks as $chunk):
+         ?>
+            <div class="carousel-item <?php if ($isFirst) { echo 'active'; $isFirst = false; } ?>">
+                <div class="row">
+                    <?php foreach ($chunk as $posts_blog):  ?>
+                        <?php 
+                        $img_url = $this->blog_model->get_media_single_image($posts_blog['_links']["wp:featuredmedia"][0]['href']) ?>
+                            <div class="col-12 col-md-3">
+                                <a class="wp-img" href="<?php echo $posts_blog['link'] ?>">
+                                <div class="blog-card">
+                                    <img src="<?= $img_url ?? 'https://via.placeholder.com/350x150'; ?>" alt="Blog Image">
+                                    <h5><?php echo $posts_blog['title']['rendered']; ?></h5>
+                                    <?php echo $posts_blog['excerpt']['rendered']; ?>
+                                </div>
+                                </a>
+                            </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Carousel Controls -->
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button> -->
+    <div class="wp-view-more mb-4">
+        <a href="<?php echo base_url(); ?>blog" class="img-btn-explore" >View More </a>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
             <!--content end-->
             <!--wrapper end-->
             <!-- Modal -->

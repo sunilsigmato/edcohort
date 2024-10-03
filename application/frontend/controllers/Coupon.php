@@ -12,6 +12,7 @@ public function __construct()
     $this->load->model('coupon_model');
     $this->load->model('review_model');
     $this->load->model('Common_model');
+    $this->load->model('blog_model');
 }
 
 function index(){
@@ -28,6 +29,7 @@ function index(){
   $data['batch_records'] = $this->common_model->selectWhereorderby('tbl_batch', $where_board, 'batch_start', 'ASC');
   $where_class = "status = 1 ";
   $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+  $data['posts_blog'] = $this->blog_model->get_coupon_posts();
   ////Filter////////
   //print_pre($_POST);
   $where = "product_status = 'active'";

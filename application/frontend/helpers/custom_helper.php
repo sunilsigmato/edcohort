@@ -685,7 +685,7 @@ function getClassName($class_id)
        // echo "Word count: " . $wordCount;
     }
 
-    function wp_api_call($parameter)
+    function wp_api_call($parameter) //Word Press API
     {
         $CI =& get_instance();
         $endpoint_url = 'https://edcohort.com/blog/wp-json/wp/v2/';

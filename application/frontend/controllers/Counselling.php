@@ -11,6 +11,7 @@ class Counselling extends CI_Controller {
     $this->load->model('counselling_model');
     $this->load->model('review_model');
     $this->load->model('Common_model');
+    $this->load->model('blog_model');
   }
   function index($id = '')
   {
@@ -33,6 +34,7 @@ class Counselling extends CI_Controller {
 
     $where_class = "status = 1 ";
     $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
+    $data['posts_blog'] = $this->blog_model->get_counselling_posts();
 
    ////Filter////////
 

@@ -218,11 +218,15 @@ class Review_model extends CI_Model {
     $config['per_page'] = $per_page;
     $config['page_query_string'] = true;
     $config['query_string_segment'] = 'page';
-    $config['cur_tag_open'] = '<a class="active paginate_button current">';
-    $config['cur_tag_close'] = '</a>';
-    $config['next_link'] = '>';
-    $config['prev_link'] = '<';
+    //$config['cur_tag_open'] = '<a class="active paginate_button current">';
+    //$config['cur_tag_close'] = '</a>';
+    //$config['next_link'] = '>';
+    //$config['prev_link'] = '<';
+    $config['use_page_numbers'] = TRUE;
     $config['num_links'] = 2;
+    
+ 
+
     //$config['first_link'] = false;
     //$config['last_link'] = false;
     

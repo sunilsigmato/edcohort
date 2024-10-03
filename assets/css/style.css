@@ -1222,7 +1222,7 @@ ul.footer-menu-sub li {
   border-radius: 10px;
 }
 .review-top-section {
-  background-color: white;
+  background-color: #f0f8ff;
   margin-bottom: 15px;
 }
 .review-top-next {
@@ -1962,8 +1962,10 @@ background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(244,244,244,0.513
 }
 
 .helpful-box {
-  background: #e0e0e0;
-  padding: 50px 0;
+  background: #ffffff;
+  padding: 15px 0;
+  margin-top: 16px;
+  border-radius: 12px;
 }
 .helpful-title {
   font-size: 24px;
