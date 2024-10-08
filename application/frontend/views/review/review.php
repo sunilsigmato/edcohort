@@ -884,7 +884,9 @@ $breadcrumb_name2 = '';*/
     </style>
 
         <!--end-->
-     
+     <?php if($posts_blog)
+        { ?>
+
         <div class="helpful-box">
         <div class="brand-align">
     <h2 class=""> Blog </h2>
@@ -893,6 +895,7 @@ $breadcrumb_name2 = '';*/
     <div class="carousel-inner">
         <?php
         // Divide posts into chunks of 3 (for each slide)
+        
         $chunks = array_chunk($posts_blog, 4);
         $isFirst = true; // To mark the first slide as active
         foreach ($chunks as $chunk):
@@ -914,7 +917,7 @@ $breadcrumb_name2 = '';*/
                     <?php endforeach; ?>
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach;  ?>
     </div>
 
     <!-- Carousel Controls -->
@@ -930,8 +933,9 @@ $breadcrumb_name2 = '';*/
         <a href="<?php echo base_url(); ?>blog" class="img-btn-explore" >View More </a>
     </div>
 </div>
+
         </div>
-        
+        <?php } ?>
     </div>
         </div>
 <?php

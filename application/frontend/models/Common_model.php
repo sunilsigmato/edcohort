@@ -419,7 +419,23 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-        $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and b.class_id = c.class_id";
+		if(!empty($segment))
+		{
+			$where .="c.segment_id = $segment";
+		}
+		if(!empty($brand_id) && ($brand_id != 'all'))
+		{
+			$where .= " and c.brand_id = $brand_id";
+		}
+		if($where)
+		{
+			$where .= " and c.class_id = b.class_id";
+		}
+		else
+		{
+			$where .= "  c.class_id = b.class_id";
+		}
+       // $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and b.class_id = c.class_id";
         $this->db->select('b.title,b.class_id,c.product_id');
         $this->db->from('tbl_product c, tbl_class b');
          $this->db->where($where);
@@ -462,12 +478,33 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-        $where.=" c.segment_id = ".$segment." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
+		/*if(!empty($segment))
+		{
+			$where .="c.segment_id = $segment";
+		}
+		if(!empty($board_id) && ($board_id != 'all'))
+      	{
+          $where .= " and c.board_id = $board_id";
+      	}
+		if(!empty($class_id) && ($class_id != 'all'))
+		{
+			$where .= " and c.class_id = $class_id";
+		}
+		if($where)
+		{
+			$where .= " and c.course_id = b.id";
+		}
+		else
+		{
+			$where .= "  c.course_id = b.id";
+		}*/
+       $where.=" c.segment_id = ".$segment." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
         $this->db->select('b.course_name,b.id,c.product_id');
         $this->db->from('tbl_product c, tbl_course b');
          $this->db->where($where);
         $this->db->group_by('c.course_id');
-        //$sql = $this->db->get_compiled_select();
+        $sql = $this->db->get_compiled_select();
+		print_R($sql);
         $query=$this->db->get();
         if($query)
         {
@@ -483,7 +520,31 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-        $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
+		if(!empty($segment))
+		{
+			$where .="c.segment_id = $segment";
+		}
+		if(!empty($board_id) && ($board_id != 'all'))
+      	{
+          $where .= " and c.board_id = $board_id";
+      	}
+		if(!empty($brand_id) && ($brand_id != 'all'))
+		{
+			$where .= " and c.brand_id = $brand_id";
+		}
+		if(!empty($class_id) && ($class_id != 'all'))
+		{
+			$where .= " and c.class_id = $class_id";
+		}
+		if($where)
+		{
+			$where .= " and c.course_id = b.id";
+		}
+		else
+		{
+			$where .= "  c.course_id = b.id";
+		}
+      //  $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
         $this->db->select('b.course_name,b.id,c.product_id');
         $this->db->from('tbl_product c, tbl_course b');
          $this->db->where($where);
@@ -506,7 +567,35 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-        $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = b.batch_id ";
+		if(!empty($segment))
+		{
+			$where .="c.segment_id = $segment";
+		}
+		if(!empty($board_id) && ($board_id != 'all'))
+      	{
+          $where .= " and c.board_id = $board_id";
+      	}
+		if(!empty($brand_id) && ($brand_id != 'all'))
+		{
+			$where .= " and c.brand_id = $brand_id";
+		}
+		if(!empty($class_id) && ($class_id != 'all'))
+		{
+			$where .= " and c.class_id = $class_id";
+		}
+		if(!empty($course_id) && ($course_id != 'all'))
+		{
+			$where .= " and c.course_id = $course_id";
+		}
+		if($where)
+		{
+			$where .= " and c.batch_id = b.batch_id";
+		}
+		else
+		{
+			$where .= "  c.batch_id = b.batch_id";
+		}
+       // $where.=" c.segment_id = ".$segment." and c.brand_id = ".$brand_id." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = ".$course_id." and c.batch_id = b.batch_id ";
         $this->db->select('b.batch_id ,b.batch_name,c.product_id');
         $this->db->from('tbl_product c, tbl_batch b');
          $this->db->where($where);

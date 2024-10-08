@@ -825,7 +825,7 @@ $sort_by = $this->input->get('sort_by');
             text-decoration: none;
         }
     </style>
-   
+   <?php if($posts_blog) { ?>
 <div class="container">
     <div class="brand-align">
     <h2 class=""> Blog </h2>
@@ -848,7 +848,7 @@ $sort_by = $this->input->get('sort_by');
                                 <div class="blog-card">
                                     <img src="<?= $img_url ?? 'https://via.placeholder.com/350x150'; ?>" alt="Blog Image">
                                     <h5><?php echo $posts_blog['title']['rendered']; ?></h5>
-                                    <?php echo $posts_blog['excerpt']['rendered']; ?>
+                                    <?php //echo $posts_blog['excerpt']['rendered']; ?>
                                 </div>
                                 </a>
                             </div>
@@ -872,6 +872,7 @@ $sort_by = $this->input->get('sort_by');
     </div>
 </div>
     </div>
+    <?php } ?>
 
 <!-- <div class="course-section-title ">
     <h2><center>Similar Topics </center></h2>

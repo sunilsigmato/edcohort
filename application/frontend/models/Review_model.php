@@ -198,43 +198,28 @@ class Review_model extends CI_Model {
       $res_seg =  $this->get_segment_name($segment);
       $seg_temp = $res_seg;
 
-
-    //$page = $this->input->get('page');
-    $this->load->library('pagination');
-    $per_page = 10;
+    $per_page = 20;
     if(!$page)
     {
-      $page = 0;
+      $page = 1;
     }
+
     $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
     $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
-
     $records_count = $this->review_model->getProductReviewCount($where);
     $datas['records_count'] = @$records_count['0']->review_count;
-    //print_ex($data['records_count']);  
-    $per_page = ($per_page) ? $per_page : 10;
-    $config['base_url'] = $request_uri_without_query_string.'?segment='.$seg_temp;
-    $config['total_rows'] = $datas['records_count'];
-    $config['per_page'] = $per_page;
-    $config['page_query_string'] = true;
-    $config['query_string_segment'] = 'page';
-    //$config['cur_tag_open'] = '<a class="active paginate_button current">';
-    //$config['cur_tag_close'] = '</a>';
-    //$config['next_link'] = '>';
-    //$config['prev_link'] = '<';
-    $config['use_page_numbers'] = TRUE;
-    $config['num_links'] = 2;
-    
- 
 
-    //$config['first_link'] = false;
-    //$config['last_link'] = false;
-    
-    $resss =$this->pagination->initialize($config);
-    $datas['page_link'] = $this->pagination->create_links();
-    $get_product_list = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $page,$sortby);
+    $per_page = ($per_page) ? $per_page : 10;
+  
+
+    $offset = $page * $per_page - $per_page;
+    $total_pages = ceil($datas['records_count'] / $per_page);
+    $this->load->model('pagination_model');
+    $res_pagination = $this->pagination_model->get_pagination($page,$total_pages,$seg_temp,$request_uri_without_query_string); // create pagination
+ 
+    $get_product_list = $this->review_model->getProductReviewLimit($where,$orderby, $per_page, $offset,$sortby); // Retrive data based on query
     $data = new stdClass;
-    $data->page_link = $datas['page_link'];
+    $data->page_link = $res_pagination;
     $items='';
     $data->items = array();
    if(count($get_product_list)!=0)

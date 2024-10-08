@@ -82,34 +82,25 @@ class Counselling_model extends CI_Model {
 
     $res_seg =  $this->get_segment_name($segment);
     $seg_temp = $res_seg;
-    $per_page = 7;
+    $per_page = 20;
     if(!$page)
     {
-      $page = 0;
+      $page = 1;
     }
     $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
     $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
     $records_count = $this->getProductcounsellingCountNew($where);
     $datas['records_count'] = @$records_count['0']->counselling_count;
-    $config['base_url'] = $request_uri_without_query_string.'?segment='.$seg_temp;
-    $config['total_rows'] = $records_count['0']->counselling_count;
-    //$config['uri_segment'] = '';
-    $config['per_page'] = $per_page;
-    $config['page_query_string'] = true;
-    $config['query_string_segment'] = 'page';
-    $config['cur_tag_open'] = '<a class="active paginate_button current">';
-   // $config['cur_tag_close'] = '</a>';
-    $config['next_link'] = '>';
-    $config['prev_link'] = '<';
-    $config['num_links'] = 3;
-   // $config['first_link'] = false;
-    //$config['last_link'] = false;
-    $resss =$this->pagination->initialize($config);
-    $datas['link'] = $this->pagination->create_links();
+    $per_page = ($per_page) ? $per_page : 10;
+    $offset = $page * $per_page - $per_page;
+    $total_pages = ceil($datas['records_count'] / $per_page);
+    $this->load->model('pagination_model');
+    $res_pagination = $this->pagination_model->get_pagination($page,$total_pages,$seg_temp,$request_uri_without_query_string); // create pagination
+
     $orderby = '';
     $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page);
     $data = new stdClass;
-    $data->page_link= $datas['link'];
+    $data->page_link= $res_pagination;
     $items='';
     $data->items = array();
 

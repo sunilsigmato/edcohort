@@ -1088,6 +1088,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             text-decoration: none;
         }
     </style>
+    <?php if($posts_blog) {?>
             <div class="helpful-box">
             <div class="brand-align">
     <h2 class=""> Blog </h2>
@@ -1134,9 +1135,11 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     </div>
 </div>
             </div>
+            <?php } ?>
+        </div>
         </div>
 
-        <input type="hidden" value = "<?php echo $segment?>" class = "segment">
+    <input type="hidden" value = "<?php echo $segment?>" class = "segment">
     <input type="hidden" value = "<?php //echo $course ?>" class = "course">
     <input type="hidden" value = "<?php //echo $get_single_course_detail->class_id ?>" class = "filter_class">
     <input type="hidden" value = "<?php //echo $get_single_course_detail->course_id ?>" class = "filter_course">
@@ -1180,8 +1183,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
 
 
-            
-               /**End   Apply Select 2 */
+         /**End   Apply Select 2 */
         var filter_toggle_online = $("#online").val();
         var filter_toggle_offline = $("#offline").val();
         var filter_segment_id = $('.segment').val();
@@ -1248,7 +1250,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             var class_search = urlParams_search.get('class');
             var course_search = urlParams_search.get('course');
             //let userCookie = getCookie(class_search); 
-            console.log(class_search);
+           // console.log(class_search);
             if(brandname_search != null)
             {
                 let userCookie = getCookie('brand');
