@@ -31,7 +31,7 @@
                                                         <th>S.no</th>
                                                         <th>Name</th>  
                                                         <th>Description</th>                                                       
-                                                        <th>Status</th>
+                                                       <!-- <th>Status</th> -->
                                                         <th>Date</th>                                                        
                                                         <th>Action</th>
                                                     </tr>
@@ -43,12 +43,12 @@
                                                         <td><?php echo $cnt; ?></td>
                                                         <td><?php echo ucfirst($rec->course_name); ?></td>
                                                         <td><?php echo ucfirst($rec->course_description); ?></td>
-                                                        <td><?php if($rec->status == 1){ ?>
+                                                       <!-- <td><?php if($rec->status == 1){ ?>
                                                                 <a href="javascript:void(0)" class="btn btn-success btn-sm">Active</a>
                                                             <?php }else{ ?>
                                                                 <a href="javascript:void(0)" class="btn btn-warning btn-sm">Inactive</a>
                                                             <?php } ?>
-                                                        </td>
+                                                        </td> -->
                                                         <td><?php echo date('d-m-Y',strtotime($rec->created_on)); ?></td>
                                                         <td>
                                                             <a href="<?php echo base_url(); ?>admin_course/edit_course/<?php echo $rec->id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>

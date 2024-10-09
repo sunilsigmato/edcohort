@@ -31,7 +31,7 @@
                                                         <label class="form-label" id="examplenameInputname2">Class Name <span style="color:red">*</span></label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <input type="text" class="form-control" id="segment_name" name="segment_name" value="<?php echo $segment->segment_name; ?>" placeholder="Enter Name" required onkeyup="category_slug_name(this.value)" required>
+                                                        <input type="text" class="form-control" id="segment_name" maxlength="20" name="segment_name" value="<?php echo $segment->segment_name; ?>" placeholder="Enter Name" required onkeyup="category_slug_name(this.value)" required>
                                                          <input type="hidden" class="form-control" id="segment_slug" name="segment_slug" placeholder="Enter Segement Name" value="<?php echo $segment->slug_name; ?>">
                                                     </div>
                                                 </div>
@@ -43,7 +43,7 @@
                                                         <label class="form-label" id="examplenameInputname2">Segment Description <span style="color:red">*</span></label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                          <textarea id="editor1" class="form-control no-resize" name="segment_description" rows="3" cols="80" ><?php echo $segment->segment_desc; ?></textarea>
+                                                          <textarea id="editor1" class="form-control no-resize" maxlength="50" name="segment_description" rows="3" cols="80" ><?php echo $segment->segment_desc; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>

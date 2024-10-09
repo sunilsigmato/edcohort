@@ -44,15 +44,15 @@
                                                     <div class="col-md-9">
                                                         <select class="form-control" name="parent_id" id="parent_id" >
                                                           <option value="0" >Select</option>
-                                                          <?php/* foreach($parent_list as $parent){ ?> 
+                                                          <?php /* foreach($parent_list as $parent){ ?> 
                                                           <option value="<?php echo $parent->class_id; ?>" <?php if($parent->class_id == $class->class_id){ echo "selected"; } ?> ><?php echo $parent->title; ?></option>
-                                                          <?php } */?>
+                                                          <?php } */ ?>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div> -->
 
-                                            <div class="form-group ">
+                                           <!-- <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label">Status</label>
@@ -64,7 +64,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                            
                                             <div class="form-group mb-0 row justify-content-end">
                                                 <div class="col-md-9 float-end">

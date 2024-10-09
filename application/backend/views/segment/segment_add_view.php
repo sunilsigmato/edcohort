@@ -28,7 +28,7 @@
                                                         <label class="form-label" id="examplenameInputname2">Segment Name <span style="color:red">*</span></label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <input type="text" class="form-control" id="segment_name" name="segment_name" placeholder="Enter Segement Name" required onkeyup="category_slug_name(this.value)" required>
+                                                        <input type="text" class="form-control" id="segment_name" maxlength="20" name="segment_name" placeholder="Enter Segement Name" required onkeyup="category_slug_name(this.value)" required>
                                                          <input type="hidden" class="form-control" id="segment_slug" name="segment_slug" placeholder="Enter Segement Name">
                                                     </div>
                                                 </div>

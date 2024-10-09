@@ -20,6 +20,7 @@ $sort_by = $this->input->get('sort_by');
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
+    
 /* Your existing styles */
 .pt-5 {
     padding-top: 5px;
