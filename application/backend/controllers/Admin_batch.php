@@ -38,8 +38,8 @@ class admin_batch extends CI_Controller
     {
        
         $batch_name=$this->input->post('batch_name');       
-        $batch_start_date=$this->input->post('batch_start_date');       
-        $batch_end_date=$this->input->post('batch_end_date');       
+       // $batch_start_date=$this->input->post('batch_start_date');       
+       // $batch_end_date=$this->input->post('batch_end_date');       
         $status=$this->input->post('status');
           
 
@@ -54,8 +54,8 @@ class admin_batch extends CI_Controller
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++
         $data=array(          
           'batch_name'=>$batch_name,
-          'batch_start'=>$batch_start_date,
-          'batch_end'=>$batch_end_date,        
+         // 'batch_start'=>$batch_start_date,
+         // 'batch_end'=>$batch_end_date,        
           'status'=>$status, 
           'added_by'=>$this->session->userdata('jw_admin_id'),          
           'date_added'=>date('Y-m-d H:i:s'),
@@ -90,8 +90,8 @@ class admin_batch extends CI_Controller
     {
         $batch_id=$this->input->post('batch_id');
         $batch=$this->input->post('batch_name');
-        $batch_start_date=$this->input->post('batch_start_date');       
-        $batch_end_date=$this->input->post('batch_end_date'); 
+        //$batch_start_date=$this->input->post('batch_start_date');       
+        //$batch_end_date=$this->input->post('batch_end_date'); 
         $status=$this->input->post('status');
 
         $where=array(
@@ -107,8 +107,8 @@ class admin_batch extends CI_Controller
         $data=array(
           
           'batch_name'=>$batch,
-          'batch_start'=>$batch_start_date,
-          'batch_end'=>$batch_end_date,          
+         // 'batch_start'=>$batch_start_date,
+         // 'batch_end'=>$batch_end_date,          
           'status'=>$status,
           'edited_by'=>$this->session->userdata('jw_admin_id'),         
           'date_edited'=>date('Y-m-d H:i:s'),

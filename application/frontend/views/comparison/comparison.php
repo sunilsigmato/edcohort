@@ -33,6 +33,40 @@ else
 }
 
 ?>
+<style>
+
+/* Override the selection box styling */
+
+.select2-dropdown {
+    border: 1px solid #bfbfbf;
+  
+}
+
+
+.select2-results__option--highlighted {
+    /*background-color: #4CAF50; /* Custom background color for highlighted items */
+    /*color: #fff; /* Custom text color for highlighted items */
+    color: #000000;
+    border-left: 4px solid #82bbdc;
+    background: linear-gradient(to right, #f7f7f7, #7cb8db);
+}
+
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #a5a5a5;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ededf5;
+    border-radius: 7px;
+    padding: 4px;
+    /* margin-top: 0px; */
+    height: 48px;
+    padding: 10px;
+}
+
+    </style>
 <?php 
 /*$get_breadcrumb = get_breadcrumb_value();
 $breadcrumb_name1 = '';
@@ -89,108 +123,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
    /* print_R(get_breadcrumb_value());
     exit;*/
 ?>
-<div class="content">
 
-    <div class="container-fluid review-top-section">
-
-        <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard">
-
-            <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
-            </div>
-            <div class="col-md-6 pt-3 course-name-display">
-                <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
-                <div>
-                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> / 5</span>
-                <!--<?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?> / 10</span>
-                    <?php } ?>  -->
-                    <?php ?>
-                     
-                            <!--VEENA-->
-                            <div class="dropdown">
-  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  -->
-  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt=""> --></label>
- <!-- </button>  -->
-
-
-  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">
-                       
-            <!------> 
-    
-            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 18rem;  border: 0px solid ">
-          
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item d-flex">
-    <div class="single-line" style="white-space: nowrap;">
-        <img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="" style="display: inline-block; margin-right: 10px;">
-        <div style="display: inline-block;">
-            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
-        </div>
-    </div>
-</li>
-
-            
-    <li class="list-group-item" style="font-weight:normal;">129 ratings</li>
-    <li class="list-group-item">
-
-  
-        <div class="progress my-2">
-       <div class="d-flex ">
-       <p>1</p>
-        <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-        <p>25%</p>
-       </div>
-
-</div>
-<div class="progress my-2">
-       <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-     
-     </div>
-     <div class="progress my-2">
-       
-       <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-     
-     </div>
-     <div class="progress my-2">
-       
-       <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-     
-     </div>
-    </li>
-  </ul>
-  <div class="card-footer">
-  <a href="#" class="stretched-link" style="padding:=100px">Go somewhere</a>
-  </div>
-</div></a></li>            
-  </ul>
-</div>
-                </div>
-                <div class="pt-3 total-review-display">
-                    <h4> Excellent Review </h4>
-                </div>
-            </div>
-           
-            <div class="col-md-4 pt-3 write-review-icon">
-            <?php if ($this->session->userdata('user_id')) { ?>
-            
-                <a href="<?php echo base_url();?>write-a-review?course=<?php echo @$course; ?>&segment=<?php echo $segment;?>&brand=<?php echo $brandID;?>&product_type=<?php echo  $product_type; ?>&board=<?php echo $board;?>&class=<?php echo $class;?>&batch=<?php echo $batch; ?>&customer_rating=<?php echo  $customer_rating; ?>&date=<?php echo $date_posted; ?>&sort_by=<?php echo $sort_by; ?>"
-                    class="review-btns text-decoration-none">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label>
-                </a>
-
-                
-                <?php } else { ?>
-                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label></a>
-                        <?php } ?>
-            </div>
-
-        </div>
-    </div>
     <!--start-->
     <div class="container-fluid review-top-section">
         <div class="row review-top-next">
@@ -198,9 +131,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         <div class="container-fluid review-top-section">
             <div class="row review-top-next">
                 <!--- Filtr Starts  --->
-                <div class="col-md-2 review-left">
+                <div class="col-md-2 review-left mt-4">
 
-                    <h3 class="filter-title">Filter</h3>
+                    
                     <form action="<?php echo base_url(); ?>coupon-search" method="post" name="form" id="form">
                         <?php echo csrf_field(); 
                         $res_filter_brand = getseg_brand_list($segment);
@@ -401,9 +334,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
 
             <!--center start-->
             <div class="col-md-8">
-            <div id="selectedValues" style="display:none"></div>  <!-- for filter values display -->
-            <div id="test_id"></div>
-                <div class="review-center">
+            <div id="selectedValuess" style="display:none"></div>  <!-- for filter values display -->
+                <div class="review-center mt-4">
+                <div id="test_id"></div>
                     <!-- <div class="review-btn-box">
 
                     </div> -->
@@ -828,8 +761,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                             value="<?php echo $board; ?>">
                         <input type="hidden" class="form-control" name="class" id="class" placeholder="Your Name"
                             value="<?php echo $class; ?>">
-                        <input type="hidden" class="form-control" name="batch" id="batch" placeholder="Your Name"
-                            value="<?php echo $batch; ?>">
+                       <!-- <input type="hidden" class="form-control" name="batch" id="batch" placeholder="Your Name"
+                            value="<?php //echo $batch; ?>"> -->
                             
                         <input type="hidden" class="form-control" name="customer_rating" id="customer_rating"
                             placeholder="Your Name" value="<?php echo $customer_rating; ?>">
@@ -860,16 +793,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 <input class="brand-search-input" type="text" placeholder="Ex.Vedantu, unacademy ">
             </div> -->
             <script id="review-template" type="text/x-handlebars-template">
+            <input type="text" id="brandSearchInput" class="form-control" style="" placeholder="Search brand..." onkeyup="filterBrands()">
                         <div class="popular-row">
                             <!--col-->
-                            <input type="text" id="brandSearchInput"style="border:1px solid" placeholder="Search brand..." onkeyup="filterBrands()">
                             
                             {{#if items}}
-                                {{#each items}}
-
-                                
-                             
-                                    
+                                {{#each items}}                    
                                 <div class="popular-col brand-item">
                                     <a href="javascript:void(0)"
                                         onclick="compare_brand({{brand_name}},{{brand_id}})">
@@ -964,7 +893,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         {
             filter_board_id = 1;
         }
-        console.log(filter_course_id);
+      //  console.log(filter_course_id);
         var isClickedSegment = true;
         var drop_down_text =$('#filter_segment :selected').text().trim(); // for segment text
         var SegmentParamKey ='segment';
@@ -1179,7 +1108,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 }, 
                 dataType: "json",   
                 success: function (response) {
-                    // console.log(response.data);
+                     console.log(response.data);
                     var options = '';
                     var filter_class_id_temp = '';
                     for (var i = 0; i < response.data.length; i++) {
@@ -1195,12 +1124,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         $('#filter_class_dropdown').empty().append(options); 
                     if(filter_class_id_temp)
                     {
-                        filter_course(brand_id,segment_id,filter_board_id,filter_class_id_temp)
+                        filter_course(segment_id,filter_board_id,filter_class_id_temp)
                     }
                 }
             });
         }
-        function filter_course(brand_id,segment_id,board_id,class_id)
+        function filter_course(segment_id,board_id,class_id)
         {
             
         $.ajax({
@@ -1473,7 +1402,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 
            
         
-               console.log(get_course_id); 
+               //console.log(get_course_id); 
                 //  let valuesArray = brandID_header.split(',');
                if (brandID_header.includes(btn_value)) {
                 // Remove value from string

@@ -33,7 +33,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group ">
+                                           <!-- <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Batch Start Date <span style="color:red">*</span></label>
@@ -52,7 +52,7 @@
                                                         <input type="date" class="form-control" id="batch_end_date" name="batch_end_date" placeholder="Enter End Date" required>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="form-group ">
                                                 <div class="row">

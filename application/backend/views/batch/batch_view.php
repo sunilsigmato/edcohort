@@ -31,7 +31,7 @@
                                                         <th>S.no</th>
                                                         <th>Name</th>                                                        
                                                         <th>Status</th>
-                                                        <th>Date</th>                                                        
+                                                        <!--<th>Date</th>  -->
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -47,7 +47,7 @@
                                                                 <a href="javascript:void(0)" class="btn btn-warning btn-sm">Inactive</a>
                                                             <?php } ?>
                                                         </td>
-                                                        <td><?php echo date('d-m-Y',strtotime($rec->date_added)); ?></td>
+                                                        <!--<td><?php //echo date('d-m-Y',strtotime($rec->date_added)); ?></td> -->
                                                         <td>
                                                             <a href="<?php echo base_url(); ?>admin_batch/edit_batch/<?php echo $rec->batch_id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
                                                            <!-- <a href="<?php echo base_url(); ?>admin_batch/delete_batch/<?php echo $rec->batch_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>-->

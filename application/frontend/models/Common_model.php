@@ -478,33 +478,13 @@ class Common_model extends CI_Model {
     {
         $where= '';
         $query = '';
-		/*if(!empty($segment))
-		{
-			$where .="c.segment_id = $segment";
-		}
-		if(!empty($board_id) && ($board_id != 'all'))
-      	{
-          $where .= " and c.board_id = $board_id";
-      	}
-		if(!empty($class_id) && ($class_id != 'all'))
-		{
-			$where .= " and c.class_id = $class_id";
-		}
-		if($where)
-		{
-			$where .= " and c.course_id = b.id";
-		}
-		else
-		{
-			$where .= "  c.course_id = b.id";
-		}*/
-       $where.=" c.segment_id = ".$segment." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
+       	$where.=" c.segment_id = ".$segment." and c.board_id = ".$board_id." and c.class_id = ".$class_id." and c.course_id = b.id";
         $this->db->select('b.course_name,b.id,c.product_id');
         $this->db->from('tbl_product c, tbl_course b');
          $this->db->where($where);
         $this->db->group_by('c.course_id');
-        $sql = $this->db->get_compiled_select();
-		print_R($sql);
+       // $sql = $this->db->get_compiled_select();
+		//print_R($sql);
         $query=$this->db->get();
         if($query)
         {
