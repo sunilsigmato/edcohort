@@ -764,9 +764,12 @@ class Common_model extends CI_Model {
 
 	function get_banner_images()
 	{
+		$where= '';
 		$query = '';
+		$where.= "status = 'active'";
 		$this->db->select('*');
 		$this->db->from('tbl_home_slider');
+		$this->db->where($where);
 		$query = $this->db->get();
 		if($query)
 		{

@@ -668,6 +668,7 @@ $sort_by = $this->input->get('sort_by');
 <!-- **** Choose Course Section  **** --->
 
 
+
 <div class="container">
     <style>
          @media (max-width: 550px) {
@@ -910,8 +911,41 @@ $sort_by = $this->input->get('sort_by');
 
 </div>
 
+<style>
+    #cookieConsent {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#cookieConsent p {
+    display: inline-block;
+    margin: 0;
+    padding-right: 10px;
+}
+
+#cookieConsent button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+</style>
 
 
+<div id="cookieConsent">
+        <p>This website uses cookies to ensure you get the best experience. <a href="/privacy-policy">Learn more</a>.</p>
+        <button id="acceptCookies">Accept Cookies</button>
+    </div>
 
 
 

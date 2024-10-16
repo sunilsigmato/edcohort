@@ -71,7 +71,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="<?php echo base_url(); ?>admin_complaint/edit_product_complaint/<?php echo $rec->product_complaint_id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
-                                                            <a href="<?php echo base_url(); ?>admin_complaint/delete_product_complaint/<?php echo $rec->product_complaint_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+                                                           <!-- <a href="<?php echo base_url(); ?>admin_complaint/delete_product_complaint/<?php echo $rec->product_complaint_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>-->
                                                              <a href="<?php echo base_url(); ?>admin_complaint/product_complaint_reply/<?php echo $rec->product_complaint_id; ?>"  class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Reply List"><i class="fe fe-list fs-16"></i></a>
                                                         </td>
                                                     </tr>

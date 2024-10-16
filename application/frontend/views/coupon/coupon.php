@@ -88,8 +88,8 @@ if($get_breadcrumb)
 
         <div class="breadcrumb">
             <ul>
-                <li>Home</li>
-                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li ><a href="<?php echo base_url(); ?>">Home </a></li>
+                <li><a href="<?php echo base_url(); ?>coupon?segment=<?php echo $segment_temp; ?>">Coupon</li>
                 <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>

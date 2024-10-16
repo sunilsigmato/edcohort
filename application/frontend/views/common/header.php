@@ -253,7 +253,7 @@ if(empty($meta_description)){
                         <i class="fas fa-search search-icon-color"></i>
                     </button>
                 </div>
-                <span class="dropdown-search-input" aria-labelledby="dropdownMenuButton" style="width: 100%;">         
+                <span class="dropdown-search-input" aria-labelledby="dropdownMenuButton" style="width: 100%;display:none;" >         
   </span>
             </div>
 

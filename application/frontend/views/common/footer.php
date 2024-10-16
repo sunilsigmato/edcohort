@@ -550,6 +550,17 @@ $authUrl1 = $gClient->createAuthUrl();
 <script type="text/javascript">
 
  $(document).ready(function() {
+
+    if (!localStorage.getItem('cookiesAccepted')) {
+        $('#cookieConsent').fadeIn();
+    }
+
+    // When the user clicks 'Accept Cookies'
+    $('#acceptCookies').click(function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        $('#cookieConsent').fadeOut();
+    });
+    
     /** Search Code Ends */
     var search_input ='';
     var search_dropdown = '';
@@ -577,7 +588,14 @@ $authUrl1 = $gClient->createAuthUrl();
                      
                     console.log(response);
                     //var mob_no = ' - ( '+result.mobile_no+' )';
-                   
+                   if(response)
+                   {
+                    $('.dropdown-search-input').css('display', '');
+                   }
+                   else
+                   {
+                        $('.dropdown-search-input').css('display', 'none');
+                   }
                     if(response.brand_id!= null)
                     {
                        // $('.dropdown-search-input').css('display', '');
@@ -619,6 +637,7 @@ $authUrl1 = $gClient->createAuthUrl();
         else
         {
             var dropdownMenu = $('.dropdown-search-input').empty();
+            $('.dropdown-search-input').css('display', 'none');
         }
 
     });

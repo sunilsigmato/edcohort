@@ -82,8 +82,8 @@ if($get_breadcrumb)
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
             <ul>
-                <li>Home</li>
-                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li ><a href="<?php echo base_url(); ?>">Home </a></li>
+                <li><a href="<?php echo base_url(); ?>counselling?segment=<?php echo $segment_temp; ?>">Counselling</li>
                 <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>
@@ -311,7 +311,7 @@ if($get_breadcrumb)
                                 </div>
                                 
                                 <style>
-                            img {
+                           .card-image-con img {
                                     max-width: 100%;
                                     display: block;
                                     border-radius: 12px;

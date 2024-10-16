@@ -368,6 +368,11 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .dropdown-search-input{
+    position:unset !important;
+    padding: unset !important;
+    border : unset !important;
+  }
   .logo img {
     width: 150px;
   }

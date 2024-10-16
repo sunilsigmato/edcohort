@@ -74,7 +74,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="<?php echo base_url(); ?>admin_review/edit_product_review/<?php echo $rec->product_review_id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
-                                                            <a href="<?php echo base_url(); ?>admin_review/delete_product_review/<?php echo $rec->product_review_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+                                                            <!--<a href="<?php echo base_url(); ?>admin_review/delete_product_review/<?php echo $rec->product_review_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>-->
                                                              <a href="<?php echo base_url(); ?>admin_review/product_review_reply/<?php echo $rec->product_review_id; ?>"  class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Reply List"><i class="fe fe-list fs-16"></i></a>
                                                         </td>
                                                     </tr>

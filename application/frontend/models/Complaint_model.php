@@ -101,9 +101,10 @@ class Complaint_model extends CI_Model {
     // if its all display all id ids 
       $where = "";
     //  $limit = 20;
+      $where.= "pr.status = 'active' ";
       if(!empty($segment))
       {
-          $where .="pr.segment_id = $segment";
+          $where .="and pr.segment_id = $segment";
       }
       if(!empty($board) && ($board != 'all'))
       {

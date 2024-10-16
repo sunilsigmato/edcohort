@@ -44,6 +44,8 @@ class admin_brand extends CI_Controller
         $meta_description=$this->input->post('meta_description');
         $meta_keyword=$this->input->post('meta_keyword');
         $sort_order=$this->input->post('sort_order');
+        $display_frontend=$this->input->post('display_frontend');
+        
 
         if($sort_order=="")
         {
@@ -82,6 +84,7 @@ class admin_brand extends CI_Controller
           'brand_sort_order'=>$sort_order,
           'brand_status'=>$status,
           'brand_image'=>$brand_image,
+          'display_frontend'=>$display_frontend,
           'date_added'=>date('Y-m-d H:i:s'),
         );
         $brand_id=$this->admin_model->insertData('tbl_brand',$data);
@@ -124,6 +127,7 @@ class admin_brand extends CI_Controller
         $meta_keyword=$this->input->post('meta_keyword');       
         $sort_order=$this->input->post('sort_order');
         $brand_image=$this->input->post('hid_image');
+        $display_frontend=$this->input->post('display_frontend');
 
         if($sort_order=="")
         {
@@ -165,6 +169,7 @@ class admin_brand extends CI_Controller
           'brand_sort_order'=>$sort_order,
           'brand_status'=>$status,
           'brand_image'=>$brand_image,
+          'display_frontend'=>$display_frontend,
           'date_edited'=>date('Y-m-d H:i:s'),
         );
         //echo "<pre>";print_r($data);exit;

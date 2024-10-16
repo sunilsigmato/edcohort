@@ -144,6 +144,19 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Display Frontend</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control" name="display_frontend" id="display_frontend" required>
+                                                          <option value="1" <?php if($brand->display_frontend=="1"){ echo "selected"; } ?>>Active</option>
+                                                          <option value="0" <?php if($brand->display_frontend=="0"){ echo "selected"; } ?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                            
                                             <div class="form-group mb-0 row justify-content-end">
                                                 <div class="col-md-9 float-end">

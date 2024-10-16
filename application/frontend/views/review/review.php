@@ -89,8 +89,8 @@ $breadcrumb_name2 = '';*/
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
             <ul>
-                <li>Home </li>
-                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li ><a href="<?php echo base_url(); ?>">Home </a></li>
+                <li><a href="<?php echo base_url(); ?>review?segment=<?php echo $segment_temp; ?>"> Review</li>
                 <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>

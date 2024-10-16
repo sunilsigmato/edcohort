@@ -87,8 +87,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
     <div class="col-md-3 breadcrumb-design">
         <div class="breadcrumb">
             <ul>
-                <li>Home </li>
-                <li><?php //echo @$breadcrumb_name1; ?> </li>
+                <li ><a href="<?php echo base_url(); ?>">Home </a></li>
+                <li><a href="<?php echo base_url(); ?>comparison?segment=<?php echo $segment_temp; ?>">Compare</li>
                 <li><a href="#"><?php //echo @$breadcrumb_name2; ?></a></li>
             </ul>
         </div>

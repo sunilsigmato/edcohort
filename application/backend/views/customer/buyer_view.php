@@ -58,7 +58,7 @@
 														</td>
 														<td>
 															<a href="<?php echo base_url(); ?>admin_customer/edit_customer/<?php echo $rec->customer_id; ?>" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fe fe-edit-2 fs-16"></i></a>
-															<a href="<?php echo base_url(); ?>admin_customer/delete/<?php echo $rec->customer_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>
+															<!---<a href="<?php echo base_url(); ?>admin_customer/delete/<?php echo $rec->customer_id; ?>" onclick="return confirm('Are you sure?')" class="btn btn-outline-light btn-sm waves-effect waves-light" data-bs-toggle="tooltip" data-bs-original-title="Delete"><i class="fe fe-trash fs-16"></i></a>-->
 														</td>
 													</tr>
 													<?php $cnt++; } ?>
