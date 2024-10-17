@@ -391,7 +391,7 @@ class Review extends CI_Controller
 
     $where_class = "status = 1 ";
     $data['class_records'] = $this->common_model->selectWhereorderby('tbl_class', $where_class, 'title', 'ASC');
-
+    $data['posts_blog'] = $this->blog_model->get_review_posts();
 
     ////Filter////////
 

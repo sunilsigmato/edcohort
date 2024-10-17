@@ -297,7 +297,7 @@ if(empty($meta_description)){
                 <div class="user-info-box">
                     <h3><?php echo $user_fullname; ?></h3>
                     <a href="<?php echo base_url(); ?>logout">Logout</a>
-                    <div class="user-photo"></div>
+                    <div class="user-photo" style="background-image: url('<?php echo base_url(); ?>assets/images/user-logo-1.png'); background-size: cover;"></div>
                 </div>
                 <?php } ?>
 

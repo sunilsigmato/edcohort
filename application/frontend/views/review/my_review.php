@@ -121,152 +121,7 @@ $breadcrumb_name2 = '';*/
 </div>
 <!--banner end-->
 <!--content start-->
-<?php
-   /* print_R(get_breadcrumb_value());
-    exit;*/
-?>
-<div class="content">
-    <div class="container-fluid review-top-section">
-        <div class="row">
-            <div class="col-md-1 course-img p-3 text-center brandCard">
-                <img class="card-img-top" style="height: 150px;"
-                                    src="<?php echo base_url(); ?>uploads/brand/<?php //echo  $get_single_course_detail->brand_image; ?>">
-            </div>
-            <div class="col-md-6 pt-3 course-name-display">
-                <h1 class="mb-3"><?php //echo  $get_course_detail; ?></h1>
-                <div>
-                <span class="rating-btn-display"><?php //echo $get_review_average_rating ?> </span>
-                <!--<?php if($get_brand_compare) { ?>
-                    <span class="rating-btn-display"><?php //echo $get_brand_compare->overall_brand ?>/5</span>
-                    <?php } ?>-->
-                    <label for="rating2" class="rating-display">
-                    <!--<img
-                            src="<?php echo base_url();?>assets/images/rating-4.png" alt=""> </label>
-                         </label> -->
 
-
-                         <!---->
-                         <div class="dropdown">
-  <!-- <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
-  <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="">--> </label>
- <!-- </button>  -->
-
-  
-
-
-
-  <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton1" style="border: 0px solid">
-                       
-            <!------> 
-    
-            <li><a class="dropdown-item p-0 m-0" href="#"><div class="card" style="width: 22rem;  border: 0px solid ">
-          
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item d-flex">
-    <div class="single-line" style="white-space: nowrap;">
-        <!--<img src="<?php echo base_url(); ?>assets/images/rating-4.png" alt="" style="display: inline-block; margin-right: 10px;"> -->
-        <div style="display: inline-block;">
-            <span class="heading" style="font-weight:bold; font-size: larger;">3.7 out of 5</span>
-        </div>
-    </div>
-</li>
-
-            
-    <li class="list-group-item" style="font-weight:normal;">129 Global Ratings</li>
-    <li class="list-group-item">
-    <div class="row">
-        <div class = "col-md-2 pt-1">
-            <span> 5 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 100%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">100%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 100% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 4 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 75%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">75%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 75% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 3 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 50%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 50% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 2 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 25%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 25% </span>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 1 star </span>
-        </div>
-        <div class = "col-md-8">
-            <div class="progress my-2">
-                <div class="progress-bar" role="progressbar" style="width: 15%; background-color:orange;color:black;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">15%</div>
-            </div>
-        </div>
-        <div class = "col-md-2 pt-1">
-            <span> 15% </span>
-        </div>
-
-    </div>
-
-
-    </li>
-  </ul>
- 
-</div></a></li>
-             
-            <!------> 
-  </ul>
-</div>
-
-                         <!----->
-                </div>
-                <div class="pt-3 total-review-display">
-               <!-- <h4> Excellent   Review </h4> -->
-                </div>
-            </div>
-            <div class="col-md-4 pt-3 write-review-icon">
-            <?php if ($this->session->userdata('user_id')) { ?>
-            
-                <a href="<?php echo base_url();?>write-a-review?segment=<?php echo $segment_temp;?>"
-                    class="review-btns text-decoration-none">
-                    <i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label>
-                </a>
-
-                
-                <?php } else { ?>
-                        <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
-                            data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-circle-user fa-2xl design-user"></i> <span> Write a review </span> <label
-                        for="rating2"> </label></a>
-                        <?php } ?>
-            </div>
-        </div>
-    </div>
     <!-- New Design Start -->
     <button type="button" class="filter-btn">Filter</button>
 
@@ -524,12 +379,12 @@ $breadcrumb_name2 = '';*/
                                 </ul>
                             </div>
                         </div>
-                        <div class=" filter-col ">
+                        <!--<div class=" filter-col ">
                             <div class="filter-list-box">
-                                <!--<button type="submit" class="apply-btn">Apply Filter</button>-->
+                                <button type="submit" class="apply-btn">Apply Filter</button>
                                 <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
         
@@ -543,6 +398,7 @@ $breadcrumb_name2 = '';*/
                     
                         <div id="selectedValues" class="value-class"></div>  <!-- for filter values display -->
                     <div class="review-inner-center">
+                    <div class=" d-flex flex-wrap justify-content-between ">
                         <div class="tab-link">
                             <ul>
                                 <li>
@@ -563,8 +419,23 @@ $breadcrumb_name2 = '';*/
                             </ul>
                         </div>
 
+                        <div class="col-md-4 pt-3 write-review-icon">
+                            <?php if ($this->session->userdata('user_id')) { ?>
+                            <a href="<?php echo base_url();?>write-a-review?segment=<?php echo $segment_temp;?>"
+                            class="review-btns text-decoration-none">
+                            <i class="fa-solid fa-pen-to-square"></i> <span> Write a review </span> <label
+                                for="rating2"> </label>
+                            </a>
+                            <?php } else { ?>
+                                <a href="javascript:void(0)" class="review-btns text-decoration-none" data-bs-effect="effect-scale"
+                                    data-bs-toggle="modal" data-bs-target="#login-button"><i class="fa-solid fa-pen-to-square"></i> <span> Write a review </span> <label
+                                for="rating2"> </label></a>
+                                <?php } ?>
+                        </div>
+                    </div>
+
     <script id="review-template" type="text/x-handlebars-template">
-    <div class="total-review">{{total_items}} Review</div>
+    <div class="total-review">{{total_items}} My Review</div>
     <div class="review-box">
         {{#if items}}
     {{#each items}}
@@ -684,14 +555,14 @@ $breadcrumb_name2 = '';*/
                                         <?php } ?>
                                         <!-- End Reply Section -->
                                            <!-- Start Share Section -->
-                                           <a href="#" class="share-button">
+                                         <!--  <a href="#" class="share-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
                                                 width="24" height="24">
                                                 <path
                                                     d="M19.333,14.667a4.66,4.66,0,0,0-3.839,2.024L8.985,13.752a4.574,4.574,0,0,0,.005-3.488l6.5-2.954a4.66,4.66,0,1,0-.827-2.643,4.633,4.633,0,0,0,.08.786L7.833,8.593a4.668,4.668,0,1,0-.015,6.827l6.928,3.128a4.736,4.736,0,0,0-.079.785,4.667,4.667,0,1,0,4.666-4.666ZM19.333,2a2.667,2.667,0,1,1-2.666,2.667A2.669,2.669,0,0,1,19.333,2ZM4.667,14.667A2.667,2.667,0,1,1,7.333,12,2.67,2.67,0,0,1,4.667,14.667ZM19.333,22A2.667,2.667,0,1,1,22,19.333,2.669,2.669,0,0,1,19.333,22Z" />
                                             </svg> Share
                                             <div class="sharethis-inline-share-buttons"></div>
-                                        </a>
+                                        </a> -->
                                           <!-- End Share Section -->
         </div>
         </div>
@@ -1010,26 +881,107 @@ $breadcrumb_name2 = '';*/
     </div>
 
         <!--end-->
+        <style>
+        /* Custom CSS for carousel blog cards */
+        .carousel-item {
+            padding: 15px;
+        }
+        .blog-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+           /* padding: 15px; */
+            text-align: center;
+            margin: 10px;
+        }
+        .blog-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .blog-card h5 {
+            margin-top: 10px;
+            color:#000000;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+        .blog-card p
+        {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            margin-top: 10px;
+            color: #585353;
+            padding: 0px 10px 10px 10px;
+        }
+        .wp-img {
+            text-decoration: none;
+        }
+        .wp-view-more
+        {
+            text-align:center;
+        }
+        .wp-view-more a 
+        {
+            text-decoration: none;
+        }
+    </style>
+
+        <!--end-->
+     <?php if($posts_blog)
+        { ?>
+
         <div class="helpful-box">
-            <div class="container">
-                <!-- <div id="summernote"></div> -->
-                <h2 class="helpful-title">You might find this helpful!</h2>
-                <div class="helpful-inner-box d-flex">
-                    <div class="helpful-left">
-                    </div>
-                    <div class="helpful-center">
-                        <h3>Article topic title related to Search “Byju’s”</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been
-                            the indus.....
-                        </p>
-                    </div>
-                    <div class="helpful-right">
-                        <a href="#" class="d-flex flex-wrap justify-content-center align-items-center text-center">Quick
-                            Read<br /> 1 min</a>
-                    </div>
+        <div class="brand-align">
+    <h2 class=""> Blog </h2>
+    </div>
+<div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <?php
+        // Divide posts into chunks of 3 (for each slide)
+        
+        $chunks = array_chunk($posts_blog, 4);
+        $isFirst = true; // To mark the first slide as active
+        foreach ($chunks as $chunk):
+         ?>
+            <div class="carousel-item <?php if ($isFirst) { echo 'active'; $isFirst = false; } ?>">
+                <div class="row">
+                    <?php foreach ($chunk as $posts_blog):  ?>
+                        <?php 
+                        $img_url = $this->blog_model->get_media_single_image($posts_blog['_links']["wp:featuredmedia"][0]['href']) ?>
+                            <div class="col-12 col-md-3">
+                                <a class="wp-img" href="<?php echo $posts_blog['link'] ?>">
+                                <div class="blog-card">
+                                    <img src="<?= $img_url ?? 'https://via.placeholder.com/350x150'; ?>" alt="Blog Image">
+                                    <h5><?php echo $posts_blog['title']['rendered']; ?></h5>
+                                    <?php echo $posts_blog['excerpt']['rendered']; ?>
+                                </div>
+                                </a>
+                            </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+        <?php endforeach;  ?>
+    </div>
+
+    <!-- Carousel Controls -->
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button> -->
+    <div class="wp-view-more mb-4">
+        <a href="<?php echo base_url(); ?>blog" class="img-btn-explore" >View More </a>
+    </div>
+</div>
+
+        </div>
+        <?php } ?>
+    </div>
         </div>
 
   

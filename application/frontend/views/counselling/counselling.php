@@ -270,11 +270,11 @@ if($get_breadcrumb)
                                     <input type="text" name="cdate" id="datepicker" value = <?php echo isset($date_picker) ? $date_picker : $today; ?> class ="datepicker" autocomplete="off">
                                 </label>
                             </div>
-                        <div class=" filter-col ">
+                        <!--<div class=" filter-col ">
                             <div class="filter-list-box">
                                 <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div> -->
                              
                         </form>
                   <!--  </div> -->

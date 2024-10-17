@@ -276,11 +276,11 @@ if($get_breadcrumb)
                                     <input type="text" name="cdate" id="datepicker" value = <?php echo isset($date_picker) ? $date_picker : $today; ?> class ="datepicker" autocomplete="off">
                                 </label>
                             </div>
-                        <div class=" filter-col ">
+                        <!-- <div class=" filter-col ">
                             <div class="filter-list-box">
                                 <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div> -->
                              
                         </form>
                   <!--  </div> -->
@@ -443,7 +443,7 @@ if($get_breadcrumb)
                                 </style>
                 <script id="review-template" type="text/x-handlebars-template">
                     <div class="container">
-                    <div class="total-review">{{total_items}} Events</div>
+                    <div class="total-review">{{total_items}} Upcoming Events</div>
                     <div class="row">
                         {{#if items}}
                             {{#each items}}

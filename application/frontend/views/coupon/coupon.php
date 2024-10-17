@@ -308,11 +308,11 @@ if($get_breadcrumb)
                                 </select>
                             </div>
                         </div>
-                        <div class=" filter-col ">
+                       <!-- <div class=" filter-col ">
                             <div class="filter-list-box">
                                 <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 <!--left end-->
@@ -346,8 +346,9 @@ if($get_breadcrumb)
                             </div>
                         <style>
      </style>
-<div class="total-review"> Coupon</div>
+
     <div class="container pt-3">
+    <div class="total-review"> Coupon</div>
     <div class="voucher-container d-flex flex-column flex-md-row">
         <div class="voucher-body col-md-8">
             <div class="voucher-title">VOUCHER</div>

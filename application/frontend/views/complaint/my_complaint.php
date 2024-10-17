@@ -405,12 +405,12 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                                 </ul>
                             </div>
                         </div>
-                        <div class=" filter-col ">
+                       <!-- <div class=" filter-col ">
                             <div class="filter-list-box">
                                 <!--<button type="submit" class="apply-btn">Apply Filter</button>-->
-                                <button type="button" class="apply-btn apply_filter">Apply Filter</button>
+                              <!--  <button type="button" class="apply-btn apply_filter">Apply Filter</button>
                             </div>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>
@@ -471,7 +471,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     </div>
 
     <script id="review-template" type="text/x-handlebars-template">
-    <div class="total-review">{{total_items}} Complaints</div>
+    <div class="total-review">{{total_items}} My Complaints</div>
     <div class="review-box">
         {{#if items}}
     {{#each items}}
@@ -650,14 +650,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 <?php } ?>
                 <!-- End Reply Section -->
                     <!-- Start Share Section -->
-                    <a href="#" class="share-button">
+                  <!--  <a href="#" class="share-button">
                     <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
                         width="24" height="24">
                         <path
                             d="M19.333,14.667a4.66,4.66,0,0,0-3.839,2.024L8.985,13.752a4.574,4.574,0,0,0,.005-3.488l6.5-2.954a4.66,4.66,0,1,0-.827-2.643,4.633,4.633,0,0,0,.08.786L7.833,8.593a4.668,4.668,0,1,0-.015,6.827l6.928,3.128a4.736,4.736,0,0,0-.079.785,4.667,4.667,0,1,0,4.666-4.666ZM19.333,2a2.667,2.667,0,1,1-2.666,2.667A2.669,2.669,0,0,1,19.333,2ZM4.667,14.667A2.667,2.667,0,1,1,7.333,12,2.67,2.67,0,0,1,4.667,14.667ZM19.333,22A2.667,2.667,0,1,1,22,19.333,2.669,2.669,0,0,1,19.333,22Z" />
                     </svg> Share
                     <div class="sharethis-inline-share-buttons"></div>
-                </a>
+                </a> -->
                     <!-- End Share Section -->
             </div>
         </div>

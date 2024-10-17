@@ -9,6 +9,9 @@
   list-style: none;
   text-decoration: none;
 }
+a:hover {
+  color: unset;
+}
 *:hover,
 *focus {
   outline: none !important;
@@ -415,7 +418,7 @@ Banner
 .img-btn-explore {
   background: none;
   border: 1px solid #9c9c9c;
-  color: #3554fe;
+ 
 }
 .img-btn-explore {
   background: #fff;
@@ -1083,11 +1086,12 @@ ul.footer-menu-sub li {
   margin: 0 0 8px;
 }
 .user-info-box a {
-  color: #3554fe;
+  color: #e64040;
   font-weight: 400;
   font-size: 16px;
   line-height: 21px;
   text-decoration: none;
+  font-weight:600;
 }
 .user-photo {
   width: 64px;
@@ -1645,9 +1649,10 @@ p.display-brand-brand {
   border-bottom: 1px solid #e0e0e0;
   padding: 0 0 15px;
   margin: 0 0 10px;
-  color: #505050;
+  color: #464c52;
   font-size: 16px;
   line-height: 21px;
+  font-weight: 600;
 }
 
 .review-row {
@@ -3597,7 +3602,7 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
 #register button.btn-close {
   right: 5px;
   position: absolute;
-  background-color: #ccc;
+  background-color: #fd0202;
   padding: 6px;
   top: 5px;
   z-index: 1;
@@ -3633,7 +3638,7 @@ label.me-3.button-cls {
 } */
 .login-popup button.btn-close:hover,
 #register button.btn-close:hover {
-  background-color: #3554fe;
+  background-color: #ffffff;
 }
 .login-popup .modal-body,
 #register .modal-body {
