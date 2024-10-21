@@ -688,7 +688,7 @@ function complaint_submit()
           $message = $errors;
           $status = 0;
           echo json_encode(array('message' => $message, 'status' => $status));
-          exit();
+         // exit();
         }
         $complaint_id = $this->input->post('complaint_id');
         $user_id = $this->input->post('user_id');
@@ -724,10 +724,10 @@ function complaint_submit()
         );
         $user_id = $this->common_model->insertData('tbl_product_complaint_like', $data);
       }
-      $message = 'Comment submitted successfully';
+      $message = 'Liked successfully';
       $status = 1;
       echo json_encode(array('message' => $message, 'status' => $status));
-      exit();
+     // exit();
       
     }
     function complaint_reply_submit()

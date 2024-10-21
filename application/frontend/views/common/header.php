@@ -129,21 +129,7 @@ if(empty($meta_description)){
 
 <style>
   /* Dropdown Menu Styling */
-.dropdown-search-input {
-   /* display: none; /* Hidden by default */
-    position: absolute;
-    /* top: 50px; Position relative to the search box */
-    width:810px !important;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 11px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 3;
-    padding: 11px;
-   /* display:none;
-   /* overflow-y: auto; Enable scroll if too many items*/
-    
-}
+
 
 /* Dropdown Item Styling */
 .dropdown-item {
@@ -253,7 +239,7 @@ if(empty($meta_description)){
                         <i class="fas fa-search search-icon-color"></i>
                     </button>
                 </div>
-                <span class="dropdown-search-input" aria-labelledby="dropdownMenuButton" style="width: 100%;display:none;" >         
+                <span class="dropdown-search-input" aria-labelledby="dropdownMenuButton" style="display:none;" >         
   </span>
             </div>
 

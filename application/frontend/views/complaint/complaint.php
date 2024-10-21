@@ -513,7 +513,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
  
     <div class="review-row">
     <div class=" d-flex flex-wrap justify-content-between align-items-center">
-        <div class="review-user-images d-flex align-items-center mt-4">
+        <div class="review-user-images d-flex align-items-center mt-1">
             <img src="{{profile_image}}" alt="">
             
             <img src="<?php echo base_url();?>assets/images/s-test.png" alt="">

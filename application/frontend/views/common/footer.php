@@ -125,12 +125,12 @@ $authUrl1 = $gClient->createAuthUrl();
 
     <div class="container ">
         <div class="row pb-3">
-            <div class="col-12 col-md-10 pt-3">
+            <div class="col-12 col-md-9 pt-3">
                 <div class="footer-logo ">Copyright © 2023. All Rights Reserved by Edcohort. Designed & Developed by
                     Sigmato Solution Pvt Ltd </div>
 
             </div>
-            <div class="col-md-2 footer-icons pt-3">
+            <div class="col-md-3 footer-icons pt-3">
                 <i class="fa-brands fa-square-facebook fa-2xl icon-align"></i>
                 <i class="fa-brands fa-square-instagram fa-2xl icon-align"></i>
                 <i class="fa-brands fa-square-youtube fa-2xl icon-align"></i>

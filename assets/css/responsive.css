@@ -114,6 +114,10 @@
     padding: 15px 0;
     font-size: 16px;
   }
+  .dropdown-search-input {
+    /* top: 50px; Position relative to the search box */
+    width:738px !important;
+  }
 }
 
 @media only screen and (max-width: 991px) {
