@@ -613,6 +613,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         $likeCountCheck =0; 
         ?>
          <!-- Start Like Section -->
+          <?php
+            if($this->session->userdata('user_id'))
+            {
+               // print_R('{{product_complaint_id}}');
+               //$res_get_user = get_user_like('{{product_complaint_id}}',$this->session->userdata('user_id'));
+                //print_R($res_get_user);
+            }
+            else
+            {
+                print_R('{{product_complaint_id}}');
+            }
+          ?>
          {{#xif like "<" "0"}}   
          <a href="javascript:void(0)"
             onclick="productComplaintLike({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">

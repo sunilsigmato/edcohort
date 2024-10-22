@@ -435,6 +435,23 @@ function getClassName($class_id)
             return $data;
         }
     }
+
+    function get_user_like($product_complaint_id,$user)
+    {   $data = '';
+        $CI =& get_instance();
+        $data=$CI->complaint_model->get_user_like($product_complaint_id,$user);
+      
+      
+       if($data)
+        {
+            return $data;
+        }
+        else
+        {
+            return $data;
+        }
+       // print_R($user);
+    }
     
     function getseg_course_list($id)
     {

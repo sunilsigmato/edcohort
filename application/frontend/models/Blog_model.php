@@ -38,6 +38,7 @@ class blog_model extends CI_Model {
         $url_parts = explode('/', $parameter);
         $res_api = wp_api_call('media/'.end($url_parts));
         $json_data = json_decode($res_api, true);
+        //print_R($json_data);
         return $json_data['guid']['rendered'];
     }
 
