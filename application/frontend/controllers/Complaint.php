@@ -693,42 +693,32 @@ function complaint_submit()
         $complaint_id = $this->input->post('complaint_id');
         $user_id = $this->input->post('user_id');
         $action = $this->input->post('action');
-
-       //print_ex($result);
-       // echo $this->db->last_query(); 
-
-        $where = 'complaint_id = '.$complaint_id.' and user_id = '.$user_id.'';
-        $record = $this->common_model->selectWhereorderby('tbl_product_complaint_like',$where,'prl_id','ASC');
-        if($record){
-         $this->common_model->deleteData('tbl_product_complaint_like',array('prl_id'=>$record['0']->prl_id));
-
-         if($record['0']->action != $action){
-           $data = array(
+        
+        if($action)
+        {
+          $data = array(
             'complaint_id' => $complaint_id, 
             'user_id' => $user_id,
             'action' => $action,
             'status' => 1,
             'date_added' => date('Y-m-d H:i:s'), 
-
           );
-           $user_id = $this->common_model->insertData('tbl_product_complaint_like', $data);
-         }
-       }else{ 
-        $data = array(
-          'complaint_id' => $complaint_id, 
-          'user_id' => $user_id,
-          'action' => $action,
-          'status' => 1,
-          'date_added' => date('Y-m-d H:i:s'), 
-
-        );
-        $user_id = $this->common_model->insertData('tbl_product_complaint_like', $data);
-      }
+          $user_id = $this->common_model->insertData('tbl_product_complaint_like', $data);
+        }
+        else{
+         
+           $where = 'complaint_id = '.$complaint_id.' and user_id = '.$user_id.'';
+           $res = $this->common_model->deleteData('tbl_product_complaint_like',$where);
+           if($res)
+           {
+             $message = 'Liked successfully';
+             $status = 1;
+           }
+        }
       $message = 'Liked successfully';
       $status = 1;
       echo json_encode(array('message' => $message, 'status' => $status));
-     // exit();
-      
+    
     }
     function complaint_reply_submit()
     {

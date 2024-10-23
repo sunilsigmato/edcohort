@@ -142,8 +142,9 @@ public function __construct()
     $type = $this->input->post('type');
     $page = $this->input->post('page');
     $user_id = $this->input->post('user_id');
+    $like_u_id = $this->input->post('like_u_id');
     
-    $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page);
+    $get_filter_result_detail = $this->complaint_model->get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user_id,$page,$like_u_id);
 
   }
   function get_all_data_comparison()

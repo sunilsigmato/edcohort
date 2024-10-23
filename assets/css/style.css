@@ -2121,7 +2121,7 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
   margin-left: 10px;
 }
 .review-footer-right svg path {
-  fill: #a0a0a0;
+  fill: #181818;
 }
 .review-footer-right svg.active-svg path {
   fill: #3554fe;

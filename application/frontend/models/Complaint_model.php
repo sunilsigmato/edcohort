@@ -96,7 +96,7 @@ class Complaint_model extends CI_Model {
    
   }
 
-  function get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user,$page)
+  function get_all_data_complaint($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$type,$user,$page,$like_u_id)
   {
     // if its all display all id ids 
       $where = "";
@@ -222,7 +222,7 @@ class Complaint_model extends CI_Model {
         $item->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
         $item->lastname = $r->lastname;
         $item->user_email = $r->user_email;
-      //  $item->user_like = $this->get_user_like($user,$r->product_complaint_id);
+        $item->user_like = $this->get_user_like($like_u_id,$r->product_complaint_id);
        // $item->dislike_count = $r->dislike_count;
         //$item->share_count = $r->share_count;
         $item->segment_id = $r->segment_id;
@@ -338,24 +338,21 @@ class Complaint_model extends CI_Model {
         }
         return [];
   }
-  function get_user_like($product_complaint_id,$user)
+  function get_user_like($user,$product_complaint_id)
   {
-  $a = (int) $product_complaint_id;
-    $user_like = '';
-    $where = '';
-      $where = 'complaint_id = '.$a.' and user_id = '.$user;      
-      if($where!=""){        
-        $where="WHERE ".$where;
+
+      $user_like = '';
+      $where = '';
+      $res = '';
+      if($user)
+      {
+        $where = 'complaint_id = '.$product_complaint_id.' and user_id = '.$user;      
+        if($where!=""){        
+          $where="WHERE ".$where;
+        }
+        $query = $this->db->query("select * from tbl_product_complaint_like ".$where);    
+        $res = $query->result();
       }
-    
-      $query = $this->db->query("select * from tbl_product_complaint_like ".$where);
-      $rss = $this->db->last_query();
-     // print_r(strlen($product_complaint_id));
-     $product_complaint_id = preg_replace('/[^0-9]/', '', $product_complaint_id); // Keep only numeric characters
-     $int_value = (int) $product_complaint_id; // Convert to integer
-     echo $int_value;
-      $res = $query->result();
-    
       if($res)
       {
         return $user_like = 1;
