@@ -125,7 +125,8 @@ public function __construct()
     $sortby = $this->input->post('sortby');
     $page = $this->input->post('page');
     $user_id = $this->input->post('user_id');
-    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page);
+    $like_u_id = $this->input->post('like_u_id');
+    $get_filter_result_detail = $this->review_model->get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user_id,$page,$like_u_id);
 
   }
 

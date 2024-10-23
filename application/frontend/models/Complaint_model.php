@@ -183,11 +183,12 @@ class Complaint_model extends CI_Model {
 
     $per_page = ($per_page) ? $per_page : 10;
     $offset = $page * $per_page - $per_page;
+    //print_r($offset);
     $total_pages = ceil($datas['records_count'] / $per_page);
     $this->load->model('pagination_model');
     $res_pagination = $this->pagination_model->get_pagination($page,$total_pages,$seg_temp,$request_uri_without_query_string); // create pagination
     /** */
-    $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $page,$sortby);
+    $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $offset,$sortby);
 
     $data = new stdClass;
     $data->page_link= $res_pagination;

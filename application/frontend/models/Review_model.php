@@ -140,7 +140,7 @@ class Review_model extends CI_Model {
 	   return $output;
   }
 
-  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user,$page)
+  function get_all_data($segment,$board,$brand,$class,$course,$batch,$rating,$sortby,$user,$page,$like_u_id)
   {
     // if its all display all id ids 
       $where = "";
@@ -253,6 +253,7 @@ class Review_model extends CI_Model {
         $item->profile_image =   base_url().'assets/images/'.$name_first_letter.'_profile.png';
         $item->lastname = $r->lastname;
         $item->user_email = $r->user_email;
+        $item->user_like = $this->get_user_like($like_u_id,$r->product_review_id);
         $item->like_count = $r->like_count;
         $item->dislike_count = $r->dislike_count;
         $item->share_count = $r->share_count;
@@ -383,6 +384,29 @@ class Review_model extends CI_Model {
     }
         
       //return $query->result();  
+  }
+  function get_user_like($user,$product_review_id)
+  {
+      $user_like = '';
+      $where = '';
+      $res = '';
+      if($user)
+      {
+        $where = 'review_id = '.$product_review_id.' and user_id = '.$user;      
+        if($where!=""){        
+          $where="WHERE ".$where;
+        }
+        $query = $this->db->query("select * from tbl_product_review_like ".$where);    
+        $res = $query->result();
+      }
+      if($res)
+      {
+        return $user_like = 1;
+      }
+      else
+      {
+        return $user_like = 0;
+      }
   }
   function get_segment_name($segment_id)
   {

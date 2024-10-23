@@ -612,44 +612,39 @@ class Review extends CI_Controller
       $message = $errors;
       $status = 0;
       echo json_encode(array('message' => $message, 'status' => $status));
-      exit();
+      //exit();
     }
     $review_id = $this->input->post('review_id');
-
-    
     $user_id = $this->input->post('user_id');
     $action = $this->input->post('action');
     //print_ex($result);
     // echo $this->db->last_query(); 
-    $where = 'review_id = ' . $review_id . ' and user_id = ' . $user_id . '';
-    $record = $this->common_model->selectWhereorderby('tbl_product_review_like', $where, 'prl_id', 'ASC');
-    if ($record) {
-      //echo $record['0']->prl_id; die;
-      $this->common_model->deleteData('tbl_product_review_like', array('prl_id' => $record['0']->prl_id));
-      if ($record['0']->action != $action) {
-        $data = array(
-          'review_id' => $review_id,
-          'user_id' => $user_id,
-          'action' => $action,
-          'status' => 1,
-          'date_added' => date('Y-m-d H:i:s'),
-        );
-        $user_id = $this->common_model->insertData('tbl_product_review_like', $data);
-      }
-    } else {
-      $data = array(
-        'review_id' => $review_id,
-        'user_id' => $user_id,
-        'action' => $action,
-        'status' => 1,
-        'date_added' => date('Y-m-d H:i:s'),
-      );
-      $user_id = $this->common_model->insertData('tbl_product_review_like', $data);
-    }
+
+    if($action)
+        {
+          $data = array(
+            'review_id' => $review_id, 
+            'user_id' => $user_id,
+            'action' => $action,
+            'status' => 1,
+            'date_added' => date('Y-m-d H:i:s'), 
+          );
+          $user_id = $this->common_model->insertData('tbl_product_review_like', $data);
+        }
+        else{
+         
+           $where = 'review_id = '.$review_id.' and user_id = '.$user_id.'';
+           $res = $this->common_model->deleteData('tbl_product_review_like',$where);
+           if($res)
+           {
+             $message = 'Liked successfully';
+             $status = 1;
+           }
+        }
     $message = 'Comment submitted successfully';
     $status = 1;
     echo json_encode(array('message' => $message, 'status' => $status));
-    exit();
+   
   }
 
   function write_review()

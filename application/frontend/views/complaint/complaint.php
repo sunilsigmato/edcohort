@@ -621,7 +621,9 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                         onclick="productComplaintLike({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>','0')">
                         <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"/>
                         </svg> {{like}} </a>
+
                         {{else}}
+
                         <a href="javascript:void(0)"
                         onclick="productComplaintLike({{product_complaint_id}},'<?php echo $this->session->userdata('user_id'); ?>','1')">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
@@ -631,7 +633,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                     {{/xif}}
         
                
-            <?php }else
+            <?php 
+            }else
             { ?>
             <a href="javascript:void(0)" data-bs-effect="effect-scale"
             data-bs-toggle="modal" data-bs-target="#login-button">
