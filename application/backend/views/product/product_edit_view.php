@@ -21,6 +21,9 @@
                                 <div class="card m-b-20">
                                     <div class="card-header">
                                         <h3 class="card-title">Edit Product</h3>
+                                        <?php
+                                       // print_R($product_detail);
+                                        ?>
                                     </div>
                                     <div class="card-body mb-0">
 
@@ -212,7 +215,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group ">                                                
+                                         <!--   <div class="form-group ">                                                
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="examplenameInputname2">Product Short Description</label>
@@ -234,7 +237,7 @@
                                                         <textarea class="form-control"  name="product_description" id="product_description"  rows="4"><?php echo $row->product_description; ?></textarea>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                              <?php
                                            
@@ -278,7 +281,7 @@
                                                 </div>
                                             </div> -->
 
-                                            <div class="form-group ">
+                                         <!--   <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputPassword5">Image</label>
@@ -289,7 +292,7 @@
                                                        <input type="file" name="img_upload[]" id="img_upload" onchange="readURL(this);" style="padding: 12px 0px;width:206px;margin-left:0px;outline:none">
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>  -->
 
                                             <div class="form-group ">
                                                 <div class="row">
@@ -376,7 +379,7 @@
                                             </div>-->
 
 
-                                            <div class="form-group ">
+                                          <!--  <div class="form-group ">
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label class="form-label" id="inputEmail3">Meta Tag Title</label>

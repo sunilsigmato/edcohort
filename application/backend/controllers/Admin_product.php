@@ -435,7 +435,7 @@ class admin_product extends CI_Controller
         $data['board_list']=$this->admin_model->selectWhere('tbl_board',$where);
         $where = "status = 1 ";
         $data['batch_list']=$this->admin_model->selectWhere('tbl_batch',$where);
-        //print_ex($data);
+       // print_ex($data);
 
         $data['active']="product";
         $this->load->view('common/header');
@@ -454,7 +454,7 @@ class admin_product extends CI_Controller
         //print_pre($this->input->post());
         $option_list=$this->admin_model->selectAll('tbl_option'); 
         $product_id=$this->input->post('product_id');       
-        foreach ($_FILES['img_upload']['name'] as $key => $value)
+      /*  foreach ($_FILES['img_upload']['name'] as $key => $value)
         {   
             $uploaded="";
             $new_name1 = str_replace(".","",microtime());
@@ -471,7 +471,7 @@ class admin_product extends CI_Controller
                 $product_image_array[]=$product_image;
             }
            
-        }
+        }*/
        
        
        // print_ex($_POST);
@@ -519,21 +519,21 @@ class admin_product extends CI_Controller
             $data=array(
                 'product_name'=>$this->input->post("item_title"),
                 'product_added_by'=>'admin',
-                'product_model'=>$this->input->post("model_num"),
-                'manufacturer_id'=>$this->input->post("manufacturer"),
+               // 'product_model'=>$this->input->post("model_num"),
+                //'manufacturer_id'=>$this->input->post("manufacturer"),
                 'product_brand'=>$this->input->post("brand_name"),
                 'brand_id'=>$this->input->post("brand_name"),
-                'product_sku'=>$this->input->post("seller_sku"),
-                'product_description'=>$this->input->post("product_description"),                
-                'product_short_description'=>$this->input->post("product_short_description"),   
+                //'product_sku'=>$this->input->post("seller_sku"),
+               // 'product_description'=>$this->input->post("product_description"),                
+               // 'product_short_description'=>$this->input->post("product_short_description"),   
                 'product_status'=>$this->input->post("product_status"),
-                'product_global_addons'=>$this->input->post("global_addons"),
+             //   'product_global_addons'=>$this->input->post("global_addons"),
                 'product_slug'=>$slug,
-                'product_is_price'=>$this->input->post("product_is_price"),
-                'product_is_get_quote'=>$this->input->post("product_is_get_quote"),
-                'product_is_builder'=>$this->input->post("is_builder"),
-                'product_sort'=>$this->input->post("product_sort"),
-                'product_builder_sort'=>$this->input->post("product_builder_sort"),
+              //  'product_is_price'=>$this->input->post("product_is_price"),
+              //  'product_is_get_quote'=>$this->input->post("product_is_get_quote"),
+              //  'product_is_builder'=>$this->input->post("is_builder"),
+               // 'product_sort'=>$this->input->post("product_sort"),
+               // 'product_builder_sort'=>$this->input->post("product_builder_sort"),
 				'product_type'=>$this->input->post("product_type"),
                 'class_id'=>$this->input->post("class_name"),
                 'board_id'=>$this->input->post("board_name"),
@@ -547,7 +547,7 @@ class admin_product extends CI_Controller
       
             $this->admin_model->updateData('tbl_product',$data,$where);
             
-            $data_description=array(
+          /*  $data_description=array(
                 //'product_id'=>$product_id,
                 'product_meta_title'=>$this->input->post("meta_title"),
                 'product_meta_keyword'=>$this->input->post("meta_keyword"),
@@ -558,7 +558,7 @@ class admin_product extends CI_Controller
                 'diamond_quality'=>$this->input->post("diamond_quality"),
             );
             $this->admin_model->updateData('tbl_product_description',$data_description,$where);
-            $this->admin_model->deleteData('tbl_product_category',$where);
+            $this->admin_model->deleteData('tbl_product_category',$where);*
             foreach ($parent_category as $key => $value) 
             {
                 $data_category=array(
@@ -618,7 +618,7 @@ class admin_product extends CI_Controller
                 );
                 $this->admin_model->insertData('tbl_product_feature',$data_feature);
             }
-            
+            */
             
         }
 

@@ -18,7 +18,9 @@
                                 <div class="card m-b-20">
                                     <div class="card-header">
                                         <h3 class="card-title">Edit Product Review</h3>
+                                      
                                     </div>
+                                    
                                     <div class="card-body mb-0">
 
                                         <form class="form-horizontal" action="<?php echo base_url(); ?>admin_product/edit_product_review_submit" role="form" method="post" enctype="multipart/form-data">
