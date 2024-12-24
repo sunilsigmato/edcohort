@@ -44,7 +44,8 @@
     box-shadow: 0 1rem 3rem rgba(132,138,163,0.1) !important;
 }
     </style>
-<div class="container">
+
+<div class="container pt-5 pb-5 ">
     <div class="contact__wrapper shadow-lg mt-n9">
         <div class="row no-gutters">
             <div class="col-lg-5 contact-info__wrapper gradient-brand-color p-5 order-lg-2">
@@ -52,15 +53,15 @@
     
                 <ul class="contact-info__list list-style--none position-relative z-index-101">
                     <li class="mb-4 pl-4">
-                        <span class="position-absolute"><i class="fas fa-envelope"></i></span> support@bootdey.com
+                        <span class="position-absolute"><i class="fas fa-envelope"></i></span> support@edcohort.com
                     </li>
                     <li class="mb-4 pl-4">
-                        <span class="position-absolute"><i class="fas fa-phone"></i></span> (021)-241454-545
+                        <span class="position-absolute"><i class="fas fa-phone"></i></span> (+91)-241454-545
                     </li>
                     <li class="mb-4 pl-4">
-                        <span class="position-absolute"><i class="fas fa-map-marker-alt"></i></span> bootdey Technologies Inc.
+                        <span class="position-absolute"><i class="fas fa-map-marker-alt"></i></span> Edcohort Inc.
                         <br> 2694 Queen City Rainbow Drive
-                        <br> Florida 99161
+                        <br> New Delhi
                     </li>
                 </ul>
     
@@ -110,11 +111,14 @@
                     </div>
                 </form>
             </div>
+            
             <!-- End Contact Form Wrapper -->
     
         </div>
     </div>
 </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $(".get-in-touch-submit").click(function()
@@ -122,6 +126,21 @@
            var first_name = $('.firstName').val();
            var email = $('.email').val();
            var message = $('.message').val();
+           if(!first_name)
+           {
+            alert("Please enter your name");
+            return
+           }
+           else if(!email)
+           {
+            alert("Please enter your email");
+            return
+           }
+           else if(!message)
+           {
+            alert("Please enter your message");
+            return
+           }
            $.ajax({
               type : 'POST',    
                url: "<?php echo base_url(); ?>filter/submit_get_in_touch",

@@ -175,6 +175,7 @@ class Complaint_model extends CI_Model {
       $page = 1;
     }
     $referrer_url = $_SERVER['HTTP_REFERER'];  // Get Page URL
+   // print_R($referrer_url);
     $request_uri_without_query_string = strtok($referrer_url, '?'); //Remove Parameter
     $records_count = $this->getProductComplaintCount($where);
 
@@ -186,7 +187,7 @@ class Complaint_model extends CI_Model {
     //print_r($offset);
     $total_pages = ceil($datas['records_count'] / $per_page);
     $this->load->model('pagination_model');
-    $res_pagination = $this->pagination_model->get_pagination($page,$total_pages,$seg_temp,$request_uri_without_query_string); // create pagination
+    $res_pagination = $this->pagination_model->get_pagination($page,$total_pages,$seg_temp,$request_uri_without_query_string,$referrer_url); // create pagination
     /** */
     $get_product_list = $this->getProductComplaintLimit($where,$orderby, $per_page, $offset,$sortby);
 

@@ -52,11 +52,13 @@ $authUrl1 = $gClient->createAuthUrl();
                    <!-- <h2>Company </h2> -->
                 </div>
                 <ul class="footer-menu-sub">
+                    <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
                     <li> <a href="<?php echo base_url(); ?>about-us">About</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/#">Our Team</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/#">Research  Methodologies</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>" data-bs-toggle="modal" data-bs-target="#signup-button">Sign Up</a> </li>
+                   
+                    <!--<li> <a href="<?php echo base_url(); ?>/#">Research  Methodologies</a> </li>
                     <li> <a href="<?php echo base_url(); ?>/#">Careers</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>/#">Cookie Preferences</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>/#">Cookie Preferences</a> </li>-->
                 </ul>
 
             </div>
@@ -66,9 +68,10 @@ $authUrl1 = $gClient->createAuthUrl();
                 </div>
                 <ul class="footer-menu-sub">
                     <li> <a href="<?php echo base_url(); ?>get-in-touch">Contact Us</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#complain-section">Help Center</a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#comparision-section">Share Your Story </a> </li>
-                    <li> <a href="<?php echo base_url(); ?>#counselling-section">Press</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>" data-bs-toggle="modal" data-bs-target="#login-button">Login</a> </li>
+                   <!-- <li> <a href="<?php echo base_url(); ?>complain-section">Help Center</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>comparision-section">Share Your Story </a> </li>
+                    <li> <a href="<?php echo base_url(); ?>counselling-section">Press</a> </li>-->
                 </ul>
 
 
@@ -88,8 +91,8 @@ $authUrl1 = $gClient->createAuthUrl();
                     <!--<h2>Top Brands</h2>-->
                 </div>
                 <ul class="footer-menu-sub">
-                    <li> <a href="#">Terms of Use</a> </li>
-                    <li> <a href="#">Privacy Policy</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>terms-conditions">Terms of Use</a> </li>
+                    <li> <a href="<?php echo base_url(); ?>privacy-policy">Privacy Policy</a> </li>
                     <li> <a href="#">Cookie Notice</a> </li>
                 </ul>
 
@@ -112,10 +115,10 @@ $authUrl1 = $gClient->createAuthUrl();
                         <h6> Want to Know what we're up to </h6>
                     </div>
                     <div class="footer-menu-sub">
-                        <input type="text" placeholder=" Email Address" class="input-text-get-in-touch">
+                        <input type="text" placeholder=" Email Address" class="input-text-get-in-touch lets_connect" required>
                     </div>
                     <div class="footer-menu-sub pt-3">
-                        <input type="button" value="Subscribe" class="img-btn-explore">
+                        <input type="button" value="Subscribe" class="img-btn-explore lts_connect">
                     </div>
                 </div>
             </div>
@@ -131,11 +134,11 @@ $authUrl1 = $gClient->createAuthUrl();
 
             </div>
             <div class="col-md-3 footer-icons pt-3">
-                <i class="fa-brands fa-square-facebook fa-2xl icon-align"></i>
+                <!--<i class="fa-brands fa-square-facebook fa-2xl icon-align"></i>
                 <i class="fa-brands fa-square-instagram fa-2xl icon-align"></i>
                 <i class="fa-brands fa-square-youtube fa-2xl icon-align"></i>
                 <i class="fa-brands fa-square-twitter fa-2xl icon-align"></i>
-                <i class="fa-brands fa-linkedin fa-2xl"></i>
+                <i class="fa-brands fa-linkedin fa-2xl"></i> -->
             </div>
         </div>
     </div>
@@ -172,6 +175,7 @@ $authUrl1 = $gClient->createAuthUrl();
 <!--footer end-->
 
 
+</div>
 </div>
 <!--wrapper end-->
 
@@ -548,6 +552,7 @@ $authUrl1 = $gClient->createAuthUrl();
 
 
 <script type="text/javascript">
+    
 
  $(document).ready(function() {
 
@@ -559,6 +564,20 @@ $authUrl1 = $gClient->createAuthUrl();
     $('#acceptCookies').click(function() {
         localStorage.setItem('cookiesAccepted', 'true');
         $('#cookieConsent').fadeOut();
+    });
+
+    $('.lts_connect').click(function() {
+        var get_txt = $('.lets_connect').val();
+        if(get_txt)
+        {
+           
+            alert("Thank you for connect with us")
+        }
+        else
+        {
+            alert("Enter Mail Id")
+        }
+       
     });
     
     /** Search Code Ends */

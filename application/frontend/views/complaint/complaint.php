@@ -1258,35 +1258,51 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             ajax_cal_data();
 
             /**Cookies Code */
-            var urlParams_search = new URLSearchParams(window.location.search);
-            var brandname_search = urlParams_search.get('brand');
-            var class_search = urlParams_search.get('class');
-            var course_search = urlParams_search.get('course');
+            var urlParams_search = window.location.search;
+            const urlParams_get = new URLSearchParams(urlParams_search);
+            
+            var brandname_search = urlParams_get.get('brand');
+            var class_search = urlParams_get.get('class');
+            var course_search = urlParams_get.get('course');
+        
             //let userCookie = getCookie(class_search); 
            // console.log(class_search);
-            if(brandname_search != null)
+            if(brandname_search != null )
             {
-                let userCookie = getCookie('brand');
-                isClickedBrand =true;
-                filter_brand_id = userCookie[1];
+
+                //let userCookie = getCookie('brand');
+                /**Cookie New  */
+                const preferencesCookie = getCookie_new('complaint_brand');
+                if (preferencesCookie) {
+                    const preferences = JSON.parse(preferencesCookie);
+                    filter_brand_id = preferences.id;
+                }
+                /**End of Cookie New */
                 FilterBrandText = brandname_search;
                 requestData.brand = filter_brand_id;
-                filter_class(userCookie[1],filter_segment_id);
+                isClickedBrand =true;
+                filter_class(filter_brand_id,filter_segment_id);
                 $('#brand').val(filter_brand_id).trigger('change');
                 right_side();
                 get_all_data();
             }
             if(class_search != null)
             {
-                let userCookie_class = getCookie('class');
-                isClickedClass =true;
-                filter_class_id = userCookie_class[1];
+                //let userCookie_class = getCookie('class');
+                /**Cookie New  */
+                const preferencesCookie = getCookie_new('complaint_class');
+                if (preferencesCookie) {
+                    const preferences = JSON.parse(preferencesCookie);
+                    filter_class_id = preferences.id;
+                }
+                /**End of Cookie New */
+                //filter_class_id = userCookie_class[1];
                 FilterClassText = class_search;
-               requestData.class = filter_class_id;
+                requestData.class = filter_class_id;
+                isClickedClass =true;
                 filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
                 $('#filter_class_dropdown').val(filter_class_id).trigger('change');
                 get_all_data();
-
             }
             if(course_search != null)
             {
@@ -1309,6 +1325,7 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             $('.board-k12').css('display', 'block');
             $('.board-other').css('display', 'none');
         }
+        
         else
         {
             $('.board-other').css('display', 'block');
@@ -1354,6 +1371,16 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             FilterBoardText = 'cbsc';
             get_all_data();
 
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_cbsc = {
+            name: FilterBoardText,
+            id: filter_board_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_cbsc);
+            document.cookie = `complaint_cbsc=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+
         });
         $('.toggle_icsc').click(function() {
             filter_board_id = $('#icsc').val();
@@ -1363,6 +1390,16 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             isClickedBoard = true;
             FilterBoardText = 'icsc';
             get_all_data();
+            
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_icsc = {
+            name: FilterBoardText,
+            id: filter_board_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_icsc);
+            document.cookie = `complaint_icsc=${cookieValue}; path=/; expires=${date.toUTCString()}`;
 
         });
         $('.toggle_online').click(function() { 
@@ -1372,6 +1409,13 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             isClickedBoard = true;
             FilterBoardText = 'online';
             get_all_data();
+            const complaint_online = {
+            name: FilterBoardText,
+            id: filter_board_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_online);
+            document.cookie = `complaint_online=${cookieValue}; path=/; expires=${date.toUTCString()}`;
 
         });
         $('.toggle_offline').click(function() {
@@ -1381,6 +1425,14 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             isClickedBoard = true;
             FilterBoardText = 'offline';
             get_all_data();
+            const complaint_offline = {
+            name: FilterBoardText,
+            id: filter_board_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_offline);
+            document.cookie = `complaint_offline=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+
         });
    
         $("#brand").change(function()
@@ -1392,16 +1444,39 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             //console.log(FilterBrandText);
             right_side();
             get_all_data();
+            /** Cookie New */
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_brand = {
+            name: FilterBrandText,
+            id: filter_brand_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_brand);
+            document.cookie = `complaint_brand=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+            /**End Cookie New */
+
         });
 
 
         $("#filter_class_dropdown").change(function()
-        {
+        {   
             filter_class_id = $(this).val();
             FilterClassText = $('#filter_class_dropdown :selected').text().trim();
             filter_course(filter_brand_id,filter_segment_id,filter_board_id,filter_class_id);
             isClickedClass =true;
             get_all_data();
+            /** Cookie New */
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_class = {
+            name: FilterClassText,
+            id: filter_class_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_class);
+            document.cookie = `complaint_class=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+            /**End Cookie New */
         });
 
         $("#filter_course_dropdown").change(function()
@@ -1412,6 +1487,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
             isClickedCourse =true;
             get_all_data();
 
+            /** Cookie New */
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_course = {
+            name: FilterCourseText,
+            id: filter_course_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_course);
+            document.cookie = `complaint_course=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+            /**End Cookie New */
+
         });
 
         $("#batch").change(function()
@@ -1420,6 +1507,18 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
              FilterBatchText = $('#batch :selected').text().trim();
              isClickedBatch =true;
              get_all_data();
+
+             /** Cookie New */
+            const date = new Date();
+            date.setDate(date.getDate() + 1); // Add 1 day
+            const complaint_batch = {
+            name: FilterBatchText,
+            id: filter_batch_id,
+            root: 'complaint'
+            };
+            const cookieValue = JSON.stringify(complaint_batch);
+            document.cookie = `complaint_batch=${cookieValue}; path=/; expires=${date.toUTCString()}`;
+            /**End Cookie New */
         });
         /** Rating Code  **/
         $('input[name="customer_rating"]').change(function(){
@@ -1436,6 +1535,8 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
                 // window.location="<?php echo base_url();?>complaint/?course="+parameter_course+"&segment="+filter_segment_id+"&sort_by="+sort_by+"&customer_rating="+ratings;
                // console.log("Selected rating: " + ratingValue);
                //alert(ratings);
+
+               
             }
         });
          /** End Rating Code  **/
@@ -2156,5 +2257,11 @@ $get_course_detail = get_course_detail($get_single_course_detail->course_id);*/
         }
     }
     return null; // Return null if the cookie is not found
+}
+
+function getCookie_new(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
     </script>

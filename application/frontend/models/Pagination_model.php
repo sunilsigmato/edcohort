@@ -1,19 +1,37 @@
 <?php
 class Pagination_model extends CI_Model {
 
-    function get_pagination($page,$total_pages,$seg_temp,$uri)
+    function get_pagination($page,$total_pages,$seg_temp,$uri,$referrer_url)
     {
         $parsed_url = parse_url($uri);
         $path = trim($parsed_url['path'], '/');
         $segments = explode('/', $path);
         $extracted_segment = $segments[1];
 
+
+        //referal URL Code 
+        $parsed_refurl = parse_url($referrer_url);
+        parse_str($parsed_refurl['query'], $query_params);
+        // Remove the 'page' parameter
+        unset($query_params['page']);
+        // Rebuild the query string
+        $new_query_string = http_build_query($query_params);
+        // Rebuild the URL without 'page'
+        $new_url = $parsed_refurl['scheme'] . '://' . $parsed_refurl['host'] . $parsed_refurl['path'];
+        if (!empty($new_query_string)) {
+            $new_url .= '?' . $new_query_string;
+        }
+
+       
+
+
 // Adjust the start page if we are close to the beginning
     $pagination_links = '';
     
     // First link
     if ($page > 1) {
-        $pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . urlencode($seg_temp) . '&page=1" data-ci-pagination-page="1"><<</a>';
+       // $pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . urlencode($seg_temp) . '&page=1" data-ci-pagination-page="1"><<</a>';
+        $pagination_links .= '<a href="' .$new_url. '&page=1" data-ci-pagination-page="1"><<</a>';
     }
 
     // Previous link
@@ -40,9 +58,13 @@ class Pagination_model extends CI_Model {
     for ($i = $start_page; $i <= $end_page; $i++) {
         if ($i == $page) {
             // Highlight the current page without a link
-            $pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . $seg_temp. '&page=' . $i . '" data-ci-pagination-page="' . $i . '" style="background: #5eabf4 !important; color: #fff !important; "><strong>' . $i . '</strong></a>';
+            //$pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . $seg_temp. '&page=' . $i . '" data-ci-pagination-page="' . $i . '" style="background: #5eabf4 !important; color: #fff !important; "><strong>' . $i . '</strong></a>';
+            $pagination_links .= '<a href="' .$new_url. '&page=' . $i . '" data-ci-pagination-page="' . $i . '" style="background: #5eabf4 !important; color: #fff !important; "><strong>' . $i . '</strong></a>';
+
         } else {
-            $pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . $seg_temp. '&page=' . $i . '" data-ci-pagination-page="' . $i . '">' . $i . '</a>';
+            //$pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . $seg_temp. '&page=' . $i . '" data-ci-pagination-page="' . $i . '">' . $i . '</a>';
+            $pagination_links .= '<a href="' .$new_url. '&page=' . $i . '" data-ci-pagination-page="' . $i . '">' . $i . '</a>';
+            
         }
     }
 
@@ -54,7 +76,8 @@ class Pagination_model extends CI_Model {
 
     // Last link
     if ($total_pages > 3) { // Show last link only if there are more than 3 pages
-        $pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . urlencode($seg_temp) . '&page=' . $total_pages . '" data-ci-pagination-page="' . $total_pages . '">>></a>';
+        //$pagination_links .= '<a href="' . base_url() . $extracted_segment.'/?segment=' . urlencode($seg_temp) . '&page=' . $total_pages . '" data-ci-pagination-page="' . $total_pages . '">>></a>';
+        $pagination_links .= '<a href="' .$new_url. '&page=' . $total_pages . '" data-ci-pagination-page="' . $total_pages . '">>></a>';
     }
   // Output the pagination links
   return $pagination_links;
